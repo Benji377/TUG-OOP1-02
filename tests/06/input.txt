@@ -1,0 +1,9 @@
+1
+Spieler
+W
+help 123
+help bbb
+help
+HELP
+heLP
+quit

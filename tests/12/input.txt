@@ -1,0 +1,20 @@
+playEr213
+3
+play1
+w
+play2
+b
+play3
+r
+move w 2,1
+move B 4,3
+move R 3,2
+move R 3,1
+move B 4,4
+map
+move b 4,5
+move R 2,2
+move B 3,4
+map
+move W 1,2
+quit

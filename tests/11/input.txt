@@ -1,0 +1,12 @@
+3
+a
+W
+B
+r
+c
+B
+inventory W
+inventory r
+inventORY b
+inventory W
+quit

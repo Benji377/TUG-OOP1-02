@@ -1,0 +1,16 @@
+2
+Spieler1
+W
+Spieler2
+R
+player
+PLaYer
+player W
+Player R
+player B
+ attack r    2,2
+attack r 2,2
+player r
+player w
+qu it
+quit

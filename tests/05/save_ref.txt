@@ -1,0 +1,8 @@
+-- Players --------------------------------------
+  Barbarian [B] "David" survived.
+  Wizard [W] "Alex", rest in peace.
+
+-- Statistics -----------------------------------
+  2 rooms completed
+  19 performed actions
+

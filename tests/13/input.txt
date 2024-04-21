@@ -1,0 +1,11 @@
+3
+a
+w
+b
+b
+c
+r
+loot b 2,3
+loot b 2,3
+loot b 3,3
+quit

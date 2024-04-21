@@ -1,0 +1,13 @@
+2
+Spieler1
+W
+Spieler2
+R
+MAP 123
+map abc
+map
+attack w 2,2
+attack r 2,2
+MAP
+move R 2,1
+quit

@@ -1,0 +1,20 @@
+2
+a
+w
+b
+r
+map
+inventory w
+use w qacd
+inventory w
+use w qacd
+inventory w
+use w DagG
+inventory w
+inventory r
+use r larm
+inventory r
+use r DAGG
+inventory r
+inventory w
+quit

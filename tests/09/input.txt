@@ -1,0 +1,13 @@
+2
+Spieler1
+R
+Spieler2
+W
+positions W
+positions 123
+POsiTIOns 33
+POSITIONS
+move w 2,1
+positions w
+positions
+     quiT   

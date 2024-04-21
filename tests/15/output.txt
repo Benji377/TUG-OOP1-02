@@ -1,0 +1,8 @@
+-- Players --------------------------------------
+  Wizard [W] "w", rest in peace.
+  Rogue [R] "r", rest in peace.
+
+-- Statistics -----------------------------------
+  0 rooms completed
+  8 performed actions
+
