@@ -9,13 +9,16 @@
  * "2d6" which means 2 dice with 6 sides each.
  */
 class Dice {
-public:
-    Dice(int sides);
-    int roll();
 private:
-    int sides;
-    int dices;
-    void parse(std::string dice);
+    int dice_type_;
+    int roll_amount_;
+    std::pair<int, int> parseDice(const std::string& dice);
+public:
+  Dice(int dice_type, int roll_amount);
+  explicit Dice(const std::string& dice);
+  [[nodiscard]] int roll() const;
+  ~Dice() = default;
+  Dice(const Dice& other) = default;
 };
 
 
