@@ -11,7 +11,6 @@
 //
 
 #include "Item.hpp"
-#include "../utility/Dice.cpp"
 
 #ifndef POTION_HPP
 #define POTION_HPP
@@ -20,7 +19,14 @@ enum class Effect {HEALTH, FIRE, COLD, FORCE, ACID};
 
 class Potion: public Item
 {
- Effect effect_;
+  Effect effect_;
+  ///-------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Parses the effect of the potion. Converts a string to an effect.
+  /// @param effect The effect of the potion as a string.
+  /// @return The effect of the potion.
+  //
+  Effect parseEffect(std::string& effect);
   public:
     ///----------------------------------------------------------------------------------------------------------------
     ///
@@ -30,7 +36,7 @@ class Potion: public Item
     /// @param dice The dice of the potion. can be null on resistance potions.
     /// @param effect The effect of the potion.
     //
-    Potion(std::string& abbreviation, std::string& name, Dice* dice, Effect effect);
+    Potion(std::string& abbreviation, std::string& name, Dice* dice, std::string& effect);
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the effect of the potion.

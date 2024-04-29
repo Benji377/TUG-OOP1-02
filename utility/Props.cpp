@@ -1,2 +1,6 @@
 #include "Props.hpp"
-#include "../items/Potion.cpp"
+
+void Props::craftPotion(Potion& potion, std::string& abbreviation)
+{
+  return;
+}
