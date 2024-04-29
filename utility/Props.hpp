@@ -8,7 +8,8 @@
  * use the Abbreviation with an `-X` at the end. The characters that apply are also stored.
  * So basically we store those weapons twice, one for the all characters (default) and extension (-X) for the specific character.
  */
-class Props {
+class Props
+{
 
 };
 

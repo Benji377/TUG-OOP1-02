@@ -1,5 +1,5 @@
 Abbreviation;Name;DamageType;RegeneratedHealth
-NHEP;Normal Health Potionm; ;2d4
+NHEP;Normal Health Potion; ;2d4
 GHEP;Greater Health Potion;	;4d4
 SHEP;Superior Health Potion; ;8d4
 FIRS;Potion of Fire Resistance;Fire;

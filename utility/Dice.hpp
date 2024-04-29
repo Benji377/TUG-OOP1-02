@@ -4,7 +4,7 @@
 // The class also has a function to parse a string into a dice. The string is usually like this: "2d6" which means
 // 2 dice with 6 sides each. The class also has a function to roll the dice and return the result.
 //
-// Group: 68
+// Group: 068
 //
 // Author: Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
