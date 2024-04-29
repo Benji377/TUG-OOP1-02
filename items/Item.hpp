@@ -23,7 +23,7 @@ class Item
   protected:
     std::string abbreviation_;
     std::string name_;
-    Dice dice_;
+    Dice *dice_;
 };
 
 

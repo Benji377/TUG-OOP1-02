@@ -30,14 +30,14 @@ class Potion: public Item
     /// @param dice The dice of the potion. can be null on resistance potions.
     /// @param effect The effect of the potion.
     //
-    Potion(std::string abbreviation, std::string name, Dice dice, Effect effect);
+    Potion(std::string& abbreviation, std::string& name, Dice* dice, Effect effect);
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the effect of the potion.
     ///
     /// @return The effect of the potion.
     //
-    Effect getEffect() const;
+    [[nodiscard]] Effect getEffect() const;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted copy constructor.
@@ -52,7 +52,7 @@ class Potion: public Item
     ///
     /// Destructor for a potion. Default.
     //
-    virtual ~Potion() = default;
+    virtual ~Potion();
 };
 
 
