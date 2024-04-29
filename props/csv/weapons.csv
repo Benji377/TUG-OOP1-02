@@ -1,0 +1,22 @@
+Abbreviation;Name;Attack Type;Damage Type;Damage Pattern;Damage Amount; Damage Addition; Character
+DAGG;Dagger;Melee;Physical;Hit;1d4;VIT
+MACE;Mace;Melee;Physical;Hit;1d6;STR
+WARH;Warhammer;Melee;Physical;Hit;1d10;STR
+HAXE;Handaxe;Melee;Physical;Hit;1d6;STR
+GAXE;Greataxe;Melee;Physical;Slash;1d12;STR
+RAPI;Rapier;Melee;Physical;Thrust;1d8;VIT
+SSWD;Shortsword;Melee;Physical;Thrust;1d6;VIT
+LSWD;Longsword;Melee;Physical;Slash;1d10;STR
+GSWD;Greatsword;Melee;Physical;Slash;2d6;STR
+SBOW;Shortbow;Ranged;Physical;Shot;1d6;VIT
+LBOW;Longbow;Ranged;Physical;Shot;1d8;VIT
+LCRS;Light Crossbow;Ranged;Physical;Shot;1d8;VIT
+HCRS;Heavy Crossbow;Ranged;Physical;Shot;1d10;VIT
+QFIR-X;Quarterstaff of Fire;Ranged;Fire;Burst;3d6;;W,L
+QFIR;Quarterstaff of Fire;Melee;Physical;Hit;1d6;STR
+QCLD-X;Quarterstaff of Cold;Melee;Cold;Line;2d10;;W,L
+QCLD;Quarterstaff of Cold;Melee;Physical;Hit;1d6;STR
+QACD-X;Quarterstaff of Acid;Ranged;Acid;Shot;1d10;;W,L
+QACD;Quarterstaff of Acid;Melee;Physical;Hit;1d6;STR
+QFRC-X;Quarterstaff of Force;Melee;Force;Hit;1d10;;W,L
+QFRC;Quarterstaff of Force;Melee;Physical;Hit;1d6;STR

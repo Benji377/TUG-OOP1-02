@@ -1,0 +1,5 @@
+Abbreviation;Name;Armor Value;Additions
+LARM;Leather Armor;1;VIT
+BPLT;Breastplate;4;min(VIT, 2)
+CHML;Chain Mail;6
+PARM;Plate Armor;8
