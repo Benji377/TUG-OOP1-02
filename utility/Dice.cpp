@@ -1,5 +1,5 @@
 #include "Dice.hpp"
-#include "../Random.cpp"
+#include "Random.cpp"
 
 Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount) {}
 
@@ -13,7 +13,9 @@ Dice::Dice(const std::string& dice)
 int Dice::roll() const
 {
   int result = 0;
-  for (int i = 0; i < roll_amount_; i++) {
+  for (int i = 0; i < roll_amount_; i++)
+  {
+    // The random number is generated in the range [1, dice_type_]
     result += (int)Random::getInstance().getRandomNumber(dice_type_);
   }
   return result;
@@ -21,6 +23,7 @@ int Dice::roll() const
 
 std::pair<int, int> Dice::parseDice(const std::string& dice)
 {
+  // The accepted format is "2d6" or "2 d6" which means 2 dice with 6 sides each.
   size_t d_pos = dice.find('d');
   if (d_pos == std::string::npos)
   {
