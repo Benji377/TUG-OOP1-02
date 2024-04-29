@@ -1,7 +1,19 @@
-#include "Item.hpp"
-
+//---------------------------------------------------------------------------------------------------------------------
+//
+// The Ammunition class is a derived class of the Item class. It represents an ammunition item in the game.
+// The class has a type attribute that represents the type of the ammunition. The type can be either ARROW or BOLT.
+// The class has a constructor that initializes the attributes of the ammunition.
+// The class has a parseType method that converts a string to an AmmunitionType.
+//
+// Group: 086
+//
+// Author: Benjamin Demetz, 12320035
+//---------------------------------------------------------------------------------------------------------------------
+//
 #ifndef AMMUNITION_HPP
 #define AMMUNITION_HPP
+
+#include "Item.hpp"
 
 enum class AmmunitionType { ARROW, BOLT };
 

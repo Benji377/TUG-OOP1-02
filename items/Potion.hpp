@@ -9,11 +9,10 @@
 // Author: Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
 //
-
-#include "Item.hpp"
-
 #ifndef POTION_HPP
 #define POTION_HPP
+
+#include "Item.hpp"
 
 enum class Effect {HEALTH, FIRE, COLD, FORCE, ACID};
 

@@ -9,10 +9,10 @@
 // Author: Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
 //
-#include <iostream>
-
 #ifndef DICE_HPP
 #define DICE_HPP
+
+#include <iostream>
 
 class Dice
 {

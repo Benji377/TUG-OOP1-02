@@ -10,13 +10,11 @@
 // Author: Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
 //
-
-#include <string>
-#include "../utility/Dice.cpp"
-
 #ifndef ITEM_HPP
 #define ITEM_HPP
 
+#include <string>
+#include "../utility/Dice.cpp"
 
 class Item
 {

@@ -1,11 +1,22 @@
+//---------------------------------------------------------------------------------------------------------------------
+//
+// The Props class can create Item objects by reading its values from a CSV file. The CSV file is read by the
+// CSVReader class and the values are stored in a vector of strings. The values are then parsed and stored in the
+// respective Item object. The CSV file is stored in the items/csv folder.
+//
+// Group: 068
+//
+// Author: Benjamin Demetz, 12320035
+//---------------------------------------------------------------------------------------------------------------------
+//
+#ifndef PROPS_HPP
+#define PROPS_HPP
+
 #include <string>
 #include "../items/Potion.cpp"
 #include "../items/Weapon.cpp"
 #include "../items/Armor.cpp"
 #include "../items/Ammunition.cpp"
-
-#ifndef PROPS_HPP
-#define PROPS_HPP
 
 /*
  * Quick Notes:
@@ -17,16 +28,17 @@
 // TODO: Use function overloading to retrieve weapons with or without character
 class Props
 {
-  std::string ammunition_csv_path_;
-  std::string armor_csv_path_;
-  std::string potions_csv_path_;
-  std::string weapon_csv_path_;
+  std::string ammunition_csv_path_ = "../items/csv/ammunition.csv";
+  std::string armor_csv_path_ = "../items/csv/armor.csv";
+  std::string potions_csv_path_ = "../items/csv/potions.csv";
+  std::string weapon_csv_path_ = "../items/csv/weapons.csv";
 
 public:
   static void craftPotion(Potion& potion, std::string& abbreviation);
   static void craftWeapon(Weapon& weapon, std::string& abbreviation);
   static void craftWeapon(Weapon& weapon, std::string& abbreviation, char& character);
-  static void craftArmor(Armor& armor, std::string& abbreviation);
+  // TODO: Armor also needs the players vitality to calculate the armor value
+  static void craftArmor(Armor& armor, std::string& abbreviation, int vitality = 0);
   static void craftAmmunition(Ammunition& ammunition, std::string& abbreviation);
 };
 
