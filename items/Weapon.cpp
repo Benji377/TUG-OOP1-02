@@ -1,7 +1,6 @@
-
 #include "Weapon.hpp"
 
-Weapon::Weapon(std::string &abbreviation, std::string &name, Dice *dice, WeaponDamagePattern &damage_pattern,
+Weapon::Weapon(std::string &abbreviation, std::string &name, Dice *dice, DamagePattern *damage_pattern,
                std::string &attack_type, std::string &damage_type, int damage_addition)
 {
   abbreviation_ = abbreviation;
@@ -16,6 +15,16 @@ Weapon::Weapon(std::string &abbreviation, std::string &name, Dice *dice, WeaponD
 int Weapon::getDamageAddition() const
 {
   return damage_addition_;
+}
+
+AttackType Weapon::getAttackType() const
+{
+  return attack_type_;
+}
+
+DamageType Weapon::getDamageType() const
+{
+  return damage_type_;
 }
 
 Weapon::~Weapon()

@@ -20,6 +20,7 @@ enum class AmmunitionType { ARROW, BOLT };
 class Ammunition: public Item
 {
   AmmunitionType type_;
+  std::vector<std::string> weapons_;
   ///----------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the type of the ammunition. Converts a string to an AmmunitionType.
@@ -35,7 +36,7 @@ class Ammunition: public Item
     /// @param name The name of the ammunition.
     /// @param type The type of the ammunition.
     //
-    Ammunition(std::string& abbreviation, std::string& name, std::string& type);
+    Ammunition(std::string& abbreviation, std::string& type, std::vector<std::string> &weapons);
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Returns the type of the ammunition.

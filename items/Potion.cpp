@@ -2,7 +2,7 @@
 #include <map>
 #include "../utility/Utils.cpp"
 
-Potion::Potion(std::string& abbreviation, std::string& name, Dice *dice, std::string& effect)
+Potion::Potion(std::string& abbreviation, std::string& name, std::string& effect, Dice *dice)
 {
   abbreviation_ = abbreviation;
   name_ = name;

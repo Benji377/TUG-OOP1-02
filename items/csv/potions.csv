@@ -1,7 +1,7 @@
 Abbreviation;Name;DamageType;RegeneratedHealth
-NHEP;Normal Health Potion; ;2d4
-GHEP;Greater Health Potion;	;4d4
-SHEP;Superior Health Potion; ;8d4
+NHEP;Normal Health Potion;;2d4
+GHEP;Greater Health Potion;;4d4
+SHEP;Superior Health Potion;;8d4
 FIRS;Potion of Fire Resistance;Fire;
 CORS;Potion of Cold Resistance;Cold;
 FORS;Potion of Force Resistance;Force;

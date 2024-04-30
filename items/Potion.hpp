@@ -35,7 +35,7 @@ class Potion: public Item
     /// @param dice The dice of the potion. can be null on resistance potions.
     /// @param effect The effect of the potion.
     //
-    Potion(std::string& abbreviation, std::string& name, Dice* dice, std::string& effect);
+    Potion(std::string& abbreviation, std::string& name, std::string& effect, Dice *dice);
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the effect of the potion.

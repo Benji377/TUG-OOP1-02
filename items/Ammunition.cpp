@@ -2,11 +2,11 @@
 #include "../utility/Utils.cpp"
 #include <map>
 
-Ammunition::Ammunition(std::string& abbreviation, std::string& name, std::string& type)
+Ammunition::Ammunition(std::string& abbreviation, std::string& type, std::vector<std::string> &weapons)
 {
   abbreviation_ = abbreviation;
-  name_ = name;
   type_ = parseType(type);
+  weapons_ = weapons;
 }
 
 AmmunitionType Ammunition::parseType(std::string& type)
