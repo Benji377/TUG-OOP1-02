@@ -1,5 +1,4 @@
 #include "Dice.hpp"
-#include "Random.cpp"
 
 Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount) {}
 
@@ -16,7 +15,7 @@ int Dice::roll() const
   for (int i = 0; i < roll_amount_; i++)
   {
     // The random number is generated in the range [1, dice_type_]
-    result += (int)Random::getInstance().getRandomNumber(dice_type_);
+    result += (int)Oop::Random::getInstance().getRandomNumber(dice_type_);
   }
   return result;
 }

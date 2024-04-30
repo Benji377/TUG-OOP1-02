@@ -1,5 +1,7 @@
 #include "Weapon.hpp"
 
+using namespace ItemSpace;
+
 Weapon::Weapon(std::string &abbreviation, std::string &name, Dice *dice, DamagePattern *damage_pattern,
                std::string &attack_type, std::string &damage_type, int damage_addition)
 {

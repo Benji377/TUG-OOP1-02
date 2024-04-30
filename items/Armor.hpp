@@ -13,9 +13,9 @@
 
 #include "Item.hpp"
 
-class Armor: public Item
-{
-  int armor_value_;
+namespace ItemSpace {
+  class Armor : public Item {
+    int armor_value_;
   public:
     ///----------------------------------------------------------------------------------------------------------------
     ///
@@ -25,12 +25,14 @@ class Armor: public Item
     /// @param name The name of the armor.
     /// @param armor_value The armor value of the armor.
     //
-    Armor(std::string& abbreviation, std::string& name, int armor_value);
+    Armor(std::string &abbreviation, std::string &name, int armor_value);
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// This method returns the armor value of the armor.
     //
     [[nodiscard]] int getArmorValue() const;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// This method sets the armor value of the armor.
@@ -38,22 +40,25 @@ class Armor: public Item
     /// @param armor_value The armor value of the armor.
     //
     void setArmorValue(int armor_value);
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// This method is deleted to prevent copying of Armor objects.
     //
-    Armor(const Armor& armor) = delete;
+    Armor(const Armor &armor) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// This method is deleted to prevent copying of Armor objects.
     //
-    Armor& operator=(const Armor& armor) = delete;
+    Armor &operator=(const Armor &armor) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// This method is the destructor of the Armor class.
     //
     ~Armor() = default;
-};
-
+  };
+}
 
 #endif //ARMOR_HPP

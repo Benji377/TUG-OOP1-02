@@ -10,19 +10,21 @@
 // Author: Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
 //
+
 #ifndef ITEM_HPP
 #define ITEM_HPP
 
 #include <string>
-#include "../utility/Dice.cpp"
+#include "../utility/Dice.hpp"
+#include "../utility/Utils.hpp"
 
-class Item
-{
+namespace ItemSpace {
+  class Item {
   protected:
     std::string abbreviation_;
     std::string name_;
     Dice *dice_;
-};
-
+  };
+}
 
 #endif //ITEM_HPP

@@ -1,5 +1,7 @@
 #include "Armor.hpp"
 
+using namespace ItemSpace;
+
 Armor::Armor(std::string &abbreviation, std::string &name, int armor_value) {
   abbreviation_ = abbreviation;
   name_ = name;

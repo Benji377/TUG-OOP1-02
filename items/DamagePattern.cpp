@@ -1,5 +1,7 @@
 #include "DamagePattern.hpp"
 
+using namespace ItemSpace;
+
 DamagePattern::DamagePattern(std::string& pattern) {
   pattern_ = parsePattern(pattern);
 }

@@ -14,20 +14,28 @@
 #define AMMUNITION_HPP
 
 #include "Item.hpp"
+#include <map>
 
-enum class AmmunitionType { ARROW, BOLT };
-
-class Ammunition: public Item
+namespace ItemSpace
 {
-  AmmunitionType type_;
-  std::vector<std::string> weapons_;
-  ///----------------------------------------------------------------------------------------------------------------
-  ///
-  /// Parses the type of the ammunition. Converts a string to an AmmunitionType.
-  /// @param type The type of the ammunition.
-  /// @return The AmmunitionType of the ammunition.
-  //
-  AmmunitionType parseType(std::string& type);
+  enum class AmmunitionType
+  {
+    ARROW, BOLT
+  };
+
+  class Ammunition : public Item
+  {
+    AmmunitionType type_;
+    std::vector<std::string> weapons_;
+
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Parses the type of the ammunition. Converts a string to an AmmunitionType.
+    /// @param type The type of the ammunition.
+    /// @return The AmmunitionType of the ammunition.
+    //
+    AmmunitionType parseType(std::string &type);
+
   public:
     ///----------------------------------------------------------------------------------------------------------------
     ///
@@ -36,29 +44,33 @@ class Ammunition: public Item
     /// @param name The name of the ammunition.
     /// @param type The type of the ammunition.
     //
-    Ammunition(std::string& abbreviation, std::string& type, std::vector<std::string> &weapons);
+    Ammunition(std::string &abbreviation, std::string &type, std::vector<std::string> &weapons);
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Returns the type of the ammunition.
     /// @return The type of the ammunition.
     //
     [[nodiscard]] AmmunitionType getType() const;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted copy constructor.
     //
-    Ammunition(Ammunition const&) = delete;
+    Ammunition(Ammunition const &) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted assignment operator.
     //
-    Ammunition& operator=(Ammunition const&) = delete;
+    Ammunition &operator=(Ammunition const &) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the Ammunition class. Default implementation.
     //
     ~Ammunition() = default;
-};
-
+  };
+}
 
 #endif //AMMUNITION_HPP

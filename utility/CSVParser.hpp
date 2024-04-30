@@ -14,11 +14,13 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 class CSVParser {
   public:
     static std::vector<std::vector<std::string>> readCSV(const std::string& filename);
-    static std::vector<std::string> getRowById(const std::string& filename, int id);
     static std::vector<std::string> getRowByAbbreviation(const std::string& filename, const std::string& abbreviation);
 };
 

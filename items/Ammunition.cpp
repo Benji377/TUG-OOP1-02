@@ -1,6 +1,6 @@
 #include "Ammunition.hpp"
-#include "../utility/Utils.cpp"
-#include <map>
+
+using namespace ItemSpace;
 
 Ammunition::Ammunition(std::string& abbreviation, std::string& type, std::vector<std::string> &weapons)
 {

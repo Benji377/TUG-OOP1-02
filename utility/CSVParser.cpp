@@ -1,9 +1,5 @@
 #include "CSVParser.hpp"
 
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
 std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename) {
   std::vector<std::vector<std::string>> data;
   std::ifstream file(filename);
@@ -23,18 +19,6 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
   }
   file.close();
   return data;
-}
-
-std::vector<std::string> CSVParser::getRowById(const std::string& filename, int id) {
-  std::vector<std::vector<std::string>> data = readCSV(filename);
-  if (data.empty()) {
-    return {};
-  }
-  if (id < 0 || id >= data.size()) {
-    std::cerr << "Error: Invalid id " << id << std::endl;
-    return {};
-  }
-  return data[id];
 }
 
 std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& filename, const std::string& abbreviation) {
