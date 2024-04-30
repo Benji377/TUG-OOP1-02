@@ -35,7 +35,8 @@ class Props
 
 public:
   static void craftPotion(Potion& potion, std::string& abbreviation);
-  static void craftWeapon(Weapon& weapon, std::string& abbreviation);
+  // TODO: Weapon either requires the character or the strength and vitality of the player to calculate the damage
+  static void craftWeapon(Weapon& weapon, std::string& abbreviation, int strength = 0, int vitality = 0);
   static void craftWeapon(Weapon& weapon, std::string& abbreviation, char& character);
   // TODO: Armor also needs the players vitality to calculate the armor value
   static void craftArmor(Armor& armor, std::string& abbreviation, int vitality = 0);

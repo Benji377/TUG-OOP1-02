@@ -10,7 +10,6 @@ Potion::Potion(std::string& abbreviation, std::string& name, Dice *dice, std::st
   effect_ = parseEffect(effect);
 }
 
-
 Effect Potion::parseEffect(std::string& effect)
 {
   Utils::normalizeString(effect);
