@@ -13,61 +13,63 @@
 #define POTION_HPP
 
 #include "Item.hpp"
+#include "../utility/Utils.hpp"
 #include <map>
 
-namespace ItemSpace {
-  enum class Effect {
-    HEALTH, FIRE, COLD, FORCE, ACID
-  };
 
-  class Potion : public Item {
-    Effect effect_;
+enum class Effect
+{
+  HEALTH, FIRE, COLD, FORCE, ACID
+};
 
-    ///-------------------------------------------------------------------------------------------------------------------
-    ///
-    /// Parses the effect of the potion. Converts a string to an effect.
-    /// @param effect The effect of the potion as a string.
-    /// @return The effect of the potion.
-    //
-    Effect parseEffect(std::string &effect);
+class Potion : public Item
+{
+  Effect effect_;
 
-  public:
-    ///----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Constructor for a potion.
-    /// @param abbreviation The abbreviation of the potion.
-    /// @param name The name of the potion.
-    /// @param dice The dice of the potion. can be null on resistance potions.
-    /// @param effect The effect of the potion.
-    //
-    Potion(std::string &abbreviation, std::string &name, std::string &effect, Dice *dice);
+  ///-------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Parses the effect of the potion. Converts a string to an effect.
+  /// @param effect The effect of the potion as a string.
+  /// @return The effect of the potion.
+  //
+  Effect parseEffect(std::string &effect);
 
-    ///----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Getter for the effect of the potion.
-    ///
-    /// @return The effect of the potion.
-    //
-    [[nodiscard]] Effect getEffect() const;
+public:
+  ///----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor for a potion.
+  /// @param abbreviation The abbreviation of the potion.
+  /// @param name The name of the potion.
+  /// @param dice The dice of the potion. can be null on resistance potions.
+  /// @param effect The effect of the potion.
+  //
+  Potion(std::string &abbreviation, std::string &name, std::string &effect, Dice *dice);
 
-    ///----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Deleted copy constructor.
-    //
-    Potion(const Potion &) = delete;
+  ///----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Getter for the effect of the potion.
+  ///
+  /// @return The effect of the potion.
+  //
+  [[nodiscard]] Effect getEffect() const;
 
-    ///----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Deleted assignment operator.
-    //
-    Potion &operator=(const Potion &) = delete;
+  ///----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Deleted copy constructor.
+  //
+  Potion(const Potion &) = delete;
 
-    ///----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Destructor for a potion. Default.
-    //
-    virtual ~Potion();
-  };
-}
+  ///----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Deleted assignment operator.
+  //
+  Potion &operator=(const Potion &) = delete;
+
+  ///----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Destructor for a potion. Default.
+  //
+  virtual ~Potion();
+};
 
 #endif //POTION_HPP

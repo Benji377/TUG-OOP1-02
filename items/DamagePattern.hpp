@@ -6,28 +6,25 @@
 #include <map>
 #include <string>
 #include "Item.hpp"
+#include "../utility/Utils.hpp"
 
-namespace ItemSpace {
-  enum class Pattern {
-    HIT, SLASH, THRUST, SHOT, LINE, BURST
-  };
 
-  class DamagePattern {
-    Pattern pattern_;
+enum class Pattern
+{
+  HIT, SLASH, THRUST, SHOT, LINE, BURST
+};
 
-    Pattern parsePattern(std::string &pattern);
+class DamagePattern
+{
+  Pattern pattern_;
+  Pattern parsePattern(std::string &pattern);
 
-  public:
-    explicit DamagePattern(std::string &pattern);
-
-    [[nodiscard]] Pattern getPattern() const;
-
-    DamagePattern(const DamagePattern &other) = delete;
-
-    DamagePattern &operator=(const DamagePattern &other) = delete;
-
-    ~DamagePattern() = default;
-  };
-}
+public:
+  explicit DamagePattern(std::string &pattern);
+  [[nodiscard]] Pattern getPattern() const;
+  DamagePattern(const DamagePattern &other) = delete;
+  DamagePattern &operator=(const DamagePattern &other) = delete;
+  ~DamagePattern() = default;
+};
 
 #endif //DAMAGEPATTERN_HPP

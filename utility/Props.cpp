@@ -1,11 +1,11 @@
 #include "Props.hpp"
 
-std::string ammunition_csv_path_ = "../items/csv/ammunition.csv";
-std::string armor_csv_path_ = "../items/csv/armor.csv";
-std::string potions_csv_path_ = "../items/csv/potions.csv";
-std::string weapon_csv_path_ = "../items/csv/weapons.csv";
+std::string Props::ammunition_csv_path_ = "../items/csv/ammunition.csv";
+std::string Props::armor_csv_path_ = "../items/csv/armor.csv";
+std::string Props::potions_csv_path_ = "../items/csv/potions.csv";
+std::string Props::weapon_csv_path_ = "../items/csv/weapons.csv";
 
-ItemSpace::Potion *Props::craftPotion(std::string& abbreviation)
+Potion *Props::craftPotion(std::string& abbreviation)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(potions_csv_path_, abbreviation);
   if (row.empty())
@@ -15,16 +15,16 @@ ItemSpace::Potion *Props::craftPotion(std::string& abbreviation)
   if (row[3].empty())
   {
     // It's a health potion
-    return new ItemSpace::Potion(abbreviation, row[1], (std::string &) "health", new Dice(row[4]));
+    return new Potion(abbreviation, row[1], (std::string &) "health", new Dice(row[4]));
   }
   else
   {
     // It's a resistance potion
-    return new ItemSpace::Potion(abbreviation, row[1], row[3], nullptr);
+    return new Potion(abbreviation, row[1], row[3], nullptr);
   }
 }
 
-ItemSpace::Ammunition* Props::craftAmmunition(std::string& abbreviation)
+Ammunition* Props::craftAmmunition(std::string& abbreviation)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(ammunition_csv_path_, abbreviation);
   if (row.empty())
@@ -34,10 +34,10 @@ ItemSpace::Ammunition* Props::craftAmmunition(std::string& abbreviation)
   // TODO: Somehow implement the weapons here using row[2] as the weapon abbreviation
   // Convert the string to a vector of strings splitting by the comma
   std::vector<std::string> weapons = Utils::splitString(row[2], ",");
-  return new ItemSpace::Ammunition(abbreviation, row[1], weapons);
+  return new Ammunition(abbreviation, row[1], weapons);
 }
 
-ItemSpace::Armor* Props::craftArmor(std::string& abbreviation, int vitality)
+Armor* Props::craftArmor(std::string& abbreviation, int vitality)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(armor_csv_path_, abbreviation);
   if (row.empty())
@@ -51,17 +51,17 @@ ItemSpace::Armor* Props::craftArmor(std::string& abbreviation, int vitality)
     {
       // Calculate the minimum of the vitality and 2
       int armor_value = std::stoi(row[2]) + std::min(vitality, 2);
-      return new ItemSpace::Armor(abbreviation, row[1], armor_value);
+      return new Armor(abbreviation, row[1], armor_value);
     }
     else
     {
-      return new ItemSpace::Armor(abbreviation, row[1], std::stoi(row[2]) + vitality);
+      return new Armor(abbreviation, row[1], std::stoi(row[2]) + vitality);
     }
   }
-  return new ItemSpace::Armor(abbreviation, row[1], std::stoi(row[2]));
+  return new Armor(abbreviation, row[1], std::stoi(row[2]));
 }
 
-ItemSpace::Weapon* Props::craftWeapon(std::string& abbreviation, char &character)
+Weapon* Props::craftWeapon(std::string& abbreviation, char &character)
 {
   if (character != 'L' && character != 'W')
   {
@@ -72,10 +72,11 @@ ItemSpace::Weapon* Props::craftWeapon(std::string& abbreviation, char &character
   {
     throw std::invalid_argument("Invalid abbreviation");
   }
-  return new ItemSpace::Weapon(abbreviation, row[1], new Dice(row[5]),
-                               new ItemSpace::DamagePattern(row[4]), row[2], row[3], 0);
+  return new Weapon(abbreviation, row[1], new Dice(row[5]),
+                               new DamagePattern(row[4]), row[2], row[3], 0);
 }
-ItemSpace::Weapon* Props::craftWeapon(std::string& abbreviation, int strength, int vitality)
+
+Weapon* Props::craftWeapon(std::string& abbreviation, int strength, int vitality)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(weapon_csv_path_, abbreviation);
   if (row.empty())
@@ -85,24 +86,24 @@ ItemSpace::Weapon* Props::craftWeapon(std::string& abbreviation, int strength, i
   if (row[6].empty())
   {
     // It's a weapon that doesn't require a character
-    return new ItemSpace::Weapon(abbreviation, row[1], new Dice(row[5]),
-                                 new ItemSpace::DamagePattern(row[4]), row[2], row[3], 0);
+    return new Weapon(abbreviation, row[1], new Dice(row[5]),
+                                 new DamagePattern(row[4]), row[2], row[3], 0);
   }
   else
   {
     if (row[6] == "STR")
     {
       // Calculate the damage based on the strength
-      return new ItemSpace::Weapon(abbreviation, row[1], new Dice(row[5]),
-                                   new ItemSpace::DamagePattern(row[4]), row[2], row[3], strength);
+      return new Weapon(abbreviation, row[1], new Dice(row[5]),
+                                   new DamagePattern(row[4]), row[2], row[3], strength);
     }
     else if (row[6] == "VIT")
     {
       // Calculate the damage based on the vitality
-      return new ItemSpace::Weapon(abbreviation, row[1], new Dice(row[5]),
-                                   new ItemSpace::DamagePattern(row[4]), row[2], row[3], vitality);
+      return new Weapon(abbreviation, row[1], new Dice(row[5]),
+                                   new DamagePattern(row[4]), row[2], row[3], vitality);
     }
   }
-  return new ItemSpace::Weapon(abbreviation, row[1], new Dice(row[5]),
-                               new ItemSpace::DamagePattern(row[4]), row[2], row[3], 0);
+  return new Weapon(abbreviation, row[1], new Dice(row[5]),
+                               new DamagePattern(row[4]), row[2], row[3], 0);
 }

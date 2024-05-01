@@ -1,7 +1,5 @@
 #include "Potion.hpp"
 
-using namespace ItemSpace;
-
 Potion::Potion(std::string& abbreviation, std::string& name, std::string& effect, Dice *dice)
 {
   abbreviation_ = abbreviation;

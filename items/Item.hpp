@@ -16,15 +16,14 @@
 
 #include <string>
 #include "../utility/Dice.hpp"
-#include "../utility/Utils.hpp"
 
-namespace ItemSpace {
-  class Item {
-  protected:
-    std::string abbreviation_;
-    std::string name_;
-    Dice *dice_;
-  };
-}
+
+class Item
+{
+protected:
+  std::string abbreviation_;
+  std::string name_;
+  Dice *dice_;
+};
 
 #endif //ITEM_HPP
