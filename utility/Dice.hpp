@@ -13,7 +13,7 @@
 #define DICE_HPP
 
 #include <iostream>
-#include "Random.hpp"
+#include "../Random.hpp"
 
 class Dice
 {
