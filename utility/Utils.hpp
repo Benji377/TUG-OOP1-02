@@ -1,8 +1,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 //
 // The Utils class contains some useful functions for use in other classes.
+// It has been extracted from A1 and adapted with further functionality for use in A2.
 //
 // Author: Tutors
+//         Benjamin Demetz, 12320035
 //---------------------------------------------------------------------------------------------------------------------
 //
 #ifndef UTILS_HPP

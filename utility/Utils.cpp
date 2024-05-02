@@ -1,11 +1,3 @@
-//---------------------------------------------------------------------------------------------------------------------
-//
-// The Utils class contains some useful functions for use in other classes.
-//
-// Author: Tutors
-//---------------------------------------------------------------------------------------------------------------------
-//
-
 #include "Utils.hpp"
 
 bool Utils::decimalStringToInt(const std::string& str, int& number)
