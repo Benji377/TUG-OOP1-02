@@ -12,21 +12,28 @@
 #define GAME_HPP
 
 #include <vector>
-#include <memory>
+#include <stdexcept>
 
-#include "IO.hpp"
 #include "Dungeon.hpp"
+#include "../commands/CommandParser.hpp"
+#include "../utility/Props.hpp"
+#include "../utility/IO.hpp"
 
 class Game
 {
   private:
-  std::unique_ptr<Dungeon> dungeon_;
+  CommandParser* parser_;
+  bool is_running_;
 
   public:
   void parseConfigs(char* dungeon_config_file, char* story_config_file);
-  Game() : dungeon_(new Dungeon) {};
+  Game(): is_running_(false) {};
   Game(Game&) = delete;
-  ~Game() = default;
+  ~Game();
+  void toggleGame();
+
+  bool isRunning() const;
+  void start();
 
 };
 

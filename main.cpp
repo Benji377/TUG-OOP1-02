@@ -1,10 +1,16 @@
-#include "utility/Props.hpp"
-#include "Game.hpp"
+#include "game/Game.hpp"
 
-#include <stdexcept>
+int main()
+{
+Game game;
+
+game.start();
+
+return 0;
+}
 
 
-int main(int argc, char** argv)
+/*int main(int argc, char** argv)
 {
   if(argc != 3)
   {
@@ -25,6 +31,8 @@ int main(int argc, char** argv)
   }
 
 
+
+
   return 0;
 
-}
+} */

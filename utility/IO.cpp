@@ -12,7 +12,6 @@
 //
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
-
   std::string filename{config_path};
   std::ifstream file(filename);
   if (!file.is_open())
