@@ -35,10 +35,9 @@ class Game
 
     void toggleGame();
     bool isRunning() const;
-    void toggleGame();
     void toggleStoryOutput();
-    bool isRunning() const;
     void start();
+    void doCommand();
     void doCommand(std::string input);
 };
 
