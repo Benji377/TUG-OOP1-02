@@ -16,7 +16,6 @@ AmmunitionType Ammunition::parseType(std::string& type)
   };
   if (typeMap.count(type) == 0)
   {
-    // TODO: Replace with custom exception
     throw std::invalid_argument("Invalid ammunition type.");
   }
   return typeMap[type];

@@ -21,7 +21,6 @@ Effect Potion::parseEffect(std::string& effect)
   };
   if (effectMap.count(effect) == 0)
   {
-    // TODO: Replace with custom exception
     throw std::invalid_argument("Invalid effect");
   }
   return effectMap[effect];

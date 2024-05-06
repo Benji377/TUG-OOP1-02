@@ -42,7 +42,6 @@ void Utils::isValidConfig(const char *config_path, const char* magic_number) {
   }
   // Now we can read from the file and check if the first line is "OOP"
   std::string magic = readConfigLine(config_path, 0);
-  // TODO: Change magic number
   if (magic == magic_number) {
     return;
   }

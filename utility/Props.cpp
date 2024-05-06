@@ -31,7 +31,6 @@ Ammunition* Props::craftAmmunition(std::string& abbreviation)
   {
     throw std::invalid_argument("Invalid abbreviation");
   }
-  // TODO: Somehow implement the weapons here using row[2] as the weapon abbreviation
   // Convert the string to a vector of strings splitting by the comma
   std::vector<std::string> weapons = Utils::splitString(row[2], ",");
   return new Ammunition(abbreviation, row[1], weapons);
@@ -46,7 +45,7 @@ Armor* Props::craftArmor(std::string& abbreviation, int vitality)
   }
   if (row.size() > 3 && !row[3].empty())
   {
-    // TODO: This is very specific, leave as is?
+    // Very specific, comes from config
     if (row[3] == "min(VIT, 2)")
     {
       // Calculate the minimum of the vitality and 2
