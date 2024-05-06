@@ -26,6 +26,16 @@ int main(int argc, char** argv)
   }
 
   Game game(argv[1], argv[2]);
+  //game.start();
+  //
+  //CommandParser cli;
+  //while(game.isRunning())
+  //{
+  //  Command command = cli.readCommand();
+  //  if (command.isQuit())
+  //    break;
+  //  game.executeCommand(command);
+  //}
 
   return 0;
 } 
