@@ -24,6 +24,7 @@ class Game
   private:
   std::unique_ptr<CommandParser> parser_;
   bool is_running_;
+  bool story_output_active_;
 
   public:
   void parseConfigs(char* dungeon_config_file, char* story_config_file);
@@ -32,10 +33,12 @@ class Game
   ~Game(){};
 
   void toggleGame();
+  void toggleStoryOutput();
+
   bool isRunning() const;
 
   void start();
-  void doCommand(std::string input);
+  void doCommand();
 
 };
 

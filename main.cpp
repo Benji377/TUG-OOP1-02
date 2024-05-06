@@ -5,7 +5,7 @@ int main()
 Game game;
 game.start();
 
-game.doCommand("help");
+game.doCommand();
 
 return 0;
 }
