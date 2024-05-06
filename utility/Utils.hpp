@@ -54,10 +54,11 @@ public:
   /// if it contains the correct magic number at the start of the file.
   ///
   /// @param config_path The path to the file
+  /// @param magic_number The magic number to be checked
   ///
   /// @return true if the configuration file is valid, false otherwise
   //
-  static bool isValidConfig(char* config_path);
+  static bool isValidConfig(char* config_path, char* magic_number);
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

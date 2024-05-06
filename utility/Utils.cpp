@@ -33,7 +33,7 @@ std::string Utils::readConfigLine(char *config_path, int line_number) {
   return output;
 }
 
-bool Utils::isValidConfig(char *config_path) {
+bool Utils::isValidConfig(char *config_path, char* magic_number) {
   std::fstream config_file(config_path);
   // We need to check if we can open the file first, else we would get an error when reading from it
   if(!config_file.is_open()) {
@@ -42,7 +42,7 @@ bool Utils::isValidConfig(char *config_path) {
   // Now we can read from the file and check if the first line is "OOP"
   std::string magic = readConfigLine(config_path, 0);
   // TODO: Change magic number
-  if (magic == "OOP") {
+  if (magic == magic_number) {
     return true;
   }
   return false;
