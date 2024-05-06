@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 using std::string;
 using std::vector;
 
@@ -32,16 +33,33 @@ class StorySegment
     StorySegmentType type_;
 
   public:
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Constructor for the StorySegment class. Initializes the key, text and type of the StorySegment.
+    /// @param key The key of the StorySegment.
+    /// @param text The text of the StorySegment.
+    /// @param type The type of the StorySegment.
+    //
     StorySegment(string key, string text, StorySegmentType type) : key_(key), text_(text), type_(type) {}
+
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Creates a vector of StorySegments from the given file.
+    /// @param file_path The path to the file.
+    /// @return A vector of StorySegments.
+    //
+    static vector<StorySegment> loadStory(const char* file_path);
+
     friend std::ostream& operator<<(std::ostream& os, const StorySegment& story_segment);
+
+
 };
 
 ///---------------------------------------------------------------------------------------------------------------------
 ///
-/// Overloads the << operator to print the text of the StorySegment.
-///
+/// Overloaded operator for the StorySegment class. Prints the text of the StorySegment.
 /// @param os The output stream.
-/// @param story_segment The StorySegment to print.
+/// @param story_segment The StorySegment that should be printed.
 /// @return The output stream.
 //
 std::ostream &operator<<(std::ostream &os, const StorySegment &story_segment);

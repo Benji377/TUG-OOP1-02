@@ -1,39 +1,24 @@
 #include "game/Game.hpp"
+#include "utility/Exception.hpp"
+#include "utility/Utils.hpp"
 
-int main()
+
+int main(int argc, char** argv)
 {
-Game game;
-game.start();
-
-game.doCommand("help");
-
-return 0;
-}
-
-
-/*int main(int argc, char** argv)
-{
-  if(argc != 3)
+  try {
+    if (argc != 3)
+    {
+      throw Exception(Exceptions::WRONG_NUMBER_OF_PARAMETERS);
+    }
+    Utils::isValidConfig(argv[1], "DUNGEON");
+    Utils::isValidConfig(argv[2], "STORY");
+  }
+  catch(const Exception& e)
   {
-    std::cout << "Error: Wrong number of parameters!\n" << std::endl;
+    std::cout << e.what() << std::endl;
     return 2;
   }
 
-  Game game;
-
-  try
-  {
-    game.parseConfigs(argv[1], argv[2]);
-  }
-  catch(const std::runtime_error& e)
-  {
-    std::cout << e.what() << std::endl;
-    return 3;
-  }
-
-
-
-
+  Game game(argv[1], argv[2]);
   return 0;
-
-} */
+} 

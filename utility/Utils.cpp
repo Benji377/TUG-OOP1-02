@@ -1,4 +1,5 @@
 #include "Utils.hpp"
+#include "Exception.hpp"
 
 bool Utils::decimalStringToInt(const std::string& str, int& number)
 {
@@ -25,7 +26,7 @@ std::fstream& Utils::goToLine(std::fstream& file, int num) {
   return file;
 }
 
-std::string Utils::readConfigLine(char *config_path, int line_number) {
+std::string Utils::readConfigLine(const char *config_path, int line_number) {
   std::string output;
   std::fstream config_file(config_path);
   goToLine(config_file, line_number);
@@ -33,19 +34,19 @@ std::string Utils::readConfigLine(char *config_path, int line_number) {
   return output;
 }
 
-bool Utils::isValidConfig(char *config_path, char* magic_number) {
+void Utils::isValidConfig(const char *config_path, const char* magic_number) {
   std::fstream config_file(config_path);
   // We need to check if we can open the file first, else we would get an error when reading from it
   if(!config_file.is_open()) {
-    return false;
+    throw Exception(Exceptions::INVALID_CONFIG_FILE, config_path);
   }
   // Now we can read from the file and check if the first line is "OOP"
   std::string magic = readConfigLine(config_path, 0);
   // TODO: Change magic number
   if (magic == magic_number) {
-    return true;
+    return;
   }
-  return false;
+  throw Exception(Exceptions::INVALID_CONFIG_FILE, config_path);
 }
 
 std::vector<std::string> Utils::splitString(const std::string& string, const std::string& delimiter) {

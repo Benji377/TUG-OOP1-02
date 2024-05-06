@@ -46,19 +46,17 @@ public:
   ///
   /// @return The line read from the file
   //
-  static std::string readConfigLine(char* config_path, int line_number);
+  static std::string readConfigLine(const char* config_path, int line_number);
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Utils class extension: This function checks if a given configuration file is valid. A configuration file is valid
-  /// if it contains the correct magic number at the start of the file.
+  /// if it contains the correct magic number at the start of the file. If the file is not valid, an exception is thrown.
   ///
-  /// @param config_path The path to the file
+  /// @param config_path The path to the configuration file
   /// @param magic_number The magic number to be checked
-  ///
-  /// @return true if the configuration file is valid, false otherwise
   //
-  static bool isValidConfig(char* config_path, char* magic_number);
+  static void isValidConfig(const char* config_path, const char* magic_number);
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
@@ -95,4 +93,3 @@ private:
 };
 
 #endif // UTILS_HPP
-
