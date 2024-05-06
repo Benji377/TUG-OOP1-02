@@ -14,7 +14,7 @@
 #include <vector>
 #include <stdexcept>
 
-#include "Dungeon.hpp"
+#include "../dungeon/Dungeon.hpp"
 #include "../commands/CommandParser.hpp"
 #include "../utility/Props.hpp"
 #include "../utility/IO.hpp"
@@ -29,7 +29,7 @@ class Game
   void parseConfigs(char* dungeon_config_file, char* story_config_file);
   Game();
   Game(Game&) = delete;
-  ~Game();
+  ~Game(){};
 
   void toggleGame();
   bool isRunning() const;

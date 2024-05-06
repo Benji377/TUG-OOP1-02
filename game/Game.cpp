@@ -55,10 +55,6 @@ void Game::toggleGame()
   is_running_ = !is_running_;
 }
 
-//If game isn't declared here, I get a seg fault
-Game::~Game()
-{}
-
 bool Game::isRunning() const
 {
   return is_running_;
