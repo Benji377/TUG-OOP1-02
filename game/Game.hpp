@@ -30,7 +30,7 @@ class Game
   public:
     Game(Game&) = delete;
     ~Game(){};
-    Game();//char *dungeon_path, char *config_path);
+    Game(char *dungeon_path, char *config_path);
 
     void toggleGame();
     bool isRunning() const;
