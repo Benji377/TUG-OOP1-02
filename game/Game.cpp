@@ -1,16 +1,11 @@
 #include "Game.hpp"
-Game::Game()
+
+Game::Game()//char *dungeon_path, char *config_path)
 {
+  //story = StorySegment::loadStory(config_path);
   parser_ = std::make_unique<CommandParser>();
   is_running_ = false;
   story_output_active_ = true;
-}
-
-Game::Game(char *dungeon_path, char *config_path)
-{
-  story = StorySegment::loadStory(config_path);
-  parser_ = std::make_unique<CommandParser>();
-  is_running_ = false;
 }
 
 void Game::start()
@@ -18,8 +13,10 @@ void Game::start()
   is_running_ = true;
 
   parser_->registerCommand("help", std::make_unique<HelpCommand>());
-  //parser_->registerCommand("map", std::make_unique<MapCommand>(this));
+  parser_->registerCommand("map", std::make_unique<MapCommand>(this));
   parser_->registerCommand("quit", std::make_unique<QuitCommand>(this));
+  parser_->registerCommand("positions", std::make_unique<PositionsCommand>(this));
+
 }
 
 void Game::doCommand()

@@ -28,10 +28,9 @@ class Game
     bool story_output_active_;
 
   public:
-    Game();
     Game(Game&) = delete;
     ~Game(){};
-    Game(char *dungeon_path, char *config_path);
+    Game();//char *dungeon_path, char *config_path);
 
     void toggleGame();
     bool isRunning() const;

@@ -5,6 +5,12 @@
 
 int main(int argc, char** argv)
 {
+  Game game;
+  game.start();
+
+  game.doCommand();
+
+  /*
   try {
     if (argc != 3)
     {
@@ -19,6 +25,6 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  Game game(argv[1], argv[2]);
+  Game game(argv[1], argv[2]); */
   return 0;
 } 

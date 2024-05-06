@@ -26,6 +26,13 @@ std::vector<std::string> IO::promtUserInput()
 
   std::string input;
   std::getline(std::cin, input);
+
+  // Check if input is Ctrl + D (end of input)
+  if(std::cin.eof())
+  {
+    input = "quit";
+  }
+
   Utils::normalizeString(input);
   std::vector<std::string> vectorised_string = Utils::splitString(input, " ");
 

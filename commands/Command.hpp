@@ -34,14 +34,14 @@ protected:
   /// @param params The vector of strings representing the parameters.
   /// @param required_size The required number of parameters.
   ///
-  /// @throws std::runtime_error if the number of parameters doesn't match the required size.
+  /// @throws std::invalid_argument if the number of parameters doesn't match the required size.
   //
   void checkParameterCount(std::vector<std::string> params, size_t required_size);
 
 public:
   //------------------------------------------------------------------------------------------------------------------
   ///
-  /// Destructor is set to default, can be overriden tho, maybe we need memory at some point?
+  /// Destructor is set to empty, can be overriden tho, maybe we need memory at some point?
   /// This class should never be copied. Each command type only exists once.
   ///
   //------------------------------------------------------------------------------------------------------------------
@@ -51,12 +51,15 @@ public:
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// execute function that differes from subclass to subclass. This is where the actual command logic happens
-  /// @return bool whether the command was successfull or not
+  /// @return void
   ///
   //------------------------------------------------------------------------------------------------------------------
-  virtual bool execute(std::vector<std::string> params) = 0;
+  virtual void execute(std::vector<std::string> params) = 0;
 
 };
+
+
+
 
 //------------------------------------------------------------------------------------------------------------------
 ///
@@ -66,12 +69,63 @@ public:
 class HelpCommand: public Command
 {
 public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Help class calls Constructor of command class. As game ptr is not needed for help, it initialises
+  /// the game for this to the nullptr.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
   HelpCommand() : Command(NULL) {};
   virtual ~HelpCommand() {};
   HelpCommand(const HelpCommand&) = delete;
 
-  virtual bool execute(std::vector<std::string> params) override;
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
+  /// then prints the help text
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  virtual void execute(std::vector<std::string> params) override;
 };
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------
+///
+/// MapCommand class: This class represents a command that toggles output of map in the game. 
+/// Gets initialised with the address of the game.
+///
+//------------------------------------------------------------------------------------------------------------------
+class MapCommand : public Command
+{
+public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Map class calls Constructor of command class, which initialises the game ptr.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  MapCommand(Game* game) : Command(game) {}
+  virtual ~MapCommand() {};
+  MapCommand(const MapCommand&) = delete;
+
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
+  /// Then toggles the map output in the game
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  virtual void execute(std::vector<std::string> params) override;
+};
+
+
+
 
 //------------------------------------------------------------------------------------------------------------------
 ///
@@ -82,11 +136,56 @@ public:
 class QuitCommand : public Command
 {
 public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Quit class calls Constructor of command class, which initialises the game ptr.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
   QuitCommand(Game* game) : Command(game) {}
   virtual ~QuitCommand() {};
   QuitCommand(const QuitCommand&) = delete;
 
-  virtual bool execute(std::vector<std::string> params) override;
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
+  /// Then toggles the is_active_ status of the game
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  virtual void execute(std::vector<std::string> params) override;
+};
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------
+///
+/// PositionsCommand class: This class represents a command prints the positions of enemies and players. 
+//  Gets initialised with the address of the game.
+///
+//------------------------------------------------------------------------------------------------------------------
+class PositionsCommand : public Command
+{
+public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Positions class calls Constructor of command class, which initialises the game ptr.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  PositionsCommand(Game* game) : Command(game) {}
+  virtual ~PositionsCommand() {};
+  PositionsCommand(const PositionsCommand&) = delete;
+
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
+  /// Then prints the positions of the players.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  virtual void execute(std::vector<std::string> params) override;
 };
 
 
