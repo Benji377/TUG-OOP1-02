@@ -1,5 +1,5 @@
 #include "Utils.hpp"
-#include "Exception.hpp"
+#include "Exceptions.hpp"
 
 bool Utils::decimalStringToInt(const std::string& str, int& number)
 {
@@ -38,7 +38,7 @@ void Utils::isValidConfig(const char *config_path, const char* magic_number) {
   std::fstream config_file(config_path);
   // We need to check if we can open the file first, else we would get an error when reading from it
   if(!config_file.is_open()) {
-    throw Exception(Exceptions::INVALID_CONFIG_FILE, config_path);
+    throw InvalidConfigFileException(config_path);
   }
   // Now we can read from the file and check if the first line is "OOP"
   std::string magic = readConfigLine(config_path, 0);
@@ -46,7 +46,7 @@ void Utils::isValidConfig(const char *config_path, const char* magic_number) {
   if (magic == magic_number) {
     return;
   }
-  throw Exception(Exceptions::INVALID_CONFIG_FILE, config_path);
+  throw InvalidConfigFileException(config_path);
 }
 
 std::vector<std::string> Utils::splitString(const std::string& string, const std::string& delimiter) {
