@@ -16,12 +16,12 @@ int main(int argc, char** argv)
   }
   catch (WrongNumberOfParametersException& e)
   {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 2;
   }
   catch (InvalidConfigFileException& e)
   {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 3;
   }
 
