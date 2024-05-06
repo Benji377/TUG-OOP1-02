@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-Game::Game(char *dungeon_path, char *config_path)
+Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_path))
 {
-  //story = StorySegment::loadStory(config_path);
+  story = StorySegment::loadStory(config_path);
   parser_ = std::make_unique<CommandParser>();
   is_running_ = false;
   story_output_active_ = true;
