@@ -9,7 +9,7 @@ void Command::checkParameterCount(std::vector<std::string> params, size_t requir
   }
 }
 
-bool HelpCommand::execute(std::vector<std::string> params)
+void HelpCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
@@ -63,20 +63,17 @@ bool HelpCommand::execute(std::vector<std::string> params)
                  "* action commands (count as actions)\n"
                  "----------------------------------------------------\n";
 
-  return true;
 }
 
-/*bool MapCommand::execute(std::vector<std::string> params)
+void MapCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
   game_->toggleStoryOutput();
 
-  return true;
+}
 
-}*/
-
-bool QuitCommand::execute(std::vector<std::string> params)
+void QuitCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
@@ -84,5 +81,13 @@ bool QuitCommand::execute(std::vector<std::string> params)
 
   game_->toggleGame();
 
-  return true;
+}
+
+
+void PositionsCommand::execute(std::vector<std::string> params)
+{
+  checkParameterCount(params, 1);
+
+  std::cout << "positions" << std::endl;
+
 }

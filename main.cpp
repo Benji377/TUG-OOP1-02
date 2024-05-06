@@ -5,6 +5,7 @@
 
 int main(int argc, char** argv)
 {
+
   try {
     if (argc != 3)
     {
@@ -25,5 +26,6 @@ int main(int argc, char** argv)
   }
 
   Game game(argv[1], argv[2]);
+
   return 0;
 } 
