@@ -1,15 +1,5 @@
 #include "IO.hpp"
 
-//---------------------------------------------------------------------------------------------------------------------
-///
-/// Checks if the first line of a file matches a specified magic number. It is declared "static" in the .hpp file
-/// So you don't have to create an instance of IO for the function to work.
-///
-/// @param config_path Path to the configuration file.
-/// @param magic_number The magic number to compare against.
-///
-/// @return true if the first line of the file matches the magic number, false otherwise or if the file cannot be opened.
-//
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
   std::string filename{config_path};
@@ -28,4 +18,17 @@ bool IO::checkMagicNumber(char* config_path, std::string magic_number)
   }
 
   return false;
+}
+
+std::vector<std::string> IO::promtUserInput()
+{
+  std::cout << "> " << std::flush;
+
+  std::string input;
+  std::getline(std::cin, input);
+  Utils::normalizeString(input);
+  std::vector<std::string> vectorised_string = Utils::splitString(input, " ");
+
+  return vectorised_string;
+
 }

@@ -3,6 +3,7 @@ Game::Game()
 {
   parser_ = std::make_unique<CommandParser>();
   is_running_ = false;
+  story_output_active_ = true;
 }
 
 Game::Game(char *dungeon_path, char *config_path)
@@ -12,18 +13,35 @@ Game::Game(char *dungeon_path, char *config_path)
   is_running_ = false;
 }
 
-//Idea to use map for commands from KU Practicals 5
 void Game::start()
 {
   is_running_ = true;
 
   parser_->registerCommand("help", std::make_unique<HelpCommand>());
+  //parser_->registerCommand("map", std::make_unique<MapCommand>(this));
   parser_->registerCommand("quit", std::make_unique<QuitCommand>(this));
 }
 
-void Game::doCommand(std::string input)
+void Game::doCommand()
 {
-  parser_->execute(input);
+
+  //Print Story Message
+  std::vector<std::string> input = IO::promtUserInput();
+
+  try
+  {
+    parser_->execute(input);
+  }
+  catch(const std::exception& e)
+  {
+    std::cout << e.what() << '\n';
+  }
+
+}
+
+void Game::toggleStoryOutput()
+{
+  story_output_active_ = !story_output_active_;
 }
 
 void Game::toggleGame()

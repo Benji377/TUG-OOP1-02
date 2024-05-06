@@ -1,22 +1,20 @@
 #include "CommandParser.hpp"
 
-//Idea for this from OO KU Practicals 5
 void CommandParser::registerCommand(const std::string name, std::unique_ptr<Command> command)
 {
   commands_.insert({name, std::move(command)});
 }
 
-bool CommandParser::execute(std::string input)
+bool CommandParser::execute(std::vector<std::string> user_input)
 {
-  if (commands_.count(input) == 0)
+  if (commands_.count(user_input.at(0)) == 0)
   {
-    return false;
+    throw std::invalid_argument("UnknownCommand");
   }
 
-  commands_.at(input)->execute();
+  commands_.at(user_input.at(0))->execute(user_input);
   return true;
 }
 
-//Idea for this from OO KU Practicals 5
 CommandParser::~CommandParser()
 {}

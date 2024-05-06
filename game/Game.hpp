@@ -25,6 +25,7 @@ class Game
     std::vector<StorySegment> story;
     std::unique_ptr<CommandParser> parser_;
     bool is_running_;
+    bool story_output_active_;
 
   public:
     Game();
@@ -34,7 +35,9 @@ class Game
 
     void toggleGame();
     bool isRunning() const;
-
+    void toggleGame();
+    void toggleStoryOutput();
+    bool isRunning() const;
     void start();
     void doCommand(std::string input);
 };
