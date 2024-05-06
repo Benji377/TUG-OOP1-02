@@ -29,15 +29,24 @@ void Game::parseConfigs(char* dungeon_config_file, char* story_config_file)
 
 }
 
+Game::Game()
+{
+  parser_ = std::make_unique<CommandParser>();
+  is_running_ = false;
+}
+
+
 //Idea to use map for commands from KU Practicals 5
 void Game::start()
 {
-  parser_ = new CommandParser;
+  is_running_ = true;
 
-  parser_->registerCommand("help", new HelpCommand());
-  parser_->registerCommand("quit", new QuitCommand(this));
+  parser_->registerCommand("help", std::make_unique<HelpCommand>());
+  parser_->registerCommand("quit", std::make_unique<QuitCommand>(this));
+}
 
-  std::string input = "quit";
+void Game::doCommand(std::string input)
+{
   parser_->execute(input);
 }
 
@@ -46,8 +55,11 @@ void Game::toggleGame()
   is_running_ = !is_running_;
 }
 
+//If game isn't declared here, I get a seg fault
 Game::~Game()
-{
-  delete parser_;
-}
+{}
 
+bool Game::isRunning() const
+{
+  return is_running_;
+}

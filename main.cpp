@@ -3,8 +3,9 @@
 int main()
 {
 Game game;
-
 game.start();
+
+game.doCommand("help");
 
 return 0;
 }

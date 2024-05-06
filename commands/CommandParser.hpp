@@ -10,14 +10,14 @@
 class CommandParser
 {
   private:
-  std::map<std::string, Command*> commands_;
+  std::map<std::string, std::unique_ptr<Command>> commands_;
 
   public:
   ~CommandParser();
   CommandParser(CommandParser&) = delete;
   CommandParser() {}
 
-  void registerCommand(const std::string name, Command* command);
+  void registerCommand(const std::string name, std::unique_ptr<Command> command);
   bool execute(std::string input);
 
 

@@ -22,18 +22,20 @@
 class Game
 {
   private:
-  CommandParser* parser_;
+  std::unique_ptr<CommandParser> parser_;
   bool is_running_;
 
   public:
   void parseConfigs(char* dungeon_config_file, char* story_config_file);
-  Game(): is_running_(false) {};
+  Game();
   Game(Game&) = delete;
   ~Game();
-  void toggleGame();
 
+  void toggleGame();
   bool isRunning() const;
+
   void start();
+  void doCommand(std::string input);
 
 };
 

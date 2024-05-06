@@ -1,9 +1,9 @@
 #include "CommandParser.hpp"
 
 //Idea for this from OO KU Practicals 5
-void CommandParser::registerCommand(const std::string name, Command* command)
+void CommandParser::registerCommand(const std::string name, std::unique_ptr<Command> command)
 {
-  commands_.insert({name, command});
+  commands_.insert({name, std::move(command)});
 }
 
 bool CommandParser::execute(std::string input)
@@ -19,10 +19,4 @@ bool CommandParser::execute(std::string input)
 
 //Idea for this from OO KU Practicals 5
 CommandParser::~CommandParser()
-{
-  for(const auto& [_,command] : commands_)
-  {
-    delete command;
-  }
-
-}
+{}
