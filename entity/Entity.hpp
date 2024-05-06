@@ -14,13 +14,20 @@
 
 #include <optional>
 #include <string>
-#include "../character/Inventory.hpp"
+#include "character/Inventory.hpp"
 
 class Entity {
   protected:
     int id_;
+    char abbreviation_;
     std::optional<Inventory> inventory_;
     bool is_lootable_;
+
+  public:
+    Entity(int id, char abbreviation, bool is_lootable) : id_(id), abbreviation_(abbreviation),
+          is_lootable_(is_lootable) {}
+
+    char getAbbreviation() const { return abbreviation_; }
 };
 
 #endif //ENTITY_HPP

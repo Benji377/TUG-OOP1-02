@@ -15,3 +15,8 @@ Room::Room(int id, int width, int height)
     fields_.push_back(row);
   }
 }
+
+void Room::setEntity(shared_ptr<Entity> entity, int row, int col)
+{
+  fields_[row - 1][col - 1]->setEntity(entity);
+}

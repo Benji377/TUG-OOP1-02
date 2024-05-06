@@ -13,10 +13,10 @@
 #define INVENTORY_HPP
 
 #include <vector>
-#include "../items/Potion.hpp"
-#include "../items/Weapon.hpp"
-#include "../items/Armor.hpp"
-#include "../items/Ammunition.hpp"
+#include "../../items/Potion.hpp"
+#include "../../items/Weapon.hpp"
+#include "../../items/Armor.hpp"
+#include "../../items/Ammunition.hpp"
 
 class Inventory
 {
@@ -29,7 +29,7 @@ class Inventory
     Inventory() = default;
     Inventory(const Inventory& other) = delete;
     Inventory& operator=(const Inventory& other) = delete;
-    ~Inventory();
+    ~Inventory() = default;
 };
 
 

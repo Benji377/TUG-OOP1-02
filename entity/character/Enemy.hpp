@@ -19,13 +19,14 @@ class Enemy: public Character
 {
   bool is_boss_;
   public:
+    Enemy(int id, int abbreviation) : Character(id, abbreviation) {} // Temporary constructor
     bool is_boss() const;
     Enemy(std::string name, int health, int attack, int defense, bool is_boss);
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;
     int move(int row, int column) override;
     void printEnemy() const;
-    ~Enemy() override;
+    virtual ~Enemy() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
 };
 
 

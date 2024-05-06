@@ -30,6 +30,7 @@ class Room
 
     int getId() const { return id_; }
     vector<vector<shared_ptr<Field>>> getFields() const { return fields_; }
+    void setEntity(shared_ptr<Entity> entity, int row, int col);
 
 };
 

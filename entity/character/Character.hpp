@@ -12,24 +12,24 @@
 #define CHARACTER_HPP
 
 #include <string>
-#include "../entity/Entity.hpp"
+#include "../Entity.hpp"
 
 class Character: public Entity
 {
   protected:
-    char type_;
     std::string type_name_;
     int maximum_health_;
     int health_;
-    Armor armor_;
-    Weapon weapon_;
+    Armor* armor_; // Temporarily changed to a pointer
+    Weapon* weapon_; // Temporarily changed to a pointer
     int strength_;
     int vitality_;
   public:
-    virtual int move(int row, int column);
-    virtual void attack(Character& target, int damage);
-    virtual void take_damage(int damage);
-    virtual ~Character();
+    Character(int id, char abbreviation) : Entity(id, abbreviation, false) {} // Temporary constructor
+    virtual int move(int row, int column) = 0;                // Missn et pure virtual san, isch la temporär
+    virtual void attack(Character& target, int damage) = 0;   // Missn et pure virtual san, isch la temporär
+    virtual void take_damage(int damage) = 0;                 // Missn et pure virtual san, isch la temporär
+    virtual ~Character() = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
 };
 
 
