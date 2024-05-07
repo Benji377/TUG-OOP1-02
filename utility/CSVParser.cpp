@@ -36,7 +36,7 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
   return {};
 }
 
-std::string CSVParser::getItemByAbbreviation(const std::string& abbreviation)
+std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
 {
   // Map the filenames to the corresponding item types
   std::map<std::string, std::string> filenameToItemType = {

@@ -47,7 +47,7 @@ class CSVParser {
     /// @param abbreviation The value to search for in the first column
     /// @return The item that was found
     //
-    static std::string getItemByAbbreviation(const std::string& abbreviation);
+    static std::string getFolderByAbbreviation(const std::string& abbreviation);
 };
 
 

@@ -1,4 +1,6 @@
 #include "Inventory.hpp"
+#include "../../utility/CSVParser.hpp"
+#include "../../utility/Props.hpp"
 
 void Inventory::addPotion(Potion *potion)
 {
@@ -136,13 +138,41 @@ Ammunition *Inventory::getAmmunition(std::string &abbreviation)
   return nullptr;
 }
 
-int Inventory::parseInventory(std::vector<std::string> &inventory)
+int Inventory::parseInventory(std::map<std::string, int> &inventory)
 {
-  for (std::string item : inventory)
+  for (auto & item : inventory)
   {
-
+    std::string parsed_item = CSVParser::getFolderByAbbreviation(item.first);
+    if (parsed_item.empty())
+    {
+      return 1;
+    }
+    else if (parsed_item == "Ammunition")
+    {
+      addAmmunition(Props::craftAmmunition(const_cast<std::string &>(item.first), item.second));
+    }
+    else
+    {
+      for (int i = 0; i < item.second; i++)
+      {
+        if (parsed_item == "Potion")
+        {
+          addPotion(Props::craftPotion(const_cast<std::string &>(item.first)));
+        }
+        else if (parsed_item == "Weapon")
+        {
+          addWeapon(Props::craftWeapon(const_cast<std::string &>(item.first)));
+        }
+        else if (parsed_item == "Armor")
+        {
+          addArmor(Props::craftArmor(const_cast<std::string &>(item.first)));
+        }
+      }
+    }
   }
+  return 0;
 }
+
 
 Inventory::~Inventory()
 {
