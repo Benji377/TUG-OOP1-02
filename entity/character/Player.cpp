@@ -78,7 +78,7 @@ void Player::initializeInventory()
 
 // Sorry muss san um di errors zi fixen
 void Player::attack(Character& target, int damage) { }
-void Player::take_damage(int damage) { }
+void Player::takeDamage(int damage) { }
 int Player::move(int row, int column) { return 0; }
 
 void Player::setResistance(Effect effect)

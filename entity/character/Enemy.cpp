@@ -78,7 +78,7 @@ bool Enemy::is_boss() const
 
 // Sorry muss san um di errors zi fixen
 void Enemy::attack(Character& target, int damage) { }
-void Enemy::take_damage(int damage) { }
+void Enemy::takeDamage(int damage) { }
 int Enemy::move(int row, int column) { return 0; }
 
 Enemy::~Enemy()

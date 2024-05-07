@@ -21,7 +21,7 @@ class Player: public Character
   public:
     Player(int id, char abbreviation, std::string name);
     void attack(Character& target, int damage) override;
-    void take_damage(int damage) override;
+    void takeDamage(int damage) override;
     int move(int row, int column) override;
     void setResistance(Effect effect);
     [[nodiscard]] Effect getResistance() const;
