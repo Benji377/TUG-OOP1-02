@@ -19,7 +19,7 @@ class Enemy: public Character
 {
   bool is_boss_;
   public:
-    Enemy(int id, int abbreviation); // Temporary constructor
+    Enemy(int id, char abbreviation); // Temporary constructor
     bool is_boss() const;
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;

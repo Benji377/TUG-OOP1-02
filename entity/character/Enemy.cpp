@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
 
-// TODO: Implement Enemy class
+Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation) {}
 
 
 // Sorry muss san um di errors zi fixen
