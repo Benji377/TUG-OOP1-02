@@ -1,12 +1,14 @@
 #include "Player.hpp"
+
+#include <utility>
 #include "../../utility/Props.hpp"
 
-Player::Player(int id, char abbreviation) : Character(id, abbreviation)
+Player::Player(int id, char abbreviation, std::string name) : Character(id, abbreviation)
 {
+  name_ = std::move(name);
   switch (abbreviation)
   {
     case 'B':
-      name_ = "Barbarian";
       resistant_to_ = Effect::NONE;
       base_armor_ = 2;
       strength_ = 4;
@@ -15,7 +17,6 @@ Player::Player(int id, char abbreviation) : Character(id, abbreviation)
       health_ = maximum_health_;
       break;
     case 'R':
-      name_ = "Rogue";
       resistant_to_ = Effect::NONE;
       base_armor_ = 1;
       strength_ = 2;
@@ -24,7 +25,6 @@ Player::Player(int id, char abbreviation) : Character(id, abbreviation)
       health_ = maximum_health_;
       break;
     case 'W':
-      name_ = "Wizard";
       resistant_to_ = Effect::NONE;
       base_armor_ = 0;
       strength_ = 1;

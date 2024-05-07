@@ -136,6 +136,14 @@ Ammunition *Inventory::getAmmunition(std::string &abbreviation)
   return nullptr;
 }
 
+int Inventory::parseInventory(std::vector<std::string> &inventory)
+{
+  for (std::string item : inventory)
+  {
+
+  }
+}
+
 Inventory::~Inventory()
 {
   for (auto & potion : potions_)

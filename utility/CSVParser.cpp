@@ -35,3 +35,26 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
   std::cerr << "Error: Abbreviation " << abbreviation << " not found" << std::endl;
   return {};
 }
+
+std::string CSVParser::getItemByAbbreviation(const std::string& abbreviation)
+{
+  // Map the filenames to the corresponding item types
+  std::map<std::string, std::string> filenameToItemType = {
+          {"../items/csv/armor.csv", "Armor"},
+          {"../items/csv/potions.csv", "Potion"},
+          {"../items/csv/weapon.csv", "Weapon"},
+          {"../items/csv/ammunition.csv", "Ammunition"}
+  };
+
+  // Iterate through each CSV file in the items/csv folder
+  for (const auto& [filename, itemType] : filenameToItemType)
+  {
+    std::vector<std::string> row = getRowByAbbreviation(filename, abbreviation);
+    if (!row.empty())
+    {
+      return itemType;
+    }
+  }
+  // If the abbreviation was not found in any of the files, return an empty string
+  return "";
+}

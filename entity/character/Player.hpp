@@ -20,7 +20,7 @@ class Player: public Character
   Effect resistant_to_; // Potion effect enum
   void initializeInventory();
   public:
-    Player(int id, char abbreviation); // Temporary constructor
+    Player(int id, char abbreviation, std::string name); // Temporary constructor
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;
     int move(int row, int column) override;
