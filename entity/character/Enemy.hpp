@@ -21,12 +21,12 @@ class Enemy: public Character
   void initializeInventory();
   public:
     Enemy(int id, char abbreviation); // Temporary constructor
-    bool is_boss() const;
+    [[nodiscard]] bool is_boss() const;
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;
     int move(int row, int column) override;
     void printEnemy() const;
-    ~Enemy() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    ~Enemy() override;
 
     
 };
