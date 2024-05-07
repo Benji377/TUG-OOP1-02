@@ -18,6 +18,7 @@
 class Enemy: public Character
 {
   bool is_boss_;
+  void initializeInventory();
   public:
     Enemy(int id, char abbreviation); // Temporary constructor
     bool is_boss() const;

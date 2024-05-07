@@ -20,6 +20,7 @@ class Character: public Entity
     std::string type_name_;
     int maximum_health_;
     int health_;
+    Effect resistant_to_; // Potion effect enum
     Armor* armor_;
     Weapon* weapon_;
     Inventory* inventory_;

@@ -17,7 +17,6 @@
 class Player: public Character
 {
   std::string name_;
-  Effect resistant_to_; // Potion effect enum
   void initializeInventory();
   public:
     Player(int id, char abbreviation, std::string name);
