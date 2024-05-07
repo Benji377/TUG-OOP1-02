@@ -41,7 +41,8 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
   initializeInventory();
 }
 
-void Player::initializeInventory() {
+void Player::initializeInventory()
+{
   Inventory temp_inv = *new Inventory();
   if (abbreviation_ == 'B')
   {
@@ -99,6 +100,7 @@ Player::~Player()
 
 void Player::printPlayer(const std::pair<std::string, std::string>& position) const
 {
+  // TODO: Make values right-aligned
   std::cout << type_name_ << " [" << abbreviation_ << "] \"" << name_
             << "\" on (" << position.first << "," << position.second << ")\n"
             << "Armor Value: " << base_armor_ << "\n"
