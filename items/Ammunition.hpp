@@ -26,6 +26,7 @@ class Ammunition : public Item
 {
   AmmunitionType type_;
   std::vector<std::string> weapons_;
+  int amount_;
 
   ///----------------------------------------------------------------------------------------------------------------
   ///
@@ -43,7 +44,7 @@ public:
   /// @param name The name of the ammunition.
   /// @param type The type of the ammunition.
   //
-  Ammunition(std::string &abbreviation, std::string &type, std::vector<std::string> &weapons);
+  Ammunition(std::string &abbreviation, std::string &type, std::vector<std::string> &weapons, int amount);
 
   ///----------------------------------------------------------------------------------------------------------------
   ///
@@ -51,6 +52,9 @@ public:
   /// @return The type of the ammunition.
   //
   [[nodiscard]] AmmunitionType getType() const;
+
+  void setAmount(int amount);
+  [[nodiscard]] int getAmount() const;
 
   ///----------------------------------------------------------------------------------------------------------------
   ///

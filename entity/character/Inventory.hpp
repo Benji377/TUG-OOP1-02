@@ -20,16 +20,26 @@
 
 class Inventory
 {
-  std::vector<Potion> potions_;
-  std::vector<Weapon> weapons_;
-  std::vector<Armor> armor_;
-  std::vector<Ammunition> ammunition_;
+  std::vector<Potion*> potions_;
+  std::vector<Weapon*> weapons_;
+  std::vector<Armor*> armor_;
+  std::vector<Ammunition*> ammunition_;
 
   public:
     Inventory() = default;
-    Inventory(const Inventory& other) = delete;
+    void addPotion(Potion* potion);
+    void addWeapon(Weapon* weapon);
+    void addArmor(Armor* armor);
+    void addAmmunition(Ammunition* ammunition);
+    int removeItem(Item* item);
+    int useAmmunition(std::string& abbreviation);
+    Potion* getPotion(std::string& abbreviation);
+    Weapon* getWeapon(std::string& abbreviation);
+    Armor* getArmor(std::string& abbreviation);
+    Ammunition* getAmmunition(std::string& abbreviation);
+    Inventory(const Inventory& other) = default;
     Inventory& operator=(const Inventory& other) = delete;
-    ~Inventory() = default;
+    ~Inventory();
 };
 
 

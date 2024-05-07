@@ -20,7 +20,7 @@ class Entity {
   protected:
     int id_;
     char abbreviation_;
-    std::optional<Inventory> inventory_;
+    std::optional<Inventory*> inventory_;
     bool is_lootable_;
 
   public:

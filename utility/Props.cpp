@@ -24,7 +24,7 @@ Potion *Props::craftPotion(std::string& abbreviation)
   }
 }
 
-Ammunition* Props::craftAmmunition(std::string& abbreviation)
+Ammunition* Props::craftAmmunition(std::string& abbreviation, int amount)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(ammunition_csv_path_, abbreviation);
   if (row.empty())
@@ -33,7 +33,7 @@ Ammunition* Props::craftAmmunition(std::string& abbreviation)
   }
   // Convert the string to a vector of strings splitting by the comma
   std::vector<std::string> weapons = Utils::splitString(row[2], ",");
-  return new Ammunition(abbreviation, row[1], weapons);
+  return new Ammunition(abbreviation, row[1], weapons, amount);
 }
 
 Armor* Props::craftArmor(std::string& abbreviation, int vitality)
@@ -60,7 +60,7 @@ Armor* Props::craftArmor(std::string& abbreviation, int vitality)
   return new Armor(abbreviation, row[1], std::stoi(row[2]));
 }
 
-Weapon* Props::craftWeapon(std::string& abbreviation, char &character)
+Weapon* Props::craftWeapon(std::string& abbreviation, char character)
 {
   if (character != 'L' && character != 'W')
   {

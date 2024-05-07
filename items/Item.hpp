@@ -24,6 +24,10 @@ protected:
   std::string abbreviation_;
   std::string name_;
   Dice *dice_;
+public:
+  [[nodiscard]] std::string getAbbreviation() const { return abbreviation_; }
+  [[nodiscard]] std::string getName() const { return name_; }
+  [[nodiscard]] Dice* getDice() const { return dice_; }
 };
 
 #endif //ITEM_HPP
