@@ -24,8 +24,9 @@ class DeathLocation : public Entity
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the DeathLocation class
+    /// @param loot the loot of the death location
     //
-    DeathLocation() : Entity(death_location_count_++, DEATH_LOCATION_ABBREVIATION, true) {}
+    DeathLocation(map<string, int> loot) : Entity(death_location_count_++, DEATH_LOCATION_ABBREVIATION, loot) {}
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the DeathLocation class

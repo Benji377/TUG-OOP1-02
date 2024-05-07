@@ -6,9 +6,11 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <map>
 
-using std::string;
+using std::map;
 using std::shared_ptr;
+using std::string;
 
 Dungeon::Dungeon(const char *file_path)
 {
@@ -52,6 +54,7 @@ Dungeon::Dungeon(const char *file_path)
         shared_ptr<Door> door;
         shared_ptr<Enemy> enemy;
         shared_ptr<TreasureChest> chest;
+        map<string, int> treasure_chest_loot;
         switch (entity_abbreviation)
         {
         case 'D':
@@ -65,7 +68,11 @@ Dungeon::Dungeon(const char *file_path)
           rooms_[room_id]->setFieldEntity(enemy, entity_row, entity_col);
           break;
         case 'T':
-          chest = std::make_shared<TreasureChest>(std::stoi(parameters[0]));
+          for (size_t i = 1; i < parameters.size(); i+=2)
+          {
+            treasure_chest_loot[parameters[i]] = std::stoi(parameters[i+1]);
+          }
+          chest = std::make_shared<TreasureChest>(std::stoi(parameters[0]), treasure_chest_loot);
           rooms_[room_id]->setFieldEntity(chest, entity_row, entity_col);
           break;
         default:

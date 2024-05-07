@@ -11,6 +11,8 @@
 #ifndef DOOR_HPP
 #define DOOR_HPP
 
+#define DOOR_ABBREVIATION 'D'
+
 #include "Entity.hpp"
 
 class Door : public Entity
@@ -25,7 +27,7 @@ class Door : public Entity
     /// Constructor for the Door class
     /// @param leads_to the room the door leads to
     //
-    Door(int leads_to) : Entity(leads_to, 'D', false), is_locked_(true), leads_to_(leads_to) {}
+    Door(int leads_to) : Entity(leads_to, DOOR_ABBREVIATION, false), is_locked_(true), leads_to_(leads_to) {}
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the Door class

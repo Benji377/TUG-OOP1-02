@@ -12,6 +12,8 @@
 #ifndef TREASURECHEST_HPP
 #define TREASURECHEST_HPP
 
+#define TREASURE_CHEST_ABBREVIATION 'T'
+
 #include "Entity.hpp"
 
 class TreasureChest : public Entity
@@ -27,7 +29,8 @@ class TreasureChest : public Entity
     /// Constructor for the TreasureChest class
     /// @param min_value the minimum value to open the treasure chest
     //
-    TreasureChest(int min_value) : Entity(treasure_chest_count_++, 'T', true), is_locked_(true), min_value_(min_value){}
+    TreasureChest(int min_value, map<string, int> loot) : Entity(treasure_chest_count_++, TREASURE_CHEST_ABBREVIATION,
+      loot), is_locked_(true), min_value_(min_value) {}
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the TreasureChest class
