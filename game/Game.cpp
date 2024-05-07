@@ -70,8 +70,24 @@ void Game::start()
     {
       string input;
       std::cin >> input;
-      
+      Utils::normalizeString(input);
+      // TODO: Check if the input is quit or EOF
+      if (input.length() != 1 || (input[0] != 'w' && input[0] != 'b' && input[0] != 'r'))
+      {
+        std::cout << "Please enter a letter representing your desired player type (W, B, or R)." << std::endl;
+        std::cout << "> ";
+      } else if (getPlayerTypeAmount(input[0]) >= 1)
+      {
+        std::cout << "This player type is no longer available. Please choose a different player type." << std::endl;
+        std::cout << "> ";
+      } else
+      {
+        type = input[0];
+        break;
+      }
     }
+    std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);
+    players_.push_back(player);
   }
 }
 
@@ -124,7 +140,7 @@ int Game::getPlayerTypeAmount(char type)
   int count = 0;
   for (auto player : players_)
   {
-    if (player->get_type_name()[0] == type)
+    if (player->getTypeName()[0] == type)
     {
       count++;
     }
