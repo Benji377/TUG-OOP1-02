@@ -17,6 +17,7 @@
 #include "../utility/Props.hpp"
 #include "../utility/IO.hpp"
 #include "../story/Story.hpp"
+#include "../entity/character/Player.hpp"
 
 using std::vector;
 
@@ -34,6 +35,7 @@ class Game
     inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
     Dungeon dungeon_;
+    vector<std::shared_ptr<Player>> players_;
     Phase current_phase_;
     bool is_running_;
     bool map_output_active_;
@@ -51,6 +53,8 @@ class Game
     void start();
     void doCommand();
     void doCommand(string input);
+    bool playerExists(string name);
+    int getPlayerTypeAmount(char type);
 };
 
 

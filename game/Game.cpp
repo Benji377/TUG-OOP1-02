@@ -2,6 +2,7 @@
 
 #define MIN_PLAYERS 1
 #define MAX_PLAYERS 3
+#define MAX_NAME_LENGTH 10
 
 Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_path))
 {
@@ -19,7 +20,7 @@ void Game::start()
 {
   std::cout << Game::story_.getStorySegment("N_INTRO");
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
-            << std::endl;
+    << std::endl;
   std::cout << "> ";
   int num_players;
   while (true)
@@ -30,7 +31,7 @@ void Game::start()
     if (!Utils::decimalStringToInt(input, num_players) || num_players < MIN_PLAYERS || num_players > MAX_PLAYERS)
     {
       std::cout << "Please enter a number of players between " << MIN_PLAYERS << " and " << MAX_PLAYERS << "."
-                << std::endl;
+        << std::endl;
       std::cout << "> ";
     }
     else
@@ -39,7 +40,39 @@ void Game::start()
     }
     Game::max_players_ = num_players;
   }
-
+  for (int i = 1; i <= num_players; i++)
+  {
+    std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
+      << " characters)";
+    std::cout << "> ";
+    string name;
+    while (true)
+    {
+      name.clear();
+      std::cin >> name;
+      if (name.length() > MAX_NAME_LENGTH || playerExists(name))
+      {
+        std::cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << std::endl;
+        std::cout << "> ";
+      }
+      else
+      {
+        break;
+      }
+    }
+    std::cout << name << ", please choose a player type:" << std::endl;
+    std::cout << "  [W] Wizard     <AMOUNT>/1" << std::endl;
+    std::cout << "  [B] Barbarian  <AMOUNT>/1" << std::endl;
+    std::cout << "  [R] Rogue      <AMOUNT>/1" << std::endl;
+    std::cout << "> ";
+    char type;
+    while (true)
+    {
+      string input;
+      std::cin >> input;
+      
+    }
+  }
 }
 
 void Game::doCommand()
@@ -72,4 +105,29 @@ void Game::toggleGame()
 bool Game::isRunning() const
 {
   return is_running_;
+}
+
+bool Game::playerExists(string name)
+{
+  for (auto player : players_)
+  {
+    if (player->getName() == name)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+int Game::getPlayerTypeAmount(char type)
+{
+  int count = 0;
+  for (auto player : players_)
+  {
+    if (player->get_type_name()[0] == type)
+    {
+      count++;
+    }
+  }
+  return count;
 }

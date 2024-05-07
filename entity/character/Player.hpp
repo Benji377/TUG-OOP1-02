@@ -26,6 +26,7 @@ class Player: public Character
     void setResistance(Effect effect);
     [[nodiscard]] Effect getResistance() const;
     void printPlayer(const std::pair<std::string, std::string>& position) const;
+    std::string getName() const { return name_; }
     ~Player() override;
 };
 
