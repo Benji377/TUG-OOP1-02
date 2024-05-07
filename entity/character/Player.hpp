@@ -25,7 +25,7 @@ class Player: public Character
     void take_damage(int damage) override;
     int move(int row, int column) override;
     void printPlayer() const;
-    virtual ~Player() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    ~Player() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
 };
 
 

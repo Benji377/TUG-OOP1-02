@@ -31,6 +31,10 @@ Dungeon::Dungeon(const char *file_path)
       int room_width = std::stoi(room_dimensions[0]);
       int room_height = std::stoi(room_dimensions[1]);
       rooms_.push_back(std::make_shared<Room>(room_id, room_width, room_height));
+      if (room_id == 1)
+      {
+        current_room_ = rooms_[room_id];
+      }
       // Add entities to the room
       for (string entity : entities)
       {
@@ -52,47 +56,40 @@ Dungeon::Dungeon(const char *file_path)
         {
         case 'D':
           door = std::make_shared<Door>(std::stoi(parameters[0]));
-          rooms_[room_id]->setEntity(door, entity_row, entity_col);
+          rooms_[room_id]->setFieldEntity(door, entity_row, entity_col);
           break;
         case 'Z':
         case 'G':
         case 'L':
           enemy = std::make_shared<Enemy>(std::stoi(parameters[0]), entity_abbreviation);
-          rooms_[room_id]->setEntity(enemy, entity_row, entity_col);
+          rooms_[room_id]->setFieldEntity(enemy, entity_row, entity_col);
           break;
         case 'T':
           chest = std::make_shared<TreasureChest>(std::stoi(parameters[0]));
-          rooms_[room_id]->setEntity(chest, entity_row, entity_col);
+          rooms_[room_id]->setFieldEntity(chest, entity_row, entity_col);
           break;
         default:
           break;
         }
       }
     }
-
-    // Temporary: Print the dungeon layout
-    for (int i = 1; i < rooms_.size(); i++)
-    {
-      std::cout << "Room " << i << ":\n" << std::endl;
-      for (int j = 0; j < rooms_[i]->getFields().size(); j++)
-      {
-        for (int k = 0; k < rooms_[i]->getFields()[j].size(); k++)
-        {
-          if (rooms_[i]->getFields()[j][k]->getEntity() != nullptr)
-          {
-            std::cout << " " << rooms_[i]->getFields()[j][k]->getEntity()->getAbbreviation() << " ";
-          }
-          else
-          {
-            std::cout << " - ";
-          }
-        }
-        std::cout << std::endl;
-      }
-      std::cout << std::endl;
-    }
-    //
-
     file.close();
   }
+  occured_enemy_types_ = {};
+  action_count_ = 0;
+  // Temporary: Print the current room
+  for (auto room : rooms_)
+  {
+    if (room != nullptr)
+    {
+      std::cout << "Room " << room->getId() << std::endl;
+      room->printRoom();
+      std::cout << std::endl;
+    }
+  }
+}
+
+void Dungeon::printCurrentRoom()
+{
+  current_room_->printRoom();
 }

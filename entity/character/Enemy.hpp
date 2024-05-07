@@ -26,7 +26,9 @@ class Enemy: public Character
     void take_damage(int damage) override;
     int move(int row, int column) override;
     void printEnemy() const;
-    virtual ~Enemy() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    ~Enemy() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+
+    
 };
 
 

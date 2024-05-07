@@ -1,6 +1,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-// LOrem ipsum
+// The DeathLocation class represents a death location in the game world. It is by default lootable. The inventory
+// stores the loot of the death location.
 //
 // Group: 068
 //
@@ -10,6 +11,8 @@
 #ifndef DEATHLOCATION_HPP
 #define DEATHLOCATION_HPP
 
+#define DEATH_LOCATION_ABBREVIATION 'X'
+
 #include "Entity.hpp"
 
 class DeathLocation : public Entity
@@ -18,8 +21,16 @@ class DeathLocation : public Entity
     inline static int death_location_count_ = 0;
 
   public:
-    DeathLocation() : Entity(death_location_count_++, 'X', true) {}
-    int getId() const { return id_; }
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Constructor for the DeathLocation class
+    //
+    DeathLocation() : Entity(death_location_count_++, DEATH_LOCATION_ABBREVIATION, true) {}
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Destructor for the DeathLocation class
+    //
+    ~DeathLocation() override {}
 };
 
 #endif //DEATHLOCATION_HPP

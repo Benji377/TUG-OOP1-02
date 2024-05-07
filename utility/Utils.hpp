@@ -76,6 +76,16 @@ public:
   /// @param string The string to be normalized
   //
   static void normalizeString(std::string& string);
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Utils class extension: This function checks if a given object is an instance of a specific class.
+  ///
+  /// @param ptr The object to be checked
+  ///
+  /// @return True if the object is an instance of the class, false otherwise
+  //
+  template<typename Base, typename T>
+  static bool instanceof(const T *ptr) { return dynamic_cast<const Base*>(ptr) != nullptr; }
 
 private:
   ///------------------------------------------------------------------------------------------------------------------

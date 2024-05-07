@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 //
-// Dungeon. Similar to Map in A1
+// The Dungeon class represents the game world. It contains a vector of rooms, the current room, a vector of occured
+// enemy types and an action count. In the constructor the dungeon layout is read from a file and the rooms are created.
 //
 // Group: 068
 //
@@ -26,7 +27,17 @@ class Dungeon
     int action_count_;
 
   public:
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Constructor for the Dungeon class
+    /// @param file_path the path to the file containing the dungeon layout
+    //
     Dungeon(const char *file_path);
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Function to print the current room
+    //
+    void printCurrentRoom();
 };
 
 #endif // DUNGEON_HPP

@@ -26,8 +26,10 @@ class Entity {
   public:
     Entity(int id, char abbreviation, bool is_lootable) : id_(id), abbreviation_(abbreviation),
           is_lootable_(is_lootable) {}
+    virtual ~Entity() {}
 
-    char getAbbreviation() const { return abbreviation_; }
+    virtual char getAbbreviation() const { return abbreviation_; }
+    virtual int getId() const { return id_; }
 };
 
 #endif //ENTITY_HPP

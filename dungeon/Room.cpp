@@ -1,4 +1,10 @@
 #include "Room.hpp"
+#include "../utility/Utils.hpp"
+#include "../entity/Door.hpp"
+#include "../entity/TreasureChest.hpp"
+#include "../entity/character/Enemy.hpp"
+#include "../entity/character/Player.hpp"
+
 
 Room::Room(int id, int width, int height)
 {
@@ -16,7 +22,74 @@ Room::Room(int id, int width, int height)
   }
 }
 
-void Room::setEntity(shared_ptr<Entity> entity, int row, int col)
+void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
 {
   fields_[row - 1][col - 1]->setEntity(entity);
+}
+
+void Room::printRoom()
+{
+  std::cout << "    ";
+  for (size_t i = 0; i < fields_[0].size(); i++)
+  {
+    std::cout << " " << i + 1 << "  ";
+  }
+  std::cout << "\n   +";
+  for (size_t i = 0; i < fields_[0].size(); i++)
+  {
+    std::cout << "---+";
+  }
+  std::cout << std::endl;
+  for (size_t i = 0; i < fields_.size(); i++)
+  {
+    std::cout << " " << i + 1 << " |";
+    for (size_t j = 0; j < fields_[i].size(); j++)
+    {
+      shared_ptr<Entity> entity = fields_[i][j]->getEntity();
+      printEntitie(entity);
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "   +";
+  for (size_t i = 0; i < fields_[0].size(); i++)
+  {
+    std::cout << "---+";
+  }
+  std::cout << std::endl;
+}
+
+void Room::printEntitie(shared_ptr<Entity> entity)
+{
+  if (entity == nullptr)
+  {
+    std::cout << "   |";
+  }
+  else
+  {
+    std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(entity);
+    std::shared_ptr<TreasureChest> chest = std::dynamic_pointer_cast<TreasureChest>(entity);
+    if (door != nullptr)
+    {
+      std::cout << (door->isLocked() ? "#D" : " D");
+      std::cout << door->getLeadsTo() << "|";
+    }
+    else if (chest != nullptr)
+    {
+      std::cout << (chest->isLocked() ? "#T" : " T");
+    }
+    else
+    {
+      std::cout << " ";
+      std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(entity);
+      std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(entity);
+      if (player != nullptr)
+      {
+        std::cout << player->getAbbreviation() << " |";
+      }
+      else if (enemy != nullptr)
+      {
+        std::cout << enemy->getAbbreviation() << enemy->getId() << "|";
+      }
+    }
+  }
 }
