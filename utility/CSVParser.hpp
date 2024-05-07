@@ -21,6 +21,10 @@
 
 class CSVParser {
   public:
+    static const std::string armor_csv_path_;
+    static const std::string potions_csv_path_;
+    static const std::string weapon_csv_path_;
+    static const std::string ammunition_csv_path_;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Reads a CSV file and stores the data in a vector of vectors. The first vector contains the rows and the second

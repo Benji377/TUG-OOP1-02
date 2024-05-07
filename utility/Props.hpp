@@ -22,11 +22,6 @@
 
 class Props
 {
-  static std::string ammunition_csv_path_;
-  static std::string armor_csv_path_;
-  static std::string potions_csv_path_;
-  static std::string weapon_csv_path_;
-
 public:
   ///------------------------------------------------------------------------------------------------------------------
   ///

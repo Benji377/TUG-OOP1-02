@@ -1,5 +1,10 @@
 #include "CSVParser.hpp"
 
+const std::string CSVParser::armor_csv_path_ = "../items/csv/armor.csv";
+const std::string CSVParser::potions_csv_path_ = "../items/csv/potions.csv";
+const std::string CSVParser::weapon_csv_path_ = "../items/csv/weapon.csv";
+const std::string CSVParser::ammunition_csv_path_ = "../items/csv/ammunition.csv";
+
 std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename) {
   std::vector<std::vector<std::string>> data;
   std::ifstream file(filename);
@@ -40,10 +45,10 @@ std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
 {
   // Map the filenames to the corresponding item types
   std::map<std::string, std::string> filenameToItemType = {
-          {"../items/csv/armor.csv", "Armor"},
-          {"../items/csv/potions.csv", "Potion"},
-          {"../items/csv/weapon.csv", "Weapon"},
-          {"../items/csv/ammunition.csv", "Ammunition"}
+          {armor_csv_path_, "Armor"},
+          {potions_csv_path_, "Potion"},
+          {weapon_csv_path_, "Weapon"},
+          {ammunition_csv_path_, "Ammunition"}
   };
 
   // Iterate through each CSV file in the items/csv folder
