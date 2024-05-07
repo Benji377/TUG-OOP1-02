@@ -20,12 +20,14 @@ class Player: public Character
   Effect resistant_to_; // Potion effect enum
   void initializeInventory();
   public:
-    Player(int id, char abbreviation, std::string name); // Temporary constructor
+    Player(int id, char abbreviation, std::string name);
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;
     int move(int row, int column) override;
-    void printPlayer() const;
-    ~Player() override; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    void setResistance(Effect effect);
+    [[nodiscard]] Effect getResistance() const;
+    void printPlayer(const std::pair<std::string, std::string>& position) const;
+    ~Player() override;
 };
 
 

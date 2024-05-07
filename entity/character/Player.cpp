@@ -9,6 +9,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
   switch (abbreviation)
   {
     case 'B':
+      type_name_ = "Barbarian";
       resistant_to_ = Effect::NONE;
       base_armor_ = 2;
       strength_ = 4;
@@ -17,6 +18,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       health_ = maximum_health_;
       break;
     case 'R':
+      type_name_ = "Rogue";
       resistant_to_ = Effect::NONE;
       base_armor_ = 1;
       strength_ = 2;
@@ -25,6 +27,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       health_ = maximum_health_;
       break;
     case 'W':
+      type_name_ = "Wizard";
       resistant_to_ = Effect::NONE;
       base_armor_ = 0;
       strength_ = 1;
@@ -77,9 +80,30 @@ void Player::attack(Character& target, int damage) { }
 void Player::take_damage(int damage) { }
 int Player::move(int row, int column) { return 0; }
 
+void Player::setResistance(Effect effect)
+{
+  resistant_to_ = effect;
+}
+
+Effect Player::getResistance() const
+{
+  return resistant_to_;
+}
+
 Player::~Player()
 {
-  delete inventory_.value();
+  delete inventory_;
   delete weapon_;
   delete armor_;
+}
+
+void Player::printPlayer(const std::pair<std::string, std::string>& position) const
+{
+  std::cout << type_name_ << " [" << abbreviation_ << "] \"" << name_
+            << "\" on (" << position.first << "," << position.second << ")\n"
+            << "Armor Value: " << base_armor_ << "\n"
+            << "Current Health: " << health_ << "\n"
+            << "Max Health: " << maximum_health_ << "\n"
+            << "Strength: " << strength_ << "\n"
+            << "Vitality: " << vitality_ << "\n";
 }
