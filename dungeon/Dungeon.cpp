@@ -77,16 +77,6 @@ Dungeon::Dungeon(const char *file_path)
   }
   occured_enemy_types_ = {};
   action_count_ = 0;
-  // Temporary: Print the current room
-  for (auto room : rooms_)
-  {
-    if (room != nullptr)
-    {
-      std::cout << "Room " << room->getId() << std::endl;
-      room->printRoom();
-      std::cout << std::endl;
-    }
-  }
 }
 
 void Dungeon::printCurrentRoom()

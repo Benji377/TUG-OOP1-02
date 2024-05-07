@@ -44,21 +44,18 @@ class StorySegment
 
     ///-----------------------------------------------------------------------------------------------------------------
     ///
-    /// Creates a vector of StorySegments from the given file.
-    /// @param file_path The path to the file.
-    /// @return A vector of StorySegments.
-    //
-    static vector<StorySegment> loadStory(const char* file_path);
-    ///-----------------------------------------------------------------------------------------------------------------
-    ///
     /// Friend function to overload the << operator for the StorySegment class.
     /// @param os The output stream.
     /// @param story_segment The StorySegment that should be printed.
     /// @return The output stream.
     //
     friend std::ostream& operator<<(std::ostream& os, const StorySegment& story_segment);
-
-
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter for the key of the StorySegment.
+    /// @return The key of the StorySegment.
+    //
+    string getKey() const { return key_; }
 };
 
 ///---------------------------------------------------------------------------------------------------------------------

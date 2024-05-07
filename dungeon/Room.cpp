@@ -34,12 +34,8 @@ void Room::printRoom()
   {
     std::cout << " " << i + 1 << "  ";
   }
-  std::cout << "\n   +";
-  for (size_t i = 0; i < fields_[0].size(); i++)
-  {
-    std::cout << "---+";
-  }
   std::cout << std::endl;
+  printSeparationLine();
   for (size_t i = 0; i < fields_.size(); i++)
   {
     std::cout << " " << i + 1 << " |";
@@ -49,15 +45,11 @@ void Room::printRoom()
       printEntitie(entity);
     }
     std::cout << std::endl;
+    printSeparationLine();
   }
-  std::cout << "   +";
-  for (size_t i = 0; i < fields_[0].size(); i++)
-  {
-    std::cout << "---+";
-  }
-  std::cout << std::endl;
 }
 
+// TODO: Print out the enemy health
 void Room::printEntitie(shared_ptr<Entity> entity)
 {
   if (entity == nullptr)
@@ -75,7 +67,7 @@ void Room::printEntitie(shared_ptr<Entity> entity)
     }
     else if (chest != nullptr)
     {
-      std::cout << (chest->isLocked() ? "#T" : " T");
+      std::cout << (chest->isLocked() ? "#T |" : " T |");
     }
     else
     {
@@ -92,4 +84,14 @@ void Room::printEntitie(shared_ptr<Entity> entity)
       }
     }
   }
+}
+
+void Room::printSeparationLine()
+{
+  std::cout << "   +";
+  for (size_t i = 0; i < fields_[0].size(); i++)
+  {
+    std::cout << "---+";
+  }
+  std::cout << std::endl;
 }

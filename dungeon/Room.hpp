@@ -30,6 +30,11 @@ class Room
     /// @param entity the entity to print
     //
     void printEntitie(shared_ptr<Entity> entity);
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Private helper function that prints the separation line
+    //
+    void printSeparationLine();
 
   public:
     ///-----------------------------------------------------------------------------------------------------------------

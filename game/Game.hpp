@@ -16,7 +16,7 @@
 #include "../commands/CommandParser.hpp"
 #include "../utility/Props.hpp"
 #include "../utility/IO.hpp"
-#include "StorySegment.hpp"
+#include "../story/Story.hpp"
 
 using std::vector;
 
@@ -30,13 +30,16 @@ enum class Phase
 class Game
 {
   private:
-    vector<StorySegment> story;
+    inline static Story story_ = Story();
+    inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
     Dungeon dungeon_;
     Phase current_phase_;
     bool is_running_;
     bool map_output_active_;
     bool story_output_active_;
+
+    StorySegment getStorySegment(string key);
 
   public:
     Game(Game&) = delete;
