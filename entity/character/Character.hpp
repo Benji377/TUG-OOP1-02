@@ -22,6 +22,7 @@ class Character: public Entity
     int health_;
     Armor* armor_; // Temporarily changed to a pointer
     Weapon* weapon_; // Temporarily changed to a pointer
+    int base_armor_;
     int strength_;
     int vitality_;
   public:

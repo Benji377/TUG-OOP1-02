@@ -1,13 +1,8 @@
 #include "Props.hpp"
 
-std::string Props::ammunition_csv_path_ = "../items/csv/ammunition.csv";
-std::string Props::armor_csv_path_ = "../items/csv/armor.csv";
-std::string Props::potions_csv_path_ = "../items/csv/potions.csv";
-std::string Props::weapon_csv_path_ = "../items/csv/weapons.csv";
-
 Potion *Props::craftPotion(std::string& abbreviation)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(potions_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::potions_csv_path_, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("Invalid abbreviation");
@@ -24,21 +19,21 @@ Potion *Props::craftPotion(std::string& abbreviation)
   }
 }
 
-Ammunition* Props::craftAmmunition(std::string& abbreviation)
+Ammunition* Props::craftAmmunition(std::string& abbreviation, int amount)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(ammunition_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::ammunition_csv_path_, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("Invalid abbreviation");
   }
   // Convert the string to a vector of strings splitting by the comma
   std::vector<std::string> weapons = Utils::splitString(row[2], ",");
-  return new Ammunition(abbreviation, row[1], weapons);
+  return new Ammunition(abbreviation, row[1], weapons, amount);
 }
 
 Armor* Props::craftArmor(std::string& abbreviation, int vitality)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(armor_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::armor_csv_path_, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("Invalid abbreviation");
@@ -60,13 +55,13 @@ Armor* Props::craftArmor(std::string& abbreviation, int vitality)
   return new Armor(abbreviation, row[1], std::stoi(row[2]));
 }
 
-Weapon* Props::craftWeapon(std::string& abbreviation, char &character)
+Weapon* Props::craftWeapon(std::string& abbreviation, char character)
 {
   if (character != 'L' && character != 'W')
   {
     throw std::invalid_argument("Invalid character");
   }
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(weapon_csv_path_, abbreviation + "-X");
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
   if (row.empty())
   {
     throw std::invalid_argument("Invalid abbreviation");
@@ -77,7 +72,7 @@ Weapon* Props::craftWeapon(std::string& abbreviation, char &character)
 
 Weapon* Props::craftWeapon(std::string& abbreviation, int strength, int vitality)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(weapon_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("Invalid abbreviation");

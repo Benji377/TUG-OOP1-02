@@ -26,7 +26,6 @@ Effect Potion::parseEffect(std::string& effect)
   return effectMap[effect];
 }
 
-
 Effect Potion::getEffect() const
 {
   return effect_;

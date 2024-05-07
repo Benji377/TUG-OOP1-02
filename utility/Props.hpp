@@ -22,11 +22,6 @@
 
 class Props
 {
-  static std::string ammunition_csv_path_;
-  static std::string armor_csv_path_;
-  static std::string potions_csv_path_;
-  static std::string weapon_csv_path_;
-
 public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
@@ -54,7 +49,7 @@ public:
   /// @param character The character
   /// @return The Weapon object
   //
-  static Weapon* craftWeapon(std::string& abbreviation, char& character);
+  static Weapon* craftWeapon(std::string& abbreviation, char character);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// This function reads the CSV file and creates an Armor object with the values from the CSV file. The vitality value
@@ -70,7 +65,7 @@ public:
   /// @param abbreviation The abbreviation of the ammunition
   /// @return The Ammunition object
   //
-  static Ammunition* craftAmmunition(std::string& abbreviation);
+  static Ammunition* craftAmmunition(std::string& abbreviation, int amount = 1);
 };
 
 
