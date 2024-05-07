@@ -28,7 +28,7 @@ class Ammunition : public Item
   std::vector<std::string> weapons_;
   int amount_;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the type of the ammunition. Converts a string to an AmmunitionType.
   /// @param type The type of the ammunition.
@@ -37,7 +37,7 @@ class Ammunition : public Item
   AmmunitionType parseType(std::string &type);
 
 public:
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Constructor for the Ammunition class.
   /// @param abbreviation The abbreviation of the ammunition.
@@ -46,29 +46,40 @@ public:
   //
   Ammunition(std::string &abbreviation, std::string &type, std::vector<std::string> &weapons, int amount);
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the type of the ammunition.
   /// @return The type of the ammunition.
   //
   [[nodiscard]] AmmunitionType getType() const;
 
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Sets the amount of ammunition in the stack.
+  /// @param amount The amount of ammunition in the stack.
+  //
   void setAmount(int amount);
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns the amount of ammunition in the stack.
+  /// @return The amount of ammunition in the stack.
+  //
   [[nodiscard]] int getAmount() const;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Deleted copy constructor.
   //
   Ammunition(Ammunition const &) = delete;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Deleted assignment operator.
   //
   Ammunition &operator=(Ammunition const &) = delete;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Destructor for the Ammunition class. Default implementation.
   //

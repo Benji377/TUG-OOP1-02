@@ -51,7 +51,7 @@ class Weapon : public Item
   DamageType parseDamageType(std::string &damage_type);
 
 public:
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// The constructor of the Weapon class. It initializes the abbreviation, name, dice, damage pattern, attack type,
   /// damage type and damage addition of the weapon.
@@ -66,40 +66,40 @@ public:
   Weapon(std::string &abbreviation, std::string &name, Dice *dice, DamagePattern *damage_pattern,
          std::string &attack_type, std::string &damage_type, int damage_addition);
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage addition of the weapon.
   /// @return The damage addition of the weapon.
   //
   [[nodiscard]] int getDamageAddition() const;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the attack type of the weapon.
   /// @return The attack type of the weapon.
   //
   [[nodiscard]] AttackType getAttackType() const;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage type of the weapon.
   /// @return The damage type of the weapon.
   //
   [[nodiscard]] DamageType getDamageType() const;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// The copy constructor of the Weapon class. It is deleted to prevent copying of Weapon objects.
   //
   Weapon(const Weapon &weapon) = delete;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// The assignment operator of the Weapon class. It is deleted to prevent copying of Weapon objects.
   //
   Weapon &operator=(const Weapon &weapon) = delete;
 
-  ///----------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
   /// The destructor of the Weapon class. It removes the Dice object of the weapon.
   //
