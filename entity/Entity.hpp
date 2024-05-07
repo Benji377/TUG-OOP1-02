@@ -28,8 +28,10 @@ class Entity {
     bool is_lootable_;
 
   public:
-    Entity(int id, char abbreviation, bool is_lootable) : id_(id), abbreviation_(abbreviation),
+    Entity(int id, char abbreviation, bool is_lootable = false) : id_(id), abbreviation_(abbreviation),
           is_lootable_(is_lootable) {}
+    Entity(int id, char abbreviation, map<string, int> loot) : id_(id), abbreviation_(abbreviation), loot_(loot),
+          is_lootable_(true) {}
     virtual ~Entity() {}
 
     virtual char getAbbreviation() const { return abbreviation_; }
