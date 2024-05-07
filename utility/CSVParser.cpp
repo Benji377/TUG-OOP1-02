@@ -8,8 +8,13 @@ const std::string CSVParser::ammunition_csv_path_ = "../items/csv/ammunition.csv
 std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename) {
   std::vector<std::vector<std::string>> data;
   std::ifstream file(filename);
+  // Check if file exists
+  if (!file.good()) {
+    std::cout << "Error: File " << filename << " does not exist" << std::endl;
+    return data;
+  }
   if (!file.is_open()) {
-    std::cerr << "Error: Could not open file " << filename << std::endl;
+    std::cout << "Error: Could not open file " << filename << std::endl;
     return data;
   }
   std::string line;
