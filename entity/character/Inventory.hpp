@@ -27,6 +27,7 @@ class Inventory
 
   public:
     Inventory() = default;
+    explicit Inventory(std::map<std::string, int>& inventory);
     int parseInventory(std::map<std::string, int>& inventory);
     void addPotion(Potion* potion);
     void addWeapon(Weapon* weapon);

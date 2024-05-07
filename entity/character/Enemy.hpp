@@ -27,8 +27,6 @@ class Enemy: public Character
     int move(int row, int column) override;
     void printEnemy() const;
     ~Enemy() override;
-
-    
 };
 
 

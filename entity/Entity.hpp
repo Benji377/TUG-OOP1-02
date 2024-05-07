@@ -32,10 +32,10 @@ class Entity {
           is_lootable_(is_lootable) {}
     Entity(int id, char abbreviation, map<string, int> loot) : id_(id), abbreviation_(abbreviation), loot_(loot),
           is_lootable_(true) {}
-    virtual ~Entity() {}
+    virtual ~Entity() = default;
 
-    virtual char getAbbreviation() const { return abbreviation_; }
-    virtual int getId() const { return id_; }
+    [[nodiscard]] virtual char getAbbreviation() const { return abbreviation_; }
+    [[nodiscard]] virtual int getId() const { return id_; }
 };
 
 #endif //ENTITY_HPP
