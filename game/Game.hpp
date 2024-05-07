@@ -39,8 +39,6 @@ class Game
     bool map_output_active_;
     bool story_output_active_;
 
-    StorySegment getStorySegment(string key);
-
   public:
     Game(Game&) = delete;
     Game& operator=(Game&) = delete;

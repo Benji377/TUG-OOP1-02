@@ -14,13 +14,17 @@
 
 #include <optional>
 #include <string>
+#include <map>
 #include "character/Inventory.hpp"
+
+using std::string;
+using std::map;
 
 class Entity {
   protected:
     int id_;
     char abbreviation_;
-    std::optional<Inventory*> inventory_;
+    map<string, int> loot_;
     bool is_lootable_;
 
   public:
