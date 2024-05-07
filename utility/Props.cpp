@@ -5,7 +5,7 @@ Potion *Props::craftPotion(std::string& abbreviation)
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::potions_csv_path_, abbreviation);
   if (row.empty())
   {
-    throw std::invalid_argument("Invalid abbreviation");
+    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for potion");
   }
   if (row[3].empty())
   {
@@ -24,7 +24,7 @@ Ammunition* Props::craftAmmunition(std::string& abbreviation, int amount)
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::ammunition_csv_path_, abbreviation);
   if (row.empty())
   {
-    throw std::invalid_argument("Invalid abbreviation");
+    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for ammunition");
   }
   // Convert the string to a vector of strings splitting by the comma
   std::vector<std::string> weapons = Utils::splitString(row[2], ",");
@@ -36,7 +36,7 @@ Armor* Props::craftArmor(std::string& abbreviation, int vitality)
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::armor_csv_path_, abbreviation);
   if (row.empty())
   {
-    throw std::invalid_argument("Invalid abbreviation");
+    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for armor");
   }
   if (row.size() > 3 && !row[3].empty())
   {
@@ -64,7 +64,7 @@ Weapon* Props::craftWeapon(std::string& abbreviation, char character)
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
   if (row.empty())
   {
-    throw std::invalid_argument("Invalid abbreviation");
+    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for weapon");
   }
   return new Weapon(abbreviation, row[1], new Dice(row[5]),
                                new DamagePattern(row[4]), row[2], row[3], 0);
@@ -75,7 +75,7 @@ Weapon* Props::craftWeapon(std::string& abbreviation, int strength, int vitality
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
   if (row.empty())
   {
-    throw std::invalid_argument("Invalid abbreviation");
+    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for weapon");
   }
   if (row[6].empty())
   {
