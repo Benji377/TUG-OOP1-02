@@ -95,3 +95,27 @@ void Room::printSeparationLine()
   }
   std::cout << std::endl;
 }
+
+std::map<std::shared_ptr<Entity>, std::string> Room::getCharacters()
+{
+  int row_nr;
+  int column_nr;
+
+  std::map<std::shared_ptr<Entity>, std::string> ptr_and_field;
+
+  for (auto& row : fields_)
+  {
+    row_nr++;
+
+    for (auto& fieldPtr : row)
+    {
+      column_nr++;
+
+        if(fieldPtr->getEntity() == std::dynamic_pointer_cast<Entity>(fieldPtr->getEntity()))
+        {
+           ptr_and_field[fieldPtr->getEntity()] = std::to_string(row_nr) + "," + std::to_string(column_nr);
+        }
+    }
+  }
+  return ptr_and_field;
+}

@@ -147,3 +147,8 @@ int Game::getPlayerTypeAmount(char type)
   }
   return count;
 }
+
+std::shared_ptr<Room> Game::getCurrentRoom()
+{
+  return dungeon_.getCurrentRoom();
+}

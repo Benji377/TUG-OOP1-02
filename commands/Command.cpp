@@ -88,6 +88,8 @@ void PositionsCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
-  std::cout << "positions" << std::endl;
+  std::shared_ptr<Room> current_room = game_->getCurrentRoom();
+
+  //vector<vector<shared_ptr<Field>>> fields = current_room->getCharacters();
 
 }

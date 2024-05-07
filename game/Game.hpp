@@ -34,8 +34,8 @@ class Game
     inline static Story story_ = Story();
     inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
-    Dungeon dungeon_;
     vector<std::shared_ptr<Player>> players_;
+    Dungeon dungeon_;
     Phase current_phase_;
     bool is_running_;
     bool map_output_active_;
@@ -55,6 +55,7 @@ class Game
     void doCommand(string input);
     bool playerExists(string name);
     int getPlayerTypeAmount(char type);
+    std::shared_ptr<Room> getCurrentRoom();
 };
 
 

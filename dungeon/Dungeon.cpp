@@ -90,3 +90,8 @@ void Dungeon::printCurrentRoom()
 {
   current_room_->printRoom();
 }
+
+std::shared_ptr<Room> Dungeon::getCurrentRoom()
+{
+  return current_room_;
+}
