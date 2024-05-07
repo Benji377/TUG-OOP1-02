@@ -38,6 +38,7 @@ Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
     default:
       throw std::invalid_argument("Invalid abbreviation for enemy character.");
   }
+  initializeInventory();
 }
 
 void Enemy::initializeInventory()
@@ -53,6 +54,7 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon((std::string &) "HAXE", strength_, vitality_);
     armor_ = nullptr;
+    loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
     inventory_ = new Inventory();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon((std::string &) "SBOW", strength_, vitality_));
@@ -69,8 +71,29 @@ void Enemy::initializeInventory()
   }
 }
 
+bool Enemy::is_boss() const
+{
+  return is_boss_;
+}
 
 // Sorry muss san um di errors zi fixen
 void Enemy::attack(Character& target, int damage) { }
-void Enemy::take_damage(int damage) { }
+void Enemy::takeDamage(int damage) { }
 int Enemy::move(int row, int column) { return 0; }
+
+Enemy::~Enemy()
+{
+  delete inventory_;
+  delete weapon_;
+  delete armor_;
+}
+
+void Enemy::printEnemy() const
+{
+  std::cout << "Enemy: " << type_name_ << std::endl;
+  std::cout << "Health: " << health_ << "/" << maximum_health_ << std::endl;
+  std::cout << "Strength: " << strength_ << std::endl;
+  std::cout << "Vitality: " << vitality_ << std::endl;
+  std::cout << "Armor: " << base_armor_ << std::endl;
+  std::cout << "Weapon: " << weapon_->getName() << std::endl;
+}

@@ -2,6 +2,11 @@
 #include "../../utility/CSVParser.hpp"
 #include "../../utility/Props.hpp"
 
+Inventory::Inventory(std::map<std::string, int> &inventory)
+{
+  parseInventory(inventory);
+}
+
 void Inventory::addPotion(Potion *potion)
 {
   potions_.push_back(potion);
