@@ -17,6 +17,17 @@ void Inventory::addArmor(Armor *armor)
 
 void Inventory::addAmmunition(Ammunition *ammunition)
 {
+  // Check if the ammunition with the same abbreviation already exists
+  // If it does, simply add the amount of the new ammunition to the existing one and delete the new one
+  for (auto & existing_ammunition : ammunition_)
+  {
+    if (existing_ammunition->getAbbreviation() == ammunition->getAbbreviation())
+    {
+      existing_ammunition->setAmount(existing_ammunition->getAmount() + ammunition->getAmount());
+      delete ammunition;
+      return;
+    }
+  }
   ammunition_.push_back(ammunition);
 }
 

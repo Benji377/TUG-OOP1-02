@@ -52,6 +52,7 @@ void Player::initializeInventory() {
   {
     weapon_ = Props::craftWeapon((std::string &) "RAPI", strength_, vitality_);
     armor_ = Props::craftArmor((std::string &) "LARM", vitality_);
+
     temp_inv.addArmor(armor_);
     temp_inv.addWeapon(weapon_);
     temp_inv.addWeapon(Props::craftWeapon((std::string &) "DAGG", strength_, vitality_));
@@ -75,3 +76,10 @@ void Player::initializeInventory() {
 void Player::attack(Character& target, int damage) { }
 void Player::take_damage(int damage) { }
 int Player::move(int row, int column) { return 0; }
+
+Player::~Player()
+{
+  delete inventory_.value();
+  delete weapon_;
+  delete armor_;
+}

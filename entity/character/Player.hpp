@@ -21,12 +21,11 @@ class Player: public Character
   void initializeInventory();
   public:
     Player(int id, char abbreviation); // Temporary constructor
-    Player(std::string name, int health, int attack, int defense, Effect resistance);
     void attack(Character& target, int damage) override;
     void take_damage(int damage) override;
     int move(int row, int column) override;
     void printPlayer() const;
-    ~Player() override = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    ~Player() override; // Fixed error? Mogsch la ändon wennis ondos hom willsch
 };
 
 
