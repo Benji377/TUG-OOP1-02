@@ -54,6 +54,7 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon((std::string &) "HAXE", strength_, vitality_);
     armor_ = nullptr;
+    loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
     inventory_ = new Inventory();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon((std::string &) "SBOW", strength_, vitality_));
