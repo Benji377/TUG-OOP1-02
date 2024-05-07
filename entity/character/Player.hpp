@@ -25,7 +25,9 @@ class Player: public Character
     int move(int row, int column) override;
     void setResistance(Effect effect);
     [[nodiscard]] Effect getResistance() const;
+    int usePotion(std::string abbreviation);
     void printPlayer(const std::pair<std::string, std::string>& position) const;
+    void simplePrintPlayer() const;
     ~Player() override;
 };
 
