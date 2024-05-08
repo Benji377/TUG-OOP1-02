@@ -18,9 +18,11 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <filesystem>
 
 class CSVParser {
   public:
+    static const std::filesystem::path cwd;
     static const std::string armor_csv_path_;
     static const std::string potions_csv_path_;
     static const std::string weapon_csv_path_;
