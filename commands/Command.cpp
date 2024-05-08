@@ -6,8 +6,26 @@ void Command::checkParameterCount(std::vector<std::string> params, size_t requir
 {
   if(params.size() != required_size)
   {
-    throw std::invalid_argument("Invalid Parameter Count");
+    throw WrongNumberOfParametersException();
   }
+}
+
+
+std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params)
+{
+  std::string input_abbrevation = params.at(position_of_abbrev_in_params);
+
+  std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
+
+  for(auto& player : players)
+  {
+    if(std::to_string(player->getAbbreviation()) == input_abbrevation)
+    {
+      return player;
+    }
+  }
+
+  throw InvalidParamCommand();
 }
 
 void HelpCommand::execute(std::vector<std::string> params)
@@ -92,11 +110,7 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   std::vector<std::shared_ptr<Entity>> characters = current_room->getCharacters();
 
-
-
   //std::map<std::shared_ptr<Entity>, std::string> characters = current_room->getCharacters();
-
-
 
 
   //No Fields Implementation. Once they are added, this should be adapted accordingly
@@ -137,5 +151,22 @@ void PositionsCommand::execute(std::vector<std::string> params)
   {
     std::cout << enemies.first << "on" << enemies.second << std::endl;
   }*/
+
+}
+
+
+
+
+void PlayerCommand::execute(std::vector<std::string> params)
+{
+  checkParameterCount(params, 2);
+
+  getPlayerOfAbbrev(params, 1);
+
+  vector<std::shared_ptr<Player>> players = game_->getPlayers();
+
+
+
+
 
 }

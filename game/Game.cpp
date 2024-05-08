@@ -124,9 +124,17 @@ void Game::doCommand()
   {
     parser_->execute(command_input);
   }
-  catch(const std::exception& e)
+  catch(const UnknownCommand& e)
   {
-    std::cout << e.what() << '\n';
+    std::cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
+  }
+  catch(const WrongNumberOfParametersException& e)
+  {
+    std::cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
+  }
+  catch(const InvalidParamCommand& e)
+  {
+    std::cout << Game::story_.getStorySegment("E_INVALID_PARAM");
   }
 
 }

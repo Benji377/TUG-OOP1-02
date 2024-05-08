@@ -9,6 +9,9 @@
 // Author: Elija Innerkofler, 12320034
 //----------------------------------------------------------------------------------------------------------------------
 //
+#ifndef EXCEPTIONS_HPP
+#define EXCEPTIONS_HPP
+
 #include <string>
 #include <map>
 #include <iostream>
@@ -42,3 +45,13 @@ class InvalidConfigFileException : public std::exception
 
     virtual const char* what() const noexcept override { return error_message_.c_str(); }
 };
+
+
+class UnknownCommand : public std::exception
+{};
+
+class InvalidParamCommand : public std::exception
+{};
+
+
+#endif

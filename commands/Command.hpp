@@ -12,8 +12,11 @@
 
 #include <iostream>
 #include <vector>
+#include "../utility/Exceptions.hpp"
+#include <memory>
 
 class Game;
+class Player;
 
 class Command
 {
@@ -38,6 +41,20 @@ protected:
   //
   void checkParameterCount(std::vector<std::string> params, size_t required_size);
 
+  ///
+  /// This function searches for a player with the specified abbreviation in the game's list of players.
+  /// If found, it returns a shared pointer to the player. If no player with the specified abbreviation
+  /// is found, it throws an InvalidParamCommand exception.
+  ///
+  /// @param params The vector of strings representing the parameters.
+  /// @param position_of_abbrev_in_params The index of the abbreviation in the params vector.
+  ///
+  /// @return A shared pointer to the player with the specified abbreviation.
+  ///
+  /// @throws InvalidParamCommand if no player with the specified abbreviation is found.
+  std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params);
+
+
 public:
   //------------------------------------------------------------------------------------------------------------------
   ///
@@ -55,6 +72,7 @@ public:
   ///
   //------------------------------------------------------------------------------------------------------------------
   virtual void execute(std::vector<std::string> params) = 0;
+
 
 };
 
@@ -186,6 +204,17 @@ public:
   ///
   //------------------------------------------------------------------------------------------------------------------
   virtual void execute(std::vector<std::string> params) override;
+};
+
+
+class PlayerCommand : public Command
+{
+  PlayerCommand(Game* game) : Command(game) {}
+  virtual ~PlayerCommand() {};
+  PlayerCommand(const PlayerCommand&) = delete;
+
+  virtual void execute(std::vector<std::string> params) override;
+
 };
 
 
