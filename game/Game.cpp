@@ -21,8 +21,8 @@ void Game::start()
   std::cout << Game::story_.getStorySegment("N_INTRO");
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
     << std::endl;
-  int num_players;  //TODO I changed this up. Does it still work? -Hanno
-  while (isRunning())
+  int num_players;
+  while (true)
   {
     string input = IO::promtUserInput();
 
@@ -43,26 +43,19 @@ void Game::start()
     }
     Game::max_players_ = num_players;
   }
-  for (int i = 1; i <= num_players && isRunning(); i++)
+  for (int i = 1; i <= num_players; i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
-      << " characters)";
+      << " characters)" << std::endl;
     string name;
-    while (isRunning())
+    while (true)
     {
       name.clear();
-      name = IO::promtUserInput(); //TODO Also changed this, so you could enter quit here.
-
-      if(name == "quit")
-      {
-        doCommand(name);
-        break;
-      }
+      name = IO::promtUserInput();
 
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
         std::cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << std::endl;
-        std::cout << "> ";
       }
       else
       {
@@ -70,11 +63,11 @@ void Game::start()
       }
     }
     std::cout << name << ", please choose a player type:" << std::endl;
-    std::cout << "  [W] Wizard     <AMOUNT>/1" << std::endl;
-    std::cout << "  [B] Barbarian  <AMOUNT>/1" << std::endl;
-    std::cout << "  [R] Rogue      <AMOUNT>/1" << std::endl;
+    std::cout << "  [W] Wizard     " << getPlayerTypeAmount('W') << "/1" << std::endl;
+    std::cout << "  [B] Barbarian  " << getPlayerTypeAmount('B') << "/1" << std::endl;
+    std::cout << "  [R] Rogue      " << getPlayerTypeAmount('R') << "/1" << std::endl;
     char type;
-    while (isRunning())
+    while (true)
     {
       string input;
       input = IO::promtUserInput();
@@ -84,8 +77,8 @@ void Game::start()
         doCommand(input);
       }
 
-      Utils::normalizeString(input);
-      if (input.length() != 1 || (input[0] != 'w' && input[0] != 'b' && input[0] != 'r'))
+      Utils::normalizeString(input, true);
+      if (input.length() != 1 || (input[0] != 'W' && input[0] != 'B' && input[0] != 'R'))
       {
         std::cout << "Please enter a letter representing your desired player type (W, B, or R)." << std::endl;
       } else if (getPlayerTypeAmount(input[0]) >= 1)
@@ -100,6 +93,13 @@ void Game::start()
     std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);
     players_.push_back(player);
   }
+  std::cout << "\n-- Players --------------------------------------" << std::endl;
+  for (auto player : players_)
+  {
+    std::cout << "  ";
+    player->simplePrintPlayer();
+  }
+  std::cout << std::endl;
 }
 
 void Game::doCommand()
@@ -169,7 +169,7 @@ int Game::getPlayerTypeAmount(char type)
   int count = 0;
   for (auto player : players_)
   {
-    if (player->getTypeName()[0] == type)
+    if (player->getAbbreviation() == type)
     {
       count++;
     }

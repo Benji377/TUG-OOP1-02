@@ -29,7 +29,7 @@ public:
   /// @param abbreviation The abbreviation of the potion
   /// @return The Potion object
   //
-  static Potion* craftPotion(std::string& abbreviation);
+  static Potion* craftPotion(std::string abbreviation);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// This function reads the CSV file and creates a Weapon object with the values from the CSV file. The strength and
@@ -40,7 +40,7 @@ public:
   /// @param vitality The vitality value
   /// @return The Weapon object
   //
-  static Weapon* craftWeapon(std::string& abbreviation, int strength = 0, int vitality = 0);
+  static Weapon* craftWeapon(std::string abbreviation, int strength = 0, int vitality = 0);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Similar to the other Weapon function, this creates a weapon based on a character. Only 'L' and 'W' are valid.
@@ -49,7 +49,7 @@ public:
   /// @param character The character
   /// @return The Weapon object
   //
-  static Weapon* craftWeapon(std::string& abbreviation, char character);
+  static Weapon* craftWeapon(std::string abbreviation, char character);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// This function reads the CSV file and creates an Armor object with the values from the CSV file. The vitality value
@@ -58,14 +58,14 @@ public:
   /// @param vitality The vitality value
   /// @return The Armor object
   //
-  static Armor* craftArmor(std::string& abbreviation, int vitality = 0);
+  static Armor* craftArmor(std::string abbreviation, int vitality = 0);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// This function reads the CSV file and creates an Ammunition object with the values from the CSV file.
   /// @param abbreviation The abbreviation of the ammunition
   /// @return The Ammunition object
   //
-  static Ammunition* craftAmmunition(std::string& abbreviation, int amount = 1);
+  static Ammunition* craftAmmunition(std::string abbreviation, int amount = 1);
 };
 
 

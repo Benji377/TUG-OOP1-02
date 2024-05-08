@@ -1,6 +1,6 @@
 #include "Props.hpp"
 
-Potion *Props::craftPotion(std::string& abbreviation)
+Potion *Props::craftPotion(std::string abbreviation)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::potions_csv_path_, abbreviation);
   if (row.empty())
@@ -10,7 +10,7 @@ Potion *Props::craftPotion(std::string& abbreviation)
   if (row[3].empty())
   {
     // It's a health potion
-    return new Potion(abbreviation, row[1], (std::string &) "health", new Dice(row[4]));
+    return new Potion(abbreviation, row[1], "health", new Dice(row[4]));
   }
   else
   {
@@ -19,7 +19,7 @@ Potion *Props::craftPotion(std::string& abbreviation)
   }
 }
 
-Ammunition* Props::craftAmmunition(std::string& abbreviation, int amount)
+Ammunition* Props::craftAmmunition(std::string abbreviation, int amount)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::ammunition_csv_path_, abbreviation);
   if (row.empty())
@@ -31,7 +31,7 @@ Ammunition* Props::craftAmmunition(std::string& abbreviation, int amount)
   return new Ammunition(abbreviation, row[1], weapons, amount);
 }
 
-Armor* Props::craftArmor(std::string& abbreviation, int vitality)
+Armor* Props::craftArmor(std::string abbreviation, int vitality)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::armor_csv_path_, abbreviation);
   if (row.empty())
@@ -55,7 +55,7 @@ Armor* Props::craftArmor(std::string& abbreviation, int vitality)
   return new Armor(abbreviation, row[1], std::stoi(row[2]));
 }
 
-Weapon* Props::craftWeapon(std::string& abbreviation, char character)
+Weapon* Props::craftWeapon(std::string abbreviation, char character)
 {
   if (character != 'L' && character != 'W')
   {
@@ -70,7 +70,7 @@ Weapon* Props::craftWeapon(std::string& abbreviation, char character)
                                new DamagePattern(row[4]), row[2], row[3], 0);
 }
 
-Weapon* Props::craftWeapon(std::string& abbreviation, int strength, int vitality)
+Weapon* Props::craftWeapon(std::string abbreviation, int strength, int vitality)
 {
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
   if (row.empty())

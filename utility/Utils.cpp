@@ -62,7 +62,7 @@ std::vector<std::string> Utils::splitString(const std::string& string, const std
   return res;
 }
 
-void Utils::normalizeString(std::string& string) {
+void Utils::normalizeString(std::string& string, bool to_upper) {
   // Remove trailing whitespaces
   size_t end = string.find_last_not_of(' ');
   string = end == std::string::npos ? "" : string.substr(0, end + 1);
@@ -70,5 +70,8 @@ void Utils::normalizeString(std::string& string) {
   auto start = string.find_first_not_of(' ');
   string = start == std::string::npos ? "" : string.substr(start);
   // Transform all characters to lowercase
-  std::transform(string.begin(), string.end(), string.begin(), ::tolower);
+  if (to_upper)
+    std::transform(string.begin(), string.end(), string.begin(), ::toupper);
+  else
+    std::transform(string.begin(), string.end(), string.begin(), ::tolower);
 }

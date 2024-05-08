@@ -70,12 +70,13 @@ public:
   static std::vector<std::string> splitString(const std::string& string, const std::string& delimiter);
   ///------------------------------------------------------------------------------------------------------------------
   ///
-  /// Utils class extension: This function normalizes a string by removing leading and trailing whitespaces.
-  /// It furthermore converts all characters to lowercase.
+  /// Utils class extension: This function normalizes a string by removing all whitespace and converting it by default
+  /// to lowercase. If the to_upper parameter is set to true, the string is converted to uppercase.
   ///
   /// @param string The string to be normalized
+  /// @param to_upper True if the string should be converted to uppercase, false otherwise
   //
-  static void normalizeString(std::string& string);
+  static void normalizeString(std::string& string, bool to_upper = false);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Utils class extension: This function checks if a given object is an instance of a specific class.
