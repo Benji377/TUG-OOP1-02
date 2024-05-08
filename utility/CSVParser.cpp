@@ -1,9 +1,9 @@
 #include "CSVParser.hpp"
 
-const std::string CSVParser::armor_csv_path_ = "items/csv/armor.csv";
-const std::string CSVParser::potions_csv_path_ = "items/csv/potions.csv";
-const std::string CSVParser::weapon_csv_path_ = "items/csv/weapons.csv";
-const std::string CSVParser::ammunition_csv_path_ = "items/csv/ammunition.csv";
+const std::string CSVParser::armor_csv_path_ = "./items/csv/armor.csv";
+const std::string CSVParser::potions_csv_path_ = "./items/csv/potions.csv";
+const std::string CSVParser::weapon_csv_path_ = "./items/csv/weapons.csv";
+const std::string CSVParser::ammunition_csv_path_ = "./items/csv/ammunition.csv";
 
 std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename) {
   std::vector<std::vector<std::string>> data;
