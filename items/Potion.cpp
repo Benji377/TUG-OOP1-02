@@ -1,6 +1,6 @@
 #include "Potion.hpp"
 
-Potion::Potion(std::string& abbreviation, std::string& name, std::string& effect, Dice *dice)
+Potion::Potion(std::string& abbreviation, std::string& name, std::string effect, Dice *dice)
 {
   abbreviation_ = abbreviation;
   name_ = name;

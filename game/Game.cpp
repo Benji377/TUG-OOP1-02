@@ -21,18 +21,21 @@ void Game::start()
   std::cout << Game::story_.getStorySegment("N_INTRO");
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
     << std::endl;
-  std::cout << "> ";
   int num_players;
-  while (true)
+  while (isRunning())
   {
-    string input;
-    std::cin >> input;
-    // TODO: Check if the input is quit or EOF
+    string input = IO::promtUserInput();
+
+    if(input == "quit")
+    {
+      doCommand(input);
+      break;
+    }
+
     if (!Utils::decimalStringToInt(input, num_players) || num_players < MIN_PLAYERS || num_players > MAX_PLAYERS)
     {
       std::cout << "Please enter a number of players between " << MIN_PLAYERS << " and " << MAX_PLAYERS << "."
         << std::endl;
-      std::cout << "> ";
     }
     else
     {
@@ -40,20 +43,25 @@ void Game::start()
     }
     Game::max_players_ = num_players;
   }
-  for (int i = 1; i <= num_players; i++)
+  for (int i = 1; i <= num_players && isRunning(); i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
-      << " characters)";
-    std::cout << "> ";
+      << " characters)" << std::endl;
     string name;
-    while (true)
+    while (isRunning())
     {
       name.clear();
-      std::cin >> name;
+      name = IO::promtUserInput();
+
+      if(name == "quit")
+      {
+        doCommand(name);
+        break;
+      }
+
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
         std::cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << std::endl;
-        std::cout << "> ";
       }
       else
       {
@@ -61,25 +69,27 @@ void Game::start()
       }
     }
     std::cout << name << ", please choose a player type:" << std::endl;
-    std::cout << "  [W] Wizard     <AMOUNT>/1" << std::endl;
-    std::cout << "  [B] Barbarian  <AMOUNT>/1" << std::endl;
-    std::cout << "  [R] Rogue      <AMOUNT>/1" << std::endl;
-    std::cout << "> ";
+    std::cout << "  [W] Wizard     " << getPlayerTypeAmount('W') << "/1" << std::endl;
+    std::cout << "  [B] Barbarian  " << getPlayerTypeAmount('B') << "/1" << std::endl;
+    std::cout << "  [R] Rogue      " << getPlayerTypeAmount('R') << "/1" << std::endl;
     char type;
-    while (true)
+    while (isRunning())
     {
       string input;
-      std::cin >> input;
-      Utils::normalizeString(input);
-      // TODO: Check if the input is quit or EOF
-      if (input.length() != 1 || (input[0] != 'w' && input[0] != 'b' && input[0] != 'r'))
+      input = IO::promtUserInput();
+
+      if(input == "quit")
+      {
+        doCommand(input);
+      }
+
+      Utils::normalizeString(input, true);
+      if (input.length() != 1 || (input[0] != 'W' && input[0] != 'B' && input[0] != 'R'))
       {
         std::cout << "Please enter a letter representing your desired player type (W, B, or R)." << std::endl;
-        std::cout << "> ";
       } else if (getPlayerTypeAmount(input[0]) >= 1)
       {
         std::cout << "This player type is no longer available. Please choose a different player type." << std::endl;
-        std::cout << "> ";
       } else
       {
         type = input[0];
@@ -89,17 +99,46 @@ void Game::start()
     std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);
     players_.push_back(player);
   }
+  if(isRunning())
+  {
+  std::cout << "\n-- Players --------------------------------------" << std::endl;
+  for (auto player : players_)
+  {
+    std::cout << "  ";
+    player->simplePrintPlayer();
+  }
+  std::cout << std::endl;
+  }
 }
 
 void Game::doCommand()
 {
 
-  //Print Story Message
-  std::vector<std::string> input = IO::promtUserInput();
+  std::cout << Game::story_.getStorySegment("N_PROMPT_MESSAGE");
+
+  std::string input = IO::promtUserInput();
+
+  std::vector<std::string> command_input = IO::commandifyString(input);
 
   try
   {
-    parser_->execute(input);
+    parser_->execute(command_input);
+  }
+  catch(const std::exception& e)
+  {
+    std::cout << e.what() << '\n';
+  }
+
+}
+
+void Game::doCommand(std::string input)
+{
+
+  std::vector<std::string> command_input = IO::commandifyString(input);
+
+  try
+  {
+    parser_->execute(command_input);
   }
   catch(const std::exception& e)
   {
@@ -113,7 +152,7 @@ void Game::toggleStoryOutput()
   story_output_active_ = !story_output_active_;
 }
 
-void Game::toggleGame()
+void Game::toggleGameRunning()
 {
   is_running_ = !is_running_;
 }
@@ -140,10 +179,17 @@ int Game::getPlayerTypeAmount(char type)
   int count = 0;
   for (auto player : players_)
   {
-    if (player->getTypeName()[0] == type)
+    if (player->getAbbreviation() == type)
     {
       count++;
     }
   }
   return count;
 }
+
+std::shared_ptr<Room> Game::getCurrentRoom()
+{
+  return dungeon_.getCurrentRoom();
+}
+
+

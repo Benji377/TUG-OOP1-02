@@ -38,6 +38,9 @@ class Dungeon
     /// Function to print the current room
     //
     void printCurrentRoom();
+
+    std::shared_ptr<Room> getCurrentRoom();
+
 };
 
 #endif // DUNGEON_HPP

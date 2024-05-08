@@ -70,6 +70,18 @@ class Room
     /// Prints the room
     //
     void printRoom();
+
+    ///-----------------------------------------------------------------------------------------------------------------
+    /// Retrieves characters present in the room along with their corresponding positions.
+    ///
+    /// This function iterates over the fields of the room, checks if each field contains an entity,
+    /// and if so, associates the entity with its position in the room.
+    ///
+    /// @return A map containing pointers to the entities found in the room as keys, and their positions as values.
+    ///
+    std::vector<std::shared_ptr<Entity>> getCharacters();
+
+
 };
 
 #endif // ROOM_HPP

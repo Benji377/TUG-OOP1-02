@@ -77,7 +77,7 @@ public:
   /// This class should never be copied. Each command type only exists once.
   ///
   //------------------------------------------------------------------------------------------------------------------
-  HelpCommand() : Command(NULL) {};
+  HelpCommand() : Command(nullptr) {};
   virtual ~HelpCommand() {};
   HelpCommand(const HelpCommand&) = delete;
 

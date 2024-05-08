@@ -1,6 +1,7 @@
 #include "Command.hpp"
 #include "../game/Game.hpp"
 
+
 void Command::checkParameterCount(std::vector<std::string> params, size_t required_size)
 {
   if(params.size() != required_size)
@@ -13,7 +14,6 @@ void HelpCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
-  //TODO make pretty, put in IOor use csv file
   std::cout << "-- Commands ----------------------------------------\n"
                  "- help\n"
                  "     Prints this help text.\n"
@@ -79,15 +79,63 @@ void QuitCommand::execute(std::vector<std::string> params)
 
   std::cout << "quit" << std::endl;
 
-  game_->toggleGame();
+  game_->toggleGameRunning();
 
 }
-
 
 void PositionsCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
-  std::cout << "positions" << std::endl;
+  std::shared_ptr<Room> current_room = game_->getCurrentRoom();
+
+
+  std::vector<std::shared_ptr<Entity>> characters = current_room->getCharacters();
+
+
+
+  //std::map<std::shared_ptr<Entity>, std::string> characters = current_room->getCharacters();
+
+
+
+
+  //No Fields Implementation. Once they are added, this should be adapted accordingly
+/*
+  //First the Players
+
+  std::map<std::shared_ptr<Entity>, std::string> players;
+
+  for(auto& character = characters.begin(); character != characters.end();)
+  {
+    //Idea to use dynamic cast, which returns a nullpointer if not possible, to check if it's a player from ChatGPT
+    std::shared_ptr<Player> player_ptr = std::dynamic_pointer_cast<Player>(character->first);
+    if(player_ptr)
+    {
+      players.insert(std::make_pair(player_ptr, character->second));
+      characters.erase(character); //erase returns the iterator to the next element
+    }
+    else
+    {
+      ++character;
+    }
+  }
+
+  IO::printPlayerPositions(players);
+
+  //Now the enemies
+
+  std::map<std::string, std::string> enemies;
+
+  //Map keys are sorted automatically alphabetically.
+  for(auto& pair : characters)
+  {
+    std::string key = pair.first->getTypeName() + pair.first->getId() + pair.first->getAbbreviation();
+    enemies[key] = pair.second;
+  }
+
+  for(auto& pair : enemies)
+  {
+    std::cout << enemies.first << "on" << enemies.second << std::endl;
+  }*/
 
 }

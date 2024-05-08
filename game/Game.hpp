@@ -34,8 +34,8 @@ class Game
     inline static Story story_ = Story();
     inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
-    Dungeon dungeon_;
     vector<std::shared_ptr<Player>> players_;
+    Dungeon dungeon_;
     Phase current_phase_;
     bool is_running_;
     bool map_output_active_;
@@ -47,14 +47,19 @@ class Game
     ~Game(){};
     Game(char *dungeon_path, char *config_path);
 
-    void toggleGame();
+    void toggleGameRunning();
     bool isRunning() const;
     void toggleStoryOutput();
     void start();
+
+    //Function that promts user input and executes command
     void doCommand();
+    //Overloaded doCommand function that executes a command based on a string
     void doCommand(string input);
     bool playerExists(string name);
     int getPlayerTypeAmount(char type);
+    std::shared_ptr<Room> getCurrentRoom();
+    vector<std::shared_ptr<Player>> getPlayers() {return players_;};
 };
 
 

@@ -7,6 +7,11 @@
 
 int main(int argc, char** argv)
 {
+  /* Testing
+  fs::path path = fs::current_path();
+  print_directory(path);
+  */
+  //return 0;
 
   // We need to inspect some issues with the CSV parser and path finding
   // Therefore we need to check the current path and the current working directory
@@ -54,8 +59,12 @@ int main(int argc, char** argv)
     return 3;
   }
 
+
   Game game(argv[1], argv[2]);
   game.start();
+
+
+
   //
   //CommandParser cli;
   //while(game.isRunning())

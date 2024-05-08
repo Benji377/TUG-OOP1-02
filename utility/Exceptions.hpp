@@ -15,6 +15,8 @@
 
 #define MEMORY_ALLOCATION_EXCEPTION "Error: Not enough memory!"
 #define WRONG_NUMBER_OF_PARAMETERS_EXCEPTION "Error: Wrong number of parameters!"
+#define THROWN_QUIT_EXCEPTION "QUIT"
+
 
 class MemoryAllocationException : public std::exception
 {
@@ -37,6 +39,6 @@ class InvalidConfigFileException : public std::exception
   public:
     InvalidConfigFileException(std::string file_path) : file_path_(file_path),
       error_message_("Error: Invalid file (" + file_path_ + ")!") {}
-      
+
     virtual const char* what() const noexcept override { return error_message_.c_str(); }
 };

@@ -45,29 +45,29 @@ void Enemy::initializeInventory()
 {
   if (abbreviation_ == 'Z')
   {
-    weapon_ = Props::craftWeapon((std::string &) "DAGG", strength_, vitality_);
+    weapon_ = Props::craftWeapon("DAGG", strength_, vitality_);
     armor_ = nullptr;
     loot_ = {{"DAGG", 1}};
     inventory_ = nullptr;
   }
   else if (abbreviation_ == 'G')
   {
-    weapon_ = Props::craftWeapon((std::string &) "HAXE", strength_, vitality_);
+    weapon_ = Props::craftWeapon("HAXE", strength_, vitality_);
     armor_ = nullptr;
     loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
-    inventory_ = new Inventory();
+    inventory_ = std::shared_ptr<Inventory>();
     inventory_->addWeapon(weapon_);
-    inventory_->addWeapon(Props::craftWeapon((std::string &) "SBOW", strength_, vitality_));
+    inventory_->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
   }
   else if (abbreviation_ == 'L')
   {
-    weapon_ = Props::craftWeapon((std::string &) "QFIR", 'L');
+    weapon_ = Props::craftWeapon("QFIR", 'L');
     armor_ = nullptr;
-    inventory_ = new Inventory();
+    inventory_ = std::shared_ptr<Inventory>();
     inventory_->addWeapon(weapon_);
-    inventory_->addWeapon(Props::craftWeapon((std::string &) "QLCD", 'L'));
-    inventory_->addWeapon(Props::craftWeapon((std::string &) "QACD", 'L'));
-    inventory_->addWeapon(Props::craftWeapon((std::string &) "QFRC", 'L'));
+    inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
+    inventory_->addWeapon(Props::craftWeapon("QACD", 'L'));
+    inventory_->addWeapon(Props::craftWeapon("QFRC", 'L'));
   }
 }
 
@@ -83,9 +83,6 @@ int Enemy::move(int row, int column) { return 0; }
 
 Enemy::~Enemy()
 {
-  delete inventory_;
-  delete weapon_;
-  delete armor_;
 }
 
 void Enemy::printEnemy() const
@@ -97,3 +94,4 @@ void Enemy::printEnemy() const
   std::cout << "Armor: " << base_armor_ << std::endl;
   std::cout << "Weapon: " << weapon_->getName() << std::endl;
 }
+

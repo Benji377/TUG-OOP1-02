@@ -11,10 +11,12 @@
 #ifndef IO_HPP
 #define IO_HPP
 
-#include "../utility/Utils.hpp"
+#include "Utils.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
+#include <memory>
 
 class IO
 {
@@ -37,7 +39,11 @@ public:
   ///
   /// @return A vector of strings containing the input tokens.
   //
-  static std::vector<std::string> promtUserInput();
+  static std::string promtUserInput();
+
+  static std::vector<std::string> commandifyString(std::string input);
+
+  //void printPlayerPositions(std::map<std::shared_ptr<Entity>, std::string> players);
 
 };
 

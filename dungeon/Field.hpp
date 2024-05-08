@@ -15,12 +15,14 @@
 
 using std::shared_ptr;
 
-class Field
+class Field : public std::enable_shared_from_this<Field>
 {
   private:
     inline static int field_count_ = 0;
     int id_;
     shared_ptr<Entity> entity_;
+    int row_;
+    int column_;
 
   public:
     ///-----------------------------------------------------------------------------------------------------------------
@@ -45,7 +47,10 @@ class Field
     /// Setter for the entity
     /// @param entity the entity to set
     //
-    void setEntity(shared_ptr<Entity> entity) { entity_ = entity; }
+    void setEntity(std::shared_ptr<Entity> entity) {entity_ = entity; entity_->setField(shared_from_this()); }
+
+    std::pair<int, int> getPosition() { return std::make_pair(row_, column_); }
+
 };
 
 #endif // FIELD_HPP
