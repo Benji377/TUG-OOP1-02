@@ -7,22 +7,22 @@ Inventory::Inventory(std::map<std::string, int> &inventory)
   parseInventory(inventory);
 }
 
-void Inventory::addPotion(Potion *potion)
+void Inventory::addPotion(std::shared_ptr<Potion> potion)
 {
   potions_.push_back(potion);
 }
 
-void Inventory::addWeapon(Weapon *weapon)
+void Inventory::addWeapon(std::shared_ptr<Weapon> weapon)
 {
   weapons_.push_back(weapon);
 }
 
-void Inventory::addArmor(Armor *armor)
+void Inventory::addArmor(std::shared_ptr<Armor> armor)
 {
   armor_.push_back(armor);
 }
 
-void Inventory::addAmmunition(Ammunition *ammunition)
+void Inventory::addAmmunition(std::shared_ptr<Ammunition> ammunition)
 {
   // Check if the ammunition with the same abbreviation already exists
   // If it does, simply add the amount of the new ammunition to the existing one and delete the new one
@@ -31,14 +31,13 @@ void Inventory::addAmmunition(Ammunition *ammunition)
     if (existing_ammunition->getAbbreviation() == ammunition->getAbbreviation())
     {
       existing_ammunition->setAmount(existing_ammunition->getAmount() + ammunition->getAmount());
-      delete ammunition;
       return;
     }
   }
   ammunition_.push_back(ammunition);
 }
 
-int Inventory::removeItem(Item *item)
+int Inventory::removeItem(std::shared_ptr<Item> item)
 {
   // Loop through all the items and remove the item if the abbreviation matches
   for (auto it = potions_.begin(); it != potions_.end(); ++it)
@@ -95,7 +94,7 @@ int Inventory::useAmmunition(std::string &abbreviation)
   return -1;
 }
 
-Potion *Inventory::getPotion(std::string &abbreviation)
+std::shared_ptr<Potion> Inventory::getPotion(std::string &abbreviation)
 {
   for (auto & potion : potions_)
   {
@@ -107,7 +106,7 @@ Potion *Inventory::getPotion(std::string &abbreviation)
   return nullptr;
 }
 
-Weapon *Inventory::getWeapon(std::string &abbreviation)
+std::shared_ptr<Weapon> Inventory::getWeapon(std::string &abbreviation)
 {
   for (auto & weapon : weapons_)
   {
@@ -119,7 +118,7 @@ Weapon *Inventory::getWeapon(std::string &abbreviation)
   return nullptr;
 }
 
-Armor *Inventory::getArmor(std::string &abbreviation)
+std::shared_ptr<Armor> Inventory::getArmor(std::string &abbreviation)
 {
   for (auto & armor : armor_)
   {
@@ -131,7 +130,7 @@ Armor *Inventory::getArmor(std::string &abbreviation)
   return nullptr;
 }
 
-Ammunition *Inventory::getAmmunition(std::string &abbreviation)
+std::shared_ptr<Ammunition> Inventory::getAmmunition(std::string &abbreviation)
 {
   for (auto & ammunition : ammunition_)
   {
@@ -181,20 +180,4 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory)
 
 Inventory::~Inventory()
 {
-  for (auto & potion : potions_)
-  {
-    delete potion;
-  }
-  for (auto & weapon : weapons_)
-  {
-    delete weapon;
-  }
-  for (auto & armor : armor_)
-  {
-    delete armor;
-  }
-  for (auto & ammunition : ammunition_)
-  {
-    delete ammunition;
-  }
 }

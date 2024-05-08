@@ -15,6 +15,8 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
+#include <memory>
 
 class IO
 {
@@ -40,6 +42,8 @@ public:
   static std::string promtUserInput();
 
   static std::vector<std::string> commandifyString(std::string input);
+
+  //void printPlayerPositions(std::map<std::shared_ptr<Entity>, std::string> players);
 
 };
 

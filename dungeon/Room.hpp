@@ -79,7 +79,7 @@ class Room
     ///
     /// @return A map containing pointers to the entities found in the room as keys, and their positions as values.
     ///
-    std::map<std::shared_ptr<Entity>, std::string> getCharacters();
+    std::vector<std::shared_ptr<Entity>> getCharacters();
 
 
 };

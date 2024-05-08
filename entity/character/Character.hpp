@@ -21,9 +21,9 @@ class Character: public Entity
     int maximum_health_;
     int health_;
     Effect resistant_to_; // Potion effect enum
-    Armor* armor_;
-    Weapon* weapon_;
-    Inventory* inventory_;
+    std::shared_ptr<Armor> armor_;
+    std::shared_ptr<Weapon> weapon_;
+    std::shared_ptr<Inventory> inventory_;
     int base_armor_;
     int strength_;
     int vitality_;
@@ -33,16 +33,16 @@ class Character: public Entity
     [[nodiscard]] std::string getTypeName() const { return type_name_; }
     [[nodiscard]] int getMaximumHealth() const { return maximum_health_; }
     [[nodiscard]] int getHealth() const { return health_; }
-    [[nodiscard]] Armor* getArmor() const { return armor_; }
-    [[nodiscard]] Weapon* getWeapon() const { return weapon_; }
+    [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
+    [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }
     void setHealth(int health) { health_ = health; }
-    void setArmor(Armor* armor) { armor_ = armor; }
-    void setWeapon(Weapon* weapon) { weapon_ = weapon; }
+    void setArmor(std::shared_ptr<Armor> armor) { armor_ = armor; }
+    void setWeapon(std::shared_ptr<Weapon> weapon) { weapon_ = weapon; }
     void setBaseArmor(int base_armor) { base_armor_ = base_armor; }
     void setStrength(int strength) { strength_ = strength; }
     void setVitality(int vitality) { vitality_ = vitality; }

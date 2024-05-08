@@ -29,8 +29,8 @@ class TreasureChest : public Entity
     /// Constructor for the TreasureChest class
     /// @param min_value the minimum value to open the treasure chest
     //
-    TreasureChest(int min_value, map<string, int> loot) : Entity(treasure_chest_count_++, TREASURE_CHEST_ABBREVIATION,
-      loot), is_locked_(true), min_value_(min_value) {}
+    TreasureChest(int min_value, map<string, int> loot, std::shared_ptr<Field> field) : Entity(treasure_chest_count_++, TREASURE_CHEST_ABBREVIATION,
+      loot, field), is_locked_(true), min_value_(min_value) {}
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the TreasureChest class

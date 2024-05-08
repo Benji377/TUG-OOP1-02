@@ -30,7 +30,7 @@ enum class DamageType
 
 class Weapon : public Item
 {
-  DamagePattern *damage_pattern_;
+  std::shared_ptr<DamagePattern> damage_pattern_;
   AttackType attack_type_;
   DamageType damage_type_;
   int damage_addition_; // Gets added to the damage roll
@@ -63,7 +63,8 @@ public:
   /// @param damage_type The damage type of the weapon.
   /// @param damage_addition The damage addition of the weapon.
   //
-  Weapon(std::string &abbreviation, std::string &name, Dice *dice, DamagePattern *damage_pattern,
+  Weapon(std::string &abbreviation, std::string &name, const std::shared_ptr<Dice>& dice,
+        const std::shared_ptr<DamagePattern>& damage_pattern,
          std::string &attack_type, std::string &damage_type, int damage_addition);
 
   ///------------------------------------------------------------------------------------------------------------------

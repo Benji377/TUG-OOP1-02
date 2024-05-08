@@ -55,7 +55,7 @@ void Enemy::initializeInventory()
     weapon_ = Props::craftWeapon("HAXE", strength_, vitality_);
     armor_ = nullptr;
     loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
-    inventory_ = new Inventory();
+    inventory_ = std::shared_ptr<Inventory>();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
   }
@@ -63,7 +63,7 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("QFIR", 'L');
     armor_ = nullptr;
-    inventory_ = new Inventory();
+    inventory_ = std::shared_ptr<Inventory>();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
     inventory_->addWeapon(Props::craftWeapon("QACD", 'L'));
@@ -83,9 +83,6 @@ int Enemy::move(int row, int column) { return 0; }
 
 Enemy::~Enemy()
 {
-  delete inventory_;
-  //delete weapon_;
-  delete armor_;
 }
 
 void Enemy::printEnemy() const
@@ -97,3 +94,4 @@ void Enemy::printEnemy() const
   std::cout << "Armor: " << base_armor_ << std::endl;
   std::cout << "Weapon: " << weapon_->getName() << std::endl;
 }
+

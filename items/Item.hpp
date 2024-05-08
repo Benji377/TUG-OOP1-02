@@ -16,6 +16,7 @@
 
 #include <string>
 #include "../utility/Dice.hpp"
+#include <memory>
 
 
 class Item
@@ -23,7 +24,7 @@ class Item
 protected:
   std::string abbreviation_;
   std::string name_;
-  Dice *dice_;
+  std::shared_ptr<Dice> dice_;
 public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
@@ -44,7 +45,7 @@ public:
   /// Returns the Dice object of the item.
   /// @return The Dice object of the item.
   //
-  [[nodiscard]] Dice* getDice() const { return dice_; }
+  [[nodiscard]] std::shared_ptr<Dice> getDice() const { return dice_;};
 };
 
 #endif //ITEM_HPP

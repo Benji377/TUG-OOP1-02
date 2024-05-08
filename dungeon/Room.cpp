@@ -96,8 +96,13 @@ void Room::printSeparationLine()
   std::cout << std::endl;
 }
 
-std::map<std::shared_ptr<Entity>, std::string> Room::getCharacters()
+//std::map<std::shared_ptr<Entity>, std::string> Room::getCharacters()
+std::vector<std::shared_ptr<Entity>> Room::getCharacters()
 {
+
+
+
+  /*
   int row_nr;
   int column_nr;
 
@@ -117,5 +122,5 @@ std::map<std::shared_ptr<Entity>, std::string> Room::getCharacters()
         }
     }
   }
-  return ptr_and_field;
+  return ptr_and_field; */
 }

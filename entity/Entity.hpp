@@ -17,6 +17,8 @@
 #include <map>
 #include "character/Inventory.hpp"
 
+class Field;
+
 using std::string;
 using std::map;
 
@@ -26,16 +28,18 @@ class Entity {
     char abbreviation_;
     map<string, int> loot_;
     bool is_lootable_;
+    std::shared_ptr<Field> field_;
 
   public:
-    Entity(int id, char abbreviation, bool is_lootable = false) : id_(id), abbreviation_(abbreviation),
-          is_lootable_(is_lootable) {}
-    Entity(int id, char abbreviation, map<string, int> loot) : id_(id), abbreviation_(abbreviation), loot_(loot),
-          is_lootable_(true) {}
+    Entity(int id, char abbreviation, bool is_lootable = false, std::shared_ptr<Field> field = nullptr) : id_(id), abbreviation_(abbreviation),
+          is_lootable_(is_lootable), field_(field) {}
+    Entity(int id, char abbreviation, map<string, int> loot, std::shared_ptr<Field> field) : id_(id), abbreviation_(abbreviation), loot_(loot),
+          is_lootable_(true), field_(field) {}
     virtual ~Entity() = default;
 
     [[nodiscard]] virtual char getAbbreviation() const { return abbreviation_; }
     [[nodiscard]] virtual int getId() const { return id_; }
+    void setField(std::shared_ptr<Field> field) {field_ = field;}
 };
 
 #endif //ENTITY_HPP

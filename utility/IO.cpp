@@ -49,3 +49,19 @@ std::vector<std::string> IO::commandifyString(std::string input)
 
   return vectorised_string;
 }
+
+/*void IO::printPlayerPositions(std::map<std::shared_ptr<Entity>, std::string> players)
+{ OLD VERSION
+  for (int idx_player = 1; idx_player <= players.size(); ++idx_player)
+  {
+    for (const auto& pair : players)
+    {
+      if (pair.first->getId() == idx_player)
+      {
+          std::cout << pair.first->getTypeName() << pair.first->getAbbreviation() << pair.first->getName()
+            << pair.second << std::endl;
+      }
+    }
+  } 
+} 
+Ü*/

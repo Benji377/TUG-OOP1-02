@@ -43,36 +43,38 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
 
 void Player::initializeInventory()
 {
-  Inventory temp_inv = *new Inventory();
+  std::shared_ptr<Inventory> temp_inv = std::make_shared<Inventory>(); // Create a shared pointer to Inventory
+
   if (abbreviation_ == 'B')
   {
     weapon_ = Props::craftWeapon("GAXE", strength_, vitality_);
     armor_ = nullptr;
-    temp_inv.addWeapon(weapon_);
-    temp_inv.addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
-    temp_inv.addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
+    temp_inv->addWeapon(weapon_);
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
   }
   else if (abbreviation_ == 'R')
   {
     weapon_ = Props::craftWeapon("RAPI", strength_, vitality_);
     armor_ = Props::craftArmor("LARM", vitality_);
 
-    temp_inv.addArmor(armor_);
-    temp_inv.addWeapon(weapon_);
-    temp_inv.addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
-    temp_inv.addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
-    temp_inv.addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
-    temp_inv.addAmmunition(Props::craftAmmunition("ARRW", 20));
+    temp_inv->addArmor(armor_);
+    temp_inv->addWeapon(weapon_);
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
+    temp_inv->addAmmunition(Props::craftAmmunition("ARRW", 20));
   }
   else if (abbreviation_ == 'W')
   {
     weapon_ = Props::craftWeapon("QFRC", 'W');
     armor_ = nullptr;
-    temp_inv.addWeapon(weapon_);
-    temp_inv.addWeapon(Props::craftWeapon("QACD", 'W'));
-    temp_inv.addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
+    temp_inv->addWeapon(weapon_);
+    temp_inv->addWeapon(Props::craftWeapon("QACD", 'W'));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
   }
-  inventory_ = &temp_inv;
+
+  inventory_ = temp_inv;
 }
 
 
@@ -93,7 +95,7 @@ Effect Player::getResistance() const
 
 int Player::usePotion(std::string abbreviation)
 {
-  Potion* potion = inventory_->getPotion(abbreviation);
+  std::shared_ptr<Potion> potion = inventory_->getPotion(abbreviation);
   if (potion == nullptr)
   {
     return 1;
@@ -117,11 +119,7 @@ int Player::usePotion(std::string abbreviation)
 }
 
 Player::~Player()
-{
-  delete inventory_;
-  delete weapon_;
-  delete armor_;
-}
+{}
 
 void Player::printPlayer(const std::pair<std::string, std::string>& position) const
 {

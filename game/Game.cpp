@@ -114,7 +114,8 @@ void Game::start()
 void Game::doCommand()
 {
 
-  //Print Story Message
+  std::cout << Game::story_.getStorySegment("N_PROMPT_MESSAGE");
+
   std::string input = IO::promtUserInput();
 
   std::vector<std::string> command_input = IO::commandifyString(input);
@@ -190,3 +191,5 @@ std::shared_ptr<Room> Game::getCurrentRoom()
 {
   return dungeon_.getCurrentRoom();
 }
+
+

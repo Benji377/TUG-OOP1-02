@@ -20,25 +20,25 @@
 
 class Inventory
 {
-  std::vector<Potion*> potions_;
-  std::vector<Weapon*> weapons_;
-  std::vector<Armor*> armor_;
-  std::vector<Ammunition*> ammunition_;
+  std::vector<std::shared_ptr<Potion>> potions_;
+  std::vector<std::shared_ptr<Weapon>> weapons_;
+  std::vector<std::shared_ptr<Armor>> armor_;
+  std::vector<std::shared_ptr<Ammunition>> ammunition_;
 
   public:
     Inventory() = default;
     explicit Inventory(std::map<std::string, int>& inventory);
     int parseInventory(std::map<std::string, int>& inventory);
-    void addPotion(Potion* potion);
-    void addWeapon(Weapon* weapon);
-    void addArmor(Armor* armor);
-    void addAmmunition(Ammunition* ammunition);
-    int removeItem(Item* item);
+    void addPotion(std::shared_ptr<Potion> potion);
+    void addWeapon(std::shared_ptr<Weapon> weapon);
+    void addArmor(std::shared_ptr<Armor> armor);
+    void addAmmunition(std::shared_ptr<Ammunition> ammunition);
+    int removeItem(std::shared_ptr<Item> item);
     int useAmmunition(std::string& abbreviation);
-    Potion* getPotion(std::string& abbreviation);
-    Weapon* getWeapon(std::string& abbreviation);
-    Armor* getArmor(std::string& abbreviation);
-    Ammunition* getAmmunition(std::string& abbreviation);
+    std::shared_ptr<Potion> getPotion(std::string& abbreviation);
+    std::shared_ptr<Weapon> getWeapon(std::string& abbreviation);
+    std::shared_ptr<Armor> getArmor(std::string& abbreviation);
+    std::shared_ptr<Ammunition> getAmmunition(std::string& abbreviation);
     Inventory(const Inventory& other) = default;
     Inventory& operator=(const Inventory& other) = delete;
     ~Inventory();
