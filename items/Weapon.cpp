@@ -29,7 +29,10 @@ DamageType Weapon::getDamageType() const
 
 Weapon::~Weapon()
 {
-  delete dice_;
+  if(dice_ != nullptr)
+  {
+    delete dice_;
+  }
 }
 
 AttackType Weapon::parseAttackType(std::string &attack_type)

@@ -5,14 +5,11 @@
 
 int main(int argc, char** argv)
 {
-<<<<<<< HEAD
   /* Testing
   fs::path path = fs::current_path();
   print_directory(path);
   */
   //return 0;
-=======
->>>>>>> f6b03e7d56e7222a8a5a70b1a93b5f7ec6ad9606
 
   try {
     if (argc != 3)

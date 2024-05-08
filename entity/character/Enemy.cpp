@@ -84,7 +84,7 @@ int Enemy::move(int row, int column) { return 0; }
 Enemy::~Enemy()
 {
   delete inventory_;
-  delete weapon_;
+  //delete weapon_;
   delete armor_;
 }
 
