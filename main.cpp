@@ -1,8 +1,9 @@
 #include <csignal>
 #include <filesystem>
-#include "game/Game.hpp"
-#include "utility/Exceptions.hpp"
-#include "utility/Utils.hpp"
+#include <iostream>
+// #include "game/Game.hpp"
+// #include "utility/Exceptions.hpp"
+// #include "utility/Utils.hpp"
 
 
 int main(int argc, char** argv)
@@ -39,7 +40,7 @@ int main(int argc, char** argv)
   }
   
   std::cout << "Termination of current path check" << std::endl;
-
+/*
   try {
     if (argc != 3)
     {
@@ -74,6 +75,6 @@ int main(int argc, char** argv)
   //    break;
   //  game.executeCommand(command);
   //}
-
+*/
   return 0;
 }

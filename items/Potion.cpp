@@ -4,7 +4,7 @@ Potion::Potion(std::string& abbreviation, std::string& name, std::string effect,
 {
   abbreviation_ = abbreviation;
   name_ = name;
-  dice_ = dice;
+  dice_ = static_cast<const std::shared_ptr<Dice>>(dice);
   effect_ = parseEffect(effect);
 }
 
@@ -33,5 +33,5 @@ Effect Potion::getEffect() const
 
 Potion::~Potion()
 {
-  delete dice_;
+  // Delete the dice object
 }
