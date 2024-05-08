@@ -31,11 +31,11 @@ void print_directory(const fs::path& path, const std::string& indent = "")
 
 int main(int argc, char** argv)
 {
-  // Testing
+  /* Testing
   fs::path path = fs::current_path();
   print_directory(path);
-  //
-  return 0;
+  */
+  //return 0;
 
   try {
     if (argc != 3)
@@ -56,8 +56,12 @@ int main(int argc, char** argv)
     return 3;
   }
 
+
   Game game(argv[1], argv[2]);
   game.start();
+
+
+
   //
   //CommandParser cli;
   //while(game.isRunning())

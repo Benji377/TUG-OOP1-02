@@ -22,7 +22,7 @@ void Game::start()
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
     << std::endl;
   int num_players;
-  while (true)
+  while (isRunning())
   {
     string input = IO::promtUserInput();
 
@@ -43,15 +43,21 @@ void Game::start()
     }
     Game::max_players_ = num_players;
   }
-  for (int i = 1; i <= num_players; i++)
+  for (int i = 1; i <= num_players && isRunning(); i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
       << " characters)" << std::endl;
     string name;
-    while (true)
+    while (isRunning())
     {
       name.clear();
       name = IO::promtUserInput();
+
+      if(name == "quit")
+      {
+        doCommand(name);
+        break;
+      }
 
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
@@ -67,7 +73,7 @@ void Game::start()
     std::cout << "  [B] Barbarian  " << getPlayerTypeAmount('B') << "/1" << std::endl;
     std::cout << "  [R] Rogue      " << getPlayerTypeAmount('R') << "/1" << std::endl;
     char type;
-    while (true)
+    while (isRunning())
     {
       string input;
       input = IO::promtUserInput();
@@ -93,6 +99,8 @@ void Game::start()
     std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);
     players_.push_back(player);
   }
+  if(isRunning())
+  {
   std::cout << "\n-- Players --------------------------------------" << std::endl;
   for (auto player : players_)
   {
@@ -100,6 +108,7 @@ void Game::start()
     player->simplePrintPlayer();
   }
   std::cout << std::endl;
+  }
 }
 
 void Game::doCommand()
@@ -142,7 +151,7 @@ void Game::toggleStoryOutput()
   story_output_active_ = !story_output_active_;
 }
 
-void Game::toggleGame()
+void Game::toggleGameRunning()
 {
   is_running_ = !is_running_;
 }

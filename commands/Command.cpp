@@ -1,6 +1,7 @@
 #include "Command.hpp"
 #include "../game/Game.hpp"
 
+
 void Command::checkParameterCount(std::vector<std::string> params, size_t required_size)
 {
   if(params.size() != required_size)
@@ -79,7 +80,7 @@ void QuitCommand::execute(std::vector<std::string> params)
 
   std::cout << "quit" << std::endl;
 
-  game_->toggleGame();
+  game_->toggleGameRunning();
 
 }
 

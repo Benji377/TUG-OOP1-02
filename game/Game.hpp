@@ -47,7 +47,7 @@ class Game
     ~Game(){};
     Game(char *dungeon_path, char *config_path);
 
-    void toggleGame();
+    void toggleGameRunning();
     bool isRunning() const;
     void toggleStoryOutput();
     void start();

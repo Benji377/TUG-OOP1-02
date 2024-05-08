@@ -11,7 +11,7 @@
 #ifndef IO_HPP
 #define IO_HPP
 
-#include "../utility/Utils.hpp"
+#include "Utils.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>

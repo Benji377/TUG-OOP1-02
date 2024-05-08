@@ -27,8 +27,12 @@ std::string IO::promtUserInput()
   std::string input;
   std::getline(std::cin, input);
 
+  //Normalise the input, so you can test for case sensitive QuITs
+  std::string input_normalised = input;
+  Utils::normalizeString(input_normalised);
+
   // Check if input is Ctrl + D (end of input)
-  if(std::cin.eof())
+  if(std::cin.eof() || input_normalised == "quit")
   {
     input = "quit";
   }
