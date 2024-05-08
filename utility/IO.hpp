@@ -37,7 +37,9 @@ public:
   ///
   /// @return A vector of strings containing the input tokens.
   //
-  static std::vector<std::string> promtUserInput();
+  static std::string promtUserInput();
+
+  static std::vector<std::string> commandifyString(std::string input);
 
 };
 

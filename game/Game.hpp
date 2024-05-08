@@ -51,7 +51,10 @@ class Game
     bool isRunning() const;
     void toggleStoryOutput();
     void start();
+
+    //Function that promts user input and executes command
     void doCommand();
+    //Overloaded doCommand function that executes a command based on a string
     void doCommand(string input);
     bool playerExists(string name);
     int getPlayerTypeAmount(char type);

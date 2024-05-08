@@ -21,18 +21,21 @@ void Game::start()
   std::cout << Game::story_.getStorySegment("N_INTRO");
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
     << std::endl;
-  std::cout << "> ";
-  int num_players;
-  while (true)
+  int num_players;  //TODO I changed this up. Does it still work? -Hanno
+  while (isRunning())
   {
-    string input;
-    std::cin >> input;
-    // TODO: Check if the input is quit or EOF
+    string input = IO::promtUserInput();
+
+    if(input == "quit")
+    {
+      doCommand(input);
+      break;
+    }
+
     if (!Utils::decimalStringToInt(input, num_players) || num_players < MIN_PLAYERS || num_players > MAX_PLAYERS)
     {
       std::cout << "Please enter a number of players between " << MIN_PLAYERS << " and " << MAX_PLAYERS << "."
         << std::endl;
-      std::cout << "> ";
     }
     else
     {
@@ -40,16 +43,22 @@ void Game::start()
     }
     Game::max_players_ = num_players;
   }
-  for (int i = 1; i <= num_players; i++)
+  for (int i = 1; i <= num_players && isRunning(); i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
       << " characters)";
-    std::cout << "> ";
     string name;
-    while (true)
+    while (isRunning())
     {
       name.clear();
-      std::cin >> name;
+      name = IO::promtUserInput(); //TODO Also changed this, so you could enter quit here.
+
+      if(name == "quit")
+      {
+        doCommand(name);
+        break;
+      }
+
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
         std::cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << std::endl;
@@ -64,22 +73,24 @@ void Game::start()
     std::cout << "  [W] Wizard     <AMOUNT>/1" << std::endl;
     std::cout << "  [B] Barbarian  <AMOUNT>/1" << std::endl;
     std::cout << "  [R] Rogue      <AMOUNT>/1" << std::endl;
-    std::cout << "> ";
     char type;
-    while (true)
+    while (isRunning())
     {
       string input;
-      std::cin >> input;
+      input = IO::promtUserInput();
+
+      if(input == "quit")
+      {
+        doCommand(input);
+      }
+
       Utils::normalizeString(input);
-      // TODO: Check if the input is quit or EOF
       if (input.length() != 1 || (input[0] != 'w' && input[0] != 'b' && input[0] != 'r'))
       {
         std::cout << "Please enter a letter representing your desired player type (W, B, or R)." << std::endl;
-        std::cout << "> ";
       } else if (getPlayerTypeAmount(input[0]) >= 1)
       {
         std::cout << "This player type is no longer available. Please choose a different player type." << std::endl;
-        std::cout << "> ";
       } else
       {
         type = input[0];
@@ -95,11 +106,29 @@ void Game::doCommand()
 {
 
   //Print Story Message
-  std::vector<std::string> input = IO::promtUserInput();
+  std::string input = IO::promtUserInput();
+
+  std::vector<std::string> command_input = IO::commandifyString(input);
 
   try
   {
-    parser_->execute(input);
+    parser_->execute(command_input);
+  }
+  catch(const std::exception& e)
+  {
+    std::cout << e.what() << '\n';
+  }
+
+}
+
+void Game::doCommand(std::string input)
+{
+
+  std::vector<std::string> command_input = IO::commandifyString(input);
+
+  try
+  {
+    parser_->execute(command_input);
   }
   catch(const std::exception& e)
   {

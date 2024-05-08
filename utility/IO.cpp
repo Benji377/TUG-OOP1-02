@@ -20,7 +20,7 @@ bool IO::checkMagicNumber(char* config_path, std::string magic_number)
   return false;
 }
 
-std::vector<std::string> IO::promtUserInput()
+std::string IO::promtUserInput()
 {
   std::cout << "> " << std::flush;
 
@@ -33,9 +33,15 @@ std::vector<std::string> IO::promtUserInput()
     input = "quit";
   }
 
+  return input;
+
+}
+
+
+std::vector<std::string> IO::commandifyString(std::string input)
+{
   Utils::normalizeString(input);
   std::vector<std::string> vectorised_string = Utils::splitString(input, " ");
 
   return vectorised_string;
-
 }
