@@ -43,7 +43,7 @@ public:
   /// @param dice The dice of the potion. can be null on resistance potions.
   /// @param effect The effect of the potion.
   //
-  Potion(std::string &abbreviation, std::string &name, std::string effect, Dice *dice);
+  Potion(std::string &abbreviation, std::string &name, std::string effect, std::shared_ptr<Dice> dice);
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
@@ -69,7 +69,7 @@ public:
   ///
   /// Destructor for a potion. Default.
   //
-  virtual ~Potion();
+  ~Potion() = default;
 };
 
 #endif //POTION_HPP

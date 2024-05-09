@@ -1,10 +1,12 @@
 #include "Potion.hpp"
 
-Potion::Potion(std::string& abbreviation, std::string& name, std::string effect, Dice *dice)
+#include <utility>
+
+Potion::Potion(std::string& abbreviation, std::string& name, std::string effect, std::shared_ptr<Dice> dice)
 {
   abbreviation_ = abbreviation;
   name_ = name;
-  dice_ = dice;
+  dice_ = std::move(dice);
   effect_ = parseEffect(effect);
 }
 
@@ -29,9 +31,4 @@ Effect Potion::parseEffect(std::string& effect)
 Effect Potion::getEffect() const
 {
   return effect_;
-}
-
-Potion::~Potion()
-{
-  delete dice_;
 }

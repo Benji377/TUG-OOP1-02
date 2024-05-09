@@ -10,7 +10,7 @@ std::shared_ptr<Potion> Props::craftPotion(std::string abbreviation)
   if (row[3].empty())
   {
     // It's a health potion
-    return std::make_shared<Potion>(abbreviation, row[1], "health", new Dice(row[4]));
+    return std::make_shared<Potion>(abbreviation, row[1], "health", std::make_shared<Dice>(row[4]));
   }
   else
   {
