@@ -5,10 +5,33 @@ const std::string CSVParser::potions_csv_path_ = "items/csv/potions.csv";
 const std::string CSVParser::weapon_csv_path_ = "items/csv/weapons.csv";
 const std::string CSVParser::ammunition_csv_path_ = "items/csv/ammunition.csv";
 
+bool checkFile(const std::string& filename)
+{
+  try
+  {
+    std::ifstream file(filename);
+    if (!file.good())
+    {
+      throw std::runtime_error("Error: File " + filename + " does not exist");
+    }
+    if (!file.is_open())
+    {
+      throw std::runtime_error("Error: Could not open file " + filename);
+    }
+    file.close();
+    return true;
+  }
+  catch (const std::exception& e)
+  {
+    std::cout << "[CSVParser] Error: " << e.what() << std::endl;
+    return false;
+  }
+}
+
 std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename)
 {
   std::vector<std::vector<std::string>> data;
-  try
+  if (checkFile(filename))
   {
     std::ifstream file(filename);
     if (!file.good())
@@ -33,13 +56,14 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
     }
     file.close();
   }
-  catch (const std::exception& e)
+  else
   {
-    std::cout << "[CSVParser] Error: " << e.what() << std::endl;
+    return {};
   }
 }
 
-std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& filename, const std::string& abbreviation) {
+std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& filename, const std::string& abbreviation)
+{
   std::vector<std::vector<std::string>> data = readCSV(filename);
   if (data.empty())
   {
