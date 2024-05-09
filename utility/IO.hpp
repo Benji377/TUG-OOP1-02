@@ -18,6 +18,12 @@
 #include <map>
 #include <memory>
 
+class Entity;
+class Player;
+class Room;
+class Character;
+
+
 class IO
 {
 public:

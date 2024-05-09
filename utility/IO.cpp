@@ -1,4 +1,7 @@
 #include "IO.hpp"
+#include "../entity/character/Player.hpp"
+#include "../entity/Entity.hpp"
+#include "../dungeon/Room.hpp"
 
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
@@ -52,7 +55,7 @@ std::vector<std::string> IO::commandifyString(std::string input)
 void IO::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room)
 {
   std::cout << player->getTypeName() << player->getAbbreviation() << player->getName()
-    << room->getFieldOfEntity().first << "," << room->getFieldOfEntity().first << std::endl;
+    << room->getFieldOfEntity(player).first << "," << room->getFieldOfEntity(player).first << std::endl;
 }
 
 
@@ -61,6 +64,7 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
 {
   for(auto& enemy : enemies_mapped)
   {
-    std::cout << enemy.first << current_room->getFieldOfEntity(enemy.second);
+    std::cout << enemy.first << current_room->getFieldOfEntity(enemy.second).first
+      << current_room->getFieldOfEntity(enemy.second).second;
   }
 }

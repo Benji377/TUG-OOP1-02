@@ -45,7 +45,7 @@ class Field : public std::enable_shared_from_this<Field>
     /// Setter for the entity
     /// @param entity the entity to set
     //
-    void setEntity(std::shared_ptr<Entity> entity) {entity_ = entity; entity_->setField(shared_from_this()); }
+    void setEntity(std::shared_ptr<Entity> entity) {entity_ = entity; }
 
 };
 
