@@ -1,5 +1,3 @@
-#include <csignal>
-#include <filesystem>
 #include "game/Game.hpp"
 #include "utility/Exceptions.hpp"
 #include "utility/Utils.hpp"

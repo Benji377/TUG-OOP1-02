@@ -5,40 +5,51 @@ const std::string CSVParser::potions_csv_path_ = "items/csv/potions.csv";
 const std::string CSVParser::weapon_csv_path_ = "items/csv/weapons.csv";
 const std::string CSVParser::ammunition_csv_path_ = "items/csv/ammunition.csv";
 
-std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename) {
+std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename)
+{
   std::vector<std::vector<std::string>> data;
-  std::ifstream file(filename);
-  // Check if file exists
-  if (!file.good()) {
-    std::cout << "Error: File " << filename << " does not exist" << std::endl;
-    return data;
-  }
-  if (!file.is_open()) {
-    std::cout << "Error: Could not open file " << filename << std::endl;
-    return data;
-  }
-  std::string line;
-  while (std::getline(file, line)) {
-    std::vector<std::string> row;
-    std::stringstream ss(line);
-    std::string cell;
-    while (std::getline(ss, cell, ';')) {
-      row.push_back(cell);
+  try
+  {
+    std::ifstream file(filename);
+    if (!file.good())
+    {
+      throw std::runtime_error("Error: File " + filename + " does not exist");
     }
-    data.push_back(row);
+    if (!file.is_open())
+    {
+      throw std::runtime_error("Error: Could not open file " + filename);
+    }
+    std::string line;
+    while (std::getline(file, line))
+    {
+      std::vector<std::string> row;
+      std::stringstream ss(line);
+      std::string cell;
+      while (std::getline(ss, cell, ';'))
+      {
+        row.push_back(cell);
+      }
+      data.push_back(row);
+    }
+    file.close();
   }
-  file.close();
-  return data;
+  catch (const std::exception& e)
+  {
+    std::cout << "[CSVParser] Error: " << e.what() << std::endl;
+  }
 }
 
 std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& filename, const std::string& abbreviation) {
   std::vector<std::vector<std::string>> data = readCSV(filename);
-  if (data.empty()) {
+  if (data.empty())
+  {
     return {};
   }
   // The abbreviation is the first column
-  for (const std::vector<std::string>& row : data) {
-    if (row[0] == abbreviation) {
+  for (const std::vector<std::string>& row : data)
+  {
+    if (row[0] == abbreviation)
+    {
       return row;
     }
   }
