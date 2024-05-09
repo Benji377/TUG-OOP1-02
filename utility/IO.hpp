@@ -43,7 +43,10 @@ public:
 
   static std::vector<std::string> commandifyString(std::string input);
 
-  //void printPlayerPositions(std::map<std::shared_ptr<Entity>, std::string> players);
+  static void printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room);
+
+  static void printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
+  std::shared_ptr<Room>  current_room);
 
 };
 

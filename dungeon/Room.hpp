@@ -17,6 +17,9 @@
 using std::vector;
 using std::shared_ptr;
 
+class UnavailableItemOrEntityCommand;
+class Character;
+
 class Room
 {
   private:
@@ -72,14 +75,27 @@ class Room
     void printRoom();
 
     ///-----------------------------------------------------------------------------------------------------------------
-    /// Retrieves characters present in the room along with their corresponding positions.
+    /// Retrieves enemies present in the room
     ///
-    /// This function iterates over the fields of the room, checks if each field contains an entity,
-    /// and if so, associates the entity with its position in the room.
+    /// @return A vector containing pointers to the entities found in the room
     ///
-    /// @return A map containing pointers to the entities found in the room as keys, and their positions as values.
+    std::vector<std::shared_ptr<Character>> getEnemies();
+
+
+    ///-----------------------------------------------------------------------------------------------------------------
+    /// Retrieves the field position of a given entity in the room.
     ///
-    std::vector<std::shared_ptr<Entity>> getCharacters();
+    /// This function iterates over the fields of the room, checking if each field contains the specified entity.
+    /// If the entity is found, the function returns a pair containing the row and column indices of the field
+    /// where the entity is located. If the entity is not found, the function throws an UnavailableItemOrEntityCommand
+    /// exception and returns a pair with values (-1, -1).
+    ///
+    /// @param entity A shared pointer to the entity to search for in the room.
+    /// @return A pair containing the row and column indices of the field where the entity is located.
+    ///
+    /// @throws UnavailableItemOrEntityCommand if the entity is not found in any field of the room.
+    ///
+    std::pair<int, int> getFieldOfEntity(shared_ptr<Entity> entity);
 
 
 };

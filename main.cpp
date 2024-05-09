@@ -16,8 +16,8 @@ int main(int argc, char** argv)
   // We need to inspect some issues with the CSV parser and path finding
   // Therefore we need to check the current path and the current working directory
   // Using nothing but standard C++17
-  std::cout << "Current path using getcwd(): " << getcwd(nullptr, 0) << std::endl;
-  std::cout << "Current path using realpath(): " << realpath(".", nullptr) << std::endl;
+  //std::cout << "Current path using getcwd(): " << getcwd(nullptr, 0) << std::endl;
+  //std::cout << "Current path using realpath(): " << realpath(".", nullptr) << std::endl;
 
   // Now we want to check which folder exists in the same directory as the executable
   // We will check for the existence of the "data" folder. The Utils class does not have any functions for this

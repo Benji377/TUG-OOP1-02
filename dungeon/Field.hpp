@@ -21,8 +21,6 @@ class Field : public std::enable_shared_from_this<Field>
     inline static int field_count_ = 0;
     int id_;
     shared_ptr<Entity> entity_;
-    int row_;
-    int column_;
 
   public:
     ///-----------------------------------------------------------------------------------------------------------------
@@ -48,8 +46,6 @@ class Field : public std::enable_shared_from_this<Field>
     /// @param entity the entity to set
     //
     void setEntity(std::shared_ptr<Entity> entity) {entity_ = entity; entity_->setField(shared_from_this()); }
-
-    std::pair<int, int> getPosition() { return std::make_pair(row_, column_); }
 
 };
 

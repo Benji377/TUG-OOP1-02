@@ -18,6 +18,11 @@
 class Game;
 class Player;
 
+enum class Abbrev {
+    PLAYER,
+    ITEM,
+};
+
 class Command
 {
 protected:
@@ -51,8 +56,10 @@ protected:
   ///
   /// @return A shared pointer to the player with the specified abbreviation.
   ///
-  /// @throws InvalidParamCommand if no player with the specified abbreviation is found.
+  /// @throws UnavailableItemOrEntityCommand if no player with the specified abbreviation is found.
   std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params);
+
+  void isValidAbbrev(Abbrev type_of_abbrev, std::string input);
 
 
 public:

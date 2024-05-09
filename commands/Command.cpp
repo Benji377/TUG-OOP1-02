@@ -10,10 +10,31 @@ void Command::checkParameterCount(std::vector<std::string> params, size_t requir
   }
 }
 
+void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input)
+{
+  switch(type_of_abbrev)
+  {
+    case Abbrev::PLAYER:
+       if(input == "B" || input == "R" || input == "W")
+      {
+        break;
+      }
+      else
+      {
+        InvalidParamCommand();
+      }
+      break;
+  case Abbrev::ITEM:
+      break;
+  }
+
+}
 
 std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params)
 {
   std::string input_abbrevation = params.at(position_of_abbrev_in_params);
+
+  isValidAbbrev(Abbrev::PLAYER, input_abbrevation);
 
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
 
@@ -25,7 +46,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
     }
   }
 
-  throw InvalidParamCommand();
+  throw UnavailableItemOrEntityCommand();
 }
 
 void HelpCommand::execute(std::vector<std::string> params)
@@ -107,8 +128,25 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   std::shared_ptr<Room> current_room = game_->getCurrentRoom();
 
+  //Assuming Players are always stored by id, otherwise sort them
+  std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
 
-  std::vector<std::shared_ptr<Entity>> characters = current_room->getCharacters();
+  for(auto& player : players)
+  {
+    IO::printPlayerPosition(player, current_room);
+  }
+
+  std::vector<std::shared_ptr<Character>> enemies = current_room->getEnemies();
+
+  std::map<std::string, std::shared_ptr<Character>> enemies_mapped;
+
+  for(auto& enemy : enemies)
+  {
+    std::string enemy_string_to_be_sorted = enemy->getTypeName() + std::to_string(enemy->getId());
+    enemies_mapped.insert(std::make_pair(enemy_string_to_be_sorted, enemy));
+  }
+
+  IO::printEnemyPosition(enemies_mapped, current_room);
 
   //std::map<std::shared_ptr<Entity>, std::string> characters = current_room->getCharacters();
 

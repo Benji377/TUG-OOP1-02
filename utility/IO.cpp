@@ -41,7 +41,6 @@ std::string IO::promtUserInput()
 
 }
 
-
 std::vector<std::string> IO::commandifyString(std::string input)
 {
   Utils::normalizeString(input);
@@ -50,18 +49,18 @@ std::vector<std::string> IO::commandifyString(std::string input)
   return vectorised_string;
 }
 
-/*void IO::printPlayerPositions(std::map<std::shared_ptr<Entity>, std::string> players)
-{ OLD VERSION
-  for (int idx_player = 1; idx_player <= players.size(); ++idx_player)
+void IO::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room)
+{
+  std::cout << player->getTypeName() << player->getAbbreviation() << player->getName()
+    << room->getFieldOfEntity().first << "," << room->getFieldOfEntity().first << std::endl;
+}
+
+
+void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
+  std::shared_ptr<Room>  current_room)
+{
+  for(auto& enemy : enemies_mapped)
   {
-    for (const auto& pair : players)
-    {
-      if (pair.first->getId() == idx_player)
-      {
-          std::cout << pair.first->getTypeName() << pair.first->getAbbreviation() << pair.first->getName()
-            << pair.second << std::endl;
-      }
-    }
-  } 
-} 
-Ü*/
+    std::cout << enemy.first << current_room->getFieldOfEntity(enemy.second);
+  }
+}

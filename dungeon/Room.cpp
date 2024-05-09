@@ -4,6 +4,7 @@
 #include "../entity/TreasureChest.hpp"
 #include "../entity/character/Enemy.hpp"
 #include "../entity/character/Player.hpp"
+#include "../utility/Exceptions.hpp"
 
 
 Room::Room(int id, int width, int height)
@@ -26,6 +27,35 @@ void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
 {
   fields_[row - 1][col - 1]->setEntity(entity);
 }
+
+std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
+{
+  int row_idx = 0;
+  int column_idx = 0;
+
+  for(auto row : fields_)
+  {
+    for(auto column : row)
+    {
+      if(column->getEntity() == entity)
+      {
+        return std::make_pair(row_idx, column_idx);
+      }
+
+      ++column_idx;
+    }
+    ++row_idx;
+    column_idx = 0;
+  }
+
+
+  std::cout << "err, entity in field not recognised" << std::endl;
+
+  throw UnavailableItemOrEntityCommand();
+
+  return std::make_pair(-1, -1);
+}
+
 
 void Room::printRoom()
 {
@@ -96,31 +126,22 @@ void Room::printSeparationLine()
   std::cout << std::endl;
 }
 
-//std::map<std::shared_ptr<Entity>, std::string> Room::getCharacters()
-std::vector<std::shared_ptr<Entity>> Room::getCharacters()
+
+
+std::vector<std::shared_ptr<Character>> Room::getEnemies()
 {
-
-
-
-  /*
-  int row_nr;
-  int column_nr;
-
-  std::map<std::shared_ptr<Entity>, std::string> ptr_and_field;
+  std::vector<std::shared_ptr<Character>> enemies;
 
   for (auto& row : fields_)
   {
-    row_nr++;
-
     for (auto& fieldPtr : row)
     {
-      column_nr++;
-
-        if(fieldPtr->getEntity() == std::dynamic_pointer_cast<Entity>(fieldPtr->getEntity()))
-        {
-           ptr_and_field[fieldPtr->getEntity()] = std::to_string(row_nr) + "," + std::to_string(column_nr);
-        }
+      //Checks first if it isn't the nullptr, then dereferences and checks if it's a character
+      if(fieldPtr->getEntity() && fieldPtr->getEntity()->isCharacter() && fieldPtr->getEntity()->isEnemy())
+      {
+        enemies.push_back(std::dynamic_pointer_cast<Character>(fieldPtr->getEntity()));
+      }
     }
   }
-  return ptr_and_field; */
+  return enemies;
 }

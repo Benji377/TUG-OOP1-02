@@ -40,6 +40,9 @@ class Entity {
     [[nodiscard]] virtual char getAbbreviation() const { return abbreviation_; }
     [[nodiscard]] virtual int getId() const { return id_; }
     void setField(std::shared_ptr<Field> field) {field_ = field;}
+    virtual bool isCharacter() const { return false; }
+    virtual bool isEnemy() const { return false; }
+
 };
 
 #endif //ENTITY_HPP

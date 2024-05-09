@@ -136,6 +136,10 @@ void Game::doCommand()
   {
     std::cout << Game::story_.getStorySegment("E_INVALID_PARAM");
   }
+  catch(const UnavailableItemOrEntityCommand&e)
+  {
+    std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+  }
 
 }
 

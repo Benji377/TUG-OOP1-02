@@ -38,6 +38,7 @@ class Character: public Entity
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }
+    bool isCharacter() const override { return true; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }
     void setHealth(int health) { health_ = health; }
