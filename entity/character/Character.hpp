@@ -36,6 +36,7 @@ class Character: public Entity
     [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
     [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
+    int getFullArmorValue() const {return base_armor_ + armor_->getArmorValue(); }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }
     bool isCharacter() const override { return true; }

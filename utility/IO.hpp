@@ -47,12 +47,38 @@ public:
   //
   static std::string promtUserInput();
 
+  //---------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Converts a given string into a vector of individual words delimited by spaces.
+  /// 
+  /// @param input The input string to be converted.
+  ///
+  /// @return A vector containing individual words extracted from the input string.
+  ///
   static std::vector<std::string> commandifyString(std::string input);
 
+  //----  -----------------------------------------------------------------------------------------------------------------
+  ///
+  /// Prints the position of a player within a room.
+  ///
+  /// @param player A shared pointer to the player object whose position is to be printed.
+  /// @param room A shared pointer to the room object containing the player.
+  ///
   static void printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room);
 
+  //---------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Prints the position of each enemy within a given room.
+  ///
+  /// @param enemies_mapped A map containing enemy names as keys and shared pointers to character objects as values.
+  /// @param current_room A shared pointer to the room object containing the enemies.
+  ///
   static void printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
   std::shared_ptr<Room>  current_room);
+
+static int getDigitAmount(int number);
+
+  static void printPlayerStats(std::shared_ptr<Player> player_ptr);
 
 };
 
