@@ -31,11 +31,14 @@ class Character: public Entity
     Character(int id, char abbreviation) : Entity(id, abbreviation, false) {}
     // Getters
     [[nodiscard]] std::string getTypeName() const { return type_name_; }
-    int getVitality() const { return vitality_; };
-    int getStrength() const { return strength_; };
-    int getHealth() const { return health_; };
-    int getMaximumHealth() const { return maximum_health_; };
-    int getBaseArmor() const { return base_armor_; };
+    [[nodiscard]] int getMaximumHealth() const { return maximum_health_; }
+    [[nodiscard]] int getHealth() const { return health_; }
+    [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
+    [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
+    [[nodiscard]] int getBaseArmor() const { return base_armor_; }
+    int getFullArmorValue() const {return base_armor_ + armor_->getArmorValue(); }
+    [[nodiscard]] int getStrength() const { return strength_; }
+    [[nodiscard]] int getVitality() const { return vitality_; }
     bool isCharacter() const override { return true; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }

@@ -68,3 +68,27 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
       << current_room->getFieldOfEntity(enemy.second).second;
   }
 }
+
+int IO::getDigitAmount(int number)
+{
+  return std::to_string(number).length();
+}
+
+void IO::printPlayerStats(std::shared_ptr<Player> player_ptr)
+{
+  int armor_val = player_ptr->getFullArmorValue();
+  std::cout << "Armor Value:    " << getDigitAmount(armor_val) * " " << armor_val "\n"; // TODO create fun that prints int empty spaces...
+
+  player_ptr->getHealth();
+  player_ptr->getMaximumHealth();
+  player_ptr->getStrength();
+  player_ptr->getVitality();
+
+
+
+  std::cout << "Current Health: XXXXX\n";
+  std::cout<< "Max Health:     XXXXX\n";
+  std::cout << "Strength:       XXXXX\n";
+  std::cout << "Vitality:       XXXXX\n";
+
+}
