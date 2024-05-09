@@ -26,8 +26,7 @@ class Enemy: public Character
     void takeDamage(int damage) override;
     int move(int row, int column) override;
     void printEnemy() const;
-    ~Enemy() override;
-
+    ~Enemy() = default;
     bool isEnemy() const override{ return true; }
 };
 

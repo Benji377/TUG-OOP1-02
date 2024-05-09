@@ -34,14 +34,6 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
   if (checkFile(filename))
   {
     std::ifstream file(filename);
-    if (!file.good())
-    {
-      throw std::runtime_error("Error: File " + filename + " does not exist");
-    }
-    if (!file.is_open())
-    {
-      throw std::runtime_error("Error: Could not open file " + filename);
-    }
     std::string line;
     while (std::getline(file, line))
     {

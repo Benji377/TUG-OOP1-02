@@ -26,11 +26,24 @@ std::fstream& Utils::goToLine(std::fstream& file, int num) {
   return file;
 }
 
-std::string Utils::readConfigLine(const char *config_path, int line_number) {
+std::string Utils::readFileLine(const char *config_path, int line_number) {
+  std::fstream target_file(config_path);
+
+  // Check if the file is open
+  if (!target_file.is_open()) {
+    throw std::runtime_error("Unable to open file");
+  }
+
+  // Move the file pointer to the specified line
+  goToLine(target_file, line_number);
+
+  // Check if the line number is within the range of the file's lines
+  if (target_file.eof()) {
+    throw std::out_of_range("Line number out of range");
+  }
+
   std::string output;
-  std::fstream config_file(config_path);
-  goToLine(config_file, line_number);
-  config_file >> output;
+  std::getline(target_file, output);
   return output;
 }
 
@@ -41,7 +54,7 @@ void Utils::isValidConfig(const char *config_path, const char* magic_number) {
     throw InvalidConfigFileException(config_path);
   }
   // Now we can read from the file and check if the first line is "OOP"
-  std::string magic = readConfigLine(config_path, 0);
+  std::string magic = readFileLine(config_path, 0);
   if (magic == magic_number) {
     return;
   }

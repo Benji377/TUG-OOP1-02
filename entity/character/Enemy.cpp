@@ -81,10 +81,6 @@ void Enemy::attack(Character& target, int damage) { }
 void Enemy::takeDamage(int damage) { }
 int Enemy::move(int row, int column) { return 0; }
 
-Enemy::~Enemy()
-{
-}
-
 void Enemy::printEnemy() const
 {
   std::cout << "Enemy: " << type_name_ << std::endl;

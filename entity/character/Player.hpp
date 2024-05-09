@@ -29,7 +29,13 @@ class Player: public Character
     void printPlayer(const std::pair<std::string, std::string>& position) const;
     std::string getName() const { return name_; }
     void simplePrintPlayer() const;
-    ~Player() override;
+
+    void setActiveWeapon(std::string weapon_abbreviation);
+    void setArmor(std::string armor_abbreviation);
+    std::shared_ptr<Weapon> getActiveWeapon() const;
+
+
+    ~Player() = default;
 };
 
 

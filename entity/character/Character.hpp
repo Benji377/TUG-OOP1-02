@@ -31,13 +31,11 @@ class Character: public Entity
     Character(int id, char abbreviation) : Entity(id, abbreviation, false) {}
     // Getters
     [[nodiscard]] std::string getTypeName() const { return type_name_; }
-    [[nodiscard]] int getMaximumHealth() const { return maximum_health_; }
-    [[nodiscard]] int getHealth() const { return health_; }
-    [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
-    [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
-    [[nodiscard]] int getBaseArmor() const { return base_armor_; }
-    [[nodiscard]] int getStrength() const { return strength_; }
-    [[nodiscard]] int getVitality() const { return vitality_; }
+    int getVitality() const { return vitality_; };
+    int getStrength() const { return strength_; };
+    int getHealth() const { return health_; };
+    int getMaximumHealth() const { return maximum_health_; };
+    int getBaseArmor() const { return base_armor_; };
     bool isCharacter() const override { return true; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }
@@ -51,7 +49,7 @@ class Character: public Entity
     virtual int move(int row, int column) = 0;                // Missn et pure virtual san, isch la temporär
     virtual void attack(Character& target, int damage) = 0;   // Missn et pure virtual san, isch la temporär
     virtual void takeDamage(int damage) = 0;                 // Missn et pure virtual san, isch la temporär
-    virtual ~Character() = default; // Fixed error? Mogsch la ändon wennis ondos hom willsch
+    virtual ~Character() = default;
 };
 
 

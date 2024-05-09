@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include <iomanip>
 #include <utility>
 #include "../../utility/Props.hpp"
 
@@ -77,11 +77,7 @@ void Player::initializeInventory()
   inventory_ = temp_inv;
 }
 
-
-// Sorry muss san um di errors zi fixen
-void Player::attack(Character& target, int damage) { }
-void Player::takeDamage(int damage) { }
-int Player::move(int row, int column) { return 0; }
+// Getter and setter methods
 
 void Player::setResistance(Effect effect)
 {
@@ -92,6 +88,38 @@ Effect Player::getResistance() const
 {
   return resistant_to_;
 }
+
+void Player::setActiveWeapon(std::string weapon_abbreviation)
+{
+  std::shared_ptr<Weapon> weapon = inventory_->getWeapon(weapon_abbreviation);
+  if (weapon != nullptr)
+  {
+    weapon_ = inventory_->getWeapon(weapon_abbreviation);
+  }
+  else
+  {
+    std::cout << "Weapon " << weapon_abbreviation << " not found in inventory.\n";
+  }
+}
+
+void Player::setArmor(std::string armor_abbreviation)
+{
+  std::shared_ptr<Armor> armor = inventory_->getArmor(armor_abbreviation);
+  if (armor != nullptr)
+  {
+    armor_ = inventory_->getArmor(armor_abbreviation);
+  }
+  else
+  {
+    std::cout << "Armor " << armor_abbreviation << " not found in inventory.\n";
+  }
+}
+
+std::shared_ptr<Weapon> Player::getActiveWeapon() const
+{
+  return weapon_;
+}
+
 
 int Player::usePotion(std::string abbreviation)
 {
@@ -118,19 +146,31 @@ int Player::usePotion(std::string abbreviation)
   }
 }
 
-Player::~Player()
-{}
+// Sorry muss san um di errors zi fixen
+void Player::attack(Character& target, int damage) { }
+
+void Player::takeDamage(int damage)
+{
+  int defense_points = base_armor_ + armor_->getArmorValue();
+  int damage_taken = damage - defense_points;
+  if (damage_taken < 0)
+  {
+    damage_taken = 0;
+  }
+  health_ -= damage_taken;
+}
+int Player::move(int row, int column) { return 0; }
+
 
 void Player::printPlayer(const std::pair<std::string, std::string>& position) const
 {
-  // TODO: Make values right-aligned
   std::cout << type_name_ << " [" << abbreviation_ << "] \"" << name_
             << "\" on (" << position.first << "," << position.second << ")\n"
-            << "Armor Value: " << base_armor_ << "\n"
-            << "Current Health: " << health_ << "\n"
-            << "Max Health: " << maximum_health_ << "\n"
-            << "Strength: " << strength_ << "\n"
-            << "Vitality: " << vitality_ << "\n";
+            << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << base_armor_ << "\n"
+            << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << health_ << "\n"
+            << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << maximum_health_ << "\n"
+            << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << strength_ << "\n"
+            << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << vitality_ << "\n";
 }
 
 void Player::simplePrintPlayer() const

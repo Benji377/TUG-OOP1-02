@@ -41,12 +41,12 @@ public:
   ///
   /// Utils class extension: This function reads a specific line from a file. The line number is given as a parameter.
   ///
-  /// @param config_path The path to the file
+  /// @param file_path The path to the file
   /// @param line_number The line number to be read
   ///
   /// @return The line read from the file
   //
-  static std::string readConfigLine(const char* config_path, int line_number);
+  static std::string readFileLine(const char* file_path, int line_number);
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

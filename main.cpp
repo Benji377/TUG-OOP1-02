@@ -24,21 +24,17 @@ int main(int argc, char** argv)
     return 3;
   }
 
+  try {
+    Game game(argv[1], argv[2]);
+    game.start();
 
-  Game game(argv[1], argv[2]);
-  game.start();
-
-
-
-  //
-  //CommandParser cli;
-  //while(game.isRunning())
-  //{
-  //  Command command = cli.readCommand();
-  //  if (command.isQuit())
-  //    break;
-  //  game.executeCommand(command);
-  //}
+    while(game.isRunning())
+    {
+      game.doCommand();
+    }
+  } catch (const std::exception& e) {
+    std::cout << "Main Error: " << e.what() << '\n';
+  }
 
   return 0;
 }
