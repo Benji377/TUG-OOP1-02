@@ -59,14 +59,6 @@ protected:
   /// @throws UnavailableItemOrEntityCommand if no player with the specified abbreviation is found.
   std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params);
 
-  //---------------------------------------------------------------------------------------------------------------------
-  ///
-  /// Checks if the input abbreviation is valid for a given type.
-  ///
-  /// @param type_of_abbrev The type of abbreviation being checked PLAYER or ITEM
-  /// @param input The input abbreviation to be validated.
-  ///
-  /// @throws InvalidParamCommand else
   void isValidAbbrev(Abbrev type_of_abbrev, std::string input);
 
 
@@ -224,7 +216,6 @@ public:
 
 class PlayerCommand : public Command
 {
-  public:
   PlayerCommand(Game* game) : Command(game) {}
   virtual ~PlayerCommand() {};
   PlayerCommand(const PlayerCommand&) = delete;

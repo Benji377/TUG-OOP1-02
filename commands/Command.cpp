@@ -116,6 +116,8 @@ void QuitCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
+  std::cout << "quit" << std::endl;
+
   game_->toggleGameRunning();
 
 }
@@ -197,13 +199,12 @@ void PlayerCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 2);
 
-  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+  getPlayerOfAbbrev(params, 1);
 
-  std::shared_ptr<Room> current_room = game_->getCurrentRoom();
+  vector<std::shared_ptr<Player>> players = game_->getPlayers();
 
 
-  IO::printPlayerPosition(player, current_room);
 
-  IO::printPlayerStats(player);
+
 
 }

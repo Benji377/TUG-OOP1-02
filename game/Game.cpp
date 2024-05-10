@@ -14,7 +14,6 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("map", std::make_unique<MapCommand>(this));
   parser_->registerCommand("quit", std::make_unique<QuitCommand>(this));
   parser_->registerCommand("positions", std::make_unique<PositionsCommand>(this));
-  parser_->registerCommand("player", std::make_unique<PlayerCommand>(this));
 }
 
 void Game::start()
