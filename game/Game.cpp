@@ -29,7 +29,7 @@ void Game::start()
     if(input == "quit")
     {
       doCommand(input);
-      break;
+      return;
     }
 
     if (!Utils::decimalStringToInt(input, num_players) || num_players < MIN_PLAYERS || num_players > MAX_PLAYERS)
@@ -51,8 +51,7 @@ void Game::start()
     while (true)
     {
       name.clear();
-      name = IO::promtUserInput();
-
+      name = IO::promtUserInput(false);
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
         std::cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << std::endl;
@@ -69,12 +68,12 @@ void Game::start()
     char type;
     while (true)
     {
-      string input;
-      input = IO::promtUserInput();
-
+      // TODO: If on the previous input EOF was entered, the program should go on
+      string input = IO::promtUserInput();
       if(input == "quit")
       {
         doCommand(input);
+        return;
       }
 
       Utils::normalizeString(input, true);

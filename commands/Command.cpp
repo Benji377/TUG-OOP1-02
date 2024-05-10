@@ -116,8 +116,6 @@ void QuitCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
 
-  std::cout << "quit" << std::endl;
-
   game_->toggleGameRunning();
 
 }

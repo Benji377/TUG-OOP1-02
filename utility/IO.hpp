@@ -43,9 +43,11 @@ public:
   ///
   /// Prompts the user for input with a ">" symbol and returns a vector of strings containing the input tokens.
   ///
+  /// @param check_input If true, the function will check if the input is "quit" and return "quit" in that case.
+  ///
   /// @return A vector of strings containing the input tokens.
   //
-  static std::string promtUserInput();
+  static std::string promtUserInput(bool check_input = true);
 
   static std::vector<std::string> commandifyString(std::string input);
 

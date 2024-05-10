@@ -23,7 +23,7 @@ bool IO::checkMagicNumber(char* config_path, std::string magic_number)
   return false;
 }
 
-std::string IO::promtUserInput()
+std::string IO::promtUserInput(bool check_input)
 {
   std::cout << "> " << std::flush;
 
@@ -35,7 +35,7 @@ std::string IO::promtUserInput()
   Utils::normalizeString(input_normalised);
 
   // Check if input is Ctrl + D (end of input)
-  if(std::cin.eof() || input_normalised == "quit")
+  if(check_input && (std::cin.eof() || input_normalised == "quit"))
   {
     input = "quit";
   }
