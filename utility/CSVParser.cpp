@@ -47,6 +47,7 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
       data.push_back(row);
     }
     file.close();
+    return data;
   }
   else
   {
