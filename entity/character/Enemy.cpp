@@ -55,7 +55,7 @@ void Enemy::initializeInventory()
     weapon_ = Props::craftWeapon("HAXE", strength_, vitality_);
     armor_ = nullptr;
     loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
-    inventory_ = std::shared_ptr<Inventory>();
+    inventory_ = std::make_shared<Inventory>();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
   }
@@ -63,7 +63,7 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("QFIR", 'L');
     armor_ = nullptr;
-    inventory_ = std::shared_ptr<Inventory>();
+    inventory_ = std::make_shared<Inventory>();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
     inventory_->addWeapon(Props::craftWeapon("QACD", 'L'));
