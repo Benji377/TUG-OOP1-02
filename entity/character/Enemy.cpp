@@ -8,7 +8,7 @@ Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
     case 'Z':
       type_name_ = "Zombie";
       is_boss_ = false;
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 1;
       strength_ = 3;
       vitality_ = 0;
@@ -18,7 +18,7 @@ Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
     case 'G':
       type_name_ = "Goblin";
       is_boss_ = false;
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 4;
       strength_ = 3;
       vitality_ = 4;
@@ -28,7 +28,7 @@ Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
     case 'L':
       type_name_ = "Lich";
       is_boss_ = true;
-      resistant_to_ = Effect::COLD;
+      resistant_to_ = DamageType::COLD;
       base_armor_ = 6;
       strength_ = 2;
       vitality_ = 8;
@@ -78,7 +78,7 @@ bool Enemy::is_boss() const
 
 // Sorry muss san um di errors zi fixen
 void Enemy::attack(Character& target, int damage) { }
-void Enemy::takeDamage(int damage) { }
+void Enemy::takeDamage(int damage, DamageType damage_type) { }
 int Enemy::move(int row, int column) { return 0; }
 
 void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const

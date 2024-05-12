@@ -21,10 +21,10 @@ class Player: public Character
   public:
     Player(int id, char abbreviation, std::string name);
     void attack(Character& target, int damage) override;
-    void takeDamage(int damage) override;
+    void takeDamage(int damage, DamageType damage_type) override;
     int move(int row, int column) override;
-    void setResistance(Effect effect);
-    [[nodiscard]] Effect getResistance() const;
+    void setResistance(DamageType damage_type);
+    [[nodiscard]] DamageType getResistance() const;
     int usePotion(std::string abbreviation);
     void printPlayer(const std::pair<int, int>& position, bool single_line = false) const;
     [[nodiscard]] std::string getName() const { return name_; }

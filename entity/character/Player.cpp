@@ -10,7 +10,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
   {
     case 'B':
       type_name_ = "Barbarian";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 2;
       strength_ = 4;
       vitality_ = 1;
@@ -19,7 +19,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       break;
     case 'R':
       type_name_ = "Rogue";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 1;
       strength_ = 2;
       vitality_ = 3;
@@ -28,7 +28,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       break;
     case 'W':
       type_name_ = "Wizard";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 0;
       strength_ = 1;
       vitality_ = 4;
@@ -79,12 +79,12 @@ void Player::initializeInventory()
 
 // Getter and setter methods
 
-void Player::setResistance(Effect effect)
+void Player::setResistance(DamageType damage_type)
 {
-  resistant_to_ = effect;
+  resistant_to_ = damage_type;
 }
 
-Effect Player::getResistance() const
+DamageType Player::getResistance() const
 {
   return resistant_to_;
 }
@@ -140,7 +140,10 @@ int Player::usePotion(std::string abbreviation)
     }
     else
     {
-      setResistance(potion->getEffect());
+      // Map the potion effect enum to the weapons damage type enum
+      auto damage_type = static_cast<DamageType>(potion->getEffect());
+      // TODO: This cast may not work properly!
+      setResistance(damage_type);
     }
     getInventory()->removeItem(potion);
   }
@@ -149,8 +152,12 @@ int Player::usePotion(std::string abbreviation)
 // Sorry muss san um di errors zi fixen
 void Player::attack(Character& target, int damage) { }
 
-void Player::takeDamage(int damage)
+void Player::takeDamage(int damage, DamageType damageType)
 {
+  if (getResistance() == damageType)
+  {
+    return;
+  }
   int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;
   if (damage_taken < 0)
