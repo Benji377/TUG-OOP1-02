@@ -31,8 +31,8 @@ void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
 
 std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
 {
-  int row_idx = 0;
-  int column_idx = 0;
+  int row_idx = 1;
+  int column_idx = 1;
 
   for(auto row : fields_)
   {
@@ -48,7 +48,6 @@ std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
     column_idx = 0;
   }
 
-  std::cout << "err, entity in field not recognised" << std::endl;
   throw UnavailableItemOrEntityCommand();
 }
 
