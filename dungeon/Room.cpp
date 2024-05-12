@@ -30,8 +30,8 @@ void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
 
 std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
 {
-  int row_idx = 0;
-  int column_idx = 0;
+  int row_idx = 1;
+  int column_idx = 1;
 
   for(auto row : fields_)
   {
@@ -47,9 +47,6 @@ std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
     ++row_idx;
     column_idx = 0;
   }
-
-
-  std::cout << "err, entity in field not recognised" << std::endl;
 
   throw UnavailableItemOrEntityCommand();
 
@@ -125,8 +122,6 @@ void Room::printSeparationLine()
   }
   std::cout << std::endl;
 }
-
-
 
 std::vector<std::shared_ptr<Character>> Room::getEnemies()
 {

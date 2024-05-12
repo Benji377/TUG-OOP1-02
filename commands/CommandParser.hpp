@@ -11,10 +11,12 @@
 #ifndef COMMAND_PARSER_HPP
 #define COMMAND_PARSER_HPP
 
-#include <map>
-#include <string>
 #include <memory>
+#include <map>
 #include <vector>
+
+using std::string;
+
 
 #include "Command.hpp"
 
@@ -47,11 +49,11 @@ public:
   /// Execute the command associated with the given input. Goes through the map and calls the execute method of the
   /// Command if it exists.
   ///
-  /// @param input The input string representing the command to be executed
+  /// @param user_input The input string representing the command to be executed
   ///
   /// @return true if the command is executed successfully, false otherwise
   //
-  bool execute(std::vector<std::string> input);
+  bool execute(std::vector<std::string> user_input);
 
 };
 

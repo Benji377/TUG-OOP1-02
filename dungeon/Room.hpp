@@ -15,7 +15,7 @@
 #include <memory>
 
 using std::vector;
-using std::shared_ptr;
+using std::shared_ptr;  
 
 class UnavailableItemOrEntityCommand;
 class Character;

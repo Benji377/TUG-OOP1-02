@@ -35,6 +35,10 @@ class Character: public Entity
     [[nodiscard]] int getHealth() const { return health_; }
     [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
     [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
+    
+    [[nodiscard]] std::shared_ptr<Inventory> getInventory() const { return inventory_; }
+    //Nur fürs testen hinzugefügt, gerne wieder löschen -Hanno
+
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }

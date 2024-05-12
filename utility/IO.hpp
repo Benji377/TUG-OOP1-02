@@ -12,14 +12,17 @@
 #define IO_HPP
 
 #include "Utils.hpp"
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <map>
 #include <memory>
+#include <map>
+
+using std::iostream;
+using std::fstream;
+using std::string;
 
 class Entity;
 class Player;
+class Inventory;
+class Item;
 class Room;
 class Character;
 
@@ -49,12 +52,27 @@ public:
   //
   static std::string promtUserInput(bool check_input = true);
 
+  //---------------------------------------------------------------------------------------------------------------------
+  ///
+  /// This function takes a string as input and splits it into a vector of words,
+  /// using a specified delimiter (default is whitespace).
+  ///
+  /// @param input The string to be split.
+  ///
+  /// @return A vector of strings containing the words from the input string.
+  //
   static std::vector<std::string> commandifyString(std::string input);
 
   static void printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room);
 
   static void printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
   std::shared_ptr<Room>  current_room);
+
+  static void printInventory(std::shared_ptr<Player> player);
+
+  //Using the fact that a map will always be sorted alphabetically
+  static void printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items);
+
 
 };
 
