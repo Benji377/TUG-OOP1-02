@@ -5,6 +5,7 @@
 #include "../entity/character/Enemy.hpp"
 #include "../entity/character/Player.hpp"
 #include "../utility/Exceptions.hpp"
+#include <algorithm>
 
 
 Room::Room(int id, int width, int height)
@@ -41,19 +42,14 @@ std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
       {
         return std::make_pair(row_idx, column_idx);
       }
-
       ++column_idx;
     }
     ++row_idx;
     column_idx = 0;
   }
 
-
   std::cout << "err, entity in field not recognised" << std::endl;
-
   throw UnavailableItemOrEntityCommand();
-
-  return std::make_pair(-1, -1);
 }
 
 
@@ -72,15 +68,14 @@ void Room::printRoom()
     for (size_t j = 0; j < fields_[i].size(); j++)
     {
       shared_ptr<Entity> entity = fields_[i][j]->getEntity();
-      printEntitie(entity);
+      printEntityInMap(entity);
     }
     std::cout << std::endl;
     printSeparationLine();
   }
 }
 
-// TODO: Print out the enemy health
-void Room::printEntitie(shared_ptr<Entity> entity)
+void Room::printEntityInMap(shared_ptr<Entity> entity)
 {
   if (entity == nullptr)
   {
@@ -126,8 +121,6 @@ void Room::printSeparationLine()
   std::cout << std::endl;
 }
 
-
-
 std::vector<std::shared_ptr<Character>> Room::getEnemies()
 {
   std::vector<std::shared_ptr<Character>> enemies;
@@ -143,5 +136,30 @@ std::vector<std::shared_ptr<Character>> Room::getEnemies()
       }
     }
   }
+
+  // Sort the enemies vector
+  std::sort(enemies.begin(), enemies.end(),
+    [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
+    {
+      // If abbreviations are equal, sort by id
+      if (a->getAbbreviation() == b->getAbbreviation())
+      {
+        return a->getId() < b->getId();
+      }
+      // Otherwise, sort by abbreviation
+      return a->getAbbreviation() < b->getAbbreviation();
+    });
+
   return enemies;
+}
+
+std::vector<char> Room::getEnemiesAbbreviations()
+{
+  std::vector<char> enemies_abbreviations;
+  std::vector<std::shared_ptr<Character>> enemies = getEnemies();
+  for (auto& enemy : enemies)
+  {
+    enemies_abbreviations.push_back(enemy->getAbbreviation());
+  }
+  return enemies_abbreviations;
 }

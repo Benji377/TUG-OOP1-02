@@ -59,8 +59,8 @@ class Game
     bool playerExists(string name);
     int getPlayerTypeAmount(char type);
     std::shared_ptr<Room> getCurrentRoom();
-    vector<std::shared_ptr<Player>> getPlayers() {return players_;};
+    vector<std::shared_ptr<Player>> getPlayers() { return players_; }
+    void printRoomAndInfo();
 };
-
 
 #endif //GAME_HPP

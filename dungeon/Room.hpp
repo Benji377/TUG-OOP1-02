@@ -32,7 +32,7 @@ class Room
     /// Private helper function to print an entity
     /// @param entity the entity to print
     //
-    void printEntitie(shared_ptr<Entity> entity);
+    void printEntityInMap(shared_ptr<Entity> entity);
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Private helper function that prints the separation line
@@ -55,6 +55,12 @@ class Room
     //
     int getId() const { return id_; }
     ///-----------------------------------------------------------------------------------------------------------------
+    /// Getter for the is_complete_ attribute
+    ///
+    /// @return A boolean value indicating whether the room is complete or not.
+    ///
+    bool isComplete() const { return is_complete_; }
+    ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the fields
     /// @return the fields of the room
@@ -73,15 +79,18 @@ class Room
     /// Prints the room
     //
     void printRoom();
-
     ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves enemies present in the room
     ///
     /// @return A vector containing pointers to the entities found in the room
     ///
     std::vector<std::shared_ptr<Character>> getEnemies();
-
-
+    ///-----------------------------------------------------------------------------------------------------------------
+    /// Retrieves the abbreviation of the enemies present in the room
+    ///
+    /// @return A vector containing the abbreviations of the enemies found in the room
+    ///
+    std::vector<char> getEnemiesAbbreviations();
     ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves the field position of a given entity in the room.
     ///
@@ -96,8 +105,6 @@ class Room
     /// @throws UnavailableItemOrEntityCommand if the entity is not found in any field of the room.
     ///
     std::pair<int, int> getFieldOfEntity(shared_ptr<Entity> entity);
-
-
 };
 
 #endif // ROOM_HPP

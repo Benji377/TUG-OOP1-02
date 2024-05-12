@@ -91,3 +91,7 @@ void Enemy::printEnemy() const
   std::cout << "Weapon: " << weapon_->getName() << std::endl;
 }
 
+void Enemy::simplePrint() const
+{
+  std::cout << abbreviation_ << id_ << ": " << health_ << "/" << maximum_health_ ;
+}

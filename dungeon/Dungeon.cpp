@@ -95,3 +95,19 @@ std::shared_ptr<Room> Dungeon::getCurrentRoom()
 {
   return current_room_;
 }
+
+int Dungeon::getCompletedRoomsCount() const
+{
+  int count = 0;
+  for (auto room : rooms_)
+  {
+    if (room != nullptr)
+    {
+      if (room->isComplete())
+      {
+        count++;
+      }
+    }
+  }
+  return count;
+}

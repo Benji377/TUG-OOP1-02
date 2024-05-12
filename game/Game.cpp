@@ -96,9 +96,10 @@ void Game::start()
   for (auto player : players_)
   {
     std::cout << "  ";
-    player->simplePrintPlayer();
+    player->simplePrint();
   }
   std::cout << std::endl;
+  printRoomAndInfo();
 }
 
 void Game::doCommand()
@@ -194,4 +195,41 @@ std::shared_ptr<Room> Game::getCurrentRoom()
   return dungeon_.getCurrentRoom();
 }
 
-
+void Game::printRoomAndInfo()
+{
+  if(!dungeon_.getCurrentRoom()->isComplete())
+  {
+    std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
+    vector<char> new_enemies = Utils::getDifference(dungeon_.getCurrentRoom()->getEnemiesAbbreviations(),
+              dungeon_.getOccuredEnemyTypes());
+    Utils::deleteDuplicates(new_enemies);
+    if(new_enemies.size() > 0)
+    {
+      for (auto enemy : new_enemies)
+      {
+        std::cout << Game::story_.getStorySegment("N_ENEMY_" + string(1, enemy));
+        dungeon_.addOccuredEnemyType(enemy);
+      }
+    }
+  }
+  std::cout << "\n-- ROOM " << dungeon_.getCurrentRoom()->getId() << " (" << dungeon_.getCompletedRoomsCount()
+    << "/" << dungeon_.getRoomCount() << " completed) --------------------\n" << std::endl;
+  dungeon_.printCurrentRoom();
+  std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
+  if (enemies.size() > 0)
+  {
+    std::cout << "   ";
+    for (auto enemy : enemies)
+    {
+      enemy->simplePrint();
+      if (enemy != enemies.back())
+      {
+        std::cout << ", ";
+      }
+      else
+      {
+        std::cout << std::endl;
+      }
+    }
+  }
+}

@@ -41,6 +41,11 @@ class Dungeon
 
     std::shared_ptr<Room> getCurrentRoom();
 
+    vector<char> getOccuredEnemyTypes() const { return occured_enemy_types_; }
+    void addOccuredEnemyType(char type) { occured_enemy_types_.push_back(type); }
+    int getCompletedRoomsCount() const;
+    int getRoomCount() const { return rooms_.size() - 1; }
+
 };
 
 #endif // DUNGEON_HPP

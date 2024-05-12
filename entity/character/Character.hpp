@@ -51,6 +51,7 @@ class Character: public Entity
     virtual int move(int row, int column) = 0;                // Missn et pure virtual san, isch la temporär
     virtual void attack(Character& target, int damage) = 0;   // Missn et pure virtual san, isch la temporär
     virtual void takeDamage(int damage) = 0;                 // Missn et pure virtual san, isch la temporär
+    virtual void simplePrint() const = 0;
     virtual ~Character() = default;
 };
 

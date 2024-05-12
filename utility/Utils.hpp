@@ -87,6 +87,26 @@ public:
   //
   template<typename Base, typename T>
   static bool instanceof(const T *ptr) { return dynamic_cast<const Base*>(ptr) != nullptr; }
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Utils class extension: This function returns the difference between two vectors. The difference is calculated by
+  /// comparing the elements of the first vector with the elements of the second vector. If an element is not found in
+  /// the second vector, it is added to the result vector.
+  ///
+  /// @param a The first vector
+  /// @param b The second vector
+  ///
+  /// @return A vector containing the difference between the two input vectors
+  //
+  static std::vector<char> getDifference(const std::vector<char> &a, const std::vector<char> &b);
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Utils class extension: This function deletes duplicates from a vector. The function iterates over the vector and
+  /// removes all duplicates. The vector is modified in place.
+  ///
+  /// @param vec The vector to be modified
+  //
+  static void deleteDuplicates(std::vector<char> &vec);
 
 private:
   ///------------------------------------------------------------------------------------------------------------------

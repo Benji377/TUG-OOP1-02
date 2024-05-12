@@ -173,7 +173,7 @@ void Player::printPlayer(const std::pair<std::string, std::string>& position) co
             << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << vitality_ << "\n";
 }
 
-void Player::simplePrintPlayer() const
+void Player::simplePrint() const
 {
   std::cout << "Player " << id_ << ": " << type_name_ << " [" << abbreviation_ << "] \"" << name_ << "\"\n";
 }
