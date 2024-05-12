@@ -169,10 +169,8 @@ void PlayerCommand::execute(std::vector<std::string> params)
   checkParameterCount(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
-
-  IO::printPlayerPosition(player, game_->getCurrentRoom());
   // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
-  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
+  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), true);
 
 }
 
