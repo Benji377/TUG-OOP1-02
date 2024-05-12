@@ -81,14 +81,10 @@ void Enemy::attack(Character& target, int damage) { }
 void Enemy::takeDamage(int damage) { }
 int Enemy::move(int row, int column) { return 0; }
 
-void Enemy::printEnemy() const
+void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const
 {
-  std::cout << "Enemy: " << type_name_ << std::endl;
-  std::cout << "Health: " << health_ << "/" << maximum_health_ << std::endl;
-  std::cout << "Strength: " << strength_ << std::endl;
-  std::cout << "Vitality: " << vitality_ << std::endl;
-  std::cout << "Armor: " << base_armor_ << std::endl;
-  std::cout << "Weapon: " << weapon_->getName() << std::endl;
+  std::cout << id_string << " [" << getAbbreviation() << getId() << "] on (" << position.first
+            << ","  << position.second << ")" << std::endl;
 }
 
 void Enemy::simplePrint() const

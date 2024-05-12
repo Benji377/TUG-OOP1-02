@@ -4,6 +4,7 @@
 #include "../dungeon/Room.hpp"
 #include "../entity/character/Inventory.hpp"
 #include "../items/Item.hpp"
+#include "../entity/character/Enemy.hpp"
 
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
@@ -70,9 +71,15 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
   for(auto& enemy : enemies_mapped)
   {
     std::pair<int, int> field = current_room->getFieldOfEntity(enemy.second);
-    std::cout << enemy.first << " [" << enemy.second->getAbbreviation();
-    std::cout << enemy.second->getId() << "] on (" << field.first;
-    std::cout << ","  << field.second << ")" << std::endl;
+    auto enemy_ptr = std::dynamic_pointer_cast<Enemy>(enemy.second);
+    if (enemy_ptr != nullptr)
+    {
+      enemy_ptr->printEnemy(enemy.first, field);
+    }
+    else
+    {
+      std::cout << "Trying to print Character not of type Enemy" << std::endl;
+    }
   }
 }
 

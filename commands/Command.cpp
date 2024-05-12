@@ -146,7 +146,8 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& player : players)
   {
-    IO::printPlayerPosition(player, current_room);
+    // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
+    player->printPlayer(current_room->getFieldOfEntity(player), true);
   }
 
   std::vector<std::shared_ptr<Character>> enemies = current_room->getEnemies();
@@ -170,8 +171,8 @@ void PlayerCommand::execute(std::vector<std::string> params)
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
   IO::printPlayerPosition(player, game_->getCurrentRoom());
-
-  player->printPlayer(std::make_pair("this line","needs to be removed"));
+  // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
+  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
 
 }
 

@@ -26,8 +26,8 @@ class Player: public Character
     void setResistance(Effect effect);
     [[nodiscard]] Effect getResistance() const;
     int usePotion(std::string abbreviation);
-    void printPlayer(const std::pair<std::string, std::string>& position) const;
-    std::string getName() const { return name_; }
+    void printPlayer(const std::pair<int, int>& position, bool single_line = false) const;
+    [[nodiscard]] std::string getName() const { return name_; }
     void simplePrint() const override;
 
     void setActiveWeapon(std::string weapon_abbreviation);
