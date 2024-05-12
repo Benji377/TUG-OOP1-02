@@ -14,7 +14,7 @@
 #include <cctype>
 #include <memory>
 using std::iostream;
-using std::vector;
+#include <vector>
 using std::string;
 
 class Game;
