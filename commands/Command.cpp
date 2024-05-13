@@ -2,7 +2,7 @@
 #include "../game/Game.hpp"
 
 
-void Command::checkParameterCount(std::vector<std::string> params, size_t required_size) const
+void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {
   if(params.size() != required_size)
   {
@@ -53,7 +53,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 
 void HelpCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::cout << "-- Commands ----------------------------------------\n"
                  "- help\n"
@@ -108,7 +108,7 @@ void HelpCommand::execute(std::vector<std::string> params)
 
 void MapCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   game_->toggleMapOutput();
 
@@ -116,7 +116,7 @@ void MapCommand::execute(std::vector<std::string> params)
 
 void StoryCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::cout << "toggled STORY ouput" << std::endl;
 
@@ -124,11 +124,9 @@ void StoryCommand::execute(std::vector<std::string> params)
 
 }
 
-
-
 void QuitCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   game_->toggleGameRunning();
 
@@ -136,7 +134,7 @@ void QuitCommand::execute(std::vector<std::string> params)
 
 void PositionsCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::shared_ptr<Room> current_room = game_->getCurrentRoom();
 
@@ -165,7 +163,7 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
 void PlayerCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 2);
+  checkCommandLenght(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
   player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
@@ -174,10 +172,60 @@ void PlayerCommand::execute(std::vector<std::string> params)
 
 void InventoryCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 2);
+  checkCommandLenght(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
   IO::printInventory(player);
+
+}
+
+std::vector<int> Command::getPosition(std::string position_string)
+{
+
+  std::vector<int> position;
+
+  try
+  {
+    //Code on how to exctract ints from a string from ChatGPT
+    //begin
+    std::istringstream iss(position_string);
+
+    std::string token;
+
+    while (std::getline(iss, token, ','))
+    {
+      int num = std::stoi(token);
+      position.push_back(num);
+    }
+    //end
+  }
+  catch(const std::exception& e)
+  {
+    throw InvalidPositionCommand(); //If someone enters something very weird for the position
+  }
+
+  std::vector<std::vector<std::shared_ptr<Field>>> fields = game_->getCurrentRoom()->getFields();
+
+  int row_nr = fields.size();
+  int column_nr = fields.at(0).size();
+
+  if(position.size() != 2 || position.at(0) < 1 || position.at(1) < 1 || position.at(0) > row_nr
+    || position.at(1) > column_nr)
+  {
+    throw InvalidPositionCommand();
+  }
+
+  return position;
+}
+
+
+void MoveCommand::execute(std::vector<std::string> params)
+{
+  checkCommandLenght(params, 3);
+
+  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
+
+  std::vector<int> position = getPosition(params.at(2));
 
 }

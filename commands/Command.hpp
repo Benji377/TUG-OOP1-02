@@ -46,7 +46,7 @@ protected:
   ///
   /// @throws std::invalid_argument if the number of parameters doesn't match the required size.
   //
-  void checkParameterCount(std::vector<std::string> params, size_t required_size) const;
+  void checkCommandLenght(std::vector<std::string> params, size_t required_size) const;
 
   ///
   /// This function searches for a player with the specified abbreviation in the game's list of players.
@@ -62,6 +62,8 @@ protected:
   std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const;
 
   void isValidAbbrev(Abbrev type_of_abbrev, std::string input) const;
+
+  std::vector<int> getPosition(std::string position_string);
 
 
 public:
@@ -254,11 +256,25 @@ class InventoryCommand : public Command
   public:
   InventoryCommand(Game* game) : Command(game) {}
   virtual ~InventoryCommand() {};
-  InventoryCommand(const PlayerCommand&) = delete;
+  InventoryCommand(const InventoryCommand&) = delete;
 
   virtual void execute(std::vector<std::string> params) override;
 
 };
+
+class MoveCommand : public Command
+{
+  public:
+  MoveCommand(Game* game) : Command(game) {}
+  virtual ~MoveCommand() {};
+  MoveCommand(const MoveCommand&) = delete;
+
+  virtual void execute(std::vector<std::string> params) override;
+
+};
+
+
+
 
 
 #endif
