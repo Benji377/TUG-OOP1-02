@@ -85,6 +85,7 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
 
 void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items)
 {
+
   std::map<std::string, int> item_strings_sorted_with_map;
 
   for(const auto& item : items)
@@ -111,7 +112,7 @@ for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item
   }
   else
   {
-    std::cout << std::endl;
+    return;
   }
 }
 
@@ -122,7 +123,7 @@ for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item
 void IO::printInventory(std::shared_ptr<Player> player)
 {
   std::cout << "Inventory " << "\"" << player->getName() << "\"" << std::endl;
-  std::cout << "  Equipped Armor: "; 
+  std::cout << "  Equipped Armor: ";
 
   if(player->getArmor() != nullptr)
   {
@@ -133,7 +134,7 @@ void IO::printInventory(std::shared_ptr<Player> player)
     std::cout << "[-] None" << std::endl;
   }
 
-  std::cout << "  Equipped Weapon: "; 
+  std::cout << "  Equipped Weapon: ";
 
   if(player->getActiveWeapon() != nullptr)
   {
@@ -146,26 +147,29 @@ void IO::printInventory(std::shared_ptr<Player> player)
 
   std::shared_ptr<Inventory> inv = player->getInventory();
 
-  //TODO can part of Inventory be empty? What then?
-  std::cout << "  Armor:";
-
   std::vector<std::shared_ptr<Armor>> armor_ptrs = inv->getAllArmor();
-  //TODO remove equipped armor here
+  //Code from https://stackoverflow.com/questions/26567687/how-to-erase-vector-element-by-pointer to erase single element
+  //begin
+  armor_ptrs.erase(std::remove(armor_ptrs.begin(), armor_ptrs.end(), player->getArmor()), armor_ptrs.end());
+  //end
   std::vector<std::shared_ptr<Item>> armor_as_items;
-  for(const auto& armor_ptr : armor_ptrs) 
+  for(const auto& armor_ptr : armor_ptrs)
   {
     //Code line from GeminiAI to perform a dynamic pointer cast
     //Begin
     std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(armor_ptr);
     //end
-    if(item != nullptr) 
+    if(item != nullptr)
     {
       armor_as_items.push_back(item);
     }
   }
-  printVectorOfItemsAlphabetically(armor_as_items);
-
-  std::cout << "  Weapons:";
+  if(!armor_as_items.empty())
+  {
+    std::cout << "  Armor:";
+    printVectorOfItemsAlphabetically(armor_as_items);
+    std::cout << std::endl;
+  } //TODO add this into the print func
 
   std::vector<std::shared_ptr<Weapon>> weapon_ptrs = inv->getAllWeapons();
   //TODO remove equipped weapon here
@@ -173,7 +177,7 @@ void IO::printInventory(std::shared_ptr<Player> player)
   for(const auto& weapon_ptr : weapon_ptrs) 
   {
     std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(weapon_ptr);
-    if(item != nullptr) 
+    if(item != nullptr)
     {
       weapons_as_items.push_back(item);
     }

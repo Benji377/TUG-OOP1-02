@@ -146,6 +146,7 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& player : players)
   {
+    // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
     player->printPlayer(current_room->getFieldOfEntity(player), true);
   }
 

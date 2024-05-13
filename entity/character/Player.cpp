@@ -177,6 +177,10 @@ void Player::printPlayer(const std::pair<int, int>& position, bool single_line) 
   {
     return;
   }
+
+  const int name_width = 15;
+  const int value_width = 5;
+
   std::cout << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << getBaseArmor() << "\n"
       << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
       << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"

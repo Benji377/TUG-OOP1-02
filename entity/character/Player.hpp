@@ -13,6 +13,7 @@
 #define PLAYER_HPP
 
 #include "Character.hpp"
+#include <cstring> //for strlen in printPlayer
 
 class Player: public Character
 {
