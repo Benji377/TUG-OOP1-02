@@ -41,7 +41,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   for(auto& player : players)
   {
     char current_player_abbrev = player->getAbbreviation();
-    
+
     if(current_player_abbrev == uppercase_input_abbrev)
     {
       return player;
@@ -109,9 +109,8 @@ void HelpCommand::execute(std::vector<std::string> params)
 void MapCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
-  std::cout << "toggled MAP ouput" << std::endl;
 
-  //game_->toggleMapOutPut();
+  game_->toggleMapOutput();
 
 }
 

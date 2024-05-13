@@ -73,6 +73,8 @@ public:
   //Using the fact that a map will always be sorted alphabetically
   static void printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items);
 
+  static void printActives(std::shared_ptr<Player> player);
+
 
 };
 
