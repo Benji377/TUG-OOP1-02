@@ -40,6 +40,7 @@ class Game
     bool is_running_;
     bool map_output_active_;
     bool story_output_active_;
+    bool command_finished_;
 
   public:
     Game(Game&) = delete;

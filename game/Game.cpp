@@ -47,7 +47,7 @@ void Game::start()
     {
       break;
     }
-    Game::max_players_ = 3;//num_players;
+    Game::max_players_ = num_players;
   }/*
   for (int i = 1; i <= num_players; i++)
   {
@@ -112,7 +112,7 @@ void Game::start()
     std::shared_ptr<Player> player3 = std::make_shared<Player>(3, 'R', "jay");
     dungeon_.getCurrentRoom()->setFieldEntity(player3, 1, 4);
     players_.push_back(player3);
-//end    
+//end
  
   std::cout << "\n-- Players --------------------------------------" << std::endl;
   for (auto player : players_)
@@ -127,9 +127,12 @@ void Game::start()
 
 void Game::doCommand()
 {
+  command_finished_ = false;
 
   std::cout << Game::story_.getStorySegment("N_PROMPT_MESSAGE");
 
+  while(!command_finished_)
+  {
   std::string input = IO::promtUserInput();
 
   std::vector<std::string> command_input = IO::commandifyString(input);
@@ -141,18 +144,25 @@ void Game::doCommand()
   catch(const UnknownCommand& e)
   {
     std::cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
+    continue;
   }
   catch(const WrongNumberOfParametersException& e)
   {
     std::cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
+    continue;
   }
   catch(const InvalidParamCommand& e)
   {
     std::cout << Game::story_.getStorySegment("E_INVALID_PARAM");
+    continue;
   }
   catch(const UnavailableItemOrEntityCommand&e)
   {
     std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+    continue;
+  }
+
+  command_finished_ = true;
   }
 
 }
