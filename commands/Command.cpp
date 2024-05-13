@@ -146,7 +146,6 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& player : players)
   {
-    // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
     player->printPlayer(current_room->getFieldOfEntity(player), true);
   }
 
@@ -169,8 +168,7 @@ void PlayerCommand::execute(std::vector<std::string> params)
   checkParameterCount(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
-  // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
-  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), true);
+  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
 
 }
 
