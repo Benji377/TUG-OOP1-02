@@ -99,7 +99,8 @@ void Game::start()
     player->simplePrint();
   }
   std::cout << std::endl;
-  printRoomAndInfo();
+  dungeon_.enterCurrentRoom(0, players_);
+  printStoryAndRoom();
 }
 
 void Game::doCommand()
@@ -107,31 +108,30 @@ void Game::doCommand()
 
   std::cout << Game::story_.getStorySegment("N_PROMPT_MESSAGE");
 
-  std::string input = IO::promtUserInput();
+    std::string input = IO::promtUserInput();
 
-  std::vector<std::string> command_input = IO::commandifyString(input);
+    std::vector<std::string> command_input = IO::commandifyString(input);
 
-  try
-  {
-    parser_->execute(command_input);
-  }
-  catch(const UnknownCommand& e)
-  {
-    std::cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
-  }
-  catch(const WrongNumberOfParametersException& e)
-  {
-    std::cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
-  }
-  catch(const InvalidParamCommand& e)
-  {
-    std::cout << Game::story_.getStorySegment("E_INVALID_PARAM");
-  }
-  catch(const UnavailableItemOrEntityCommand&e)
-  {
-    std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
-  }
-
+    try
+    {
+      parser_->execute(command_input);
+    }
+    catch(const UnknownCommand& e)
+    {
+      std::cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
+    }
+    catch(const WrongNumberOfParametersException& e)
+    {
+      std::cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
+    }
+    catch(const InvalidParamCommand& e)
+    {
+      std::cout << Game::story_.getStorySegment("E_INVALID_PARAM");
+    }
+    catch(const UnavailableItemOrEntityCommand&e)
+    {
+      std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+    }
 }
 
 void Game::doCommand(std::string input)
@@ -148,16 +148,6 @@ void Game::doCommand(std::string input)
     std::cout << e.what() << '\n';
   }
 
-}
-
-void Game::toggleStoryOutput()
-{
-  story_output_active_ = !story_output_active_;
-}
-
-void Game::toggleGameRunning()
-{
-  is_running_ = !is_running_;
 }
 
 bool Game::isRunning() const
@@ -195,9 +185,9 @@ std::shared_ptr<Room> Game::getCurrentRoom()
   return dungeon_.getCurrentRoom();
 }
 
-void Game::printRoomAndInfo()
+void Game::printStoryAndRoom()
 {
-  if(!dungeon_.getCurrentRoom()->isComplete())
+  if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_)
   {
     std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
     vector<char> new_enemies = Utils::getDifference(dungeon_.getCurrentRoom()->getEnemiesAbbreviations(),
@@ -214,22 +204,31 @@ void Game::printRoomAndInfo()
   }
   std::cout << "\n-- ROOM " << dungeon_.getCurrentRoom()->getId() << " (" << dungeon_.getCompletedRoomsCount()
     << "/" << dungeon_.getRoomCount() << " completed) --------------------\n" << std::endl;
-  dungeon_.printCurrentRoom();
-  std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
-  if (enemies.size() > 0)
+  if (map_output_active_)
   {
-    std::cout << "   ";
-    for (auto enemy : enemies)
+    dungeon_.printCurrentRoom();
+    std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
+    if (enemies.size() > 0)
     {
-      enemy->simplePrint();
-      if (enemy != enemies.back())
+      std::cout << "   ";
+      for (auto enemy : enemies)
       {
-        std::cout << ", ";
-      }
-      else
-      {
-        std::cout << std::endl;
+        enemy->simplePrint();
+        if (enemy != enemies.back())
+        {
+          std::cout << ", ";
+        }
+        else
+        {
+          std::cout << std::endl;
+        }
       }
     }
   }
+}
+
+void Game::moveToRoom(int room_id)
+{
+  dungeon_.moveToRoom(room_id);
+  printStoryAndRoom();
 }

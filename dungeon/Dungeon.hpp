@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <memory>
+#include "../entity/character/Player.hpp"
 #include "Room.hpp"
 
 using std::vector;
@@ -45,6 +46,18 @@ class Dungeon
     void addOccuredEnemyType(char type) { occured_enemy_types_.push_back(type); }
     int getCompletedRoomsCount() const;
     int getRoomCount() const { return rooms_.size() - 1; }
+    void moveToRoom(int room_id);
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Helper function for moveToRoom that removes all players from the current room and returns them
+    /// @return a map containing the players and their previous positions
+    //
+    vector<shared_ptr<Player>> exitCurrentRoom();
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Helper function for moveToRoom that adds all players to the new room
+    //
+    void enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players);
 
 };
 

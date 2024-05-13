@@ -7,6 +7,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 using std::map;
 using std::shared_ptr;
@@ -110,4 +111,66 @@ int Dungeon::getCompletedRoomsCount() const
     }
   }
   return count;
+}
+
+void Dungeon::moveToRoom(int room_id)
+{
+  int current_room_id = current_room_->getId();
+  action_count_ = 0;
+  vector<shared_ptr<Player>> players = exitCurrentRoom();
+  current_room_ = rooms_[room_id];
+  enterCurrentRoom(current_room_id, players);
+  printCurrentRoom();
+}
+
+vector<shared_ptr<Player>> Dungeon::exitCurrentRoom()
+{
+  vector<vector<shared_ptr<Field>>> fields = current_room_->getFields();
+  vector<shared_ptr<Player>> players;
+  for (size_t i = 0; i < fields.size(); i++)
+  {
+    for (size_t j = 0; j < fields[i].size(); j++)
+    {
+      if (fields[i][j]->getEntity() != nullptr)
+      {
+        shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(fields[i][j]->getEntity());
+        if (player != nullptr)
+        {
+          current_room_->setFieldEntity(nullptr, i, j);
+          players.push_back(player);
+        }
+      }
+    }
+  }
+  sort(players.begin(), players.end(), [](shared_ptr<Player> a, shared_ptr<Player> b) ->
+    bool { return a->getId() < b->getId(); });
+  return players;
+}
+
+void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
+{
+  vector<vector<shared_ptr<Field>>> fields = current_room_->getFields();
+  vector<shared_ptr<Door>> door_fields = current_room_->getAllEntitiesOfType<Door>();
+  for (auto door : door_fields)
+  {
+    if (door->getId() == door_id)
+    {
+      std::pair<int, int> door_position = current_room_->getFieldOfEntity(door);
+      vector<shared_ptr<Field>> surrounding_fields = current_room_->getSurroundingFields(door_position);
+      int player_count = 0;
+      for (size_t i = 0; i < surrounding_fields.size(); i++)
+      {
+        if (surrounding_fields[i]->getEntity() == nullptr)
+        {
+          surrounding_fields[i]->setEntity(players[player_count]);
+          player_count++;
+          if ((size_t)player_count == players.size())
+          {
+            break;
+          }
+        }
+      }
+      break;
+    }
+  }
 }

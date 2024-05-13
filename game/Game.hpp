@@ -38,8 +38,8 @@ class Game
     Dungeon dungeon_;
     Phase current_phase_;
     bool is_running_;
-    bool map_output_active_;
-    bool story_output_active_;
+    bool map_output_active_ = true;
+    bool story_output_active_ = true;
 
   public:
     Game(Game&) = delete;
@@ -47,9 +47,10 @@ class Game
     ~Game(){};
     Game(char *dungeon_path, char *config_path);
 
-    void toggleGameRunning();
+    void toggleGameRunning() { is_running_ = !is_running_; }
+    void toggleMapOutput() { map_output_active_ = !map_output_active_; }
+    void toggleStoryOutput() { story_output_active_ = !story_output_active_; }
     bool isRunning() const;
-    void toggleStoryOutput();
     void start();
 
     //Function that promts user input and executes command
@@ -60,7 +61,8 @@ class Game
     int getPlayerTypeAmount(char type);
     std::shared_ptr<Room> getCurrentRoom();
     vector<std::shared_ptr<Player>> getPlayers() { return players_; }
-    void printRoomAndInfo();
+    void printStoryAndRoom();
+    void moveToRoom(int room_id);
 };
 
 #endif //GAME_HPP

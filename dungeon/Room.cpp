@@ -50,6 +50,7 @@ std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
 
   std::cout << "err, entity in field not recognised" << std::endl;
   throw UnavailableItemOrEntityCommand();
+  return std::make_pair(-1, -1);
 }
 
 
@@ -162,4 +163,20 @@ std::vector<char> Room::getEnemiesAbbreviations()
     enemies_abbreviations.push_back(enemy->getAbbreviation());
   }
   return enemies_abbreviations;
+}
+
+std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, int> position) {
+    std::vector<std::shared_ptr<Field>> surroundingFields;
+    std::vector<std::pair<int, int>> directions = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
+    for (const auto& dir : directions) {
+        int newRow = position.first + dir.first;
+        int newCol = position.second + dir.second;
+
+        // Check if the new row and column are within the grid boundaries
+        if (newRow >= 0 && (size_t)newRow < fields_.size() && newCol >= 0 && (size_t)newCol < fields_[0].size()) {
+            surroundingFields.push_back(fields_[newRow][newCol]);
+        }
+    }
+
+    return surroundingFields;
 }
