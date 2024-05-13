@@ -39,9 +39,14 @@ class Inventory
     std::shared_ptr<Weapon> getWeapon(std::string& abbreviation);
     std::shared_ptr<Armor> getArmor(std::string& abbreviation);
     std::shared_ptr<Ammunition> getAmmunition(std::string& abbreviation);
+    std::vector<std::shared_ptr<Weapon>> getAllWeapons() const {return weapons_;};
+    std::vector<std::shared_ptr<Armor>> getAllArmor() const {return armor_;};
+    std::vector<std::shared_ptr<Ammunition>> getAllAmmunition() const {return ammunition_;};
+    std::vector<std::shared_ptr<Potion>> getAllPotions() const {return potions_;};
+
     Inventory(const Inventory& other) = default;
     Inventory& operator=(const Inventory& other) = delete;
-    ~Inventory();
+    ~Inventory() = default;
 };
 
 

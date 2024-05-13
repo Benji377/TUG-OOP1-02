@@ -176,8 +176,3 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory)
   }
   return 0;
 }
-
-
-Inventory::~Inventory()
-{
-}

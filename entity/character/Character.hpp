@@ -20,7 +20,7 @@ class Character: public Entity
     std::string type_name_;
     int maximum_health_;
     int health_;
-    Effect resistant_to_; // Potion effect enum
+    DamageType resistant_to_;
     std::shared_ptr<Armor> armor_;
     std::shared_ptr<Weapon> weapon_;
     std::shared_ptr<Inventory> inventory_;
@@ -35,6 +35,10 @@ class Character: public Entity
     [[nodiscard]] int getHealth() const { return health_; }
     [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
     [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
+    
+    [[nodiscard]] std::shared_ptr<Inventory> getInventory() const { return inventory_; }
+    //Nur fürs testen hinzugefügt, gerne wieder löschen -Hanno
+
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }
@@ -50,7 +54,7 @@ class Character: public Entity
     // Methods
     virtual int move(int row, int column) = 0;                // Missn et pure virtual san, isch la temporär
     virtual void attack(Character& target, int damage) = 0;   // Missn et pure virtual san, isch la temporär
-    virtual void takeDamage(int damage) = 0;                 // Missn et pure virtual san, isch la temporär
+    virtual void takeDamage(int damage, DamageType damageType) = 0; // Missn et pure virtual san, isch la temporär
     virtual void simplePrint() const = 0;
     virtual ~Character() = default;
 };

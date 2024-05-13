@@ -37,9 +37,10 @@ class Game
     vector<std::shared_ptr<Player>> players_;
     Dungeon dungeon_;
     Phase current_phase_;
-    bool is_running_;
+    bool is_running_ = true;
     bool map_output_active_ = true;
     bool story_output_active_ = true;
+    bool command_finished_;
 
   public:
     Game(Game&) = delete;

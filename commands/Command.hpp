@@ -10,10 +10,12 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-#include <iostream>
-#include <vector>
 #include "../utility/Exceptions.hpp"
+#include <cctype>
 #include <memory>
+using std::iostream;
+#include <vector>
+using std::string;
 
 class Game;
 class Player;
@@ -44,7 +46,7 @@ protected:
   ///
   /// @throws std::invalid_argument if the number of parameters doesn't match the required size.
   //
-  void checkParameterCount(std::vector<std::string> params, size_t required_size);
+  void checkParameterCount(std::vector<std::string> params, size_t required_size) const;
 
   ///
   /// This function searches for a player with the specified abbreviation in the game's list of players.
@@ -57,9 +59,9 @@ protected:
   /// @return A shared pointer to the player with the specified abbreviation.
   ///
   /// @throws UnavailableItemOrEntityCommand if no player with the specified abbreviation is found.
-  std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params);
+  std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const;
 
-  void isValidAbbrev(Abbrev type_of_abbrev, std::string input);
+  void isValidAbbrev(Abbrev type_of_abbrev, std::string input) const;
 
 
 public:
@@ -149,6 +151,28 @@ public:
   virtual void execute(std::vector<std::string> params) override;
 };
 
+class StoryCommand : public Command
+{
+public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Story class calls Constructor of command class, which initialises the game ptr.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  StoryCommand(Game* game) : Command(game) {}
+  virtual ~StoryCommand() {};
+  StoryCommand(const StoryCommand&) = delete;
+
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
+  /// Then toggles the map output in the game
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  virtual void execute(std::vector<std::string> params) override;
+};
 
 
 
@@ -216,9 +240,21 @@ public:
 
 class PlayerCommand : public Command
 {
+  public:
   PlayerCommand(Game* game) : Command(game) {}
   virtual ~PlayerCommand() {};
   PlayerCommand(const PlayerCommand&) = delete;
+
+  virtual void execute(std::vector<std::string> params) override;
+
+};
+
+class InventoryCommand : public Command
+{
+  public:
+  InventoryCommand(Game* game) : Command(game) {}
+  virtual ~InventoryCommand() {};
+  InventoryCommand(const PlayerCommand&) = delete;
 
   virtual void execute(std::vector<std::string> params) override;
 

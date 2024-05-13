@@ -10,7 +10,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
   {
     case 'B':
       type_name_ = "Barbarian";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 2;
       strength_ = 4;
       vitality_ = 1;
@@ -19,7 +19,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       break;
     case 'R':
       type_name_ = "Rogue";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 1;
       strength_ = 2;
       vitality_ = 3;
@@ -28,7 +28,7 @@ Player::Player(int id, char abbreviation, std::string name) : Character(id, abbr
       break;
     case 'W':
       type_name_ = "Wizard";
-      resistant_to_ = Effect::NONE;
+      resistant_to_ = DamageType::NONE;
       base_armor_ = 0;
       strength_ = 1;
       vitality_ = 4;
@@ -45,33 +45,33 @@ void Player::initializeInventory()
 {
   std::shared_ptr<Inventory> temp_inv = std::make_shared<Inventory>(); // Create a shared pointer to Inventory
 
-  if (abbreviation_ == 'B')
+  if (getAbbreviation() == 'B')
   {
-    weapon_ = Props::craftWeapon("GAXE", strength_, vitality_);
+    weapon_ = Props::craftWeapon("GAXE", getStrength(), getVitality());
     armor_ = nullptr;
     temp_inv->addWeapon(weapon_);
-    temp_inv->addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
-    temp_inv->addWeapon(Props::craftWeapon("HAXE", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", getStrength(), getVitality()));
   }
-  else if (abbreviation_ == 'R')
+  else if (getAbbreviation() == 'R')
   {
-    weapon_ = Props::craftWeapon("RAPI", strength_, vitality_);
-    armor_ = Props::craftArmor("LARM", vitality_);
+    weapon_ = Props::craftWeapon("RAPI", getStrength(), getVitality());
+    armor_ = Props::craftArmor("LARM", getVitality());
 
     temp_inv->addArmor(armor_);
     temp_inv->addWeapon(weapon_);
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
-    temp_inv->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("SBOW", getStrength(), getVitality()));
     temp_inv->addAmmunition(Props::craftAmmunition("ARRW", 20));
   }
-  else if (abbreviation_ == 'W')
+  else if (getAbbreviation() == 'W')
   {
     weapon_ = Props::craftWeapon("QFRC", 'W');
     armor_ = nullptr;
     temp_inv->addWeapon(weapon_);
     temp_inv->addWeapon(Props::craftWeapon("QACD", 'W'));
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", strength_, vitality_));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
   }
 
   inventory_ = temp_inv;
@@ -79,12 +79,12 @@ void Player::initializeInventory()
 
 // Getter and setter methods
 
-void Player::setResistance(Effect effect)
+void Player::setResistance(DamageType damage_type)
 {
-  resistant_to_ = effect;
+  resistant_to_ = damage_type;
 }
 
-Effect Player::getResistance() const
+DamageType Player::getResistance() const
 {
   return resistant_to_;
 }
@@ -123,7 +123,7 @@ std::shared_ptr<Weapon> Player::getActiveWeapon() const
 
 int Player::usePotion(std::string abbreviation)
 {
-  std::shared_ptr<Potion> potion = inventory_->getPotion(abbreviation);
+  std::shared_ptr<Potion> potion = getInventory()->getPotion(abbreviation);
   if (potion == nullptr)
   {
     return 1;
@@ -132,48 +132,64 @@ int Player::usePotion(std::string abbreviation)
   {
     if (potion->getEffect() == Effect::HEALTH)
     {
-      health_ += potion->getDice()->roll();
-      if (health_ > maximum_health_)
+      setHealth(getHealth() + potion->getDice()->roll());
+      if (getHealth() > getMaximumHealth())
       {
-        health_ = maximum_health_;
+        setHealth(getMaximumHealth());
       }
     }
     else
     {
-      setResistance(potion->getEffect());
+      // Map the potion effect enum to the weapons damage type enum
+      auto damage_type = static_cast<DamageType>(potion->getEffect());
+      // TODO: This cast may not work properly!
+      setResistance(damage_type);
     }
-    inventory_->removeItem(potion);
+    getInventory()->removeItem(potion);
   }
 }
 
 // Sorry muss san um di errors zi fixen
 void Player::attack(Character& target, int damage) { }
 
-void Player::takeDamage(int damage)
+void Player::takeDamage(int damage, DamageType damageType)
 {
-  int defense_points = base_armor_ + armor_->getArmorValue();
+  if (getResistance() == damageType)
+  {
+    return;
+  }
+  int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;
   if (damage_taken < 0)
   {
     damage_taken = 0;
   }
-  health_ -= damage_taken;
+  setHealth(getHealth() - damage_taken);
 }
 int Player::move(int row, int column) { return 0; }
 
 
-void Player::printPlayer(const std::pair<std::string, std::string>& position) const
+void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
 {
-  std::cout << type_name_ << " [" << abbreviation_ << "] \"" << name_
-            << "\" on (" << position.first << "," << position.second << ")\n"
-            << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << base_armor_ << "\n"
-            << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << health_ << "\n"
-            << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << maximum_health_ << "\n"
-            << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << strength_ << "\n"
-            << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << vitality_ << "\n";
+  std::cout << getTypeName() << " [" << getAbbreviation() << "] \"" << getName()
+            << "\" on (" << position.first << "," << position.second << ") " << std::endl;;
+  if (single_line)
+  {
+    return;
+  }
+
+  const int name_width = 15;
+  const int value_width = 5;
+
+  std::cout << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << getBaseArmor() << "\n"
+      << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
+      << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"
+      << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << getStrength() << "\n"
+      << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << getVitality() << std::endl;
 }
 
 void Player::simplePrint() const
 {
-  std::cout << "Player " << id_ << ": " << type_name_ << " [" << abbreviation_ << "] \"" << name_ << "\"\n";
+  std::cout << "Player " << getId() << ": " << getTypeName()
+            << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
 }

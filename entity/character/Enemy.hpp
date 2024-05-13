@@ -23,9 +23,9 @@ class Enemy: public Character
     Enemy(int id, char abbreviation); // Temporary constructor
     [[nodiscard]] bool is_boss() const;
     void attack(Character& target, int damage) override;
-    void takeDamage(int damage) override;
+    void takeDamage(int damage, DamageType damage_type) override;
     int move(int row, int column) override;
-    void printEnemy() const;
+    void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
     void simplePrint() const override;
     ~Enemy() = default;
     bool isEnemy() const override{ return true; }

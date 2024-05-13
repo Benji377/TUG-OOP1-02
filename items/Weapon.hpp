@@ -24,7 +24,7 @@ enum class AttackType
 };
 enum class DamageType
 {
-  PHYSICAL, FIRE, COLD, ACID, FORCE
+  NONE, PHYSICAL, FIRE, COLD, ACID, FORCE
 };
 
 

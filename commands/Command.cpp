@@ -2,7 +2,7 @@
 #include "../game/Game.hpp"
 
 
-void Command::checkParameterCount(std::vector<std::string> params, size_t required_size)
+void Command::checkParameterCount(std::vector<std::string> params, size_t required_size) const
 {
   if(params.size() != required_size)
   {
@@ -10,18 +10,18 @@ void Command::checkParameterCount(std::vector<std::string> params, size_t requir
   }
 }
 
-void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input)
+void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input) const
 {
   switch(type_of_abbrev)
   {
     case Abbrev::PLAYER:
-       if(input == "B" || input == "R" || input == "W")
+       if(input == "b" || input == "r" || input == "w")
       {
         break;
       }
       else
       {
-        InvalidParamCommand();
+        throw InvalidParamCommand();
       }
       break;
   case Abbrev::ITEM:
@@ -30,17 +30,19 @@ void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input)
 
 }
 
-std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params)
+std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const
 {
-  std::string input_abbrevation = params.at(position_of_abbrev_in_params);
+  std::string input_abbreviation = params.at(position_of_abbrev_in_params);
 
-  isValidAbbrev(Abbrev::PLAYER, input_abbrevation);
+  isValidAbbrev(Abbrev::PLAYER, input_abbreviation);
 
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
-
+  char uppercase_input_abbrev = static_cast<char>(toupper(input_abbreviation[0]));
   for(auto& player : players)
   {
-    if(std::to_string(player->getAbbreviation()) == input_abbrevation)
+    char current_player_abbrev = player->getAbbreviation();
+    
+    if(current_player_abbrev == uppercase_input_abbrev)
     {
       return player;
     }
@@ -107,10 +109,23 @@ void HelpCommand::execute(std::vector<std::string> params)
 void MapCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 1);
+  std::cout << "toggled MAP ouput" << std::endl;
+
+  //game_->toggleMapOutPut();
+
+}
+
+void StoryCommand::execute(std::vector<std::string> params)
+{
+  checkParameterCount(params, 1);
+
+  std::cout << "toggled STORY ouput" << std::endl;
 
   game_->toggleStoryOutput();
 
 }
+
+
 
 void QuitCommand::execute(std::vector<std::string> params)
 {
@@ -131,7 +146,8 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& player : players)
   {
-    IO::printPlayerPosition(player, current_room);
+    // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
+    player->printPlayer(current_room->getFieldOfEntity(player), true);
   }
 
   std::vector<std::shared_ptr<Character>> enemies = current_room->getEnemies();
@@ -140,69 +156,29 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& enemy : enemies)
   {
-    std::string enemy_string_to_be_sorted = enemy->getTypeName() + std::to_string(enemy->getId());
+    std::string enemy_string_to_be_sorted = enemy->getTypeName() + " " + std::to_string(enemy->getId());
     enemies_mapped.insert(std::make_pair(enemy_string_to_be_sorted, enemy));
   }
 
   IO::printEnemyPosition(enemies_mapped, current_room);
-
-  //std::map<std::shared_ptr<Entity>, std::string> characters = current_room->getCharacters();
-
-
-  //No Fields Implementation. Once they are added, this should be adapted accordingly
-/*
-  //First the Players
-
-  std::map<std::shared_ptr<Entity>, std::string> players;
-
-  for(auto& character = characters.begin(); character != characters.end();)
-  {
-    //Idea to use dynamic cast, which returns a nullpointer if not possible, to check if it's a player from ChatGPT
-    std::shared_ptr<Player> player_ptr = std::dynamic_pointer_cast<Player>(character->first);
-    if(player_ptr)
-    {
-      players.insert(std::make_pair(player_ptr, character->second));
-      characters.erase(character); //erase returns the iterator to the next element
-    }
-    else
-    {
-      ++character;
-    }
-  }
-
-  IO::printPlayerPositions(players);
-
-  //Now the enemies
-
-  std::map<std::string, std::string> enemies;
-
-  //Map keys are sorted automatically alphabetically.
-  for(auto& pair : characters)
-  {
-    std::string key = pair.first->getTypeName() + pair.first->getId() + pair.first->getAbbreviation();
-    enemies[key] = pair.second;
-  }
-
-  for(auto& pair : enemies)
-  {
-    std::cout << enemies.first << "on" << enemies.second << std::endl;
-  }*/
-
 }
-
-
 
 
 void PlayerCommand::execute(std::vector<std::string> params)
 {
   checkParameterCount(params, 2);
 
-  getPlayerOfAbbrev(params, 1);
+  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+  player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
 
-  vector<std::shared_ptr<Player>> players = game_->getPlayers();
+}
 
+void InventoryCommand::execute(std::vector<std::string> params)
+{
+  checkParameterCount(params, 2);
 
+  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
-
+  IO::printInventory(player);
 
 }

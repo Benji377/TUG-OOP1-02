@@ -19,7 +19,7 @@
 
 enum class Effect
 {
-  NONE, HEALTH, FIRE, COLD, FORCE, ACID
+  NONE, HEALTH, FIRE, COLD, ACID, FORCE
 };
 
 class Potion : public Item
