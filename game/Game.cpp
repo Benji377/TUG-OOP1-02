@@ -28,7 +28,7 @@ void Game::start()
   int num_players;
   Game::max_players_ = 3;
 
-  /*while (true)
+  while (true)
   {
     string input = IO::promtUserInput();
 
@@ -48,7 +48,7 @@ void Game::start()
       break;
     }
     Game::max_players_ = num_players;
-  }/*
+  }
   for (int i = 1; i <= num_players; i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
@@ -95,24 +95,9 @@ void Game::start()
         break;
       }
     }
-    std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);*/
-
-//You might get collision errors when running it with different configs than
-//"dungeon_config.txt" because you might spawn the players into something else
-//If you want to work with stuff above, uncomment and remove this:
-//begin
-    std::shared_ptr<Player> player1 = std::make_shared<Player>(1, 'W', "john");
-    players_.push_back(player1);
-    dungeon_.getCurrentRoom()->setFieldEntity(player1, 1, 1);
-
-    std::shared_ptr<Player> player2 = std::make_shared<Player>(2, 'B', "jimmy");
-    players_.push_back(player2);
-    dungeon_.getCurrentRoom()->setFieldEntity(player2, 1, 3);
-
-    std::shared_ptr<Player> player3 = std::make_shared<Player>(3, 'R', "jay");
-    dungeon_.getCurrentRoom()->setFieldEntity(player3, 1, 4);
-    players_.push_back(player3);
-//end
+    std::shared_ptr<Player> player = std::make_shared<Player>(i, type, name);
+    players_.push_back(player);
+  }
  
   std::cout << "\n-- Players --------------------------------------" << std::endl;
   for (auto player : players_)

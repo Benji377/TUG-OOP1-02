@@ -45,7 +45,7 @@ std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
       ++column_idx;
     }
     ++row_idx;
-    column_idx = 0;
+    column_idx = 1;
   }
 
   throw UnavailableItemOrEntityCommand();
@@ -167,6 +167,8 @@ std::vector<char> Room::getEnemiesAbbreviations()
 std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, int> position) {
     std::vector<std::shared_ptr<Field>> surroundingFields;
     std::vector<std::pair<int, int>> directions = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
+    position.first -= 1;
+    position.second -= 1;
     for (const auto& dir : directions) {
         int newRow = position.first + dir.first;
         int newCol = position.second + dir.second;
