@@ -94,7 +94,7 @@ int Inventory::useAmmunition(std::string &abbreviation)
   return -1;
 }
 
-std::shared_ptr<Potion> Inventory::getPotion(std::string &abbreviation)
+std::shared_ptr<Potion> Inventory::getPotion(const std::string &abbreviation)
 {
   for (auto & potion : potions_)
   {
@@ -106,7 +106,7 @@ std::shared_ptr<Potion> Inventory::getPotion(std::string &abbreviation)
   return nullptr;
 }
 
-std::shared_ptr<Weapon> Inventory::getWeapon(std::string &abbreviation)
+std::shared_ptr<Weapon> Inventory::getWeapon(const std::string &abbreviation)
 {
   for (auto & weapon : weapons_)
   {
@@ -118,7 +118,7 @@ std::shared_ptr<Weapon> Inventory::getWeapon(std::string &abbreviation)
   return nullptr;
 }
 
-std::shared_ptr<Armor> Inventory::getArmor(std::string &abbreviation)
+std::shared_ptr<Armor> Inventory::getArmor(const std::string &abbreviation)
 {
   for (auto & armor : armor_)
   {
@@ -130,7 +130,7 @@ std::shared_ptr<Armor> Inventory::getArmor(std::string &abbreviation)
   return nullptr;
 }
 
-std::shared_ptr<Ammunition> Inventory::getAmmunition(std::string &abbreviation)
+std::shared_ptr<Ammunition> Inventory::getAmmunition(const std::string& abbreviation)
 {
   for (auto & ammunition : ammunition_)
   {
@@ -175,4 +175,26 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory)
     }
   }
   return 0;
+}
+
+std::map<std::string, int> Inventory::getInventoryMapped() const
+{
+  std::map<std::string, int> inventory;
+  for (auto & potion : potions_)
+  {
+    inventory[potion->getAbbreviation()]++;
+  }
+  for (auto & weapon : weapons_)
+  {
+    inventory[weapon->getAbbreviation()]++;
+  }
+  for (auto & armor : armor_)
+  {
+    inventory[armor->getAbbreviation()]++;
+  }
+  for (auto & ammunition : ammunition_)
+  {
+    inventory[ammunition->getAbbreviation()] += ammunition->getAmount();
+  }
+  return inventory;
 }
