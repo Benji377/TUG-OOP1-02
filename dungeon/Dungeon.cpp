@@ -177,10 +177,9 @@ void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
   }
 }
 
-int Dungeon::moveCharacter(shared_ptr<Character> character, std::pair<int, int> position)
+void Dungeon::moveCharacter(shared_ptr<Character> character, std::pair<int, int> position)
 {
   std::pair<int, int> character_position = current_room_->getFieldOfEntity(character);
   current_room_->setFieldEntity(nullptr, character_position.first, character_position.second);
   current_room_->setFieldEntity(character, position.first, position.second);
-  return 0;
 }

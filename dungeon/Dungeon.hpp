@@ -58,7 +58,7 @@ class Dungeon
     //
     void enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players);
 
-    int moveCharacter(shared_ptr<Character> character, std::pair<int, int> position);
+    void moveCharacter(shared_ptr<Character> character, std::pair<int, int> position);
 
 };
 

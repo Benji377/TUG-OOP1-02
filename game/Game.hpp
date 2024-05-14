@@ -67,6 +67,7 @@ class Game
     void printStoryAndRoom(bool print_story = true);
     void movePlayer(char player_abbrev, std::pair<int, int> position);
     void moveToRoom(int room_id);
+    void lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity);
 };
 
 #endif //GAME_HPP

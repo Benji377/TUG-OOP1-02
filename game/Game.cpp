@@ -273,16 +273,20 @@ void Game::moveToRoom(int room_id)
 void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
 {
   std::shared_ptr<Player> player = getPlayerByType(player_abbrev);
-  if (player == nullptr)
+  dungeon_.moveCharacter(player, position);
+  std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
+    << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
+  action_count_++;
+  printStoryAndRoom(false);
+}
+
+void Game::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
+{
+  int ret = player->getInventory()->parseInventory(entity->getLoot());
+  if (ret == 1)
   {
-    throw std::invalid_argument("Player not found");
+    std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
   }
-  int result = dungeon_.moveCharacter(player, position);
-  if (result == 0)
-  {
-    std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
-      << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
-    action_count_++;
-    printStoryAndRoom(false);
-  }
+  std::pair<int, int> position = dungeon_.getCurrentRoom()->getFieldOfEntity(entity);
+  dungeon_.getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);
 }
