@@ -10,10 +10,11 @@
 #ifndef ROOM_HPP
 #define ROOM_HPP
 
-#include "Field.hpp"
 #include <vector>
 #include <memory>
 #include <cmath> //For adjacent field
+#include "Field.hpp"
+
 
 using std::vector;
 using std::shared_ptr;
@@ -116,7 +117,7 @@ class Room
     /// @param col The column index of the field for which to retrieve the surrounding fields.
     /// @return A vector containing shared pointers to the fields surrounding the specified field.
     ///
-    std::vector<std::shared_ptr<Field>> getSurroundingFields(std::pair<int, int> position);
+    std::vector<std::shared_ptr<Field>> getSurroundingFields(std::pair<int, int> position, int distance = 1);
 
     template <typename T>
     std::vector<std::shared_ptr<T>> getAllEntitiesOfType() {

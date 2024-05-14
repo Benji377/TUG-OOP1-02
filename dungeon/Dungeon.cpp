@@ -154,21 +154,25 @@ void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
     if (door->getId() == door_id)
     {
       std::pair<int, int> door_position = current_room_->getFieldOfEntity(door);
-      vector<shared_ptr<Field>> surrounding_fields = current_room_->getSurroundingFields(door_position);
+      int i = 1;
       int player_count = 0;
-      for (size_t i = 0; i < surrounding_fields.size(); i++)
+      while (player_count < players.size())
       {
-        if (surrounding_fields[i]->getEntity() == nullptr)
+        vector<shared_ptr<Field>> surrounding_fields = current_room_->getSurroundingFields(door_position, i);
+        for (size_t j = 0; j < surrounding_fields.size(); j++)
         {
-          surrounding_fields[i]->setEntity(players[player_count]);
-          player_count++;
-          if ((size_t)player_count == players.size())
+          if (surrounding_fields[j]->getEntity() == nullptr)
           {
-            break;
+            surrounding_fields[j]->setEntity(players[player_count]);
+            player_count++;
+            if ((size_t)player_count == players.size())
+            {
+              break;
+            }
           }
         }
+        i++;
       }
-      break;
     }
   }
 }
