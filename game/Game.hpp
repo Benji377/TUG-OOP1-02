@@ -64,7 +64,7 @@ class Game
     std::shared_ptr<Room> getCurrentRoom();
     vector<std::shared_ptr<Player>> getPlayers() { return players_; }
     std::shared_ptr<Player> getPlayerByType(char type);
-    void printStoryAndRoom();
+    void printStoryAndRoom(bool print_story = true);
     void movePlayer(char player_abbrev, std::pair<int, int> position);
     void moveToRoom(int room_id);
 };

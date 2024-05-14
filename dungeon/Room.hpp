@@ -94,6 +94,13 @@ class Room
     ///
     std::vector<char> getEnemiesAbbreviations();
     ///-----------------------------------------------------------------------------------------------------------------
+    /// Returns the field at the specified position in the room.
+    ///
+    /// @param position A pair containing the row and column indices of the field to retrieve.
+    /// @return A shared pointer to the field at the specified position in the room.
+    ///
+    std::shared_ptr<Field> getField(std::pair<int, int> position) { return fields_[position.first][position.second]; }
+    ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves the field position of a given entity in the room.
     ///
     /// This function iterates over the fields of the room, checking if each field contains the specified entity.

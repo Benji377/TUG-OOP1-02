@@ -222,9 +222,9 @@ std::shared_ptr<Room> Game::getCurrentRoom()
   return dungeon_.getCurrentRoom();
 }
 
-void Game::printStoryAndRoom()
+void Game::printStoryAndRoom(bool print_story)
 {
-  if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_)
+  if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_ && print_story)
   {
     std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
     vector<char> new_enemies = Utils::getDifference(dungeon_.getCurrentRoom()->getEnemiesAbbreviations(),
@@ -283,5 +283,6 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
     std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
       << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
     action_count_++;
+    printStoryAndRoom(false);
   }
 }
