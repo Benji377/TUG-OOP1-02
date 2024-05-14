@@ -46,6 +46,13 @@ public:
   /// @return The Dice object of the item.
   //
   [[nodiscard]] std::shared_ptr<Dice> getDice() const { return dice_;};
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Returns true if the item is an ammunition. Required for sorting
+  /// @return True if the item is an ammunition.
+  //
+  [[nodiscard]] bool getIsAmmunition() const { return getAbbreviation() == "ARRW" || getAbbreviation() == "BOLT"; }
 };
 
 #endif //ITEM_HPP
