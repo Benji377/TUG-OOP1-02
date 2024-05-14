@@ -149,12 +149,12 @@ int Player::usePotion(std::string abbreviation)
   }
 }
 
-// Sorry muss san um di errors zi fixen
-void Player::attack(Character& target, int damage) { }
 
-void Player::takeDamage(int damage, DamageType damageType)
+int Player::getAttackDamage() { }
+
+void Player::takeDamage(int damage, DamageType damage_type)
 {
-  if (getResistance() == damageType)
+  if (getResistance() == damage_type)
   {
     return;
   }
@@ -166,7 +166,6 @@ void Player::takeDamage(int damage, DamageType damageType)
   }
   setHealth(getHealth() - damage_taken);
 }
-int Player::move(int row, int column) { return 0; }
 
 
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const

@@ -42,6 +42,7 @@ class Character: public Entity
     [[nodiscard]] int getBaseArmor() const { return base_armor_; }
     [[nodiscard]] int getStrength() const { return strength_; }
     [[nodiscard]] int getVitality() const { return vitality_; }
+    [[nodiscard]] DamageType getResistantTo() const { return resistant_to_; }
     bool isCharacter() const override { return true; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }
@@ -52,9 +53,8 @@ class Character: public Entity
     void setStrength(int strength) { strength_ = strength; }
     void setVitality(int vitality) { vitality_ = vitality; }
     // Methods
-    virtual int move(int row, int column) = 0;                // Missn et pure virtual san, isch la temporär
-    virtual void attack(Character& target, int damage) = 0;   // Missn et pure virtual san, isch la temporär
-    virtual void takeDamage(int damage, DamageType damageType) = 0; // Missn et pure virtual san, isch la temporär
+    virtual int getAttackDamage() = 0;
+    virtual void takeDamage(int damage, DamageType damageType) = 0;
     virtual void simplePrint() const = 0;
     virtual ~Character() = default;
 };

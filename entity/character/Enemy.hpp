@@ -20,11 +20,10 @@ class Enemy: public Character
   bool is_boss_;
   void initializeInventory();
   public:
-    Enemy(int id, char abbreviation); // Temporary constructor
+    Enemy(int id, char abbreviation);
     [[nodiscard]] bool is_boss() const;
-    void attack(Character& target, int damage) override;
+    int getAttackDamage() override;
     void takeDamage(int damage, DamageType damage_type) override;
-    int move(int row, int column) override;
     void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
     void simplePrint() const override;
     ~Enemy() = default;
