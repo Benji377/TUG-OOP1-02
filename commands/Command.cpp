@@ -1,6 +1,7 @@
 #include "Command.hpp"
 #include "../game/Game.hpp"
-
+#include "../entity/Door.hpp"
+#include "../dungeon/Field.hpp"
 
 void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {
@@ -225,16 +226,42 @@ void MoveCommand::execute(std::vector<std::string> params)
 
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
-  std::cout << "current position: " << current_position.first << " " << current_position.second << std::endl;
-
-  if(game_->getCurrentRoom()->isAdjacentField(current_position, target_position))
+  //if it's not an adjacent field
+  if(!(game_->getCurrentRoom()->isAdjacentField(current_position, target_position)))
   {
-    std::cout << "success" << std::endl;
+    throw InvalidPositionCommand();
+  }
+
+  std::shared_ptr<Field> field = game_->getCurrentRoom()->getField(target_position);
+  std::shared_ptr<Entity> entity_on_field = field->getEntity();
+
+  if(entity_on_field == nullptr)
+  {
+    game_->movePlayer(player->getAbbreviation(), target_position);
+    IO::printPlayerMoved(player, target_position);
+  }
+  else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
+  {
+    std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(entity_on_field);
+    if(door->isLocked())
+    {
+      throw CommandExecutionException(CommandExecutionException::ExceptionType::LOCKED_DOOR);
+    }
+    else
+    {
+      IO::printPlayerMoved(player, target_position);
+      game_->moveToRoom(door->getLeadsTo());
+    }
+
   }
   else
   {
     throw InvalidPositionCommand();
   }
+
+
+
+
 
 
 }

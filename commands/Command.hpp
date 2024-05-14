@@ -20,6 +20,7 @@ using std::iostream;
 
 class Game;
 class Player;
+class Door;
 
 enum class Abbrev {
     PLAYER,
