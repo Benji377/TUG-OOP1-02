@@ -59,5 +59,19 @@ class UnavailableItemOrEntityCommand : public std::exception
 class InvalidPositionCommand : public std::exception
 {};
 
+class CommandExecutionException : public std::exception {
+public:
+    enum class ExceptionType {
+        LOCKED_DOOR
+    };
+
+private:
+  ExceptionType type_;
+
+public:
+    CommandExecutionException(ExceptionType type) : type_(type) {};
+    ExceptionType getType() const {return type_;};
+};
+
 
 #endif

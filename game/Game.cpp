@@ -148,10 +148,24 @@ void Game::doCommand()
     std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
     continue;
   }
-  catch(const InvalidPositionCommand&e)
+  catch(const InvalidPositionCommand& e)
   {
     std::cout << Game::story_.getStorySegment("E_INVALID_POSITION");
     continue;
+  }
+  catch(const CommandExecutionException& e)
+  {
+    switch(e.getType())
+    {
+      case CommandExecutionException::ExceptionType::LOCKED_DOOR:
+        std::cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
+        break;
+      default:
+        break;
+    }
+
+
+  continue;
   }
 
   command_finished_ = true;

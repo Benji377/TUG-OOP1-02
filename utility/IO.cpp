@@ -94,7 +94,6 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
     if(item_strings_sorted_with_map.count(item_string) == 0)
     {
       item_strings_sorted_with_map.insert(std::make_pair(item_string, 1));
-      //TODO check if item is ammunition, then set amount to getAmount()
     }
     else
     {
@@ -221,4 +220,11 @@ void IO::printInventory(std::shared_ptr<Player> player)
     std::cout << std::endl;
   }
 
+}
+
+
+void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
+{
+  std::cout << player->getTypeName() << " " << "[" << player->getAbbreviation()  << "] "  << player->getName()
+  << " moved to " << "(" << position.first << "," << position.second << ")";
 }

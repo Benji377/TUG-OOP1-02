@@ -99,7 +99,7 @@ class Room
     /// @param position A pair containing the row and column indices of the field to retrieve.
     /// @return A shared pointer to the field at the specified position in the room.
     ///
-    std::shared_ptr<Field> getField(std::pair<int, int> position) { return fields_[position.first][position.second]; }
+    std::shared_ptr<Field> getField(std::pair<int, int> position) { return fields_[(position.first - 1)][(position.second - 1)]; }
     ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves the field position of a given entity in the room.
     ///
