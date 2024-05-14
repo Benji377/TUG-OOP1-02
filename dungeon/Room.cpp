@@ -181,3 +181,35 @@ std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, in
 
     return surroundingFields;
 }
+
+bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2)
+{
+  int row_nr = fields_.size();
+  int column_nr = fields_.at(0).size();
+
+  //Check if first Field is part of Room
+  if(field_1.first < 1 || field_1.second < 1 || field_1.first > row_nr
+    || field_1.second > column_nr)
+  {
+    return false;
+  }
+
+  //Check if second Field is part of Room
+  if(field_2.first < 1 || field_2.second < 1 || field_2.first > row_nr
+  || field_2.second > column_nr)
+  {
+    return false;
+  }
+
+  //Check their distance
+  int distance_rows = std::abs(field_1.first - field_2.first);
+  int distance_columns = std::abs(field_1.second - field_2.second);
+
+  if(distance_rows > 1 || distance_columns > 1)
+  {
+    return false;
+  }
+
+  return true;
+
+}

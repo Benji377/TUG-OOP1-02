@@ -2,7 +2,7 @@
 #include "../game/Game.hpp"
 
 
-void Command::checkParameterCount(std::vector<std::string> params, size_t required_size) const
+void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {
   if(params.size() != required_size)
   {
@@ -41,7 +41,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   for(auto& player : players)
   {
     char current_player_abbrev = player->getAbbreviation();
-    
+
     if(current_player_abbrev == uppercase_input_abbrev)
     {
       return player;
@@ -53,7 +53,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 
 void HelpCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::cout << "-- Commands ----------------------------------------\n"
                  "- help\n"
@@ -108,16 +108,15 @@ void HelpCommand::execute(std::vector<std::string> params)
 
 void MapCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
-  std::cout << "toggled MAP ouput" << std::endl;
+  checkCommandLenght(params, 1);
 
-  //game_->toggleMapOutPut();
+  game_->toggleMapOutput();
 
 }
 
 void StoryCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::cout << "toggled STORY ouput" << std::endl;
 
@@ -125,11 +124,9 @@ void StoryCommand::execute(std::vector<std::string> params)
 
 }
 
-
-
 void QuitCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   game_->toggleGameRunning();
 
@@ -137,7 +134,7 @@ void QuitCommand::execute(std::vector<std::string> params)
 
 void PositionsCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 1);
+  checkCommandLenght(params, 1);
 
   std::shared_ptr<Room> current_room = game_->getCurrentRoom();
 
@@ -166,7 +163,7 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
 void PlayerCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 2);
+  checkCommandLenght(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
   player->printPlayer(game_->getCurrentRoom()->getFieldOfEntity(player), false);
@@ -175,10 +172,67 @@ void PlayerCommand::execute(std::vector<std::string> params)
 
 void InventoryCommand::execute(std::vector<std::string> params)
 {
-  checkParameterCount(params, 2);
+  checkCommandLenght(params, 2);
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
   IO::printInventory(player);
+
+}
+
+std::vector<int> Command::getPositionOutOfString(std::string position_string)
+{
+
+  std::vector<int> position; //Works with a vector to check for stuff like 1,2,3
+
+  try
+  {
+    //Code on how to exctract ints from a string from ChatGPT
+    //begin
+    std::istringstream iss(position_string);
+
+    std::string token;
+
+    while (std::getline(iss, token, ','))
+    {
+      int num = std::stoi(token);
+      position.push_back(num);
+    }
+    //end
+  }
+  catch(const std::exception& e)
+  {
+    throw InvalidPositionCommand(); //If someone enters something very weird for the position
+  }
+
+  if(position.size() != 2 )
+  {
+    throw InvalidPositionCommand();
+  }
+
+  return position;
+}
+
+
+void MoveCommand::execute(std::vector<std::string> params)
+{
+  checkCommandLenght(params, 3);
+
+  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
+
+  std::vector<int> target_position_as_vector = getPositionOutOfString(params.at(2));
+  std::pair<int, int> target_position = std::make_pair(target_position_as_vector.at(0), target_position_as_vector.at(1));
+
+  std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
+
+  if(game_->getCurrentRoom()->isAdjacentField(current_position, target_position))
+  {
+    std::cout << "success" << std::endl;
+  }
+  else
+  {
+    throw InvalidPositionCommand();
+  }
+
 
 }

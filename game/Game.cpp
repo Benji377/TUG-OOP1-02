@@ -18,6 +18,8 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("player", std::make_unique<PlayerCommand>(this));
   parser_->registerCommand("inventory", std::make_unique<InventoryCommand>(this));
 
+  parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
+
 }
 
 void Game::start()
@@ -74,7 +76,6 @@ void Game::start()
     char type;
     while (true)
     {
-      // TODO: If on the previous input EOF was entered, the program should go on
       string input = IO::promtUserInput();
       if(input == "quit")
       {
@@ -145,6 +146,11 @@ void Game::doCommand()
   catch(const UnavailableItemOrEntityCommand&e)
   {
     std::cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+    continue;
+  }
+  catch(const InvalidPositionCommand&e)
+  {
+    std::cout << Game::story_.getStorySegment("E_INVALID_POSITION");
     continue;
   }
 

@@ -13,9 +13,10 @@
 #include "Field.hpp"
 #include <vector>
 #include <memory>
+#include <cmath> //For adjacent field
 
 using std::vector;
-using std::shared_ptr;  
+using std::shared_ptr;
 
 class UnavailableItemOrEntityCommand;
 class Character;
@@ -135,6 +136,9 @@ class Room
 
     int getHeight() const { return fields_.size(); }
     int getWidth() const { return fields_[0].size(); }
+    //Only a suggestion, you can oc change this if you want to. I originially had it in the Commands.cpp
+    //but it actually belongs here, right? -Hanno
+    bool isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2);
 };
 
 #endif // ROOM_HPP

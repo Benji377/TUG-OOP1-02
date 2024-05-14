@@ -178,14 +178,20 @@ void Player::printPlayer(const std::pair<int, int>& position, bool single_line) 
     return;
   }
 
+  std::cout << " ";
+
   const int name_width = 15;
   const int value_width = 5;
 
+
+  //TODO this function doesn't print as it should. I tried to ask AI for explanations but it keeps spitting out this 
+  // function. -Hanno
   std::cout << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << getBaseArmor() << "\n"
-      << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
-      << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"
-      << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << getStrength() << "\n"
-      << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << getVitality() << std::endl;
+          << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
+          << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"
+          << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << getStrength() << "\n"
+          << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << getVitality() << std::endl;
+
 }
 
 void Player::simplePrint() const

@@ -85,7 +85,6 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
 
 void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items)
 {
-
   std::map<std::string, int> item_strings_sorted_with_map;
 
   for(const auto& item : items)
@@ -95,6 +94,7 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
     if(item_strings_sorted_with_map.count(item_string) == 0)
     {
       item_strings_sorted_with_map.insert(std::make_pair(item_string, 1));
+      //TODO check if item is ammunition, then set amount to getAmount()
     }
     else
     {
@@ -105,10 +105,10 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
 for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item_strings_sorted_with_map.end(); ++item_string)
 {
   std::cout << item_string->first << " (" << item_string->second << ")";
-  if (std::next(item_string) != item_strings_sorted_with_map.end()) 
+  if (std::next(item_string) != item_strings_sorted_with_map.end())
   {
     // Not the end, print a delimiter (e.g., comma)
-    std::cout << ", ";
+    std::cout << ",";
   }
   else
   {
@@ -119,8 +119,7 @@ for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item
 
 }
 
-
-void IO::printInventory(std::shared_ptr<Player> player)
+void IO::printActives(std::shared_ptr<Player> player)
 {
   std::cout << "Inventory " << "\"" << player->getName() << "\"" << std::endl;
   std::cout << "  Equipped Armor: ";
@@ -144,6 +143,12 @@ void IO::printInventory(std::shared_ptr<Player> player)
   {
     std::cout << "[-] None" << std::endl;
   }
+}
+
+
+void IO::printInventory(std::shared_ptr<Player> player)
+{
+  printActives(player);
 
   std::shared_ptr<Inventory> inv = player->getInventory();
 
@@ -169,12 +174,12 @@ void IO::printInventory(std::shared_ptr<Player> player)
     std::cout << "  Armor:";
     printVectorOfItemsAlphabetically(armor_as_items);
     std::cout << std::endl;
-  } //TODO add this into the print func
+  }
 
   std::vector<std::shared_ptr<Weapon>> weapon_ptrs = inv->getAllWeapons();
-  //TODO remove equipped weapon here
+  weapon_ptrs.erase(std::remove(weapon_ptrs.begin(), weapon_ptrs.end(), player->getActiveWeapon()), weapon_ptrs.end());
   std::vector<std::shared_ptr<Item>> weapons_as_items;
-  for(const auto& weapon_ptr : weapon_ptrs) 
+  for(const auto& weapon_ptr : weapon_ptrs)
   {
     std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(weapon_ptr);
     if(item != nullptr)
@@ -182,23 +187,38 @@ void IO::printInventory(std::shared_ptr<Player> player)
       weapons_as_items.push_back(item);
     }
   }
-
-  printVectorOfItemsAlphabetically(weapons_as_items);
-
-/*
-  std::cout << "  Consumables:";
-
-  std::vector<std::shared_ptr<Weapon>> weapon_ptrs = inv->getAllWeapons();
-  std::vector<std::shared_ptr<Item>> weapons_as_items;
-  for(const auto& weapon_ptr : weapon_ptrs) 
+  if(!weapons_as_items.empty())
   {
-    std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(weapon_ptr);
-    if(item != nullptr) 
-    {
-      weapons_as_items.push_back(item);
-    }
+    std::cout << "  Weapons:";
+    printVectorOfItemsAlphabetically(weapons_as_items);
+    std::cout << std::endl;
   }
 
-  printVectorOfItemsAlphabetically(weapons_as_items);
-*/
+  std::vector<std::shared_ptr<Item>> consumables_as_items;
+
+  std::vector<std::shared_ptr<Potion>> potion_ptrs = inv->getAllPotions();
+  for(const auto& potion_ptr : potion_ptrs)
+  {
+    std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(potion_ptr);
+    if(item != nullptr)
+    {
+      consumables_as_items.push_back(item);
+    }
+  }
+  std::vector<std::shared_ptr<Ammunition>> ammo_ptrs = inv->getAllAmmunition();
+  for(const auto& ammo_ptr : ammo_ptrs)
+  {
+    std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(ammo_ptr);
+    if(item != nullptr)
+    {
+      consumables_as_items.push_back(item);
+    }
+  }
+  if(!consumables_as_items.empty())
+  {
+    std::cout << "  Consumables:";
+    printVectorOfItemsAlphabetically(consumables_as_items);
+    std::cout << std::endl;
+  }
+
 }

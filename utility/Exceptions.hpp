@@ -56,5 +56,8 @@ class InvalidParamCommand : public std::exception
 class UnavailableItemOrEntityCommand : public std::exception
 {};
 
+class InvalidPositionCommand : public std::exception
+{};
+
 
 #endif
