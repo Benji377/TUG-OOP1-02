@@ -3,6 +3,7 @@
 #include "../entity/Door.hpp"
 #include "../entity/character/Enemy.hpp"
 #include "../entity/TreasureChest.hpp"
+#include "../entity/DeathLocation.hpp"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -61,7 +62,6 @@ Dungeon::Dungeon(const char *file_path)
         case 'D':
           door = std::make_shared<Door>(std::stoi(parameters[0]));
           rooms_[room_id]->setFieldEntity(door, entity_row, entity_col);
-          break;
         case 'Z':
         case 'G':
         case 'L':
@@ -182,4 +182,24 @@ void Dungeon::moveCharacter(shared_ptr<Character> character, std::pair<int, int>
   std::pair<int, int> character_position = current_room_->getFieldOfEntity(character);
   current_room_->setFieldEntity(nullptr, character_position.first, character_position.second);
   current_room_->setFieldEntity(character, position.first, position.second);
+}
+
+void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
+{
+  int ret = player->getInventory()->parseInventory(entity->getLoot());
+  if (ret == 1)
+  {
+    std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
+  }
+  std::pair<int, int> position = getCurrentRoom()->getFieldOfEntity(entity);
+  getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);
+}
+
+void Dungeon::killCharacter(std::shared_ptr<Character> character)
+{
+  std::pair<int, int> position = getCurrentRoom()->getFieldOfEntity(character);
+  getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);
+  std::map<string, int> loot = character->getInventory()->getInventoryMapped();
+  shared_ptr<DeathLocation> death_location = std::make_shared<DeathLocation>(loot);
+  getCurrentRoom()->setFieldEntity(death_location, position.first, position.second);
 }
