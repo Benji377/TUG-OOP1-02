@@ -214,8 +214,7 @@ std::vector<int> Command::getPositionOutOfString(std::string position_string)
   return position;
 }
 
-
-void MoveCommand::execute(std::vector<std::string> params)
+std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdjacentField(std::vector<std::string> params)
 {
   checkCommandLenght(params, 3);
 
@@ -231,6 +230,17 @@ void MoveCommand::execute(std::vector<std::string> params)
   {
     throw InvalidPositionCommand();
   }
+
+  return std::make_pair(player, target_position);
+
+}
+
+
+void MoveCommand::execute(std::vector<std::string> params)
+{
+  std::pair<std::shared_ptr<Player>, std::pair<int,int>> player_and_field = getPlayerAndAdjacentField(params);
+  std::shared_ptr<Player> player = player_and_field.first;
+  std::pair<int,int> target_position = player_and_field.second;
 
   std::shared_ptr<Field> field = game_->getCurrentRoom()->getField(target_position);
   std::shared_ptr<Entity> entity_on_field = field->getEntity();
@@ -259,9 +269,30 @@ void MoveCommand::execute(std::vector<std::string> params)
     throw InvalidPositionCommand();
   }
 
+}
 
 
+void LootCommand::execute(std::vector<std::string> params)
+{
+  std::pair<std::shared_ptr<Player>, std::pair<int,int>> player_and_field = getPlayerAndAdjacentField(params);
+  std::shared_ptr<Player> player = player_and_field.first;
+  std::pair<int,int> target_position = player_and_field.second;
 
+  std::shared_ptr<Field> field = game_->getCurrentRoom()->getField(target_position);
+  std::shared_ptr<Entity> entity_on_field = field->getEntity();
+
+  if(std::dynamic_pointer_cast<DeathLocation>(entity_on_field) != nullptr)
+  {
+    //TODO loot Death Location
+  }
+  else if(std::dynamic_pointer_cast<TreasureChest>(entity_on_field) != nullptr)
+  {
+    //TODO loot TreasureChest
+  }
+  else
+  {
+    throw InvalidPositionCommand();
+  }
 
 
 }

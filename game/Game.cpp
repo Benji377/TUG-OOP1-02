@@ -19,6 +19,8 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("inventory", std::make_unique<InventoryCommand>(this));
 
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
+  parser_->registerCommand("loot", std::make_unique<MoveCommand>(this));
+
 
 }
 
@@ -296,11 +298,11 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
 
 void Game::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
 {
-  int ret = player->getInventory()->parseInventory(entity->getLoot());
+  /*int ret = player->getInventory()->parseInventory(entity->getLoot());
   if (ret == 1)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
   }
   std::pair<int, int> position = dungeon_.getCurrentRoom()->getFieldOfEntity(entity);
-  dungeon_.getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);
+  dungeon_.getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);*/
 }

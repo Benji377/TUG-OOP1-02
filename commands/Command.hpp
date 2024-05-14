@@ -21,6 +21,8 @@ using std::iostream;
 class Game;
 class Player;
 class Door;
+class DeathLocation;
+class TreasureChest;
 
 enum class Abbrev {
     PLAYER,
@@ -66,6 +68,8 @@ protected:
   void isValidAbbrev(Abbrev type_of_abbrev, std::string input) const;
 
   std::vector<int> getPositionOutOfString(std::string position_string);
+
+  std::pair<std::shared_ptr<Player>, std::pair<int, int>> getPlayerAndAdjacentField(std::vector<std::string> params);
 
 
 public:
@@ -270,6 +274,18 @@ class MoveCommand : public Command
   MoveCommand(Game* game) : Command(game) {}
   virtual ~MoveCommand() {};
   MoveCommand(const MoveCommand&) = delete;
+
+  virtual void execute(std::vector<std::string> params) override;
+
+};
+
+
+class LootCommand : public Command
+{
+  public:
+  LootCommand(Game* game) : Command(game) {}
+  virtual ~LootCommand() {};
+  LootCommand(const LootCommand&) = delete;
 
   virtual void execute(std::vector<std::string> params) override;
 
