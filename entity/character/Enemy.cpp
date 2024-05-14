@@ -81,7 +81,7 @@ void Enemy::takeDamage(int damage, DamageType damage_type)
 {
   if (getResistantTo() == damage_type)
   {
-    return;
+    damage /= 2;
   }
   int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;

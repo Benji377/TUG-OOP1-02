@@ -145,13 +145,33 @@ int Player::usePotion(std::string abbreviation)
 }
 
 
-int Player::getAttackDamage() { }
+int Player::getAttackDamage()
+{
+  // Returns -1 if no weapon is equipped, -2 if no ammunition is available
+  if (getActiveWeapon() == nullptr)
+  {
+    return -1;
+  }
+
+  if (getActiveWeapon()->getAttackType() != AttackType::MELEE)
+  {
+    std::string ammoType = (getActiveWeapon()->getAbbreviation() == "SBOW" ||
+                            getActiveWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
+    if (getInventory()->getAmmunition(ammoType) == nullptr || getInventory()->getAmmunition(ammoType)->getAmount() == 0)
+    {
+      return -2;
+    }
+  }
+
+  return getActiveWeapon()->getDice()->roll();
+}
 
 void Player::takeDamage(int damage, DamageType damage_type)
 {
   if (getResistantTo() == damage_type)
   {
-    return;
+    // Player takes 50% damage
+    damage /= 2;
   }
   int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;
