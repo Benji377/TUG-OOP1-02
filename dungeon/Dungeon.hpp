@@ -60,6 +60,9 @@ class Dungeon
 
     void moveCharacter(shared_ptr<Character> character, std::pair<int, int> position);
 
+    void lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity);
+
+    void killCharacter(std::shared_ptr<Character> character);
 };
 
 #endif // DUNGEON_HPP

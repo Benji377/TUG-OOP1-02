@@ -296,13 +296,3 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
   printStoryAndRoom(false);
 }
 
-void Game::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
-{
-  /*int ret = player->getInventory()->parseInventory(entity->getLoot());
-  if (ret == 1)
-  {
-    std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
-  }
-  std::pair<int, int> position = dungeon_.getCurrentRoom()->getFieldOfEntity(entity);
-  dungeon_.getCurrentRoom()->setFieldEntity(nullptr, position.first, position.second);*/
-}
