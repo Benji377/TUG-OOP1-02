@@ -4,6 +4,7 @@
 #include "../dungeon/Field.hpp"
 #include "../entity/TreasureChest.hpp"
 #include "../entity/DeathLocation.hpp"
+#include "../utility/Dice.hpp"
 
 void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {
@@ -179,7 +180,7 @@ void InventoryCommand::execute(std::vector<std::string> params)
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
-  IO::printInventory(player);
+  IO::printPlayerInventory(player);
 
 }
 
@@ -285,11 +286,39 @@ void LootCommand::execute(std::vector<std::string> params)
 
   if(std::dynamic_pointer_cast<DeathLocation>(entity_on_field) != nullptr)
   {
-    //TODO loot Death Location
+    game_->getDungeon().lootEntity(player, entity_on_field);
   }
   else if(std::dynamic_pointer_cast<TreasureChest>(entity_on_field) != nullptr)
   {
-    //TODO loot TreasureChest
+    std::shared_ptr<TreasureChest> chest = std::dynamic_pointer_cast<TreasureChest>(entity_on_field);
+
+    int min_value_to_roll = chest->getMinValue() - player->getVitality();
+
+    std::cout << "** To unlock this chest you need to roll at least "
+    << min_value_to_roll << " to reach the " << chest->getMinValue() << " needed.\n";
+
+    Dice dice = Dice("1d20");
+    int roll_result = dice.roll();
+    game_->plusOneActionCount();
+
+    if(roll_result < min_value_to_roll)
+    {
+      std::cout << game_->getStory().getStorySegment("N_LOOT_CHEST_LOCKED");
+    }
+    else
+    {
+      std::cout << game_->getStory().getStorySegment("N_LOOT_SUCCESSFUL");
+
+      std::map<string, int> loot = entity_on_field->getLoot();
+      std::shared_ptr<Inventory> inv_of_entity;
+      int ret = inv_of_entity->parseInventory(loot);
+      if (ret == 1)
+      {
+        std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
+      }
+      IO::printInventory(inv_of_entity, nullptr);
+      game_->getDungeon().lootEntity(player, entity_on_field);
+    }
   }
   else
   {

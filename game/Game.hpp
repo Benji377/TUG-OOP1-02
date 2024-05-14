@@ -67,6 +67,10 @@ class Game
     void printStoryAndRoom(bool print_story = true);
     void movePlayer(char player_abbrev, std::pair<int, int> position);
     void moveToRoom(int room_id);
+
+    Dungeon& getDungeon() {return dungeon_;};
+    Story& getStory() const {return story_;};
+    void plusOneActionCount() {++action_count_; };
 };
 
 #endif //GAME_HPP

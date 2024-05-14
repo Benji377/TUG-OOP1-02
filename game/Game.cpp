@@ -19,7 +19,7 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("inventory", std::make_unique<InventoryCommand>(this));
 
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
-  parser_->registerCommand("loot", std::make_unique<MoveCommand>(this));
+  parser_->registerCommand("loot", std::make_unique<LootCommand>(this));
 
 
 }

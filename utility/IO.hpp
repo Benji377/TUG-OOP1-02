@@ -68,7 +68,9 @@ public:
   static void printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
   std::shared_ptr<Room>  current_room);
 
-  static void printInventory(std::shared_ptr<Player> player);
+  static void printPlayerInventory(std::shared_ptr<Player> player);
+
+  static void printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> player);
 
   //Using the fact that a map will always be sorted alphabetically
   static void printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items);
@@ -76,6 +78,7 @@ public:
   static void printActives(std::shared_ptr<Player> player);
 
   static void printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position);
+
 
 
 };

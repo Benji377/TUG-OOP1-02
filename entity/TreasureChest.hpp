@@ -42,6 +42,8 @@ class TreasureChest : public Entity
     /// @return true if the treasure chest is locked, false otherwise
     //
     bool isLocked() const { return is_locked_; }
+
+    int getMinValue() const {return min_value_; };
 };
 
 #endif //TREASURECHEST_HPP

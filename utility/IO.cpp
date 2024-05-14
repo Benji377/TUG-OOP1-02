@@ -83,6 +83,7 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
   }
 }
 
+
 void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items)
 {
   std::map<std::string, int> item_strings_sorted_with_map;
@@ -144,17 +145,15 @@ void IO::printActives(std::shared_ptr<Player> player)
   }
 }
 
-
-void IO::printInventory(std::shared_ptr<Player> player)
+void IO::printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> player)
 {
-  printActives(player);
-
-  std::shared_ptr<Inventory> inv = player->getInventory();
-
   std::vector<std::shared_ptr<Armor>> armor_ptrs = inv->getAllArmor();
   //Code from https://stackoverflow.com/questions/26567687/how-to-erase-vector-element-by-pointer to erase single element
   //begin
-  armor_ptrs.erase(std::remove(armor_ptrs.begin(), armor_ptrs.end(), player->getArmor()), armor_ptrs.end());
+  if(player != nullptr)
+  {
+    armor_ptrs.erase(std::remove(armor_ptrs.begin(), armor_ptrs.end(), player->getArmor()), armor_ptrs.end());
+  }
   //end
   std::vector<std::shared_ptr<Item>> armor_as_items;
   for(const auto& armor_ptr : armor_ptrs)
@@ -176,7 +175,10 @@ void IO::printInventory(std::shared_ptr<Player> player)
   }
 
   std::vector<std::shared_ptr<Weapon>> weapon_ptrs = inv->getAllWeapons();
-  weapon_ptrs.erase(std::remove(weapon_ptrs.begin(), weapon_ptrs.end(), player->getActiveWeapon()), weapon_ptrs.end());
+  if(player != nullptr)
+  {
+    weapon_ptrs.erase(std::remove(weapon_ptrs.begin(), weapon_ptrs.end(), player->getActiveWeapon()), weapon_ptrs.end());
+  }
   std::vector<std::shared_ptr<Item>> weapons_as_items;
   for(const auto& weapon_ptr : weapon_ptrs)
   {
@@ -220,6 +222,15 @@ void IO::printInventory(std::shared_ptr<Player> player)
     std::cout << std::endl;
   }
 
+}
+
+void IO::printPlayerInventory(std::shared_ptr<Player> player)
+{
+  printActives(player);
+
+  std::shared_ptr<Inventory> inv = player->getInventory();
+
+  printInventory(inv, player);
 }
 
 
