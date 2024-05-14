@@ -2,6 +2,8 @@
 #include "../game/Game.hpp"
 #include "../entity/Door.hpp"
 #include "../dungeon/Field.hpp"
+#include "../entity/TreasureChest.hpp"
+#include "../entity/DeathLocation.hpp"
 
 void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {

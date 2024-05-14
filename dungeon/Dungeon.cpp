@@ -62,6 +62,7 @@ Dungeon::Dungeon(const char *file_path)
         case 'D':
           door = std::make_shared<Door>(std::stoi(parameters[0]));
           rooms_[room_id]->setFieldEntity(door, entity_row, entity_col);
+          break;
         case 'Z':
         case 'G':
         case 'L':
