@@ -3,6 +3,7 @@
 Ammunition::Ammunition(std::string& abbreviation, std::string& type, std::vector<std::string> &weapons, int amount)
 {
   abbreviation_ = abbreviation;
+  name_ = type;
   type_ = parseType(type);
   weapons_ = weapons;
   amount_ = amount;

@@ -84,11 +84,6 @@ void Player::setResistance(DamageType damage_type)
   resistant_to_ = damage_type;
 }
 
-DamageType Player::getResistance() const
-{
-  return resistant_to_;
-}
-
 void Player::setActiveWeapon(std::string weapon_abbreviation)
 {
   std::shared_ptr<Weapon> weapon = inventory_->getWeapon(weapon_abbreviation);
@@ -149,12 +144,12 @@ int Player::usePotion(std::string abbreviation)
   }
 }
 
-// Sorry muss san um di errors zi fixen
-void Player::attack(Character& target, int damage) { }
 
-void Player::takeDamage(int damage, DamageType damageType)
+int Player::getAttackDamage() { }
+
+void Player::takeDamage(int damage, DamageType damage_type)
 {
-  if (getResistance() == damageType)
+  if (getResistantTo() == damage_type)
   {
     return;
   }
@@ -166,32 +161,29 @@ void Player::takeDamage(int damage, DamageType damageType)
   }
   setHealth(getHealth() - damage_taken);
 }
-int Player::move(int row, int column) { return 0; }
 
 
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
 {
   std::cout << getTypeName() << " [" << getAbbreviation() << "] \"" << getName()
-            << "\" on (" << position.first << "," << position.second << ")" << std::endl;;
+            << "\" on (" << position.first << "," << position.second << ")" << std::endl;
   if (single_line)
   {
     return;
   }
+  const int name_width = 17;
+  const int value_width = 6;
 
-  std::cout << " ";
-
-  const int name_width = 15;
-  const int value_width = 5;
-
-
-  //TODO this function doesn't print as it should. I tried to ask AI for explanations but it keeps spitting out this 
-  // function. -Hanno
-  std::cout << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << getBaseArmor() << "\n"
-          << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
-          << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"
-          << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << getStrength() << "\n"
-          << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << getVitality() << std::endl;
-
+  std::cout << std::setw(name_width) << std::left << "  Armor Value:" << std::setw(value_width)
+            << std::right << getBaseArmor() << "\n"
+            << std::setw(name_width) << std::left << "  Current Health:" << std::setw(value_width)
+            << std::right << getHealth() << "\n"
+            << std::setw(name_width) << std::left << "  Max Health:" << std::setw(value_width)
+            << std::right << getMaximumHealth() << "\n"
+            << std::setw(name_width) << std::left << "  Strength:" << std::setw(value_width)
+            << std::right << getStrength() << "\n"
+            << std::setw(name_width) << std::left << "  Vitality:" << std::setw(value_width)
+            << std::right << getVitality() << std::endl;
 }
 
 void Player::simplePrint() const

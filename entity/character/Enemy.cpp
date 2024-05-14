@@ -76,10 +76,21 @@ bool Enemy::is_boss() const
   return is_boss_;
 }
 
-// Sorry muss san um di errors zi fixen
-void Enemy::attack(Character& target, int damage) { }
-void Enemy::takeDamage(int damage, DamageType damage_type) { }
-int Enemy::move(int row, int column) { return 0; }
+int Enemy::getAttackDamage() { }
+void Enemy::takeDamage(int damage, DamageType damage_type)
+{
+  if (getResistantTo() == damage_type)
+  {
+    return;
+  }
+  int defense_points = getBaseArmor() + getArmor()->getArmorValue();
+  int damage_taken = damage - defense_points;
+  if (damage_taken < 0)
+  {
+    damage_taken = 0;
+  }
+  setHealth(getHealth() - damage_taken);
+}
 
 void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const
 {
