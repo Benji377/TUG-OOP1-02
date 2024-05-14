@@ -166,26 +166,24 @@ void Player::takeDamage(int damage, DamageType damage_type)
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
 {
   std::cout << getTypeName() << " [" << getAbbreviation() << "] \"" << getName()
-            << "\" on (" << position.first << "," << position.second << ")" << std::endl;;
+            << "\" on (" << position.first << "," << position.second << ")" << std::endl;
   if (single_line)
   {
     return;
   }
+  const int name_width = 17;
+  const int value_width = 6;
 
-  std::cout << " ";
-
-  const int name_width = 15;
-  const int value_width = 5;
-
-
-  //TODO this function doesn't print as it should. I tried to ask AI for explanations but it keeps spitting out this 
-  // function. -Hanno
-  std::cout << std::setw(15) << std::right << "Armor Value: " << std::setw(5) << std::right << getBaseArmor() << "\n"
-          << std::setw(15) << std::right << "Current Health: " << std::setw(5) << std::right << getHealth() << "\n"
-          << std::setw(15) << std::right << "Max Health: " << std::setw(5) << std::right << getMaximumHealth() << "\n"
-          << std::setw(15) << std::right << "Strength: " << std::setw(5) << std::right << getStrength() << "\n"
-          << std::setw(15) << std::right << "Vitality: " << std::setw(5) << std::right << getVitality() << std::endl;
-
+  std::cout << std::setw(name_width) << std::left << "  Armor Value:" << std::setw(value_width)
+            << std::right << getBaseArmor() << "\n"
+            << std::setw(name_width) << std::left << "  Current Health:" << std::setw(value_width)
+            << std::right << getHealth() << "\n"
+            << std::setw(name_width) << std::left << "  Max Health:" << std::setw(value_width)
+            << std::right << getMaximumHealth() << "\n"
+            << std::setw(name_width) << std::left << "  Strength:" << std::setw(value_width)
+            << std::right << getStrength() << "\n"
+            << std::setw(name_width) << std::left << "  Vitality:" << std::setw(value_width)
+            << std::right << getVitality() << std::endl;
 }
 
 void Player::simplePrint() const
