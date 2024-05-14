@@ -47,26 +47,25 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("DAGG", strength_, vitality_);
     armor_ = nullptr;
-    loot_ = {{"DAGG", 1}};
-    inventory_ = nullptr;
+    inventory_->addWeapon(weapon_);
   }
   else if (abbreviation_ == 'G')
   {
     weapon_ = Props::craftWeapon("HAXE", strength_, vitality_);
     armor_ = nullptr;
-    loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
     inventory_ = std::make_shared<Inventory>();
     inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
+    inventory_->addAmmunition(Props::craftAmmunition("ARRW", 3));
   }
   else if (abbreviation_ == 'L')
   {
     weapon_ = Props::craftWeapon("QFIR", 'L');
     armor_ = nullptr;
     inventory_ = std::make_shared<Inventory>();
-    inventory_->addWeapon(weapon_);
-    inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
     inventory_->addWeapon(Props::craftWeapon("QACD", 'L'));
+    inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
+    inventory_->addWeapon(weapon_);
     inventory_->addWeapon(Props::craftWeapon("QFRC", 'L'));
   }
 }
