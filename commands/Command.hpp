@@ -11,11 +11,12 @@
 #define COMMAND_HPP
 
 #include "../utility/Exceptions.hpp"
+#include "../dungeon/Room.hpp"
 #include <cctype>
 #include <memory>
-using std::iostream;
 #include <vector>
 using std::string;
+using std::iostream;
 
 class Game;
 class Player;
@@ -63,7 +64,7 @@ protected:
 
   void isValidAbbrev(Abbrev type_of_abbrev, std::string input) const;
 
-  std::vector<int> getPosition(std::string position_string);
+  std::vector<int> getPositionOutOfString(std::string position_string);
 
 
 public:

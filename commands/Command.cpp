@@ -180,10 +180,10 @@ void InventoryCommand::execute(std::vector<std::string> params)
 
 }
 
-std::vector<int> Command::getPosition(std::string position_string)
+std::vector<int> Command::getPositionOutOfString(std::string position_string)
 {
 
-  std::vector<int> position;
+  std::vector<int> position; //Works with a vector to check for stuff like 1,2,3
 
   try
   {
@@ -205,13 +205,7 @@ std::vector<int> Command::getPosition(std::string position_string)
     throw InvalidPositionCommand(); //If someone enters something very weird for the position
   }
 
-  std::vector<std::vector<std::shared_ptr<Field>>> fields = game_->getCurrentRoom()->getFields();
-
-  int row_nr = fields.size();
-  int column_nr = fields.at(0).size();
-
-  if(position.size() != 2 || position.at(0) < 1 || position.at(1) < 1 || position.at(0) > row_nr
-    || position.at(1) > column_nr)
+  if(position.size() != 2 )
   {
     throw InvalidPositionCommand();
   }
@@ -226,6 +220,19 @@ void MoveCommand::execute(std::vector<std::string> params)
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
 
-  std::vector<int> position = getPosition(params.at(2));
+  std::vector<int> target_position_as_vector = getPositionOutOfString(params.at(2));
+  std::pair<int, int> target_position = std::make_pair(target_position_as_vector.at(0), target_position_as_vector.at(1));
+
+  std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
+
+  if(game_->getCurrentRoom()->isAdjacentField(current_position, target_position))
+  {
+    std::cout << "success" << std::endl;
+  }
+  else
+  {
+    throw InvalidPositionCommand();
+  }
+
 
 }
