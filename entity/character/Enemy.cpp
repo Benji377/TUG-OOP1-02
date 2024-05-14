@@ -76,7 +76,16 @@ bool Enemy::is_boss() const
   return is_boss_;
 }
 
-int Enemy::getAttackDamage() { }
+int Enemy::getAttackDamage()
+{
+
+  if (getInventory() != nullptr)
+  {
+    setWeapon(getInventory()->getRandomWeapon());
+    return getWeapon()->getDice()->roll();
+  }
+}
+
 void Enemy::takeDamage(int damage, DamageType damage_type)
 {
   if (getResistantTo() == damage_type)
@@ -100,5 +109,5 @@ void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& 
 
 void Enemy::simplePrint() const
 {
-  std::cout << abbreviation_ << id_ << ": " << health_ << "/" << maximum_health_ ;
+  std::cout << getAbbreviation() << getId() << ": " << getHealth() << "/" << getMaximumHealth() << std::endl;
 }

@@ -118,6 +118,16 @@ std::shared_ptr<Weapon> Inventory::getWeapon(const std::string &abbreviation)
   return nullptr;
 }
 
+std::shared_ptr<Weapon> Inventory::getRandomWeapon()
+{
+  if (weapons_.empty())
+  {
+    return nullptr;
+  }
+  return weapons_[Oop::Random::getInstance().getRandomNumber(getAllWeapons().size())];
+}
+
+
 std::shared_ptr<Armor> Inventory::getArmor(const std::string &abbreviation)
 {
   for (auto & armor : armor_)

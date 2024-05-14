@@ -37,6 +37,7 @@ class Inventory
     int useAmmunition(std::string& abbreviation);
     std::shared_ptr<Potion> getPotion(const std::string& abbreviation);
     std::shared_ptr<Weapon> getWeapon(const std::string& abbreviation);
+    std::shared_ptr<Weapon> getRandomWeapon();
     std::shared_ptr<Armor> getArmor(const std::string& abbreviation);
     std::shared_ptr<Ammunition> getAmmunition(const std::string& abbreviation);
     std::vector<std::shared_ptr<Weapon>> getAllWeapons() const {return weapons_;};
