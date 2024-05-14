@@ -225,6 +225,8 @@ void MoveCommand::execute(std::vector<std::string> params)
 
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
+  std::cout << "current position: " << current_position.first << " " << current_position.second << std::endl;
+
   if(game_->getCurrentRoom()->isAdjacentField(current_position, target_position))
   {
     std::cout << "success" << std::endl;

@@ -277,7 +277,7 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
   {
     throw std::invalid_argument("Player not found");
   }
-  int result = dungeon_.movePlayer(player, position);
+  int result = dungeon_.moveCharacter(player, position);
   if (result == 0)
   {
     std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
