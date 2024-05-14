@@ -84,7 +84,6 @@ Dungeon::Dungeon(const char *file_path)
     file.close();
   }
   occured_enemy_types_ = {};
-  action_count_ = 0;
 }
 
 void Dungeon::printCurrentRoom()
@@ -116,7 +115,6 @@ int Dungeon::getCompletedRoomsCount() const
 void Dungeon::moveToRoom(int room_id)
 {
   int current_room_id = current_room_->getId();
-  action_count_ = 0;
   vector<shared_ptr<Player>> players = exitCurrentRoom();
   current_room_ = rooms_[room_id];
   enterCurrentRoom(current_room_id, players);
@@ -173,4 +171,14 @@ void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
       break;
     }
   }
+}
+
+int Dungeon::moveCharacter(shared_ptr<Character> character, std::pair<int, int> position)
+{
+  std::pair<int, int> character_position = current_room_->getFieldOfEntity(character);
+  int row = position.first - 1;
+  int col = position.second - 1;
+  int player_row = character_position.first - 1;
+  int player_col = character_position.second - 1;
+  return 0;
 }

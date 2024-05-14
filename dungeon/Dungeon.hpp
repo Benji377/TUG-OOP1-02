@@ -25,7 +25,6 @@ class Dungeon
     vector<shared_ptr<Room>> rooms_;
     shared_ptr<Room> current_room_;
     vector<char> occured_enemy_types_;
-    int action_count_;
 
   public:
     ///-----------------------------------------------------------------------------------------------------------------
@@ -58,6 +57,8 @@ class Dungeon
     /// Helper function for moveToRoom that adds all players to the new room
     //
     void enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players);
+
+    int moveCharacter(shared_ptr<Character> character, std::pair<int, int> position);
 
 };
 

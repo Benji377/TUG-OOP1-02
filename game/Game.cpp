@@ -199,6 +199,18 @@ int Game::getPlayerTypeAmount(char type)
   return count;
 }
 
+std::shared_ptr<Player> Game::getPlayerByType(char type)
+{
+  for (auto player : players_)
+  {
+    if (player->getAbbreviation() == type)
+    {
+      return player;
+    }
+  }
+  return nullptr;
+}
+
 std::shared_ptr<Room> Game::getCurrentRoom()
 {
   return dungeon_.getCurrentRoom();
@@ -250,4 +262,20 @@ void Game::moveToRoom(int room_id)
 {
   dungeon_.moveToRoom(room_id);
   printStoryAndRoom();
+}
+
+void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
+{
+  std::shared_ptr<Player> player = getPlayerByType(player_abbrev);
+  if (player == nullptr)
+  {
+    throw std::invalid_argument("Player not found");
+  }
+  int result = dungeon_.movePlayer(player, position);
+  if (result == 0)
+  {
+    std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
+      << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
+    action_count_++;
+  }
 }

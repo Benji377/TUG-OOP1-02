@@ -172,7 +172,7 @@ int Player::move(int row, int column) { return 0; }
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
 {
   std::cout << getTypeName() << " [" << getAbbreviation() << "] \"" << getName()
-            << "\" on (" << position.first << "," << position.second << ") " << std::endl;;
+            << "\" on (" << position.first << "," << position.second << ")" << std::endl;;
   if (single_line)
   {
     return;

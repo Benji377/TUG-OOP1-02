@@ -35,6 +35,7 @@ class Game
     inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
     vector<std::shared_ptr<Player>> players_;
+    int action_count_ = 0;
     Dungeon dungeon_;
     Phase current_phase_;
     bool is_running_ = true;
@@ -62,7 +63,9 @@ class Game
     int getPlayerTypeAmount(char type);
     std::shared_ptr<Room> getCurrentRoom();
     vector<std::shared_ptr<Player>> getPlayers() { return players_; }
+    std::shared_ptr<Player> getPlayerByType(char type);
     void printStoryAndRoom();
+    void movePlayer(char player_abbrev, std::pair<int, int> position);
     void moveToRoom(int room_id);
 };
 

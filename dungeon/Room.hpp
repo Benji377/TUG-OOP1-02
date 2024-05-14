@@ -132,6 +132,9 @@ class Room
       }
       return entities;
     }
+
+    int getHeight() const { return fields_.size(); }
+    int getWidth() const { return fields_[0].size(); }
 };
 
 #endif // ROOM_HPP
