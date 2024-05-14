@@ -84,11 +84,6 @@ void Player::setResistance(DamageType damage_type)
   resistant_to_ = damage_type;
 }
 
-DamageType Player::getResistance() const
-{
-  return resistant_to_;
-}
-
 void Player::setActiveWeapon(std::string weapon_abbreviation)
 {
   std::shared_ptr<Weapon> weapon = inventory_->getWeapon(weapon_abbreviation);
@@ -154,7 +149,7 @@ int Player::getAttackDamage() { }
 
 void Player::takeDamage(int damage, DamageType damage_type)
 {
-  if (getResistance() == damage_type)
+  if (getResistantTo() == damage_type)
   {
     return;
   }
