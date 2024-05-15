@@ -366,6 +366,9 @@ If this **door is locked** the message with the story key `E_MOVE_LOCKED_DOOR` i
 This is **not counted** as a performed action and the player's position does not change.
 Then print the command prompt again (without any preceding prompt messages), and wait for a new user input.
 
+> **Note**: The **door is locked** error has a lower priority than all other errors mentioned in the
+> invalid commands section.
+
 If this  **door is unlocked**, first the position change message is printed. Then all players enter the room the door
 goes to. They now spawn in the new room around the door which would go back to the previous room. For how that works and
 some examples see [Milestone 1](Milestone_1.md) > Important Rules > Moving through the Dungeon.
@@ -524,6 +527,10 @@ If **no weapon is equipped**, the attack fails without counting as a performed a
 story key `E_ATTACK_NO_WEAPON_EQUIPPED` should be printed instead. Then print the command prompt again (without any 
 preceding prompt messages), and wait for a new user input.
 
+> **Note**: If a weapon is equipped needs to be checked before the check if the position is valid, 
+> because otherwise it is unclear which positions are valid. All other errors in the invalid commands
+> section have a higher priority than the **no weapon equipped** error.
+
 Specific information about all weapons can be found in the [item overview](Items.md#weapon-items).
 
 #### Attack Types
@@ -538,6 +545,8 @@ count as valid for the `<POSITION>` parameter. How **invalid positions** are han
 
 > **Note**: Quarterstaffs' attack type changes depending on which player type has equipped them.
 
+> **Note**: The **no ammunition** error has a lower priority than all other errors mentioned in the
+> invalid commands section, as well as the **no weapon equipped** error.
 
 #### Damage Types
 Different weapons deal different types of damage. The possible damage types are:
