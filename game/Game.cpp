@@ -331,6 +331,11 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
   std::cout << std::endl;
 }
 
+void Game::playerAttack(char player_abbrev, std::pair<int, int> position)
+{
+  
+}
+
 bool Game::allPlayersAreDead()
 {
   for (auto player : players_)
