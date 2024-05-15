@@ -94,7 +94,16 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
 
     if(item_strings_sorted_with_map.count(item_string) == 0)
     {
-      item_strings_sorted_with_map.insert(std::make_pair(item_string, 1));
+      if(item->getAbbreviation() == "BOLT" || item->getAbbreviation() == "ARRW")
+      {
+        //Only and only if it is ammunition should you perform static_ptr_cast
+        std::shared_ptr<Ammunition> item_as_ammo = std::static_pointer_cast<Ammunition>(item);
+        item_strings_sorted_with_map.insert(std::make_pair(item_string, item_as_ammo->getAmount()));
+      }
+      else
+      {
+        item_strings_sorted_with_map.insert(std::make_pair(item_string, 1));
+      }
     }
     else
     {

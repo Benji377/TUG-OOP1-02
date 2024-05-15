@@ -297,7 +297,7 @@ void LootCommand::execute(std::vector<std::string> params)
     std::cout << "** To unlock this chest you need to roll at least "
     << min_value_to_roll << " to reach the " << chest->getMinValue() << " needed.\n";
 
-    Dice dice = Dice("1d20");
+    Dice dice = Dice("1 d20");
     int roll_result = dice.roll();
     game_->plusOneActionCount();
 
@@ -310,7 +310,7 @@ void LootCommand::execute(std::vector<std::string> params)
       std::cout << game_->getStory().getStorySegment("N_LOOT_SUCCESSFUL");
 
       std::map<string, int> loot = entity_on_field->getLoot();
-      std::shared_ptr<Inventory> inv_of_entity;
+      std::shared_ptr<Inventory> inv_of_entity = std::make_shared<Inventory>();
       int ret = inv_of_entity->parseInventory(loot);
       if (ret == 1)
       {
