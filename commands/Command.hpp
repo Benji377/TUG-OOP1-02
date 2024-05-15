@@ -67,9 +67,12 @@ protected:
 
   void isValidAbbrev(Abbrev type_of_abbrev, std::string input) const;
 
-  std::vector<int> getPositionOutOfString(std::string position_string);
+  std::vector<int> getPositionAsVecOutOfString(std::string position_string);
 
   std::pair<std::shared_ptr<Player>, std::pair<int, int>> getPlayerAndAdjacentField(std::vector<std::string> params);
+
+  std::pair<int,int> getPositionAsPairOutOfString(std::string position);
+
 
 
 public:
@@ -297,6 +300,19 @@ class UseCommand : public Command
     UseCommand(Game* game) : Command(game) {}
     virtual ~UseCommand() {};
     UseCommand(const UseCommand&) = delete;
+
+    virtual void execute(std::vector<std::string> params) override;
+
+  private:
+    std::shared_ptr<Item> getItemOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const;
+};
+
+class AttackCommand : public Command
+{
+  public:
+    AttackCommand(Game* game) : Command(game) {}
+    virtual ~AttackCommand() {};
+    AttackCommand(const AttackCommand&) = delete;
 
     virtual void execute(std::vector<std::string> params) override;
 

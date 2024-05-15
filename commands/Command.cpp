@@ -182,7 +182,7 @@ void InventoryCommand::execute(std::vector<std::string> params)
 
 }
 
-std::vector<int> Command::getPositionOutOfString(std::string position_string)
+std::vector<int> Command::getPositionAsVecOutOfString(std::string position_string)
 {
 
   std::vector<int> position; //Works with a vector to check for stuff like 1,2,3
@@ -204,7 +204,7 @@ std::vector<int> Command::getPositionOutOfString(std::string position_string)
   }
   catch(const std::exception& e)
   {
-    throw InvalidPositionCommand(); //If someone enters something very weird for the position
+    throw InvalidPositionCommand(); //If someone enters something very weird for the position like asd,asdasd
   }
 
   if(position.size() != 2 )
@@ -215,12 +215,19 @@ std::vector<int> Command::getPositionOutOfString(std::string position_string)
   return position;
 }
 
+std::pair<int,int> Command::getPositionAsPairOutOfString(std::string position)
+{
+  std::vector<int> position_as_vector = getPositionAsVecOutOfString(position);
+  std::pair<int, int> position_pair = std::make_pair(position_as_vector.at(0), position_as_vector.at(1));
+
+  return position_pair;
+}
+
 std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdjacentField(std::vector<std::string> params)
 {
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
 
-  std::vector<int> target_position_as_vector = getPositionOutOfString(params.at(2));
-  std::pair<int, int> target_position = std::make_pair(target_position_as_vector.at(0), target_position_as_vector.at(1));
+  std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
 
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
@@ -231,9 +238,7 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdj
   }
 
   return std::make_pair(player, target_position);
-
 }
-
 
 void MoveCommand::execute(std::vector<std::string> params)
 {
@@ -377,3 +382,37 @@ void UseCommand::execute(std::vector<std::string> params)
   throw UnavailableItemOrEntityCommand();
 
 }
+
+void AttackCommand::execute(std::vector<std::string> params)
+{
+  checkCommandLenght(params, 3);
+
+  shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+  shared_ptr<Weapon> players_weapon = player->getActiveWeapon();
+
+  if(players_weapon == nullptr)
+  {
+    throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED);
+  }
+
+  std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
+
+  if(players_weapon->getAttackType() == AttackType::MELEE)
+  {
+    //TODO is this redundant? Can probably be optimised
+    std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
+
+    if(!(game_->getCurrentRoom()->isAdjacentField(target_position, current_position)))
+    {
+      throw InvalidPositionCommand();
+    }
+  }
+  else if (players_weapon->getAttackType() == AttackType::RANGED)
+  {
+    //std::shared_ptr<Room> all_fields = game_->getCurrentRoom()->getFields();
+
+  }
+
+}
+
+

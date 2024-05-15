@@ -22,6 +22,8 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", std::make_unique<LootCommand>(this));
   parser_->registerCommand("use", std::make_unique<UseCommand>(this));
+  parser_->registerCommand("attack", std::make_unique<AttackCommand>(this));
+
 
 }
 
@@ -162,6 +164,9 @@ void Game::doCommand()
     {
       case CommandExecutionException::ExceptionType::LOCKED_DOOR:
         std::cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
+        break;
+      case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
+        std::cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
         break;
       default:
         break;
