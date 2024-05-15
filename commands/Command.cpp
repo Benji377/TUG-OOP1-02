@@ -253,7 +253,7 @@ void MoveCommand::execute(std::vector<std::string> params)
   if(entity_on_field == nullptr)
   {
     IO::printPlayerMoved(player, target_position);
-    game_->movePlayer(player->getAbbreviation(), target_position);
+    game_->playerMove(player->getAbbreviation(), target_position);
     game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)

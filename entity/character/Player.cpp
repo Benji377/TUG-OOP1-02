@@ -193,6 +193,10 @@ void Player::takeDamage(int damage, DamageType damage_type)
     damage_taken = 0;
   }
   setHealth(getHealth() - damage_taken);
+  if (getHealth() <= 0)
+  {
+    kill();
+  }
 }
 
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const

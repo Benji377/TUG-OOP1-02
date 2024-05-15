@@ -76,6 +76,13 @@ public:
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
+  /// Returns the damage pattern of the weapon.
+  /// @return The damage pattern of the weapon.
+  //
+  [[nodiscard]] std::shared_ptr<DamagePattern> getDamagePattern() const;
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
   /// Returns the attack type of the weapon.
   /// @return The attack type of the weapon.
   //

@@ -328,17 +328,12 @@ void Game::moveToRoom(int room_id)
   printStoryAndRoom();
 }
 
-void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
+void Game::playerMove(char player_abbrev, std::pair<int, int> position)
 {
   std::shared_ptr<Player> player = getPlayerByType(player_abbrev);
-  dungeon_.moveCharacter(player, position);
+  dungeon_.characterMove(player, position);
   printStoryAndRoom(false);
   std::cout << std::endl;
-}
-
-void Game::playerAttack(char player_abbrev, std::pair<int, int> position)
-{
-  
 }
 
 bool Game::allPlayersAreDead()

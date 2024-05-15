@@ -18,6 +18,11 @@ int Weapon::getDamageAddition() const
   return damage_addition_;
 }
 
+std::shared_ptr<DamagePattern> Weapon::getDamagePattern() const
+{
+  return damage_pattern_;
+}
+
 AttackType Weapon::getAttackType() const
 {
   return attack_type_;

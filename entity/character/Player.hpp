@@ -18,7 +18,7 @@
 class Player: public Character
 {
   std::string name_;
-  bool is_dead_ = false;
+  
   void initializeInventory();
   public:
     Player(int id, char abbreviation, std::string name);
@@ -29,8 +29,6 @@ class Player: public Character
     void printPlayer(const std::pair<int, int>& position, bool single_line = false) const;
     [[nodiscard]] std::string getName() const { return name_; }
     void simplePrint() const override;
-    void kill() { is_dead_ = true; }
-    bool isDead() const { return is_dead_; }
 
     void setActiveWeapon(std::string weapon_abbreviation);
     void setArmor(std::string armor_abbreviation);

@@ -178,11 +178,39 @@ void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
   }
 }
 
-void Dungeon::moveCharacter(shared_ptr<Character> character, std::pair<int, int> position)
+void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int> position)
 {
   std::pair<int, int> character_position = current_room_->getFieldOfEntity(character);
   current_room_->setFieldEntity(nullptr, character_position.first, character_position.second);
   current_room_->setFieldEntity(character, position.first, position.second);
+}
+
+void Dungeon::characterAttack(shared_ptr<Character> attacker, std::pair <int, int> target_field)
+{
+  std::pair<int, int> attacker_position = current_room_->getFieldOfEntity(attacker);
+  int damage = attacker->getAttackDamage();
+  DamageType damage_type = attacker->getWeapon()->getDamageType();
+  vector<vector<int>> affected_fields = attacker->getWeapon()->getDamagePattern()->getAffectedFields(attacker_position,
+    target_field, current_room_->getWidth(), current_room_->getHeight());
+  for (size_t i = 0; i < affected_fields.size(); i++)
+  {
+    for (size_t j = 0; j < affected_fields[i].size(); j++)
+    {
+      if (affected_fields[i][j] == 1)
+      {
+        shared_ptr<Character> target =
+          std::dynamic_pointer_cast<Character>(current_room_->getField({i, j})->getEntity());
+        if (target != nullptr)
+        {
+          target->takeDamage(damage, damage_type);
+          if (target->isDead())
+          {
+            killCharacter(target);
+          }
+        }
+      }
+    }
+  }
 }
 
 void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)

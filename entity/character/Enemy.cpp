@@ -99,6 +99,10 @@ void Enemy::takeDamage(int damage, DamageType damage_type)
     damage_taken = 0;
   }
   setHealth(getHealth() - damage_taken);
+  if (getHealth() <= 0)
+  {
+    kill();
+  }
 }
 
 void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const

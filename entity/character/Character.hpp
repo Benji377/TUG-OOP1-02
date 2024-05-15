@@ -27,6 +27,7 @@ class Character: public Entity
     int base_armor_;
     int strength_;
     int vitality_;
+    bool is_dead_ = false;
   public:
     Character(int id, char abbreviation) : Entity(id, abbreviation, false) {}
     // Getters
@@ -35,6 +36,7 @@ class Character: public Entity
     [[nodiscard]] int getHealth() const { return health_; }
     [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
     [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
+    [[nodiscard]] bool isDead() const { return is_dead_; }
     
     [[nodiscard]] std::shared_ptr<Inventory> getInventory() const { return inventory_; }
     //Nur fürs testen hinzugefügt, gerne wieder löschen -Hanno
@@ -52,6 +54,7 @@ class Character: public Entity
     void setBaseArmor(int base_armor) { base_armor_ = base_armor; }
     void setStrength(int strength) { strength_ = strength; }
     void setVitality(int vitality) { vitality_ = vitality; }
+    void kill() { is_dead_ = true; }
     // Methods
     virtual int getAttackDamage() = 0;
     virtual void takeDamage(int damage, DamageType damageType) = 0;

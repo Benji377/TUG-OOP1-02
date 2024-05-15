@@ -25,3 +25,9 @@ Pattern DamagePattern::parsePattern(std::string& pattern) {
 Pattern DamagePattern::getPattern() const {
   return pattern_;
 }
+
+std::vector<std::vector<int>> DamagePattern::getAffectedFields(std::pair<int, int> player_position,
+    std::pair<int, int> target_field, int width, int height) const
+{
+  return std::vector<std::vector<int>>();
+}

@@ -5,6 +5,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 #include "Item.hpp"
 #include "../utility/Utils.hpp"
 
@@ -25,6 +26,9 @@ public:
   DamagePattern(const DamagePattern &other) = delete;
   DamagePattern &operator=(const DamagePattern &other) = delete;
   ~DamagePattern() = default;
+  // TODO
+  std::vector<std::vector<int>> getAffectedFields(std::pair<int, int> player_position,
+    std::pair<int, int> target_field, int width, int height) const;
 };
 
 #endif //DAMAGEPATTERN_HPP
