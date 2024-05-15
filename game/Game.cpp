@@ -327,8 +327,6 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
 {
   std::shared_ptr<Player> player = getPlayerByType(player_abbrev);
   dungeon_.moveCharacter(player, position);
-  std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
-    << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
   printStoryAndRoom(false);
   std::cout << std::endl;
 }

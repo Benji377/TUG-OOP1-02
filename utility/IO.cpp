@@ -247,7 +247,7 @@ void IO::printPlayerInventory(std::shared_ptr<Player> player)
 void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
 {
   player->simplePrintNoId();
-  std::cout << "moved to " << "(" << position.first << "," << position.second << ")" << std::endl;
+  std::cout << "moved to " << "(" << position.first << "," << position.second << ")." << std::endl;
 }
 
 void IO::printDamageTypeResistance(DamageType type)
