@@ -23,12 +23,25 @@ class DamagePattern
 public:
   explicit DamagePattern(std::string &pattern);
   [[nodiscard]] Pattern getPattern() const;
+
+  std::vector<std::vector<int>> hitPattern(std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> slashPattern(std::pair<int, int> player_position,
+                                             std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> linePattern(std::pair<int, int> player_position,
+                                            std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> burstPattern(std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> shotPattern(std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> thrustPattern(std::pair<int, int> player_position,
+                                              std::pair<int, int> target_field, int width, int height) const;
+
+  std::vector<std::vector<int>> getAffectedFields(std::pair<int, int> player_position,
+                                                  std::pair<int, int> target_field, int width, int height) const;
+
+  void printDamagePattern(const std::vector<std::vector<int>>& damagePattern) const;
+
   DamagePattern(const DamagePattern &other) = delete;
   DamagePattern &operator=(const DamagePattern &other) = delete;
   ~DamagePattern() = default;
-  // TODO
-  std::vector<std::vector<int>> getAffectedFields(std::pair<int, int> player_position,
-    std::pair<int, int> target_field, int width, int height) const;
 };
 
 #endif //DAMAGEPATTERN_HPP
