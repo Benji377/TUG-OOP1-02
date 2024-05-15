@@ -1,5 +1,6 @@
 #include "Utils.hpp"
 #include "Exceptions.hpp"
+#include "../entity/character/Inventory.hpp"
 
 bool Utils::decimalStringToInt(const std::string& str, int& number)
 {
@@ -104,4 +105,25 @@ std::vector<char> Utils::getDifference(const std::vector<char>& a, const std::ve
 void Utils::deleteDuplicates(std::vector<char>& vec) {
   std::sort(vec.begin(), vec.end());
   vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+}
+
+bool Utils::isValidItemAbbrev(std::string abbrev)
+{
+  std::shared_ptr<Inventory> test_inventory = std::make_shared<Inventory>();
+
+  std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper); //Make sure it's uppercase. This line of code
+  //is from https://stackoverflow.com/questions/735204/convert-a-string-in-c-to-upper-case
+
+  std::map<std::string, int> parse_input;
+  parse_input.insert(make_pair(abbrev, 1));
+
+  test_inventory->parseInventory(parse_input);
+
+  if(test_inventory->getAllPotions().empty() && test_inventory->getAllArmor().empty() 
+    && test_inventory->getAllWeapons().empty())
+    {
+      return false;
+    }
+
+    return true;
 }

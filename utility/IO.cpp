@@ -5,6 +5,7 @@
 #include "../entity/character/Inventory.hpp"
 #include "../items/Item.hpp"
 #include "../entity/character/Enemy.hpp"
+#include "../items/Weapon.hpp"
 
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
@@ -94,7 +95,7 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
 
     if(item_strings_sorted_with_map.count(item_string) == 0)
     {
-      if(item->getAbbreviation() == "BOLT" || item->getAbbreviation() == "ARRW")
+      if(item->getIsAmmunition())
       {
         //Only and only if it is ammunition should you perform static_ptr_cast
         std::shared_ptr<Ammunition> item_as_ammo = std::static_pointer_cast<Ammunition>(item);
@@ -242,9 +243,32 @@ void IO::printPlayerInventory(std::shared_ptr<Player> player)
   printInventory(inv, player);
 }
 
-
 void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
 {
   std::cout << player->getTypeName() << " " << "[" << player->getAbbreviation()  << "] "  << player->getName()
   << " moved to " << "(" << position.first << "," << position.second << ")";
+}
+
+void IO::printDamageTypeResistance(DamageType type)
+{
+  std::string type_name;
+
+  switch(type)
+  {
+    case DamageType::FIRE:
+      type_name = "Fire";
+      break;
+    case DamageType::ACID:
+      type_name = "Acid";
+      break;
+    case DamageType::COLD:
+      type_name = "Cold";
+      break;
+    case DamageType::FORCE:
+      type_name = "Force";
+      break;
+  }
+
+  std::cout << " is now resistant to " << type_name << " until leaving the room." << std::endl;
+
 }

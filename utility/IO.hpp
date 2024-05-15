@@ -26,6 +26,7 @@ class Item;
 class Room;
 class Character;
 
+enum class DamageType;
 
 class IO
 {
@@ -78,6 +79,8 @@ public:
   static void printActives(std::shared_ptr<Player> player);
 
   static void printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position);
+
+  static void printDamageTypeResistance(DamageType type);
 
 
 

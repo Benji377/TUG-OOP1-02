@@ -10,6 +10,7 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   story_.parseStory(config_path);
   is_running_ = true;
   story_output_active_ = true;
+
   parser_->registerCommand("help", std::make_unique<HelpCommand>());
   parser_->registerCommand("map", std::make_unique<MapCommand>(this));
   parser_->registerCommand("story", std::make_unique<StoryCommand>(this));
@@ -20,7 +21,7 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
 
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", std::make_unique<LootCommand>(this));
-
+  parser_->registerCommand("use", std::make_unique<UseCommand>(this));
 
 }
 
@@ -290,8 +291,6 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
 {
   std::shared_ptr<Player> player = getPlayerByType(player_abbrev);
   dungeon_.moveCharacter(player, position);
-  std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
-    << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
   action_count_++;
   printStoryAndRoom(false);
 }

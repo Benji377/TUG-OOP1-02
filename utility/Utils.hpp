@@ -16,7 +16,9 @@
 #include <iostream>
 #include <limits>
 #include <algorithm>
+#include <map>
 
+class Inventory;
 class Utils
 {
 public:
@@ -107,6 +109,9 @@ public:
   /// @param vec The vector to be modified
   //
   static void deleteDuplicates(std::vector<char> &vec);
+
+  static bool isValidItemAbbrev(std::string abbrev);
+
 
 private:
   ///------------------------------------------------------------------------------------------------------------------

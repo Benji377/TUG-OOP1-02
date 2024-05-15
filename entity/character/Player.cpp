@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <utility>
 #include "../../utility/Props.hpp"
+#include "../../utility/IO.hpp"
 
 Player::Player(int id, char abbreviation, std::string name) : Character(id, abbreviation)
 {
@@ -115,6 +116,12 @@ std::shared_ptr<Weapon> Player::getActiveWeapon() const
   return weapon_;
 }
 
+void Player::simplePrintNoId() const
+{
+  std::cout << this->getTypeName() << " " << "[" << this->getAbbreviation() << "] \"" <<
+    this->getName() << "\"";
+}
+
 
 int Player::usePotion(std::string abbreviation)
 {
@@ -127,11 +134,15 @@ int Player::usePotion(std::string abbreviation)
   {
     if (potion->getEffect() == Effect::HEALTH)
     {
+      int health_before = getHealth();
       setHealth(getHealth() + potion->getDice()->roll());
       if (getHealth() > getMaximumHealth())
       {
         setHealth(getMaximumHealth());
       }
+      int health_after = getHealth();
+      simplePrintNoId();
+      std::cout << "regenerates " << health_after-health_before << " health." << std::endl;
     }
     else
     {
@@ -139,6 +150,8 @@ int Player::usePotion(std::string abbreviation)
       auto damage_type = static_cast<DamageType>(potion->getEffect());
       // TODO: This cast may not work properly!
       setResistance(damage_type);
+      simplePrintNoId();
+      IO::printDamageTypeResistance(damage_type);
     }
     getInventory()->removeItem(potion);
   }
@@ -182,11 +195,11 @@ void Player::takeDamage(int damage, DamageType damage_type)
   setHealth(getHealth() - damage_taken);
 }
 
-
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
 {
-  std::cout << getTypeName() << " [" << getAbbreviation() << "] \"" << getName()
-            << "\" on (" << position.first << "," << position.second << ")" << std::endl;
+  simplePrintNoId();
+
+  std::cout << "on "<< "(" << position.first << "," << position.second << ")" << std::endl;
   if (single_line)
   {
     return;
@@ -211,3 +224,4 @@ void Player::simplePrint() const
   std::cout << "Player " << getId() << ": " << getTypeName()
             << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
 }
+
