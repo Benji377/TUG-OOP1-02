@@ -7,6 +7,7 @@
 #include "../entity/character/Enemy.hpp"
 #include "../items/Weapon.hpp"
 
+
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
   std::string filename{config_path};
@@ -245,8 +246,8 @@ void IO::printPlayerInventory(std::shared_ptr<Player> player)
 
 void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
 {
-  std::cout << player->getTypeName() << " " << "[" << player->getAbbreviation()  << "] "  << player->getName()
-  << " moved to " << "(" << position.first << "," << position.second << ")";
+  player->simplePrintNoId();
+  std::cout << "moved to " << "(" << position.first << "," << position.second << ")" << std::endl;
 }
 
 void IO::printDamageTypeResistance(DamageType type)

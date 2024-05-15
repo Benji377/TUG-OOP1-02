@@ -119,7 +119,7 @@ std::shared_ptr<Weapon> Player::getActiveWeapon() const
 void Player::simplePrintNoId() const
 {
   std::cout << this->getTypeName() << " " << "[" << this->getAbbreviation() << "] \"" <<
-    this->getName() << "\"";
+    this->getName() << "\" ";
 }
 
 

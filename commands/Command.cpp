@@ -287,6 +287,7 @@ void LootCommand::execute(std::vector<std::string> params)
   if(std::dynamic_pointer_cast<DeathLocation>(entity_on_field) != nullptr)
   {
     game_->getDungeon().lootEntity(player, entity_on_field);
+    game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<TreasureChest>(entity_on_field) != nullptr)
   {
@@ -318,6 +319,7 @@ void LootCommand::execute(std::vector<std::string> params)
       }
       IO::printInventory(inv_of_entity, nullptr);
       game_->getDungeon().lootEntity(player, entity_on_field);
+      game_->plusOneActionCount();
     }
   }
   else
@@ -333,8 +335,10 @@ void UseCommand::execute(std::vector<std::string> params)
   checkCommandLenght(params, 3);
 
   std::string abbrev = params.at(2);
+  std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
 
-  if(abbrev == "bolt" || abbrev == "arrw" || !(Utils::isValidItemAbbrev(abbrev)))
+
+  if(abbrev == "BOLT" || abbrev == "ARRW" || !(Utils::isValidItemAbbrev(abbrev)))
   {
     throw InvalidParamCommand();
   }
@@ -347,15 +351,29 @@ void UseCommand::execute(std::vector<std::string> params)
   {
     player->simplePrintNoId();
     std::cout << " consumed " << potion->getName() << std::endl;
-
-    std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
     player->usePotion(abbrev);
-
+    game_->plusOneActionCount();
+    return;
   }
 
-  std::shared_ptr<Armor> armor = player_inv->getArmor(abbrev);
   std::shared_ptr<Weapon> weapon = player_inv->getWeapon(abbrev);
+  if(weapon != nullptr)
+  {
+    player->setActiveWeapon(weapon->getAbbreviation());
+    game_->plusOneActionCount();
+    return;
+  }
 
+  shared_ptr<Armor> armor = player_inv->getArmor(abbrev);
+  if(armor != nullptr)
+  {
+    player->setArmor(abbrev);
+    game_->plusOneActionCount();
+    return;
+  }
 
+  //TODO figure out if an error should be seen as error and promt user again?
+
+  throw UnavailableItemOrEntityCommand();
 
 }
