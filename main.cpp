@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
     while(game.isRunning())
     {
-      game.doCommand();
+      game.step();
     }
   } catch (const std::exception& e) {
     std::cout << "Main Error: " << e.what() << '\n';

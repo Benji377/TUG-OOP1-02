@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <algorithm>
 
 #define MIN_PLAYERS 1
 #define MAX_PLAYERS 3
@@ -8,8 +9,7 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
 {
   parser_ = std::make_unique<CommandParser>();
   story_.parseStory(config_path);
-  is_running_ = true;
-  story_output_active_ = true;
+  current_phase_ = Phase::ACTION;
   parser_->registerCommand("help", std::make_unique<HelpCommand>());
   parser_->registerCommand("map", std::make_unique<MapCommand>(this));
   parser_->registerCommand("story", std::make_unique<StoryCommand>(this));
@@ -20,8 +20,6 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
 
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", std::make_unique<LootCommand>(this));
-
-
 }
 
 void Game::start()
@@ -30,7 +28,6 @@ void Game::start()
   std::cout << "How many players want to join the adventure? (" << MIN_PLAYERS << " to " << MAX_PLAYERS << ")"
     << std::endl;
   int num_players;
-  Game::max_players_ = 3;
 
   while (true)
   {
@@ -51,8 +48,8 @@ void Game::start()
     {
       break;
     }
-    Game::max_players_ = num_players;
   }
+  Game::max_players_ = num_players;
   for (int i = 1; i <= num_players; i++)
   {
     std::cout << "\nPlayer " << i << " what do you wish to be called? (max length " << MAX_NAME_LENGTH
@@ -113,6 +110,49 @@ void Game::start()
   printStoryAndRoom();
 }
 
+void Game::step()
+{
+  if (allPlayersAreDead())
+  {
+    std::cout << Game::story_.getStorySegment("N_DEFEAT");
+    is_running_ = false;
+    printAndSaveScore();
+    return;
+  }
+  if (current_phase_ == Phase::ACTION)
+  {
+    if (action_count_ < max_players_)
+    {
+      doCommand();
+    }
+    else
+    {
+      current_phase_ = Phase::ENEMY;
+      action_count_ = 0;
+    }
+  }
+  else if (current_phase_ == Phase::ENEMY)
+  {
+    std::cout << "Enemie Phase" << std::endl;
+    std::vector<std::shared_ptr<Enemy>> enemies = dungeon_.getCurrentRoom()->getAllEntitiesOfType<Enemy>();
+    std::sort(enemies.begin(), enemies.end(),
+    [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
+    {
+      if (a->getAbbreviation() == b->getAbbreviation())
+      {
+        return a->getId() < b->getId();
+      }
+      return a->getAbbreviation() < b->getAbbreviation();
+    });
+
+    printStoryAndRoom(false);
+    current_phase_ = Phase::ACTION;
+    for (auto player : players_)
+    {
+      player->kill();
+    }
+  }
+}
 
 void Game::doCommand()
 {
@@ -172,7 +212,6 @@ void Game::doCommand()
 
   command_finished_ = true;
   }
-
 }
 
 void Game::doCommand(std::string input)
@@ -292,7 +331,75 @@ void Game::movePlayer(char player_abbrev, std::pair<int, int> position)
   dungeon_.moveCharacter(player, position);
   std::cout << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
     << "\" moved to (" << position.first << ", " << position.second << ")." << std::endl;
-  action_count_++;
   printStoryAndRoom(false);
+  std::cout << std::endl;
 }
 
+bool Game::allPlayersAreDead()
+{
+  for (auto player : players_)
+  {
+    if (!player->isDead())
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+void Game::plusOneActionCount()
+{
+  action_count_++;
+  total_actions_++;
+}
+
+std::ostream& Game::returnScoreOutput(std::ostream& os)
+{
+  os << "-- Players --------------------------------------" << std::endl;
+  for (auto player : players_)
+  {
+    if (!player->isDead())
+    {
+      os << "  " << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
+        << "\" survived." << std::endl;
+    }
+  }
+  for (auto player : players_)
+  {
+    if (player->isDead())
+    {
+      os << "  " << player->getTypeName() << " [" << player->getAbbreviation() << "] \"" << player->getName()
+        << "\", rest in peace." << std::endl;
+    }
+  }
+  os << "\n-- Statistics -----------------------------------" << std::endl;
+  os << "  " << dungeon_.getCompletedRoomsCount() << " rooms completed" << std::endl;
+  os << "  " << total_actions_ << " performed actions\n" << std::endl;
+  return os;
+}
+
+void Game::printAndSaveScore()
+{
+  returnScoreOutput(std::cout);
+  std::cout << Game::story_.getStorySegment("N_SCORING_FILE");
+  while (true)
+  {
+    std::string file_name = IO::promtUserInput();
+    if(file_name == "quit")
+    {
+      doCommand(file_name);
+      return;
+    }
+    std::ofstream file(file_name, std::ios::out | std::ios::trunc);
+    if (file.is_open())
+    {
+      returnScoreOutput(file);
+      file.close();
+      break;
+    }
+    else
+    {
+      std::cout << Game::story_.getStorySegment("E_SCORING_FILE_NOT_WRITABLE");
+    }
+  }
+}

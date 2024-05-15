@@ -109,5 +109,5 @@ void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& 
 
 void Enemy::simplePrint() const
 {
-  std::cout << getAbbreviation() << getId() << ": " << getHealth() << "/" << getMaximumHealth() << std::endl;
+  std::cout << getAbbreviation() << getId() << ": " << getHealth() << "/" << getMaximumHealth();
 }

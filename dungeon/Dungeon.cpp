@@ -204,4 +204,9 @@ void Dungeon::killCharacter(std::shared_ptr<Character> character)
   std::map<string, int> loot = character->getInventory()->getInventoryMapped();
   shared_ptr<DeathLocation> death_location = std::make_shared<DeathLocation>(loot);
   getCurrentRoom()->setFieldEntity(death_location, position.first, position.second);
+  shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(character);
+  if (player != nullptr)
+  {
+    player->kill();
+  }
 }

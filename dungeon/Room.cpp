@@ -141,12 +141,10 @@ std::vector<std::shared_ptr<Character>> Room::getEnemies()
   std::sort(enemies.begin(), enemies.end(),
     [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
     {
-      // If abbreviations are equal, sort by id
       if (a->getAbbreviation() == b->getAbbreviation())
       {
         return a->getId() < b->getId();
       }
-      // Otherwise, sort by abbreviation
       return a->getAbbreviation() < b->getAbbreviation();
     });
 

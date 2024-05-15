@@ -122,10 +122,7 @@ void StoryCommand::execute(std::vector<std::string> params)
 {
   checkCommandLenght(params, 1);
 
-  std::cout << "toggled STORY ouput" << std::endl;
-
   game_->toggleStoryOutput();
-
 }
 
 void QuitCommand::execute(std::vector<std::string> params)
@@ -238,7 +235,6 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdj
 
 }
 
-
 void MoveCommand::execute(std::vector<std::string> params)
 {
   std::pair<std::shared_ptr<Player>, std::pair<int,int>> player_and_field = getPlayerAndAdjacentField(params);
@@ -252,6 +248,7 @@ void MoveCommand::execute(std::vector<std::string> params)
   {
     game_->movePlayer(player->getAbbreviation(), target_position);
     IO::printPlayerMoved(player, target_position);
+    game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
   {
