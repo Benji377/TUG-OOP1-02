@@ -18,6 +18,7 @@
 #include "../utility/IO.hpp"
 #include "../story/Story.hpp"
 #include "../entity/character/Player.hpp"
+#include "../entity/character/Enemy.hpp"
 
 using std::vector;
 
@@ -35,6 +36,7 @@ class Game
     inline static int max_players_ = 0;
     std::unique_ptr<CommandParser> parser_;
     vector<std::shared_ptr<Player>> players_;
+    int total_actions_ = 0;
     int action_count_ = 0;
     Dungeon dungeon_;
     Phase current_phase_;
@@ -54,6 +56,7 @@ class Game
     void toggleStoryOutput() { story_output_active_ = !story_output_active_; }
     bool isRunning() const;
     void start();
+    void step();
 
     //Function that promts user input and executes command
     void doCommand();
@@ -66,11 +69,15 @@ class Game
     std::shared_ptr<Player> getPlayerByType(char type);
     void printStoryAndRoom(bool print_story = true);
     void movePlayer(char player_abbrev, std::pair<int, int> position);
+    int getActionCount() { return action_count_; }
     void moveToRoom(int room_id);
+    bool allPlayersAreDead();
+    void printAndSaveScore();
+    std::ostream& returnScoreOutput(std::ostream& os);
 
     Dungeon& getDungeon() {return dungeon_;};
     Story& getStory() const {return story_;};
-    void plusOneActionCount() {++action_count_; };
+    void plusOneActionCount();
 };
 
 #endif //GAME_HPP

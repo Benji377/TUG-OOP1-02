@@ -123,7 +123,6 @@ void StoryCommand::execute(std::vector<std::string> params)
   checkCommandLenght(params, 1);
 
   game_->toggleStoryOutput();
-
 }
 
 void QuitCommand::execute(std::vector<std::string> params)
@@ -255,6 +254,7 @@ void MoveCommand::execute(std::vector<std::string> params)
   {
     IO::printPlayerMoved(player, target_position);
     game_->movePlayer(player->getAbbreviation(), target_position);
+    game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
   {
