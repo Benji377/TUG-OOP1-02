@@ -19,6 +19,17 @@
 using std::vector;
 using std::shared_ptr;
 
+struct AttackedCharacter
+{
+  std::pair<int, int> position;
+  std::string character_name;
+  int lost_health;
+  int total_damage;
+  int resistance_modifier;
+  int armor_value;
+  bool is_dead;
+};
+
 class Dungeon
 {
   private:
@@ -60,7 +71,7 @@ class Dungeon
 
     void characterMove(shared_ptr<Character> character, std::pair<int, int> position);
 
-    void characterAttack(shared_ptr<Character> attacker, std::pair<int, int> target_field);
+    vector<AttackedCharacter> characterAttack(shared_ptr<Character> attacker, std::pair<int, int> target_field);
 
     void lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity);
 

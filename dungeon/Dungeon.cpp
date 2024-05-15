@@ -185,8 +185,9 @@ void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int>
   current_room_->setFieldEntity(character, position.first, position.second);
 }
 
-void Dungeon::characterAttack(shared_ptr<Character> attacker, std::pair <int, int> target_field)
+vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacker, std::pair <int, int> target_field)
 {
+  vector<AttackedCharacter> attacked_characters;
   std::pair<int, int> attacker_position = current_room_->getFieldOfEntity(attacker);
   int damage = attacker->getAttackDamage();
   DamageType damage_type = attacker->getWeapon()->getDamageType();
@@ -202,15 +203,33 @@ void Dungeon::characterAttack(shared_ptr<Character> attacker, std::pair <int, in
           std::dynamic_pointer_cast<Character>(current_room_->getField({i, j})->getEntity());
         if (target != nullptr)
         {
-          target->takeDamage(damage, damage_type);
+          int lost_health = target->takeDamage(damage, damage_type);
           if (target->isDead())
           {
             killCharacter(target);
           }
+          AttackedCharacter attacked_character = { {i, j}, "", lost_health, damage,
+              target->getResistantTo() == damage_type ? 50 : 100, target->getArmor()->getArmorValue(),
+              target->isDead() };
+          shared_ptr<Player> attacked_player = std::dynamic_pointer_cast<Player>(target);
+          shared_ptr<Enemy> attacked_enemy = std::dynamic_pointer_cast<Enemy>(target);
+          if (attacked_player != nullptr)
+          {
+            attacked_character.character_name = attacked_player->getName();
+          }
+          else if (attacked_enemy != nullptr)
+          {
+            std::string enemy_name = attacked_enemy->getTypeName() + " " + std::to_string(attacked_enemy->getId());
+            attacked_character.character_name = enemy_name;
+          }
+          attacked_characters.push_back(attacked_character);
         }
       }
     }
   }
+  sort(attacked_characters.begin(), attacked_characters.end(),
+    [](AttackedCharacter a, AttackedCharacter b) -> bool { return a.position < b.position; });
+  return attacked_characters;
 }
 
 void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
