@@ -149,10 +149,6 @@ void Game::step()
 
     printStoryAndRoom(false);
     current_phase_ = Phase::ACTION;
-    for (auto player : players_)
-    {
-      player->kill();
-    }
   }
 }
 
