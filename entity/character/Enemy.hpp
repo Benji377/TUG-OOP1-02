@@ -23,7 +23,7 @@ class Enemy: public Character
     Enemy(int id, char abbreviation);
     [[nodiscard]] bool is_boss() const;
     int getAttackDamage() override;
-    void takeDamage(int damage, DamageType damage_type) override;
+    int takeDamage(int damage, DamageType damage_type) override;
     void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
     void simplePrint() const override;
     ~Enemy() = default;

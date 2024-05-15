@@ -29,5 +29,6 @@ Pattern DamagePattern::getPattern() const {
 std::vector<std::vector<int>> DamagePattern::getAffectedFields(std::pair<int, int> player_position,
     std::pair<int, int> target_field, int width, int height) const
 {
+  //if (getPattern() == Pattern::HIT)
   return std::vector<std::vector<int>>();
 }

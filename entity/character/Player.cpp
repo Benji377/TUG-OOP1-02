@@ -179,24 +179,22 @@ int Player::getAttackDamage()
   return getActiveWeapon()->getDice()->roll();
 }
 
-void Player::takeDamage(int damage, DamageType damage_type)
+int Player::takeDamage(int damage, DamageType damage_type)
 {
   if (getResistantTo() == damage_type)
   {
-    // Player takes 50% damage
     damage /= 2;
   }
   int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;
-  if (damage_taken < 0)
-  {
-    damage_taken = 0;
-  }
-  setHealth(getHealth() - damage_taken);
+  int lost_health = std::min(getHealth(), std::max(0, damage_taken));
+  setHealth(getHealth() - lost_health);
+
   if (getHealth() <= 0)
   {
     kill();
   }
+  return lost_health;
 }
 
 void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const

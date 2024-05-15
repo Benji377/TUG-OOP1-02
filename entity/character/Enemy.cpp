@@ -76,17 +76,19 @@ bool Enemy::is_boss() const
   return is_boss_;
 }
 
+// TODO: Enemy can only use melee if the player is nearby
+// Therefore we need to reroll or something
 int Enemy::getAttackDamage()
 {
-
   if (getInventory() != nullptr)
   {
     setWeapon(getInventory()->getRandomWeapon());
     return getWeapon()->getDice()->roll();
   }
+  return -1;
 }
 
-void Enemy::takeDamage(int damage, DamageType damage_type)
+int Enemy::takeDamage(int damage, DamageType damage_type)
 {
   if (getResistantTo() == damage_type)
   {
@@ -94,15 +96,14 @@ void Enemy::takeDamage(int damage, DamageType damage_type)
   }
   int defense_points = getBaseArmor() + getArmor()->getArmorValue();
   int damage_taken = damage - defense_points;
-  if (damage_taken < 0)
-  {
-    damage_taken = 0;
-  }
-  setHealth(getHealth() - damage_taken);
+  int lost_health = std::min(getHealth(), std::max(0, damage_taken));
+  setHealth(getHealth() - lost_health);
+
   if (getHealth() <= 0)
   {
     kill();
   }
+  return lost_health;
 }
 
 void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const

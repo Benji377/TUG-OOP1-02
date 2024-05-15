@@ -23,7 +23,7 @@ class Player: public Character
   public:
     Player(int id, char abbreviation, std::string name);
     int getAttackDamage() override;
-    void takeDamage(int damage, DamageType damage_type) override;
+    int takeDamage(int damage, DamageType damage_type) override;
     void setResistance(DamageType damage_type);
     int usePotion(std::string abbreviation);
     void printPlayer(const std::pair<int, int>& position, bool single_line = false) const;

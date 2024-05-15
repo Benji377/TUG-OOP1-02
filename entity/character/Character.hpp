@@ -57,7 +57,7 @@ class Character: public Entity
     void kill() { is_dead_ = true; }
     // Methods
     virtual int getAttackDamage() = 0;
-    virtual void takeDamage(int damage, DamageType damageType) = 0;
+    virtual int takeDamage(int damage, DamageType damageType) = 0;
     virtual void simplePrint() const = 0;
     virtual ~Character() = default;
 };
