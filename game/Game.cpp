@@ -20,6 +20,8 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
 
   parser_->registerCommand("move", std::make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", std::make_unique<LootCommand>(this));
+  parser_->registerCommand("use", std::make_unique<UseCommand>(this));
+
 }
 
 void Game::start()

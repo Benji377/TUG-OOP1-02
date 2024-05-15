@@ -14,7 +14,7 @@ void Command::checkCommandLenght(std::vector<std::string> params, size_t require
   }
 }
 
-void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input) const
+/*void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input) const
 {
   switch(type_of_abbrev)
   {
@@ -32,13 +32,13 @@ void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input) const
       break;
   }
 
-}
+}*/
 
 std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const
 {
   std::string input_abbreviation = params.at(position_of_abbrev_in_params);
 
-  isValidAbbrev(Abbrev::PLAYER, input_abbreviation);
+  //isValidAbbrev(Abbrev::PLAYER, input_abbreviation);
 
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
   char uppercase_input_abbrev = static_cast<char>(toupper(input_abbreviation[0]));
@@ -216,8 +216,6 @@ std::vector<int> Command::getPositionOutOfString(std::string position_string)
 
 std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdjacentField(std::vector<std::string> params)
 {
-  checkCommandLenght(params, 3);
-
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
 
   std::vector<int> target_position_as_vector = getPositionOutOfString(params.at(2));
@@ -237,6 +235,8 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdj
 
 void MoveCommand::execute(std::vector<std::string> params)
 {
+  checkCommandLenght(params, 3);
+
   std::pair<std::shared_ptr<Player>, std::pair<int,int>> player_and_field = getPlayerAndAdjacentField(params);
   std::shared_ptr<Player> player = player_and_field.first;
   std::pair<int,int> target_position = player_and_field.second;
@@ -246,8 +246,8 @@ void MoveCommand::execute(std::vector<std::string> params)
 
   if(entity_on_field == nullptr)
   {
-    game_->movePlayer(player->getAbbreviation(), target_position);
     IO::printPlayerMoved(player, target_position);
+    game_->movePlayer(player->getAbbreviation(), target_position);
     game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
@@ -274,6 +274,8 @@ void MoveCommand::execute(std::vector<std::string> params)
 
 void LootCommand::execute(std::vector<std::string> params)
 {
+  checkCommandLenght(params, 3);
+
   std::pair<std::shared_ptr<Player>, std::pair<int,int>> player_and_field = getPlayerAndAdjacentField(params);
   std::shared_ptr<Player> player = player_and_field.first;
   std::pair<int,int> target_position = player_and_field.second;
@@ -284,6 +286,7 @@ void LootCommand::execute(std::vector<std::string> params)
   if(std::dynamic_pointer_cast<DeathLocation>(entity_on_field) != nullptr)
   {
     game_->getDungeon().lootEntity(player, entity_on_field);
+    game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<TreasureChest>(entity_on_field) != nullptr)
   {
@@ -315,6 +318,7 @@ void LootCommand::execute(std::vector<std::string> params)
       }
       IO::printInventory(inv_of_entity, nullptr);
       game_->getDungeon().lootEntity(player, entity_on_field);
+      game_->plusOneActionCount();
     }
   }
   else
@@ -322,5 +326,53 @@ void LootCommand::execute(std::vector<std::string> params)
     throw InvalidPositionCommand();
   }
 
+}
+
+
+void UseCommand::execute(std::vector<std::string> params)
+{
+  checkCommandLenght(params, 3);
+
+  std::string abbrev = params.at(2);
+  std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
+
+
+  if(abbrev == "BOLT" || abbrev == "ARRW" || !(Utils::isValidItemAbbrev(abbrev)))
+  {
+    throw InvalidParamCommand();
+  }
+
+  std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+  std::shared_ptr<Inventory> player_inv = player->getInventory();
+
+  std::shared_ptr<Potion> potion = player_inv->getPotion(abbrev);
+  if(potion != nullptr)
+  {
+    player->simplePrintNoId();
+    std::cout << " consumed " << potion->getName() << std::endl;
+    player->usePotion(abbrev);
+    game_->plusOneActionCount();
+    return;
+  }
+
+  std::shared_ptr<Weapon> weapon = player_inv->getWeapon(abbrev);
+  if(weapon != nullptr)
+  {
+    player->setActiveWeapon(weapon->getAbbreviation());
+    game_->plusOneActionCount();
+    return;
+  }
+
+  shared_ptr<Armor> armor = player_inv->getArmor(abbrev);
+  if(armor != nullptr)
+  {
+    player->setArmor(abbrev);
+    game_->plusOneActionCount();
+    return;
+  }
+
+  //TODO figure out if an error should be seen as error and promt user again?
+
+  throw UnavailableItemOrEntityCommand();
 
 }

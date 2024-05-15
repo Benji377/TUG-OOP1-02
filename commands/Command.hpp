@@ -15,9 +15,9 @@
 #include <cctype>
 #include <memory>
 #include <vector>
+
 using std::string;
 using std::iostream;
-
 class Game;
 class Player;
 class Door;
@@ -289,6 +289,19 @@ class LootCommand : public Command
 
   virtual void execute(std::vector<std::string> params) override;
 
+};
+
+class UseCommand : public Command
+{
+  public:
+    UseCommand(Game* game) : Command(game) {}
+    virtual ~UseCommand() {};
+    UseCommand(const UseCommand&) = delete;
+
+    virtual void execute(std::vector<std::string> params) override;
+
+  private:
+    std::shared_ptr<Item> getItemOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const;
 };
 
 
