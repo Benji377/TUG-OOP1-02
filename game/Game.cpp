@@ -205,6 +205,8 @@ void Game::doCommand()
       case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
         std::cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
         break;
+      case CommandExecutionException::ExceptionType::NO_AMMUNITION:
+        std::cout << Game::story_.getStorySegment("E_ATTACK_NO_AMMUNITION");
       default:
         break;
     }

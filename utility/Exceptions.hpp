@@ -62,7 +62,7 @@ class InvalidPositionCommand : public std::exception
 class CommandExecutionException : public std::exception {
 public:
     enum class ExceptionType {
-        LOCKED_DOOR, NO_WEAPON_EQUIPPED
+        LOCKED_DOOR, NO_WEAPON_EQUIPPED, NO_AMMUNITION
     };
 
 private:

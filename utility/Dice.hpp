@@ -65,6 +65,11 @@ class Dice
     /// Virtual default destructor for the Dice class.
     //
     virtual ~Dice() = default;
+
+    //Getters for printing in IO- Hanno
+    [[nodiscard]] int getAmount() const { return roll_amount_; };
+    [[nodiscard]] int getType() const { return dice_type_; };
+
 };
 
 

@@ -25,6 +25,7 @@ class Inventory;
 class Item;
 class Room;
 class Character;
+class Dice;
 
 enum class DamageType;
 
@@ -82,6 +83,12 @@ public:
 
   static void printDamageTypeResistance(DamageType type);
 
+  static void printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
+    std::vector<std::vector<int>>& affected_fields);
+
+  friend std::ostream& operator<<(std::ostream& os, std::pair<int,int>& pair);
+
+  static void printDiceRoll(int result, std::shared_ptr<Dice> dice);
 
 
 };

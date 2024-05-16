@@ -119,7 +119,7 @@ std::shared_ptr<Weapon> Player::getActiveWeapon() const
 void Player::simplePrintNoId() const
 {
   std::cout << this->getTypeName() << " " << "[" << this->getAbbreviation() << "] \"" <<
-    this->getName() << "\" ";
+    this->getName() << "\"";
 }
 
 
@@ -160,6 +160,10 @@ int Player::usePotion(std::string abbreviation)
 
 int Player::getAttackDamage()
 {
+  //because of the order in which the command needs to be handled, I had to check for these 2 exceptions
+  //already. Enemies have infinite ammo. I don't say remove it, maybe just something to keep in mind.
+  //btw I took the check ammunition lines from you for the exceptions, they are really elegant -Hanno
+
   // Returns -1 if no weapon is equipped, -2 if no ammunition is available
   if (getActiveWeapon() == nullptr)
   {

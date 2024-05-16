@@ -6,7 +6,13 @@
 #include "../items/Item.hpp"
 #include "../entity/character/Enemy.hpp"
 #include "../items/Weapon.hpp"
+#include "Dice.hpp"
 
+std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& pair) 
+{
+    os << "(" << pair.first << "," << pair.second << ")";
+    return os;
+}
 
 bool IO::checkMagicNumber(char* config_path, std::string magic_number)
 {
@@ -271,5 +277,45 @@ void IO::printDamageTypeResistance(DamageType type)
   }
 
   std::cout << " is now resistant to " << type_name << " until leaving the room." << std::endl;
+
+}
+
+void IO::printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
+    std::vector<std::vector<int>>& affected_fields)
+{
+  player->simplePrintNoId();
+
+  std::cout << " used " << player->getActiveWeapon()->getName() << " on " << target_position << " affecting ";
+
+  bool first_entry = true;
+
+  for(size_t row_nr = 0; row_nr < affected_fields.size(); ++row_nr)
+  {
+    for(size_t column_nr = 0; column_nr < affected_fields[row_nr].size(); ++column_nr)
+    {
+      if (affected_fields[row_nr][column_nr] == 1)
+      {
+        if(!first_entry)
+        {
+          std::cout << ", ";
+        }
+        else
+        {
+          first_entry = false;
+        }
+
+        std::cout << "(" << row_nr << "," << column_nr << ")";
+      }
+    }
+  }
+
+  std::cout << std::endl;
+}
+
+void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
+{
+  std::cout << "[Dice Roll] " << dice->getAmount() << " d" << dice->getType() << " resulting in a total value of "
+   << result << "." << std::endl;
+
 
 }

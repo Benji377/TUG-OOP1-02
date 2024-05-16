@@ -185,11 +185,10 @@ void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int>
   current_room_->setFieldEntity(character, position.first, position.second);
 }
 
-vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacker, std::pair <int, int> target_field)
+vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacker, int damage, std::pair <int, int> target_field)
 {
   vector<AttackedCharacter> attacked_characters;
   std::pair<int, int> attacker_position = current_room_->getFieldOfEntity(attacker);
-  int damage = attacker->getAttackDamage();
   DamageType damage_type = attacker->getWeapon()->getDamageType();
   vector<vector<int>> affected_fields = attacker->getWeapon()->getDamagePattern()->getAffectedFields(attacker_position,
     target_field, current_room_->getWidth(), current_room_->getHeight());

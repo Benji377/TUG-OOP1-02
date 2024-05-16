@@ -71,7 +71,7 @@ class Dungeon
 
     void characterMove(shared_ptr<Character> character, std::pair<int, int> position);
 
-    vector<AttackedCharacter> characterAttack(shared_ptr<Character> attacker, std::pair<int, int> target_field);
+    vector<AttackedCharacter> characterAttack(shared_ptr<Character> attacker, int damage, std::pair<int, int> target_field);
 
     void lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity);
 

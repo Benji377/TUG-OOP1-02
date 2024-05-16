@@ -305,13 +305,14 @@ void LootCommand::execute(std::vector<std::string> params)
     std::cout << "** To unlock this chest you need to roll at least "
     << min_value_to_roll << " to reach the " << chest->getMinValue() << " needed.\n";
 
-    Dice dice = Dice("1 d20");
-    int roll_result = dice.roll();
+    std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d20");
+    int roll_result = dice->roll();
     game_->plusOneActionCount();
 
     if(roll_result < min_value_to_roll)
     {
       std::cout << game_->getStory().getStorySegment("N_LOOT_CHEST_LOCKED");
+      IO::printDiceRoll(roll_result, dice);
     }
     else
     {
@@ -395,28 +396,45 @@ void AttackCommand::execute(std::vector<std::string> params)
   if(players_weapon == nullptr)
   {
     throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED);
+    //TODO InvalidPos Command has higher priority that noweaponequipped. This cannot be checked in that order however
+    //as the type of weapon influences the valid position
   }
 
   std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
+  std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
   if(players_weapon->getAttackType() == AttackType::MELEE)
   {
-    //TODO is this redundant? Can probably be optimised
-    std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
-
     if(!(game_->getCurrentRoom()->isAdjacentField(target_position, current_position)))
     {
       throw InvalidPositionCommand();
     }
-
-    //game_->
   }
-  else if (players_weapon->getAttackType() == AttackType::RANGED)
+  else
   {
-    //std::shared_ptr<Room> all_fields = game_->getCurrentRoom()->getFields();
+    //these 6 lines of code are from Benji, very beautiful!
+    std::string ammoType = (players_weapon->getAbbreviation() == "SBOW" ||
+                            players_weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
+    if (player->getInventory()->getAmmunition(ammoType) == nullptr ||
+                            player->getInventory()->getAmmunition(ammoType)->getAmount() == 0)
+    {
+      throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_AMMUNITION);
+    }
 
   }
 
+  std::vector<std::vector<int>> affected_fields = players_weapon->getDamagePattern()->getAffectedFields(current_position,
+      target_position, game_->getCurrentRoom()->getWidth(), game_->getCurrentRoom()->getHeight());
+
+  IO::printSuccessFullAttack(player, target_position, affected_fields);
+
+  int damage = player->getAttackDamage();
+
+  IO::printDiceRoll(damage, player->getActiveWeapon()->getDice());
+
+  game_->getDungeon().characterAttack(player, damage, target_position);
+
+  game_->plusOneActionCount();
 }
 
 
