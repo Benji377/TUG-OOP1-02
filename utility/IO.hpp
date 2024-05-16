@@ -12,6 +12,7 @@
 #define IO_HPP
 
 #include "Utils.hpp"
+#include "../entity/character/Enemy.hpp"
 #include <memory>
 #include <map>
 
@@ -84,8 +85,11 @@ public:
 
   static void printDamageTypeResistance(DamageType type);
 
-  static void printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
+  static void printSuccessFullPlayerAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
     std::vector<std::vector<int>>& affected_fields);
+
+  static void printSuccessFullEnemyAttack(std::shared_ptr<Enemy> enemy, std::pair<int, int>& target_position,
+    std::vector<AttackedCharacter>& affected_characters);
 
   friend std::ostream& operator<<(std::ostream& os, std::pair<int,int>& pair);
 
@@ -94,7 +98,5 @@ public:
   static void printAttackedCharacters(std::vector<struct AttackedCharacter> characters);
 
 };
-
-
 
 #endif

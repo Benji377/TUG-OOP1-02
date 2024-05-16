@@ -424,9 +424,32 @@ void Game::enemyPhase()
     });
     for (auto player : players)
     {
-      if (enemy->getWeapon()->getAttackType() == AttackType::MELEE)
+      std::pair<int, int> enemy_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(enemy);
+      std::pair<int, int> player_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(player);
+      if (dungeon_.getCurrentRoom()->isAdjacentField(enemy_pos, player_pos))
       {
-        
+        int damage = enemy->getAttackDamage();
+        std::vector<AttackedCharacter> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullEnemyAttack(enemy, player_pos, attacked_charas_sorted);
+        IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
+        IO::printAttackedCharacters(attacked_charas_sorted);
+        break;
+      }
+      else
+      {
+        int damage = enemy->getAttackDamage(AttackType::RANGED);
+        if (damage == -1)
+        {
+          dungeon_.moveToRandomField(enemy);
+          std::cout << "\n" << enemy->getTypeName() << " " << enemy->getId() << " [" << enemy->getAbbreviation() <<
+            enemy->getId() << "] moved to (" << enemy_pos.first << "," << enemy_pos.second << ")." << std::endl;
+          break;
+        }
+        std::vector<AttackedCharacter> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullEnemyAttack(enemy, player_pos, attacked_charas_sorted);
+        IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
+        IO::printAttackedCharacters(attacked_charas_sorted);
+        break;
       }
     }
   }

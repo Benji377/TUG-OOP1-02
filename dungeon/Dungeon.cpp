@@ -1,7 +1,6 @@
 #include "Dungeon.hpp"
 #include "../utility/Utils.hpp"
 #include "../entity/Door.hpp"
-#include "../entity/character/Enemy.hpp"
 #include "../entity/TreasureChest.hpp"
 #include "../entity/DeathLocation.hpp"
 #include <fstream>
@@ -187,6 +186,42 @@ void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int>
   std::pair<int, int> character_position = current_room_->getFieldOfEntity(character);
   current_room_->setFieldEntity(nullptr, character_position.first, character_position.second);
   current_room_->setFieldEntity(character, position.first, position.second);
+}
+
+void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
+  std::pair<int, int> enemy_position = current_room_->getFieldOfEntity(enemy);
+  std::vector<std::pair<int, int>> surrounding_fields = current_room_->getSurroundingFieldPositions(enemy_position, 1);
+  Dice dice = Dice(surrounding_fields.size(), 1);
+  int random_index = dice.roll() - 1;
+  std::pair<int, int> random_position = surrounding_fields[random_index];
+  if (current_room_->getField(random_position)->getEntity() == nullptr)
+  {
+    current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
+    current_room_->setFieldEntity(enemy, random_position.first, random_position.second);
+  }
+  else
+  {
+    int i = 1;
+    bool moved = false;
+    while (!moved)
+    {
+      std::vector<std::pair<int, int>> new_surrounding_fields =
+        current_room_->getSurroundingFieldPositions(enemy_position, i);
+      for (size_t j = 0; j < new_surrounding_fields.size(); j++)
+      {
+        if (current_room_->getField(new_surrounding_fields[j])->getEntity() == nullptr)
+        {
+          std::pair<int, int> new_position = new_surrounding_fields[j];
+          current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
+          current_room_->setFieldEntity(enemy, new_position.first, new_position.second);
+          moved = true;
+          break;
+        }
+      }
+      i++;
+    }
+  }
+
 }
 
 vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacker, int damage, std::pair <int, int> target_field)

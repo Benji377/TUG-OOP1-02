@@ -120,11 +120,29 @@ std::shared_ptr<Weapon> Inventory::getWeapon(const std::string &abbreviation)
 
 std::shared_ptr<Weapon> Inventory::getRandomWeapon()
 {
+  std::cout << "Normal random weapon" << std::endl;
   if (weapons_.empty())
   {
     return nullptr;
   }
-  return weapons_[Oop::Random::getInstance().getRandomNumber(getAllWeapons().size())];
+  return weapons_[Oop::Random::getInstance().getRandomNumber(getAllWeapons().size()) - 1];
+}
+
+std::shared_ptr<Weapon> Inventory::getRandomWeapon(AttackType attack_type)
+{
+  std::vector<std::shared_ptr<Weapon>> weapons;
+  for (auto & weapon : weapons_)
+  {
+    if (weapon->getAttackType() == attack_type)
+    {
+      weapons.push_back(weapon);
+    }
+  }
+  if (weapons.empty())
+  {
+    return nullptr;
+  }
+  return weapons[Oop::Random::getInstance().getRandomNumber(weapons.size()) - 1];
 }
 
 

@@ -310,7 +310,7 @@ void IO::printDamageTypeResistance(DamageType type)
 
 }
 
-void IO::printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
+void IO::printSuccessFullPlayerAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
     std::vector<std::vector<int>>& affected_fields)
 {
   player->simplePrintNoId();
@@ -339,6 +339,29 @@ void IO::printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, i
     }
   }
 
+  std::cout << "." << std::endl;
+}
+
+// TODO: Merge this function with the one above
+void IO::printSuccessFullEnemyAttack(std::shared_ptr<Enemy> enemy, std::pair<int, int>& target_position,
+    std::vector<AttackedCharacter>& affected_characters)
+{
+  std::cout << "\n" << enemy->getTypeName() << " " << enemy->getId() << " [" << enemy->getAbbreviation() <<
+    enemy->getId() << "] used " << "\"" << enemy->getWeapon()->getName() << "\"" << " on " << target_position <<
+    " affecting ";
+  bool first_entry = true;
+  for (const auto& character : affected_characters)
+  {
+    if(!first_entry)
+    {
+      std::cout << ", ";
+    }
+    else
+    {
+      first_entry = false;
+    }
+    std::cout << "(" << character.position.first << "," << character.position.second << ")";
+  }
   std::cout << "." << std::endl;
 }
 
