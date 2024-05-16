@@ -72,6 +72,7 @@ class Game
     bool allPlayersAreDead();
     void printAndSaveScore();
     std::ostream& returnScoreOutput(std::ostream& os);
+    void enemyPhase();
 
     Dungeon& getDungeon() {return dungeon_;};
     Story& getStory() const {return story_;};

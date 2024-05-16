@@ -113,13 +113,17 @@ int Dungeon::getCompletedRoomsCount() const
   return count;
 }
 
-void Dungeon::moveToRoom(int room_id)
+int Dungeon::moveToRoom(int room_id)
 {
+  if (room_id == 0)
+  {
+    return 1;
+  }
   int current_room_id = current_room_->getId();
   vector<shared_ptr<Player>> players = exitCurrentRoom();
   current_room_ = rooms_[room_id];
   enterCurrentRoom(current_room_id, players);
-  printCurrentRoom();
+  return 0;
 }
 
 vector<shared_ptr<Player>> Dungeon::exitCurrentRoom()
@@ -135,7 +139,7 @@ vector<shared_ptr<Player>> Dungeon::exitCurrentRoom()
         shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(fields[i][j]->getEntity());
         if (player != nullptr)
         {
-          current_room_->setFieldEntity(nullptr, i, j);
+          current_room_->setFieldEntity(nullptr, i + 1, j + 1);
           players.push_back(player);
         }
       }

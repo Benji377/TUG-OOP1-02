@@ -56,7 +56,7 @@ class Dungeon
     void addOccuredEnemyType(char type) { occured_enemy_types_.push_back(type); }
     int getCompletedRoomsCount() const;
     int getRoomCount() const { return rooms_.size() - 1; }
-    void moveToRoom(int room_id);
+    int moveToRoom(int room_id);
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Helper function for moveToRoom that removes all players from the current room and returns them

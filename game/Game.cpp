@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include <algorithm>
 
+#define M_PI 3.14159265358979323846
 #define MIN_PLAYERS 1
 #define MAX_PLAYERS 3
 #define MAX_NAME_LENGTH 10
@@ -138,17 +139,7 @@ void Game::step()
   else if (current_phase_ == Phase::ENEMY)
   {
     std::cout << "Enemie Phase" << std::endl;
-    std::vector<std::shared_ptr<Enemy>> enemies = dungeon_.getCurrentRoom()->getAllEntitiesOfType<Enemy>();
-    std::sort(enemies.begin(), enemies.end(),
-    [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
-    {
-      if (a->getAbbreviation() == b->getAbbreviation())
-      {
-        return a->getId() < b->getId();
-      }
-      return a->getAbbreviation() < b->getAbbreviation();
-    });
-
+    enemyPhase();
     printStoryAndRoom(false);
     current_phase_ = Phase::ACTION;
   }
@@ -390,6 +381,53 @@ void Game::printAndSaveScore()
     else
     {
       std::cout << Game::story_.getStorySegment("E_SCORING_FILE_NOT_WRITABLE");
+    }
+  }
+}
+
+void Game::enemyPhase()
+{
+  std::vector<std::shared_ptr<Enemy>> enemies = dungeon_.getCurrentRoom()->getAllEntitiesOfType<Enemy>();
+    std::sort(enemies.begin(), enemies.end(),
+    [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
+    {
+      if (a->getAbbreviation() == b->getAbbreviation())
+      {
+        return a->getId() < b->getId();
+      }
+      return a->getAbbreviation() < b->getAbbreviation();
+    });
+  for (auto enemy : enemies)
+  {
+    std::vector<std::shared_ptr<Player>> players = dungeon_.getCurrentRoom()->getAllEntitiesOfType<Player>();
+    std::sort(players.begin(), players.end(), [this, enemy](const std::shared_ptr<Player>& a, const std::shared_ptr<Player>& b) {
+      std::pair<int, int> a_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(a);
+      std::pair<int, int> b_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(b);
+      std::pair<int, int> enemy_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(enemy);
+
+      int distA = std::abs(a_pos.first - enemy_pos.first) + std::abs(a_pos.second - enemy_pos.second);
+      int distB = std::abs(b_pos.first - enemy_pos.first) + std::abs(b_pos.second - enemy_pos.second);
+
+      if (distA == distB)
+      {
+        if (a->getHealth() == b->getHealth())
+        {
+          // Start code from copilot TODO: Does not work
+          double angleA = atan2(a_pos.second - enemy_pos.second, a_pos.first - enemy_pos.first);
+          double angleB = atan2(b_pos.second - enemy_pos.second, b_pos.first - enemy_pos.first);
+          // End code from copilot
+          return angleA < angleB;
+        }
+        return a->getHealth() < b->getHealth();
+      }
+      return distA < distB;
+    });
+    for (auto player : players)
+    {
+      if (enemy->getWeapon()->getAttackType() == AttackType::MELEE)
+      {
+        
+      }
     }
   }
 }

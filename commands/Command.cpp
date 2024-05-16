@@ -267,7 +267,14 @@ void MoveCommand::execute(std::vector<std::string> params)
     else
     {
       IO::printPlayerMoved(player, target_position);
-      game_->getDungeon().moveToRoom(door->getLeadsTo());
+      int result = game_->getDungeon().moveToRoom(door->getLeadsTo());
+      if (result == 1)
+      {
+        std::cout << game_->getStory().getStorySegment("N_FLIGHT");
+        game_->toggleGameRunning();
+        game_->printAndSaveScore();
+        return;
+      }
       game_->printStoryAndRoom();
     }
 
