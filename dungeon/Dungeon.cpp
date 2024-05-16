@@ -207,8 +207,15 @@ vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacke
           {
             killCharacter(target);
           }
+
+          int armor_value = 0;
+          if(target->getArmor() != nullptr)
+          {
+            armor_value = target->getArmor()->getArmorValue(); //fixed case where target has no armor
+          }
+
           AttackedCharacter attacked_character = { {i, j}, "", lost_health, damage,
-              target->getResistantTo() == damage_type ? 50 : 100, target->getArmor()->getArmorValue(),
+              target->getResistantTo() == damage_type ? 50 : 100, armor_value,
               target->isDead() };
           shared_ptr<Player> attacked_player = std::dynamic_pointer_cast<Player>(target);
           shared_ptr<Enemy> attacked_enemy = std::dynamic_pointer_cast<Enemy>(target);

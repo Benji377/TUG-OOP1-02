@@ -428,11 +428,13 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   IO::printSuccessFullAttack(player, target_position, affected_fields);
 
-  int damage = player->getAttackDamage();
+  int damage = player->getAttackDamage(); //TODO is this supposed to throw an exception?
 
   IO::printDiceRoll(damage, player->getActiveWeapon()->getDice());
 
-  game_->getDungeon().characterAttack(player, damage, target_position);
+  std::vector<AttackedCharacter> attacked_chars_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
+
+  IO::printAttackedCharacters(attacked_chars_sorted);
 
   game_->plusOneActionCount();
 }

@@ -90,6 +90,9 @@ public:
 
   static void printDiceRoll(int result, std::shared_ptr<Dice> dice);
 
+  static void printAttackedCharacters(std::vector<struct AttackedCharacter> characters);
+
+
 
 };
 

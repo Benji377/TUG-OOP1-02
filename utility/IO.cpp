@@ -319,3 +319,8 @@ void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
 
 
 }
+
+void IO::printAttackedCharacters(std::vector<struct AttackedCharacter> characters)
+{
+  
+}
