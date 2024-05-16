@@ -7,6 +7,7 @@
 #include "../entity/character/Enemy.hpp"
 #include "../items/Weapon.hpp"
 #include "Dice.hpp"
+#include "../dungeon/Dungeon.hpp"
 
 std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& pair) 
 {
@@ -274,6 +275,8 @@ void IO::printDamageTypeResistance(DamageType type)
     case DamageType::FORCE:
       type_name = "Force";
       break;
+    default:
+      break;
   }
 
   std::cout << " is now resistant to " << type_name << " until leaving the room." << std::endl;
@@ -322,5 +325,15 @@ void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
 
 void IO::printAttackedCharacters(std::vector<struct AttackedCharacter> characters)
 {
-  
+  for(struct AttackedCharacter character : characters)
+  {
+    std::cout << character.character_name << " loses " << character.lost_health << " health " << "("
+              << character.total_damage << " * " << character.resistance_modifier << " - " << character.armor_value
+              << ")" << std::endl;
+
+    if(character.is_dead)
+    {
+      std::cout << character.character_name << " was defeated." << std::endl;
+    }
+  }
 }
