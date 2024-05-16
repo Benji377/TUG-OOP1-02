@@ -24,15 +24,18 @@ public:
   explicit DamagePattern(std::string &pattern);
   [[nodiscard]] Pattern getPattern() const;
 
-  std::vector<std::vector<int>> hitPattern(std::pair<int, int> target_field, int width, int height) const;
-  std::vector<std::vector<int>> slashPattern(std::pair<int, int> player_position,
-                                             std::pair<int, int> target_field, int width, int height) const;
-  std::vector<std::vector<int>> linePattern(std::pair<int, int> player_position,
-                                            std::pair<int, int> target_field, int width, int height) const;
-  std::vector<std::vector<int>> burstPattern(std::pair<int, int> target_field, int width, int height) const;
-  std::vector<std::vector<int>> shotPattern(std::pair<int, int> target_field, int width, int height) const;
-  std::vector<std::vector<int>> thrustPattern(std::pair<int, int> player_position,
-                                              std::pair<int, int> target_field, int width, int height) const;
+  std::vector<std::vector<int>> hitPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                           std::vector<std::vector<int>> affected_fields) const;
+  std::vector<std::vector<int>> slashPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                             std::vector<std::vector<int>> affected_fields) const;
+  std::vector<std::vector<int>> linePattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                            std::vector<std::vector<int>> affected_fields) const;
+  std::vector<std::vector<int>> burstPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                             std::vector<std::vector<int>> affected_fields) const;
+  std::vector<std::vector<int>> shotPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                            std::vector<std::vector<int>> affected_fields) const;
+  std::vector<std::vector<int>> thrustPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                                              std::vector<std::vector<int>> affected_fields) const;
 
   std::vector<std::vector<int>> getAffectedFields(std::pair<int, int> player_position,
                                                   std::pair<int, int> target_field, int width, int height) const;
