@@ -68,9 +68,7 @@ class Game
     vector<std::shared_ptr<Player>> getPlayers() { return players_; }
     std::shared_ptr<Player> getPlayerByType(char type);
     void printStoryAndRoom(bool print_story = true);
-    void playerMove(char player_abbrev, std::pair<int, int> position);
     int getActionCount() { return action_count_; }
-    void moveToRoom(int room_id);
     bool allPlayersAreDead();
     void printAndSaveScore();
     std::ostream& returnScoreOutput(std::ostream& os);

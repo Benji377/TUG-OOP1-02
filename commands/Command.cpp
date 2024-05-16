@@ -253,7 +253,8 @@ void MoveCommand::execute(std::vector<std::string> params)
   if(entity_on_field == nullptr)
   {
     IO::printPlayerMoved(player, target_position);
-    game_->playerMove(player->getAbbreviation(), target_position);
+    game_->getDungeon().characterMove(player, target_position);
+    game_->printStoryAndRoom(false);
     game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
@@ -266,7 +267,8 @@ void MoveCommand::execute(std::vector<std::string> params)
     else
     {
       IO::printPlayerMoved(player, target_position);
-      game_->moveToRoom(door->getLeadsTo());
+      game_->getDungeon().moveToRoom(door->getLeadsTo());
+      game_->printStoryAndRoom();
     }
 
   }
@@ -406,6 +408,8 @@ void AttackCommand::execute(std::vector<std::string> params)
     {
       throw InvalidPositionCommand();
     }
+
+    //game_->
   }
   else if (players_weapon->getAttackType() == AttackType::RANGED)
   {
