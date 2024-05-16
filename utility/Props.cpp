@@ -7,15 +7,15 @@ std::shared_ptr<Potion> Props::craftPotion(std::string abbreviation)
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for potion");
   }
-  if (row[3].empty())
+  if (row[2].empty()) //TODO check if this is okay. Otherwise ++ every number
   {
     // It's a health potion
-    return std::make_shared<Potion>(abbreviation, row[1], "health", std::make_shared<Dice>(row[4]));
+    return std::make_shared<Potion>(abbreviation, row[1], "health", std::make_shared<Dice>(row[3]));
   }
   else
   {
     // It's a resistance potion
-    return std::make_shared<Potion>(abbreviation, row[1], row[3], nullptr);
+    return std::make_shared<Potion>(abbreviation, row[1], row[2], nullptr);
   }
 }
 

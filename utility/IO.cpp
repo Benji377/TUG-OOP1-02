@@ -59,9 +59,36 @@ std::string IO::promtUserInput(bool check_input)
 std::vector<std::string> IO::commandifyString(std::string input)
 {
   Utils::normalizeString(input);
-  std::vector<std::string> vectorised_string = Utils::splitString(input, " ");
 
-  return vectorised_string;
+  //Code from ChatGPT to split the string into vectors
+  //Begin
+  std::vector<std::string> tokens;
+  std::string token;
+  bool in_token = false;
+  for (std::string::const_iterator it = input.begin(); it != input.end(); ++it) 
+  {
+    if(std::isspace(*it))
+    {
+      if(in_token)
+      {
+        tokens.push_back(token);
+        token.clear();
+        in_token = false;
+      }
+    }
+    else
+    {
+      token.push_back(*it);
+      in_token = true;
+    }
+  }
+  if(in_token)
+  {
+    tokens.push_back(token);
+  }
+  //End
+
+  return tokens;
 }
 
 void IO::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room)
@@ -254,7 +281,7 @@ void IO::printPlayerInventory(std::shared_ptr<Player> player)
 void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
 {
   player->simplePrintNoId();
-  std::cout << "moved to " << "(" << position.first << "," << position.second << ")." << std::endl;
+  std::cout << " moved to " << "(" << position.first << "," << position.second << ")." << std::endl;
 }
 
 void IO::printDamageTypeResistance(DamageType type)
@@ -288,7 +315,7 @@ void IO::printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, i
 {
   player->simplePrintNoId();
 
-  std::cout << " used " << player->getActiveWeapon()->getName() << " on " << target_position << " affecting ";
+  std::cout << " used " << "\"" << player->getActiveWeapon()->getName() << "\"" << " on " << target_position << " affecting ";
 
   bool first_entry = true;
 
@@ -312,13 +339,13 @@ void IO::printSuccessFullAttack(std::shared_ptr<Player> player, std::pair<int, i
     }
   }
 
-  std::cout << std::endl;
+  std::cout << "." << std::endl;
 }
 
 void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
 {
   std::cout << "[Dice Roll] " << dice->getAmount() << " d" << dice->getType() << " resulting in a total value of "
-   << result << "." << std::endl;
+   << result << "." << std::endl << std::endl;
 
 
 }
@@ -328,8 +355,8 @@ void IO::printAttackedCharacters(std::vector<struct AttackedCharacter> character
   for(struct AttackedCharacter character : characters)
   {
     std::cout << character.character_name << " loses " << character.lost_health << " health " << "("
-              << character.total_damage << " * " << character.resistance_modifier << " - " << character.armor_value
-              << ")" << std::endl;
+              << character.total_damage << " * " << character.resistance_modifier << " % - " << character.armor_value
+              << ")." << std::endl;
 
     if(character.is_dead)
     {

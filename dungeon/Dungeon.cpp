@@ -208,7 +208,7 @@ vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacke
             killCharacter(target);
           }
 
-          int armor_value = 0;
+          int armor_value = target->getBaseArmor();
           if(target->getArmor() != nullptr)
           {
             armor_value = target->getArmor()->getArmorValue(); //fixed case where target has no armor

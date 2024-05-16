@@ -308,11 +308,11 @@ void LootCommand::execute(std::vector<std::string> params)
     std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d20");
     int roll_result = dice->roll();
     game_->plusOneActionCount();
+    IO::printDiceRoll(roll_result, dice);
 
     if(roll_result < min_value_to_roll)
     {
       std::cout << game_->getStory().getStorySegment("N_LOOT_CHEST_LOCKED");
-      IO::printDiceRoll(roll_result, dice);
     }
     else
     {
@@ -367,7 +367,14 @@ void UseCommand::execute(std::vector<std::string> params)
   std::shared_ptr<Weapon> weapon = player_inv->getWeapon(abbrev);
   if(weapon != nullptr)
   {
+    if(player->getActiveWeapon() == weapon)
+    {
+      player->setActiveWeapon(nullptr);
+    }
+    else
+    {
     player->setActiveWeapon(weapon->getAbbreviation());
+    }
     game_->plusOneActionCount();
     return;
   }
@@ -375,7 +382,14 @@ void UseCommand::execute(std::vector<std::string> params)
   shared_ptr<Armor> armor = player_inv->getArmor(abbrev);
   if(armor != nullptr)
   {
-    player->setArmor(abbrev);
+    if(player->getArmor() == armor)
+    {
+      player->setArmor(nullptr);
+    }
+    else
+    {
+      player->setArmor(abbrev);
+    }
     game_->plusOneActionCount();
     return;
   }

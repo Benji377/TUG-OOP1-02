@@ -212,7 +212,7 @@ void Player::printPlayer(const std::pair<int, int>& position, bool single_line) 
 {
   simplePrintNoId();
 
-  std::cout << "on "<< "(" << position.first << "," << position.second << ")" << std::endl;
+  std::cout << " on "<< "(" << position.first << "," << position.second << ")" << std::endl;
   if (single_line)
   {
     return;
