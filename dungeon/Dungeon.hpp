@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include "../entity/character/Player.hpp"
+#include "../entity/character/Enemy.hpp"
 #include "Room.hpp"
 
 using std::vector;
@@ -70,6 +71,8 @@ class Dungeon
     void enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players);
 
     void characterMove(shared_ptr<Character> character, std::pair<int, int> position);
+
+    void moveToRandomField(std::shared_ptr<Enemy> enemy);
 
     vector<AttackedCharacter> characterAttack(shared_ptr<Character> attacker, int damage, std::pair<int, int> target_field);
 

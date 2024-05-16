@@ -76,13 +76,26 @@ bool Enemy::is_boss() const
   return is_boss_;
 }
 
-// TODO: Enemy can only use melee if the player is nearby
-// Therefore we need to reroll or something
 int Enemy::getAttackDamage()
 {
   if (getInventory() != nullptr)
   {
     setWeapon(getInventory()->getRandomWeapon());
+    return getWeapon()->getDice()->roll();
+  }
+  return -1;
+}
+
+int Enemy::getAttackDamage(AttackType attack_type)
+{
+  if (getInventory() != nullptr)
+  {
+    std::shared_ptr<Weapon> weapon = getInventory()->getRandomWeapon(attack_type);
+    if (weapon == nullptr)
+    {
+      return -1;
+    }
+    setWeapon(weapon);
     return getWeapon()->getDice()->roll();
   }
   return -1;

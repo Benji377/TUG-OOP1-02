@@ -126,6 +126,8 @@ class Room
     ///
     std::vector<std::shared_ptr<Field>> getSurroundingFields(std::pair<int, int> position, int distance = 1);
 
+    std::vector<std::pair<int, int>> getSurroundingFieldPositions(std::pair<int, int> position, int distance = 1);
+
     template <typename T>
     std::vector<std::shared_ptr<T>> getAllEntitiesOfType() {
       std::vector<std::shared_ptr<T>> entities;

@@ -188,6 +188,33 @@ std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, in
   return surroundingFields;
 }
 
+// TODO: Combine this function with the one above.
+std::vector<std::pair<int, int>> Room::getSurroundingFieldPositions(std::pair<int, int> position, int distance)
+{
+  std::vector<std::pair<int, int>> surroundingFieldPositions;
+  std::vector<std::pair<int, int>> directions_1 = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
+  std::vector<std::pair<int, int>> directions_2 = {{-2, 0}, {-2, 1}, {-2, 2}, {-1, 2}, {0, 2}, {1, 2}, {2, 2}, {2, 1},
+                                            {2, 0}, {2, -1}, {2, -2}, {1, -2}, {0, -2}, {-1, -2}, {-2, -2}, {-2, -1}};
+  position.first -= 1;
+  position.second -= 1;
+
+  std::vector<std::pair<int, int>> directions = distance == 1 ? directions_1 : directions_2;
+  for (const auto& dir : directions)
+  {
+    int newRow = position.first + dir.first;
+    int newCol = position.second + dir.second;
+
+    // Check if the new row and column are within the grid boundaries
+    if (newRow >= 0 && (size_t)newRow < fields_.size() && newCol >= 0 && (size_t)newCol < fields_[0].size())
+    {
+      surroundingFieldPositions.push_back(std::make_pair(newRow + 1, newCol + 1));
+    }
+  }
+
+  return surroundingFieldPositions;
+
+}
+
 bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2)
 {
   int row_nr = fields_.size();

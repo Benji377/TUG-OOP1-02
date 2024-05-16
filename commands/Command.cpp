@@ -447,7 +447,7 @@ void AttackCommand::execute(std::vector<std::string> params)
   std::vector<std::vector<int>> affected_fields = players_weapon->getDamagePattern()->getAffectedFields(current_position,
       target_position, game_->getCurrentRoom()->getWidth(), game_->getCurrentRoom()->getHeight());
 
-  IO::printSuccessFullAttack(player, target_position, affected_fields);
+  IO::printSuccessFullPlayerAttack(player, target_position, affected_fields);
 
   int damage = player->getAttackDamage(); //TODO is this supposed to throw an exception?
 
@@ -456,6 +456,8 @@ void AttackCommand::execute(std::vector<std::string> params)
   std::vector<AttackedCharacter> attacked_chars_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
 
   IO::printAttackedCharacters(attacked_chars_sorted);
+
+  game_->printStoryAndRoom(false);
 
   game_->plusOneActionCount();
 }
