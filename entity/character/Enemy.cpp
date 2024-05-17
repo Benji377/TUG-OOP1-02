@@ -81,7 +81,7 @@ int Enemy::getAttackDamage()
   if (getInventory() != nullptr)
   {
     setWeapon(getInventory()->getRandomWeapon());
-    return getWeapon()->getDice()->roll();
+    return getWeapon()->getDamage();
   }
   return -1;
 }
@@ -96,7 +96,7 @@ int Enemy::getAttackDamage(AttackType attack_type)
       return -1;
     }
     setWeapon(weapon);
-    return getWeapon()->getDice()->roll();
+    return getWeapon()->getDamage();
   }
   return -1;
 }
