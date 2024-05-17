@@ -135,8 +135,6 @@ void Game::step()
     printStoryAndRoom(false);
     current_phase_ = Phase::ACTION;
   }
-  dungeon_.getCurrentRoom()->checkCompletion();
-  dungeon_.getCurrentRoom()->openDoors();
   if (allPlayersAreDead())
   {
     std::cout << Game::story_.getStorySegment("N_DEFEAT");
@@ -276,6 +274,8 @@ std::shared_ptr<Room> Game::getCurrentRoom()
 
 void Game::printStoryAndRoom(bool print_story)
 {
+  dungeon_.getCurrentRoom()->checkCompletion();
+  dungeon_.getCurrentRoom()->openDoors();
   if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_ && print_story)
   {
     std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
