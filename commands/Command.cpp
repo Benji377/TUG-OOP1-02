@@ -449,7 +449,7 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   }
 
-  int damage = player->getAttackDamage(); //TODO is this supposed to throw an exception?
+  int damage = player->getAttackDamage();
 
   std::vector<AttackedField> attacked_fields_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
 
