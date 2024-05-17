@@ -83,8 +83,8 @@ std::vector<std::vector<int>> DamagePattern::thrustPattern(std::pair<int, int> p
   int row_diff = target_field.first - player_pos.first;
   int col_diff = target_field.second - player_pos.second;
   std::pair<int, int> additional_field = {target_field.first + row_diff, target_field.second + col_diff};
-  if (additional_field.first >= 0 && additional_field.first < affected_fields.size() &&
-      additional_field.second >= 0 && additional_field.second < affected_fields[0].size())
+  if (additional_field.first >= 0 && additional_field.first < static_cast<int>(affected_fields.size()) &&
+      additional_field.second >= 0 && additional_field.second < static_cast<int>(affected_fields[0].size()))
   {
     affected_fields[additional_field.first][additional_field.second] = 1;
   }
@@ -112,13 +112,13 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
     std::pair<int, int> additional_field1 = {target_field.first + col_diff, target_field.second - row_diff};
     std::pair<int, int> additional_field2 = {target_field.first - col_diff, target_field.second + row_diff};
 
-    if (additional_field1.first >= 0 && additional_field1.first < affected_fields.size() &&
-        additional_field1.second >= 0 && additional_field1.second < affected_fields[0].size())
+    if (additional_field1.first >= 0 && additional_field1.first < static_cast<int>(affected_fields.size()) &&
+        additional_field1.second >= 0 && additional_field1.second < static_cast<int>(affected_fields[0].size()))
     {
       affected_fields[additional_field1.first][additional_field1.second] = 1;
     }
-    if (additional_field2.first >= 0 && additional_field2.first < affected_fields.size() &&
-        additional_field2.second >= 0 && additional_field2.second < affected_fields[0].size())
+    if (additional_field2.first >= 0 && additional_field2.first < static_cast<int>(affected_fields.size()) &&
+        additional_field2.second >= 0 && additional_field2.second < static_cast<int>(affected_fields[0].size()))
     {
       affected_fields[additional_field2.first][additional_field2.second] = 1;
     }
@@ -154,13 +154,13 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
       throw std::invalid_argument("[DAMAGEPATTERN] Slash - Invalid target field (diagonal)");
     }
 
-    if (additional_field1.first >= 0 && additional_field1.first < affected_fields.size() &&
-        additional_field1.second >= 0 && additional_field1.second < affected_fields[0].size())
+    if (additional_field1.first >= 0 && additional_field1.first < static_cast<int>(affected_fields.size()) &&
+        additional_field1.second >= 0 && additional_field1.second < static_cast<int>(affected_fields[0].size()))
     {
       affected_fields[additional_field1.first][additional_field1.second] = 1;
     }
-    if (additional_field2.first >= 0 && additional_field2.first < affected_fields.size() &&
-        additional_field2.second >= 0 && additional_field2.second < affected_fields[0].size())
+    if (additional_field2.first >= 0 && additional_field2.first < static_cast<int>(affected_fields.size()) &&
+        additional_field2.second >= 0 && additional_field2.second < static_cast<int>(affected_fields[0].size()))
     {
       affected_fields[additional_field2.first][additional_field2.second] = 1;
     }
@@ -191,8 +191,8 @@ std::vector<std::vector<int>> DamagePattern::linePattern(std::pair<int, int> pla
   std::pair<int, int> next_field = {target_field.first + row_diff, target_field.second + col_diff};
 
   // Check if the next field is within the bounds of the grid
-  while (next_field.first >= 0 && next_field.first < affected_fields.size() &&
-         next_field.second >= 0 && next_field.second < affected_fields[0].size())
+  while (next_field.first >= 0 && next_field.first < static_cast<int>(affected_fields.size()) &&
+         next_field.second >= 0 && next_field.second < static_cast<int>(affected_fields[0].size()))
   {
     // Mark the next field as affected
     affected_fields[next_field.first][next_field.second] = 1;
@@ -229,8 +229,8 @@ std::vector<std::vector<int>> DamagePattern::burstPattern(std::pair<int, int> ta
   // Check if the adjacent fields are within the bounds of the grid
   for (const auto& field : adjacent_fields)
   {
-    if (field.first >= 0 && field.first < affected_fields.size() && field.second >= 0 &&
-        field.second < affected_fields[0].size())
+    if (field.first >= 0 && field.first < static_cast<int>(affected_fields.size()) && field.second >= 0 &&
+        field.second < static_cast<int>(affected_fields[0].size()))
     {
       // Mark the adjacent field as affected
       affected_fields[field.first][field.second] = 1;
@@ -245,24 +245,24 @@ void DamagePattern::printDamagePattern(const std::vector<std::vector<int>> &dama
   {
   // Print the column numbers
   std::cout << "   ";
-  for (int i = 0; i < damagePattern[0].size(); ++i) {
+  for (int i = 0; i < static_cast<int>(damagePattern[0].size()); ++i) {
     std::cout << " " << i + 1 << "  ";
   }
   std::cout << "\n";
 
   // Print the top border
   std::cout << "  ";
-  for (int i = 0; i < damagePattern[0].size(); ++i) {
+  for (int i = 0; i < static_cast<int>(damagePattern[0].size()); ++i) {
     std::cout << "+---";
   }
   std::cout << "+\n";
 
   // Print the rows with cell values
-  for (int i = 0; i < damagePattern.size(); ++i) {
+  for (int i = 0; i < static_cast<int>(damagePattern.size()); ++i) {
     std::cout << i + 1 << " ";  // Print the row number
-    for (int j = 0; j < damagePattern[i].size(); ++j) {
+    for (int j : damagePattern[i]) {
       std::cout << "|";
-      switch (damagePattern[i][j]) {
+      switch (j) {
         case 0:
           std::cout << "   ";
           break;
@@ -284,7 +284,7 @@ void DamagePattern::printDamagePattern(const std::vector<std::vector<int>> &dama
 
     // Print the border between rows
     std::cout << "  ";
-    for (int j = 0; j < damagePattern[i].size(); ++j) {
+    for (int j = 0; j < static_cast<int>(damagePattern[i].size()); ++j) {
       std::cout << "+---";
     }
     std::cout << "+\n";
