@@ -66,3 +66,8 @@ DamageType Weapon::parseDamageType(std::string &damage_type)
   }
   return damageTypeMap[damage_type];
 }
+
+int Weapon::getDamage() const
+{
+  return getDice()->roll() + getDamageAddition();
+}

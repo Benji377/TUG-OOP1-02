@@ -180,7 +180,7 @@ int Player::getAttackDamage()
     }
   }
 
-  return getActiveWeapon()->getDice()->roll();
+  return getActiveWeapon()->getDamage();
 }
 
 int Player::takeDamage(int damage, DamageType damage_type)
