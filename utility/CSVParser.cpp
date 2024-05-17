@@ -23,7 +23,7 @@ bool checkFile(const std::string& filename)
   }
   catch (const std::exception& e)
   {
-    std::cout << "[CSVParser] Error: " << e.what() << std::endl;
+    std::cout << "[CSVPARSER] Error: " << e.what() << std::endl;
     return false;
   }
 }
@@ -70,7 +70,7 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
       return row;
     }
   }
-  std::cerr << "Error: Abbreviation " << abbreviation << " not found" << std::endl;
+  std::cout << "[CSVPARSER] Error: Abbreviation " << abbreviation << " not found in file " << filename << std::endl;
   return {};
 }
 
@@ -94,5 +94,6 @@ std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
     }
   }
   // If the abbreviation was not found in any of the files, return an empty string
+  std::cout << "[CSVPARSER] Error: Abbreviation " << abbreviation << " not found in any file" << std::endl;
   return "";
 }

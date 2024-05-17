@@ -45,7 +45,7 @@ AttackType Weapon::parseAttackType(std::string &attack_type)
   };
   if (attackTypeMap.count(attack_type) == 0)
   {
-    throw std::invalid_argument("Invalid attack type");
+    throw std::invalid_argument("[WEAPON] Invalid attack type");
   }
   return attackTypeMap[attack_type];
 }
@@ -62,7 +62,7 @@ DamageType Weapon::parseDamageType(std::string &damage_type)
   };
   if (damageTypeMap.count(damage_type) == 0)
   {
-    throw std::invalid_argument("Invalid damage type");
+    throw std::invalid_argument("[WEAPON] Invalid damage type");
   }
   return damageTypeMap[damage_type];
 }

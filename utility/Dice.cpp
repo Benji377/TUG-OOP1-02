@@ -7,16 +7,18 @@ Dice::Dice(const std::string& dice)
   std::pair<int, int> parsed = parseDice(dice);
   roll_amount_ = parsed.first;
   dice_type_ = parsed.second;
+  previous_roll_ = -1;
 }
 
-int Dice::roll() const
+int Dice::roll()
 {
   int result = 0;
-  for (int i = 0; i < roll_amount_; i++)
+  for (int i = 0; i < getAmount(); i++)
   {
     // The random number is generated in the range [1, dice_type_]
-    result += (int)Oop::Random::getInstance().getRandomNumber(dice_type_); //TODO is it intended that this throws and exception? -Hanno
+    result += (int)Oop::Random::getInstance().getRandomNumber(getType());
   }
+  setPreviousRoll(result);
   return result;
 }
 
@@ -26,8 +28,7 @@ std::pair<int, int> Dice::parseDice(const std::string& dice)
   size_t d_pos = dice.find('d');
   if (d_pos == std::string::npos)
   {
-    // TODO: Change to custom exception
-    throw std::invalid_argument("Invalid dice string");
+    throw std::invalid_argument("[DICE] Invalid dice string");
   }
   std::string amount = dice.substr(0, d_pos);
   std::string type = dice.substr(d_pos + 1);
