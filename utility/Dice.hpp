@@ -66,8 +66,18 @@ class Dice
     //
     virtual ~Dice() = default;
 
-    //Getters for printing in IO- Hanno
+    //-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter functions for the dice roll amount
+    /// @return The dice roll amount.
+    //
     [[nodiscard]] int getAmount() const { return roll_amount_; };
+
+    //-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter function for the dice type
+    /// @return The dice type.
+    //
     [[nodiscard]] int getType() const { return dice_type_; };
 
 };

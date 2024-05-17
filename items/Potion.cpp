@@ -23,7 +23,7 @@ Effect Potion::parseEffect(std::string& effect)
   };
   if (effectMap.count(effect) == 0)
   {
-    throw std::invalid_argument("Invalid effect");
+    throw std::invalid_argument("[POTION] Invalid effect");
   }
   return effectMap[effect];
 }
