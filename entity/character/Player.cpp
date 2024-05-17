@@ -154,6 +154,7 @@ int Player::usePotion(std::string abbreviation)
       IO::printDamageTypeResistance(damage_type);
     }
     getInventory()->removeItem(potion);
+    return 0;
   }
 }
 
