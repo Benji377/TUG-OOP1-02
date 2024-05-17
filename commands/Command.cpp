@@ -116,6 +116,11 @@ void MapCommand::execute(std::vector<std::string> params)
 
   game_->toggleMapOutput();
 
+  if(game_->getMapOutPutState() == true)
+  {
+    game_->printStoryAndRoom(false, false);
+  }
+
 }
 
 void StoryCommand::execute(std::vector<std::string> params)
@@ -254,7 +259,7 @@ void MoveCommand::execute(std::vector<std::string> params)
   {
     IO::printPlayerMoved(player, target_position);
     game_->getDungeon().characterMove(player, target_position);
-    game_->printStoryAndRoom(false);
+    game_->printStoryAndRoom(false, true);
     game_->plusOneActionCount();
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
@@ -459,7 +464,7 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   IO::printAttackedCharacters(attacked_fields_sorted);
 
-  game_->printStoryAndRoom(false);
+  game_->printStoryAndRoom(false, true);
 
   game_->plusOneActionCount();
 }

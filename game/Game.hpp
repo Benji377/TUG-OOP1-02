@@ -67,7 +67,7 @@ class Game
     std::shared_ptr<Room> getCurrentRoom();
     vector<std::shared_ptr<Player>> getPlayers() { return players_; }
     std::shared_ptr<Player> getPlayerByType(char type);
-    void printStoryAndRoom(bool print_story = true);
+    void printStoryAndRoom(bool print_story = true, bool print_room_completed = true);
     int getActionCount() { return action_count_; }
     bool allPlayersAreDead();
     void printAndSaveScore();
@@ -77,6 +77,7 @@ class Game
     Dungeon& getDungeon() {return dungeon_;};
     Story& getStory() const {return story_;};
     void plusOneActionCount();
+    bool getMapOutPutState() {return map_output_active_;};
 };
 
 #endif //GAME_HPP
