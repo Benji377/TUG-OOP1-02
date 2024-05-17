@@ -20,6 +20,7 @@
 
 using std::vector;
 using std::shared_ptr;
+class Dice;
 
 class Dungeon
 {

@@ -3,6 +3,7 @@
 #include "../entity/Door.hpp"
 #include "../entity/TreasureChest.hpp"
 #include "../entity/DeathLocation.hpp"
+#include "../utility/Dice.hpp"
 #include <fstream>
 #include <string>
 #include <iostream>
