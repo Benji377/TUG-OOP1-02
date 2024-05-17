@@ -41,6 +41,11 @@ class Door : public Entity
     bool isLocked() const { return is_locked_; }
     ///-----------------------------------------------------------------------------------------------------------------
     ///
+    /// Unlocks the door
+    //
+    void unlock() { is_locked_ = false; }
+    ///-----------------------------------------------------------------------------------------------------------------
+    ///
     /// Returns the room the door leads to
     /// @return the room the door leads to
     //

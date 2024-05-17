@@ -120,7 +120,6 @@ std::shared_ptr<Weapon> Inventory::getWeapon(const std::string &abbreviation)
 
 std::shared_ptr<Weapon> Inventory::getRandomWeapon()
 {
-  std::cout << "Normal random weapon" << std::endl;
   if (weapons_.empty())
   {
     return nullptr;
