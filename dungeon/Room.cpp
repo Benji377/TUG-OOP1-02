@@ -270,6 +270,8 @@ void Room::openDoors()
       }
     }
   }
+}
+
 bool Room::isValidField(std::pair<int,int> field)
 {
   if(field.first < 1 || field.second < 1 || field.first > getHeight()
