@@ -217,19 +217,7 @@ std::vector<std::pair<int, int>> Room::getSurroundingFieldPositions(std::pair<in
 
 bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2)
 {
-  int row_nr = fields_.size();
-  int column_nr = fields_.at(0).size();
-
-  //Check if first Field is part of Room
-  if(field_1.first < 1 || field_1.second < 1 || field_1.first > row_nr
-    || field_1.second > column_nr)
-  {
-    return false;
-  }
-
-  //Check if second Field is part of Room
-  if(field_2.first < 1 || field_2.second < 1 || field_2.first > row_nr
-  || field_2.second > column_nr)
+  if(!isValidField(field_2) || !isValidField(field_1))
   {
     return false;
   }
@@ -245,4 +233,15 @@ bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_
 
   return true;
 
+}
+
+bool Room::isValidField(std::pair<int,int> field)
+{
+  if(field.first < 1 || field.second < 1 || field.first > getHeight()
+    || field.second > getWidth())
+  {
+    return false;
+  }
+
+  return true;
 }

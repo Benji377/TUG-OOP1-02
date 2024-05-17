@@ -105,7 +105,8 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
   }
 
   // Lets check if the target field is NOT diagonal to the player
-  if (target_field.first != target_field.second && abs(target_field.first - target_field.second) <= 1)
+  //if (target_field.first != target_field.second && abs(target_field.first - target_field.second) <= 1) OLD
+  if((abs(target_field.first - player_pos.first) == 0 || abs(target_field.second - player_pos.second) == 0))
   {
     int row_diff = target_field.first - player_pos.first;
     int col_diff = target_field.second - player_pos.second;
