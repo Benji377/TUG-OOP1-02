@@ -7,9 +7,10 @@ Dice::Dice(const std::string& dice)
   std::pair<int, int> parsed = parseDice(dice);
   roll_amount_ = parsed.first;
   dice_type_ = parsed.second;
+  previous_roll_ = -1;
 }
 
-int Dice::roll() const
+int Dice::roll()
 {
   int result = 0;
   for (int i = 0; i < getAmount(); i++)
@@ -17,6 +18,7 @@ int Dice::roll() const
     // The random number is generated in the range [1, dice_type_]
     result += (int)Oop::Random::getInstance().getRandomNumber(getType());
   }
+  setPreviousRoll(result);
   return result;
 }
 

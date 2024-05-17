@@ -19,6 +19,7 @@ class Dice
 {
   int dice_type_;
   int roll_amount_;
+  int previous_roll_;
   //-------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses a string into a pair of integers. The string should be in the format "2d6" or "2 d6" which means
@@ -49,7 +50,7 @@ class Dice
     /// Rolls the dice and returns the result. Is marked as nodiscard because the result should be used.
     /// @return The result of the dice roll.
     //
-    [[nodiscard]] int roll() const;
+    [[nodiscard]] int roll();
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted copy constructor.
@@ -79,6 +80,20 @@ class Dice
     /// @return The dice type.
     //
     [[nodiscard]] int getType() const { return dice_type_; };
+
+    //-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter function for the previous roll
+    /// @return The previous roll or -1 if no roll has been made yet.
+    //
+    [[nodiscard]] int getPreviousRoll() const { return previous_roll_; }
+
+    //-----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Setter function for the previous roll
+    /// @param previous_roll The previous roll to be set.
+    //
+    void setPreviousRoll(int previous_roll) { previous_roll_ = previous_roll; }
 
 };
 
