@@ -59,7 +59,7 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, char charac
 {
   if (character != 'L' && character != 'W')
   {
-    throw std::invalid_argument("Invalid character");
+    throw std::invalid_argument("[PROPS] Invalid character");
   }
   std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
   if (row.empty())

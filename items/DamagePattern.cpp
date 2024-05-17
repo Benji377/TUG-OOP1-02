@@ -166,7 +166,7 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
     }
   }
 
-  affected_fields[target_field.first][target_field.second] = 3;
+  affected_fields[target_field.first][target_field.second] = 1;
   return affected_fields;
 }
 
