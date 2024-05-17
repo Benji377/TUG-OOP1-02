@@ -224,9 +224,9 @@ void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
 
 }
 
-vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacker, int damage, std::pair <int, int> target_field)
+vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, int damage, std::pair <int, int> target_field)
 {
-  vector<AttackedCharacter> attacked_characters;
+  vector<AttackedField> attacked_fields;
   std::pair<int, int> attacker_position = current_room_->getFieldOfEntity(attacker);
   DamageType damage_type = attacker->getWeapon()->getDamageType();
   vector<vector<int>> affected_fields = attacker->getWeapon()->getDamagePattern()->getAffectedFields(attacker_position,
@@ -238,7 +238,8 @@ vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacke
       if (affected_fields[i][j] == 1)
       {
         shared_ptr<Character> target =
-          std::dynamic_pointer_cast<Character>(current_room_->getField({i, j})->getEntity());
+          std::dynamic_pointer_cast<Character>(current_room_->getField({i + 1, j + 1})->getEntity());
+        AttackedField attacked_field = AttackedField({i + 1, j + 1});
         if (target != nullptr)
         {
           int lost_health = target->takeDamage(damage, damage_type);
@@ -252,29 +253,27 @@ vector<AttackedCharacter> Dungeon::characterAttack(shared_ptr<Character> attacke
           {
             armor_value = target->getArmor()->getArmorValue(); //fixed case where target has no armor
           }
-
-          AttackedCharacter attacked_character = { {i, j}, "", lost_health, damage,
-              target->getResistantTo() == damage_type ? 50 : 100, armor_value,
-              target->isDead() };
+          attacked_field.setCharacterWithoutName(lost_health, damage,
+            target->getResistantTo() == damage_type ? 50 : 100, armor_value, target->isDead());
           shared_ptr<Player> attacked_player = std::dynamic_pointer_cast<Player>(target);
           shared_ptr<Enemy> attacked_enemy = std::dynamic_pointer_cast<Enemy>(target);
           if (attacked_player != nullptr)
           {
-            attacked_character.character_name = attacked_player->getName();
+            attacked_field.setName(attacked_player->getName());
           }
           else if (attacked_enemy != nullptr)
           {
             std::string enemy_name = attacked_enemy->getTypeName() + " " + std::to_string(attacked_enemy->getId());
-            attacked_character.character_name = enemy_name;
-          }
-          attacked_characters.push_back(attacked_character);
+            attacked_field.setName(enemy_name);
+          }          
         }
+        attacked_fields.push_back(attacked_field);
       }
     }
   }
-  sort(attacked_characters.begin(), attacked_characters.end(),
-    [](AttackedCharacter a, AttackedCharacter b) -> bool { return a.position < b.position; });
-  return attacked_characters;
+  sort(attacked_fields.begin(), attacked_fields.end(),
+    [](AttackedField a, AttackedField b) -> bool { return a.getPosition() < b.getPosition(); });
+  return attacked_fields;
 }
 
 void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)

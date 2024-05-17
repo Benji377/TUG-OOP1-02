@@ -310,47 +310,24 @@ void IO::printDamageTypeResistance(DamageType type)
 
 }
 
-void IO::printSuccessFullPlayerAttack(std::shared_ptr<Player> player, std::pair<int, int>& target_position,
-    std::vector<std::vector<int>>& affected_fields)
+void IO::printSuccessFullAttack(std::shared_ptr<Character> attacker, std::pair<int, int>& target_position,
+    std::vector<AttackedField>& attacked_fields)
 {
-  player->simplePrintNoId();
-
+  std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(attacker);
+  std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(attacker);
+  if (player != nullptr)
+  {
+    player->simplePrintNoId();
+  }
+  else if (enemy != nullptr)
+  {
+    enemy->attackPrint();
+  }
   std::cout << " used " << "\"" << player->getActiveWeapon()->getName() << "\"" << " on " << target_position << " affecting ";
 
   bool first_entry = true;
 
-  for(size_t row_nr = 0; row_nr < affected_fields.size(); ++row_nr)
-  {
-    for(size_t column_nr = 0; column_nr < affected_fields[row_nr].size(); ++column_nr)
-    {
-      if (affected_fields[row_nr][column_nr] == 1)
-      {
-        if(!first_entry)
-        {
-          std::cout << ", ";
-        }
-        else
-        {
-          first_entry = false;
-        }
-
-        std::cout << "(" << row_nr << "," << column_nr << ")";
-      }
-    }
-  }
-
-  std::cout << "." << std::endl;
-}
-
-// TODO: Merge this function with the one above
-void IO::printSuccessFullEnemyAttack(std::shared_ptr<Enemy> enemy, std::pair<int, int>& target_position,
-    std::vector<AttackedCharacter>& affected_characters)
-{
-  std::cout << "\n" << enemy->getTypeName() << " " << enemy->getId() << " [" << enemy->getAbbreviation() <<
-    enemy->getId() << "] used " << "\"" << enemy->getWeapon()->getName() << "\"" << " on " << target_position <<
-    " affecting ";
-  bool first_entry = true;
-  for (const auto& character : affected_characters)
+  for(const auto& field : attacked_fields)
   {
     if(!first_entry)
     {
@@ -360,7 +337,7 @@ void IO::printSuccessFullEnemyAttack(std::shared_ptr<Enemy> enemy, std::pair<int
     {
       first_entry = false;
     }
-    std::cout << "(" << character.position.first << "," << character.position.second << ")";
+    std::cout << "(" << field.getPosition().first << "," << field.getPosition().second << ")";
   }
   std::cout << "." << std::endl;
 }
@@ -373,17 +350,18 @@ void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
 
 }
 
-void IO::printAttackedCharacters(std::vector<struct AttackedCharacter> characters)
+void IO::printAttackedCharacters(std::vector<AttackedField> attacked_fields)
 {
-  for(struct AttackedCharacter character : characters)
+  for(AttackedField field : attacked_fields)
   {
-    std::cout << character.character_name << " loses " << character.lost_health << " health " << "("
-              << character.total_damage << " * " << character.resistance_modifier << " % - " << character.armor_value
-              << ")." << std::endl;
-
-    if(character.is_dead)
+    if (field.containsCharacter())
     {
-      std::cout << character.character_name << " was defeated." << std::endl;
+      std::cout << field;
+      if(field.isDead())
+      {
+        std::cout << field.getName() << " was defeated." << std::endl;
+      }
+    
     }
   }
 }

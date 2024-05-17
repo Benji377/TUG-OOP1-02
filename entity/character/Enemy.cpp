@@ -136,3 +136,8 @@ void Enemy::simplePrint() const
 {
   std::cout << getAbbreviation() << getId() << ": " << getHealth() << "/" << getMaximumHealth();
 }
+
+void Enemy::attackPrint() const
+{
+  std::cout << getTypeName() << " " << getId() << " [" << getAbbreviation() << getId() << "]";
+}

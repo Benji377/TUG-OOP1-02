@@ -295,21 +295,21 @@ void Game::printStoryAndRoom(bool print_story)
   if (map_output_active_)
   {
     dungeon_.printCurrentRoom();
-    std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
-    if (enemies.size() > 0)
+  }
+  std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
+  if (enemies.size() > 0)
+  {
+    std::cout << "   ";
+    for (auto enemy : enemies)
     {
-      std::cout << "   ";
-      for (auto enemy : enemies)
+      enemy->simplePrint();
+      if (enemy != enemies.back())
       {
-        enemy->simplePrint();
-        if (enemy != enemies.back())
-        {
-          std::cout << ", ";
-        }
-        else
-        {
-          std::cout << std::endl;
-        }
+        std::cout << ", ";
+      }
+      else
+      {
+        std::cout << std::endl;
       }
     }
   }
@@ -429,8 +429,8 @@ void Game::enemyPhase()
       if (dungeon_.getCurrentRoom()->isAdjacentField(enemy_pos, player_pos))
       {
         int damage = enemy->getAttackDamage();
-        std::vector<AttackedCharacter> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
-        IO::printSuccessFullEnemyAttack(enemy, player_pos, attacked_charas_sorted);
+        std::vector<AttackedField> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullAttack(enemy, player_pos, attacked_charas_sorted);
         IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_charas_sorted);
         break;
@@ -445,8 +445,8 @@ void Game::enemyPhase()
             enemy->getId() << "] moved to (" << enemy_pos.first << "," << enemy_pos.second << ")." << std::endl;
           break;
         }
-        std::vector<AttackedCharacter> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
-        IO::printSuccessFullEnemyAttack(enemy, player_pos, attacked_charas_sorted);
+        std::vector<AttackedField> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullAttack(enemy, player_pos, attacked_charas_sorted);
         IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_charas_sorted);
         break;

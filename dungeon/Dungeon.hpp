@@ -15,21 +15,11 @@
 #include <memory>
 #include "../entity/character/Player.hpp"
 #include "../entity/character/Enemy.hpp"
+#include "../dungeon/AttackedField.hpp"
 #include "Room.hpp"
 
 using std::vector;
 using std::shared_ptr;
-
-struct AttackedCharacter
-{
-  std::pair<int, int> position;
-  std::string character_name;
-  int lost_health;
-  int total_damage;
-  int resistance_modifier;
-  int armor_value;
-  bool is_dead;
-};
 
 class Dungeon
 {
@@ -74,7 +64,7 @@ class Dungeon
 
     void moveToRandomField(std::shared_ptr<Enemy> enemy);
 
-    vector<AttackedCharacter> characterAttack(shared_ptr<Character> attacker, int damage, std::pair<int, int> target_field);
+    vector<AttackedField> characterAttack(shared_ptr<Character> attacker, int damage, std::pair<int, int> target_field);
 
     void lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity);
 

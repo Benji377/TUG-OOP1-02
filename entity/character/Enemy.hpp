@@ -27,6 +27,7 @@ class Enemy: public Character
     int takeDamage(int damage, DamageType damage_type) override;
     void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
     void simplePrint() const override;
+    void attackPrint() const;
     ~Enemy() = default;
     bool isEnemy() const override{ return true; }
 };
