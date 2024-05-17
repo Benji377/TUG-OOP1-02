@@ -70,7 +70,6 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
       return row;
     }
   }
-  std::cout << "[CSVPARSER] Error: Abbreviation " << abbreviation << " not found in file " << filename << std::endl;
   return {};
 }
 
@@ -93,7 +92,5 @@ std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
       return itemType;
     }
   }
-  // If the abbreviation was not found in any of the files, return an empty string
-  std::cout << "[CSVPARSER] Error: Abbreviation " << abbreviation << " not found in any file" << std::endl;
   return "";
 }
