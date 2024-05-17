@@ -429,10 +429,10 @@ void Game::enemyPhase()
       if (dungeon_.getCurrentRoom()->isAdjacentField(enemy_pos, player_pos))
       {
         int damage = enemy->getAttackDamage();
-        std::vector<AttackedField> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
-        IO::printSuccessFullAttack(enemy, player_pos, attacked_charas_sorted);
+        std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
-        IO::printAttackedCharacters(attacked_charas_sorted);
+        IO::printAttackedCharacters(attacked_fields);
         break;
       }
       else
@@ -445,10 +445,10 @@ void Game::enemyPhase()
             enemy->getId() << "] moved to (" << enemy_pos.first << "," << enemy_pos.second << ")." << std::endl;
           break;
         }
-        std::vector<AttackedField> attacked_charas_sorted = getDungeon().characterAttack(enemy, damage, player_pos);
-        IO::printSuccessFullAttack(enemy, player_pos, attacked_charas_sorted);
+        std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
+        IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
-        IO::printAttackedCharacters(attacked_charas_sorted);
+        IO::printAttackedCharacters(attacked_fields);
         break;
       }
     }
