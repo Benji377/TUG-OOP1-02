@@ -272,7 +272,7 @@ std::shared_ptr<Room> Game::getCurrentRoom()
   return dungeon_.getCurrentRoom();
 }
 
-void Game::printStoryAndRoom(bool print_story)
+void Game::printStoryAndRoom(bool print_story, bool print_room_completed)
 {
   dungeon_.getCurrentRoom()->checkCompletion();
   dungeon_.getCurrentRoom()->openDoors();
@@ -291,8 +291,11 @@ void Game::printStoryAndRoom(bool print_story)
       }
     }
   }
+  if(print_room_completed)
+  {
   std::cout << "\n-- ROOM " << dungeon_.getCurrentRoom()->getId() << " (" << dungeon_.getCompletedRoomsCount()
     << "/" << dungeon_.getRoomCount() << " completed) --------------------\n" << std::endl;
+  }
   if (map_output_active_)
   {
     dungeon_.printCurrentRoom();
