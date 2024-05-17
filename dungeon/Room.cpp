@@ -2,6 +2,7 @@
 #include "../utility/Utils.hpp"
 #include "../entity/Door.hpp"
 #include "../entity/TreasureChest.hpp"
+#include "../entity/DeathLocation.hpp"
 #include "../entity/character/Enemy.hpp"
 #include "../entity/character/Player.hpp"
 #include "../utility/Exceptions.hpp"
@@ -84,6 +85,7 @@ void Room::printEntityInMap(shared_ptr<Entity> entity)
   {
     std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(entity);
     std::shared_ptr<TreasureChest> chest = std::dynamic_pointer_cast<TreasureChest>(entity);
+    std::shared_ptr<DeathLocation> death_location = std::dynamic_pointer_cast<DeathLocation>(entity);
     if (door != nullptr)
     {
       std::cout << (door->isLocked() ? "#D" : " D");
@@ -92,6 +94,10 @@ void Room::printEntityInMap(shared_ptr<Entity> entity)
     else if (chest != nullptr)
     {
       std::cout << (chest->isLocked() ? "#T |" : " T |");
+    }
+    else if (death_location != nullptr)
+    {
+      std::cout << " X |";
     }
     else
     {
