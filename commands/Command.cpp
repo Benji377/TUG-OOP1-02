@@ -433,6 +433,11 @@ void AttackCommand::execute(std::vector<std::string> params)
   }
   else
   {
+    if(!(game_->getCurrentRoom()->isValidField(target_position)))
+    {
+      throw InvalidPositionCommand();
+    }
+
     //these 6 lines of code are from Benji, very beautiful!
     std::string ammoType = (players_weapon->getAbbreviation() == "SBOW" ||
                             players_weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";

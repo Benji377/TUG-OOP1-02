@@ -219,9 +219,10 @@ void Player::printPlayer(const std::pair<int, int>& position, bool single_line) 
   }
   const int name_width = 17;
   const int value_width = 6;
+  const int armor_value = std::max(getBaseArmor(), getArmor() ? getArmor()->getArmorValue() : 0);
 
   std::cout << std::setw(name_width) << std::left << "  Armor Value:" << std::setw(value_width)
-            << std::right << getBaseArmor() << "\n"
+            << std::right << armor_value << "\n"
             << std::setw(name_width) << std::left << "  Current Health:" << std::setw(value_width)
             << std::right << getHealth() << "\n"
             << std::setw(name_width) << std::left << "  Max Health:" << std::setw(value_width)

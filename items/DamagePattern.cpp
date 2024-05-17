@@ -47,9 +47,9 @@ std::vector<std::vector<int>> DamagePattern::getAffectedFields(std::pair<int, in
     case Pattern::LINE:
       return linePattern(player_position, target_field, affected_fields);
     case Pattern::BURST:
-      return burstPattern(player_position, target_field, affected_fields);
+      return burstPattern(target_field, affected_fields);
     case Pattern::SHOT:
-      return shotPattern(player_position, target_field, affected_fields);
+      return shotPattern(target_field, affected_fields);
     case Pattern::THRUST:
       return thrustPattern(player_position, target_field, affected_fields);
     default:
@@ -105,7 +105,7 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
   }
 
   // Lets check if the target field is NOT diagonal to the player
-  if (target_field.first != target_field.second && abs(target_field.first - target_field.second) <= 1)
+  if((abs(target_field.first - player_pos.first) == 0 || abs(target_field.second - player_pos.second) == 0))
   {
     int row_diff = target_field.first - player_pos.first;
     int col_diff = target_field.second - player_pos.second;
@@ -166,7 +166,7 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
     }
   }
 
-  affected_fields[target_field.first][target_field.second] = 1;
+  affected_fields[target_field.first][target_field.second] = 3;
   return affected_fields;
 }
 
@@ -203,31 +203,18 @@ std::vector<std::vector<int>> DamagePattern::linePattern(std::pair<int, int> pla
   return affected_fields;
 }
 
-std::vector<std::vector<int>> DamagePattern::shotPattern(std::pair<int, int> player_pos,
-                                                         std::pair<int, int> target_field,
+std::vector<std::vector<int>> DamagePattern::shotPattern(std::pair<int, int> target_field,
                                                          std::vector<std::vector<int>> affected_fields) const
 {
-  // TODO: can the player shoot itself?
-  if (target_field.first == player_pos.first && target_field.second == player_pos.second)
-  {
-    throw std::invalid_argument("[DAMAGEPATTERN] Shot - Invalid target field");
-  }
   // Mark the target field as affected
   affected_fields[target_field.first][target_field.second] = 1;
 
   return affected_fields;
 }
 
-std::vector<std::vector<int>> DamagePattern::burstPattern(std::pair<int, int> player_pos,
-                                                          std::pair<int, int> target_field,
+std::vector<std::vector<int>> DamagePattern::burstPattern(std::pair<int, int> target_field,
                                                           std::vector<std::vector<int>> affected_fields) const
 {
-  // TODO: can the player shoot itself?
-  if (target_field.first == player_pos.first && target_field.second == player_pos.second)
-  {
-    throw std::invalid_argument("[DAMAGEPATTERN] Burst - Invalid target field");
-  }
-
   // Mark the target field as affected
   affected_fields[target_field.first][target_field.second] = 1;
 
