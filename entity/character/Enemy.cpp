@@ -48,7 +48,8 @@ void Enemy::initializeInventory()
     weapon_ = Props::craftWeapon("DAGG", strength_, vitality_);
     armor_ = nullptr;
     loot_ = {{"DAGG", 1}};
-    inventory_ = nullptr;
+    inventory_ = std::make_shared<Inventory>();
+    inventory_->addWeapon(weapon_);
   }
   else if (abbreviation_ == 'G')
   {
@@ -81,7 +82,7 @@ int Enemy::getAttackDamage()
   if (getInventory() != nullptr)
   {
     setWeapon(getInventory()->getRandomWeapon());
-    return getWeapon()->getDice()->roll();
+    return getWeapon()->getDamage();
   }
   return -1;
 }
@@ -96,7 +97,7 @@ int Enemy::getAttackDamage(AttackType attack_type)
       return -1;
     }
     setWeapon(weapon);
-    return getWeapon()->getDice()->roll();
+    return getWeapon()->getDamage();
   }
   return -1;
 }

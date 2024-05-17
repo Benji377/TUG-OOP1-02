@@ -323,7 +323,8 @@ void IO::printSuccessFullAttack(std::shared_ptr<Character> attacker, std::pair<i
   {
     enemy->attackPrint();
   }
-  std::cout << " used " << "\"" << player->getActiveWeapon()->getName() << "\"" << " on " << target_position << " affecting ";
+  std::cout << " used " << "\"" << attacker->getWeapon()->getName() << "\"" << " on " << target_position
+    << " affecting ";
 
   bool first_entry = true;
 

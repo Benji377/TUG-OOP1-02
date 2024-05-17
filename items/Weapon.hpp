@@ -97,6 +97,13 @@ public:
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
+  /// Returns the damage of the weapon. Rolls the dice and then adds the damage addition to the result.
+  /// @return The damage of the weapon.
+  //
+  [[nodiscard]] int getDamage() const;
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
   /// The copy constructor of the Weapon class. It is deleted to prevent copying of Weapon objects.
   //
   Weapon(const Weapon &weapon) = delete;
