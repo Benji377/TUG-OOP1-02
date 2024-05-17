@@ -149,6 +149,9 @@ class Room
     //Only a suggestion, you can oc change this if you want to. I originially had it in the Commands.cpp
     //but it actually belongs here, right? -Hanno
     bool isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2);
+
+    //as well as this
+    bool isValidField(std::pair<int,int> field);
 };
 
 #endif // ROOM_HPP
