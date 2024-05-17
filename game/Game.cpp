@@ -117,13 +117,6 @@ void Game::start()
 
 void Game::step()
 {
-  if (allPlayersAreDead())
-  {
-    std::cout << Game::story_.getStorySegment("N_DEFEAT");
-    is_running_ = false;
-    printAndSaveScore();
-    return;
-  }
   if (current_phase_ == Phase::ACTION)
   {
     if (action_count_ < max_players_)
@@ -138,10 +131,18 @@ void Game::step()
   }
   else if (current_phase_ == Phase::ENEMY)
   {
-    std::cout << "Enemie Phase" << std::endl;
     enemyPhase();
     printStoryAndRoom(false);
     current_phase_ = Phase::ACTION;
+  }
+  dungeon_.getCurrentRoom()->checkCompletion();
+  dungeon_.getCurrentRoom()->openDoors();
+  if (allPlayersAreDead())
+  {
+    std::cout << Game::story_.getStorySegment("N_DEFEAT");
+    is_running_ = false;
+    printAndSaveScore();
+    return;
   }
 }
 

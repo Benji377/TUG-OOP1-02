@@ -11,7 +11,6 @@
 Room::Room(int id, int width, int height)
 {
   id_ = id;
-  enemy_count_ = 0;
   is_complete_ = false;
   for (int i = 0; i < height; i++)
   {
@@ -233,6 +232,44 @@ bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_
 
   return true;
 
+}
+
+void Room::checkCompletion()
+{
+  for (const auto& row : fields_)
+  {
+    for (const auto& field : row)
+    {
+      if (field->getEntity() != nullptr)
+      {
+        std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(field->getEntity());
+        if (enemy != nullptr)
+        {
+          is_complete_ = false;
+          return;
+        }
+      }
+    }
+  }
+  is_complete_ = true;
+}
+
+void Room::openDoors()
+{
+  if (is_complete_)
+  {
+    for (auto& row : fields_)
+    {
+      for (auto& field : row)
+      {
+        std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(field->getEntity());
+        if (door != nullptr)
+        {
+          door->unlock();
+        }
+      }
+    }
+  }
 }
 
 bool Room::isValidField(std::pair<int,int> field)

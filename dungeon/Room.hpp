@@ -27,7 +27,6 @@ class Room
   private:
     int id_;
     vector<vector<shared_ptr<Field>>> fields_;
-    int enemy_count_;
     bool is_complete_;
     ///-----------------------------------------------------------------------------------------------------------------
     ///
@@ -62,6 +61,14 @@ class Room
     /// @return A boolean value indicating whether the room is complete or not.
     ///
     bool isComplete() const { return is_complete_; }
+    ///-----------------------------------------------------------------------------------------------------------------
+    /// Checks if all enemies in the room are dead and sets the is_complete_ attribute accordingly.
+    ///
+    void checkCompletion();
+    ///-----------------------------------------------------------------------------------------------------------------
+    /// Opens all doors in the room.
+    ///
+    void openDoors();
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the fields
