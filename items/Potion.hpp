@@ -29,7 +29,9 @@ class Potion : public Item
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the effect of the potion. Converts a string to an effect.
+  ///
   /// @param effect The effect of the potion as a string.
+  ///
   /// @return The effect of the potion.
   //
   Effect parseEffect(std::string &effect);

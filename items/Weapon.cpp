@@ -13,29 +13,6 @@ Weapon::Weapon(std::string &abbreviation, std::string &name, const std::shared_p
   damage_type_ = parseDamageType(damage_type);
 }
 
-int Weapon::getDamageAddition() const
-{
-  return damage_addition_;
-}
-
-std::shared_ptr<DamagePattern> Weapon::getDamagePattern() const
-{
-  return damage_pattern_;
-}
-
-AttackType Weapon::getAttackType() const
-{
-  return attack_type_;
-}
-
-DamageType Weapon::getDamageType() const
-{
-  return damage_type_;
-}
-
-Weapon::~Weapon()
-{}
-
 AttackType Weapon::parseAttackType(std::string &attack_type)
 {
   Utils::normalizeString(attack_type);

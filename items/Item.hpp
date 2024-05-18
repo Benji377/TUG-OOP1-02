@@ -29,6 +29,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the Item abbreviation.
+  ///
   /// @return The abbreviation of the item.
   //
   std::string getAbbreviation() const { return abbreviation_; }
@@ -36,6 +37,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the Item name.
+  ///
   /// @return The name of the item.
   //
   std::string getName() const { return name_; }
@@ -43,6 +45,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the Dice object of the item.
+  ///
   /// @return The Dice object of the item.
   //
   std::shared_ptr<Dice> getDice() const { return dice_;};
@@ -50,6 +53,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns true if the item is an ammunition. Required for sorting
+  ///
   /// @return True if the item is an ammunition.
   //
   bool getIsAmmunition() const { return getAbbreviation() == "ARRW" || getAbbreviation() == "BOLT"; }

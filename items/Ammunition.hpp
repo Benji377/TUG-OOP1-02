@@ -31,6 +31,7 @@ class Ammunition : public Item
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the type of the ammunition. Converts a string to an AmmunitionType.
+  ///
   /// @param type The type of the ammunition.
   /// @return The AmmunitionType of the ammunition.
   //
@@ -40,6 +41,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Constructor for the Ammunition class.
+  ///
   /// @param abbreviation The abbreviation of the ammunition.
   /// @param name The name of the ammunition.
   /// @param type The type of the ammunition.
@@ -49,6 +51,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the type of the ammunition.
+  ///
   /// @return The type of the ammunition.
   //
   AmmunitionType getType() const;
@@ -56,6 +59,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Sets the amount of ammunition in the stack.
+  ///
   /// @param amount The amount of ammunition in the stack.
   //
   void setAmount(int amount);
@@ -63,6 +67,7 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the amount of ammunition in the stack.
+  ///
   /// @return The amount of ammunition in the stack.
   //
   int getAmount() const;

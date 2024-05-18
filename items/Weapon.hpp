@@ -37,7 +37,9 @@ class Weapon : public Item
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the attack type from a string to an enum.
+  ///
   /// @param attack_type The attack type as a string.
+  ///
   /// @return The attack type as an enum.
   //
   AttackType parseAttackType(std::string &attack_type);
@@ -45,7 +47,9 @@ class Weapon : public Item
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Parses the damage type from a string to an enum.
+  ///
   /// @param damage_type The damage type as a string.
+  ///
   /// @return The damage type as an enum.
   //
   DamageType parseDamageType(std::string &damage_type);
@@ -55,6 +59,7 @@ public:
   ///
   /// The constructor of the Weapon class. It initializes the abbreviation, name, dice, damage pattern, attack type,
   /// damage type and damage addition of the weapon.
+  ///
   /// @param abbreviation The abbreviation of the weapon.
   /// @param name The name of the weapon.
   /// @param dice The dice of the weapon.
@@ -70,34 +75,39 @@ public:
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage addition of the weapon.
+  ///
   /// @return The damage addition of the weapon.
   //
-  int getDamageAddition() const;
+  int getDamageAddition() const { return damage_addition_; };
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage pattern of the weapon.
+  ///
   /// @return The damage pattern of the weapon.
   //
-  std::shared_ptr<DamagePattern> getDamagePattern() const;
+  std::shared_ptr<DamagePattern> getDamagePattern() const { return damage_pattern_; };
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the attack type of the weapon.
+  ///
   /// @return The attack type of the weapon.
   //
-  AttackType getAttackType() const;
+  AttackType getAttackType() const { return attack_type_; };
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage type of the weapon.
+  ///
   /// @return The damage type of the weapon.
   //
-  DamageType getDamageType() const;
+  DamageType getDamageType() const { return damage_type_; };
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage of the weapon. Rolls the dice and then adds the damage addition to the result.
+  ///
   /// @return The damage of the weapon.
   //
   int getDamage() const;
@@ -118,7 +128,7 @@ public:
   ///
   /// The destructor of the Weapon class. It removes the Dice object of the weapon.
   //
-  ~Weapon();
+  ~Weapon() = default;
 };
 
 #endif //WEAPON_HPP
