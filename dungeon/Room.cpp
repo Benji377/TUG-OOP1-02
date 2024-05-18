@@ -167,7 +167,7 @@ std::vector<char> Room::getEnemiesAbbreviations()
   return enemies_abbreviations;
 }
 
-// TODO: Make this function more flexible.
+// TODO: Make this function   re flexible.
 std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, int> position, int distance)
 {
   std::vector<std::shared_ptr<Field>> surroundingFields;

@@ -132,7 +132,6 @@ void Game::step()
   else if (current_phase_ == Phase::ENEMY)
   {
     enemyPhase();
-    printStoryAndRoom(false);
     current_phase_ = Phase::ACTION;
   }
   if (allPlayersAreDead())
@@ -396,6 +395,10 @@ void Game::printAndSaveScore()
 void Game::enemyPhase()
 {
   std::vector<std::shared_ptr<Enemy>> enemies = dungeon_.getCurrentRoom()->getAllEntitiesOfType<Enemy>();
+  if(enemies.empty())
+  {
+    return;
+  }
     std::sort(enemies.begin(), enemies.end(),
     [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
     {
@@ -462,4 +465,5 @@ void Game::enemyPhase()
       }
     }
   }
+  printStoryAndRoom(false);
 }

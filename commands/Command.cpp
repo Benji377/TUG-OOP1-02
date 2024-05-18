@@ -340,7 +340,6 @@ void LootCommand::execute(std::vector<std::string> params)
   IO::printInventory(inv_of_entity, nullptr);
   game_->getDungeon().lootEntity(player, entity_on_field);
   game_->plusOneActionCount();
-
   game_->printStoryAndRoom(false, true);
 
 }
