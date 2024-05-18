@@ -116,8 +116,10 @@ void MapCommand::execute(std::vector<std::string> params)
 
   game_->toggleMapOutput();
 
-  game_->printStoryAndRoom(false, false);
-
+  if(game_->getMapOutPutState() == true)
+  {
+    game_->printStoryAndRoom(false, false);
+  }
 }
 
 void StoryCommand::execute(std::vector<std::string> params)
