@@ -51,6 +51,8 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
   }
   else
   {
+    // Equivalent to an empty file. We don't want to throw an exception here as the file might be willingly empty
+    // The check for empty file is done in the calling function
     return {};
   }
 }
@@ -83,7 +85,7 @@ std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
           {ammunition_csv_path_, "Ammunition"}
   };
 
-  // Iterate through each CSV file in the items/csv folder
+  // Iterate through each CSV file in the data folder
   for (const auto& [filename, itemType] : filenameToItemType)
   {
     std::vector<std::string> row = getRowByAbbreviation(filename, abbreviation);
@@ -92,5 +94,6 @@ std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
       return itemType;
     }
   }
+  // Equivalent to an item not being found. This can happen and is handled in the calling function
   return "";
 }

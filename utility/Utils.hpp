@@ -22,20 +22,21 @@ class Inventory;
 class Utils
 {
 public:
-  //------------------------------------------------------------------------------------------------------------------
-  // Constructor, Copy-Constructor and Destructor are deleted, as this class should never be instantiated.
+  ///------------------------------------------------------------------------------------------------------------------
+  /// Constructor, Copy-Constructor and Destructor are deleted, as this class should never be instantiated.
   //
   Utils() = delete;
   Utils(const Utils&) = delete;
   ~Utils() = delete;
 
-  //------------------------------------------------------------------------------------------------------------------
-  // This function converts a string into an integer. The conversion is only successful, if all
-  // elements of the string are converted.
-  //
-  // @param str - string that should be converted
-  // @param number - the converted number
-  // @return true, if conversion was successful, false otherwise
+  ///------------------------------------------------------------------------------------------------------------------
+  /// This function converts a string into an integer. The conversion is only successful, if all
+  /// elements of the string are converted.
+  ///
+  /// @param str - string that should be converted
+  /// @param number - the converted number
+  ///
+  /// @return true, if conversion was successful, false otherwise
   //
   static bool decimalStringToInt(const std::string& str, int& number);
 
@@ -110,6 +111,15 @@ public:
   //
   static void deleteDuplicates(std::vector<char> &vec);
 
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Utils class extension: This function checks if a given item abbreviation is valid. An item abbreviation is valid
+  /// if it is contained in the item abbreviation map of the inventory.
+  ///
+  /// @param abbrev The item abbreviation to be checked
+  ///
+  /// @return True if the item abbreviation is valid, false otherwise
+  //
   static bool isValidItemAbbrev(std::string abbrev);
 
 

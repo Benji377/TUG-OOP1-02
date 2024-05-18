@@ -7,7 +7,7 @@ std::shared_ptr<Potion> Props::craftPotion(std::string abbreviation)
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for potion");
   }
-  if (row[2].empty()) //TODO check if this is okay. Otherwise ++ every number
+  if (row[2].empty())
   {
     // It's a health potion
     return std::make_shared<Potion>(abbreviation, row[1], "health", std::make_shared<Dice>(row[3]));
@@ -40,7 +40,7 @@ std::shared_ptr<Armor> Props::craftArmor(std::string abbreviation, int vitality)
   }
   if (row.size() > 3 && !row[3].empty())
   {
-    // Very specific, comes from config
+    // Very specific, comes from config and is a special case
     if (row[3] == "min(VIT, 2)")
     {
       // Calculate the minimum of the vitality and 2
@@ -97,7 +97,9 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, int strengt
       return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
                                    std::make_shared<DamagePattern>(row[4]), row[2], row[3], vitality);
     }
+    else
+    {
+      throw std::invalid_argument("[PROPS] Invalid character attribute: \" " + row[6] + " \" for weapon");
+    }
   }
-  return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
-                                   std::make_shared<DamagePattern>(row[4]), row[2], row[3], 0);
 }

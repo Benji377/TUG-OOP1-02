@@ -1,13 +1,13 @@
 #include "Dice.hpp"
 
-Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount) {}
+Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount), previous_roll_(-1) {}
 
 Dice::Dice(const std::string& dice)
 {
   std::pair<int, int> parsed = parseDice(dice);
   roll_amount_ = parsed.first;
   dice_type_ = parsed.second;
-  previous_roll_ = -1;
+  previous_roll_ = -1; // Will be set to a valid value after the first roll
 }
 
 int Dice::roll()

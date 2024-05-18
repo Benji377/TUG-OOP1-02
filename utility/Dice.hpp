@@ -24,6 +24,7 @@ class Dice
   ///
   /// Parses a string into a pair of integers. The string should be in the format "2d6" or "2 d6" which means
   /// 2 dice with 6 sides each.
+  ///
   /// @param dice The string to be parsed.
   ///
   /// @return A pair of integers where the first is the amount of dice and the second is the dice size.
@@ -34,6 +35,7 @@ class Dice
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the Dice class. Initializes the dice with the given dice type and roll amount.
+    ///
     /// @param dice_type The number of sides of the dice.
     /// @param roll_amount The number of dice to be rolled.
     //
@@ -42,12 +44,14 @@ class Dice
     ///
     /// Constructor for the Dice class. Parses the given string and initializes the dice with
     /// the given dice type and roll amount.
+    ///
     /// @param dice The string to be parsed.
     //
     explicit Dice(const std::string& dice);
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Rolls the dice and returns the result. Is marked as nodiscard because the result should be used.
+    ///
     /// @return The result of the dice roll.
     //
     int roll();
@@ -70,6 +74,7 @@ class Dice
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter functions for the dice roll amount
+    ///
     /// @return The dice roll amount.
     //
     int getAmount() const { return roll_amount_; };
@@ -77,6 +82,7 @@ class Dice
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter function for the dice type
+    ///
     /// @return The dice type.
     //
     int getType() const { return dice_type_; };
@@ -84,6 +90,7 @@ class Dice
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter function for the previous roll
+    ///
     /// @return The previous roll or -1 if no roll has been made yet.
     //
     int getPreviousRoll() const { return previous_roll_; }
@@ -91,6 +98,7 @@ class Dice
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Setter function for the previous roll
+    ///
     /// @param previous_roll The previous roll to be set.
     //
     void setPreviousRoll(int previous_roll) { previous_roll_ = previous_roll; }
