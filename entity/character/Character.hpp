@@ -31,20 +31,20 @@ class Character: public Entity
   public:
     Character(int id, char abbreviation) : Entity(id, abbreviation, false) {}
     // Getters
-    [[nodiscard]] std::string getTypeName() const { return type_name_; }
-    [[nodiscard]] int getMaximumHealth() const { return maximum_health_; }
-    [[nodiscard]] int getHealth() const { return health_; }
-    [[nodiscard]] std::shared_ptr<Armor> getArmor() const { return armor_; }
-    [[nodiscard]] std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
-    [[nodiscard]] bool isDead() const { return is_dead_; }
+    std::string getTypeName() const { return type_name_; }
+    int getMaximumHealth() const { return maximum_health_; }
+    int getHealth() const { return health_; }
+    std::shared_ptr<Armor> getArmor() const { return armor_; }
+    std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
+    bool isDead() const { return is_dead_; }
     
-    [[nodiscard]] std::shared_ptr<Inventory> getInventory() const { return inventory_; }
+    std::shared_ptr<Inventory> getInventory() const { return inventory_; }
     //Nur fürs testen hinzugefügt, gerne wieder löschen -Hanno
 
-    [[nodiscard]] int getBaseArmor() const { return base_armor_; }
-    [[nodiscard]] int getStrength() const { return strength_; }
-    [[nodiscard]] int getVitality() const { return vitality_; }
-    [[nodiscard]] DamageType getResistantTo() const { return resistant_to_; }
+    int getBaseArmor() const { return base_armor_; }
+    int getStrength() const { return strength_; }
+    int getVitality() const { return vitality_; }
+    DamageType getResistantTo() const { return resistant_to_; }
     bool isCharacter() const override { return true; }
     // Setters
     void setMaximumHealth(int maximum_health) { maximum_health_ = maximum_health; }

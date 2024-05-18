@@ -1,10 +1,12 @@
 #include "DamagePattern.hpp"
 
-DamagePattern::DamagePattern(std::string& pattern) {
+DamagePattern::DamagePattern(std::string& pattern)
+{
   pattern_ = parsePattern(pattern);
 }
 
-Pattern DamagePattern::parsePattern(std::string& pattern) {
+Pattern DamagePattern::parsePattern(std::string& pattern)
+{
   Utils::normalizeString(pattern);
   // Uses the map function to map the string to the enum
   std::map<std::string, Pattern> patternMap = {
@@ -22,7 +24,8 @@ Pattern DamagePattern::parsePattern(std::string& pattern) {
   return patternMap[pattern];
 }
 
-Pattern DamagePattern::getPattern() const {
+Pattern DamagePattern::getPattern() const
+{
   return pattern_;
 }
 
@@ -238,55 +241,4 @@ std::vector<std::vector<int>> DamagePattern::burstPattern(std::pair<int, int> ta
   }
 
   return affected_fields;
-}
-
-// TODO: Only used for debugging purposes
-void DamagePattern::printDamagePattern(const std::vector<std::vector<int>> &damagePattern) const
-  {
-  // Print the column numbers
-  std::cout << "   ";
-  for (int i = 0; i < static_cast<int>(damagePattern[0].size()); ++i) {
-    std::cout << " " << i + 1 << "  ";
-  }
-  std::cout << "\n";
-
-  // Print the top border
-  std::cout << "  ";
-  for (int i = 0; i < static_cast<int>(damagePattern[0].size()); ++i) {
-    std::cout << "+---";
-  }
-  std::cout << "+\n";
-
-  // Print the rows with cell values
-  for (int i = 0; i < static_cast<int>(damagePattern.size()); ++i) {
-    std::cout << i + 1 << " ";  // Print the row number
-    for (int j : damagePattern[i]) {
-      std::cout << "|";
-      switch (j) {
-        case 0:
-          std::cout << "   ";
-          break;
-        case 1:
-          std::cout << "<!>";
-          break;
-        case 2:
-          std::cout << "<C>";
-          break;
-        case 3:
-          std::cout << "<X>";
-          break;
-        default:
-          std::cout << "   ";
-          break;
-      }
-    }
-    std::cout << "|\n";
-
-    // Print the border between rows
-    std::cout << "  ";
-    for (int j = 0; j < static_cast<int>(damagePattern[i].size()); ++j) {
-      std::cout << "+---";
-    }
-    std::cout << "+\n";
-  }
 }

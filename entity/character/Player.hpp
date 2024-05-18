@@ -27,7 +27,7 @@ class Player: public Character
     void setResistance(DamageType damage_type);
     int usePotion(std::string abbreviation);
     void printPlayer(const std::pair<int, int>& position, bool single_line = false) const;
-    [[nodiscard]] std::string getName() const { return name_; }
+    std::string getName() const { return name_; }
     void simplePrint() const override;
 
     void setActiveWeapon(std::string weapon_abbreviation);

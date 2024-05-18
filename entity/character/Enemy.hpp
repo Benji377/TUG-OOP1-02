@@ -21,7 +21,7 @@ class Enemy: public Character
   void initializeInventory();
   public:
     Enemy(int id, char abbreviation);
-    [[nodiscard]] bool is_boss() const;
+    bool is_boss() const;
     int getAttackDamage() override;
     int getAttackDamage(AttackType attack_type);
     int takeDamage(int damage, DamageType damage_type) override;

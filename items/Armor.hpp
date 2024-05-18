@@ -33,7 +33,7 @@ public:
   ///
   /// This method returns the armor value of the armor.
   //
-  [[nodiscard]] int getArmorValue() const;
+  int getArmorValue() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

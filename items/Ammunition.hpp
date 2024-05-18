@@ -51,7 +51,7 @@ public:
   /// Returns the type of the ammunition.
   /// @return The type of the ammunition.
   //
-  [[nodiscard]] AmmunitionType getType() const;
+  AmmunitionType getType() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
@@ -65,7 +65,7 @@ public:
   /// Returns the amount of ammunition in the stack.
   /// @return The amount of ammunition in the stack.
   //
-  [[nodiscard]] int getAmount() const;
+  int getAmount() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

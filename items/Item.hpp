@@ -31,28 +31,28 @@ public:
   /// Returns the Item abbreviation.
   /// @return The abbreviation of the item.
   //
-  [[nodiscard]] std::string getAbbreviation() const { return abbreviation_; }
+  std::string getAbbreviation() const { return abbreviation_; }
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the Item name.
   /// @return The name of the item.
   //
-  [[nodiscard]] std::string getName() const { return name_; }
+  std::string getName() const { return name_; }
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the Dice object of the item.
   /// @return The Dice object of the item.
   //
-  [[nodiscard]] std::shared_ptr<Dice> getDice() const { return dice_;};
+  std::shared_ptr<Dice> getDice() const { return dice_;};
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns true if the item is an ammunition. Required for sorting
   /// @return True if the item is an ammunition.
   //
-  [[nodiscard]] bool getIsAmmunition() const { return getAbbreviation() == "ARRW" || getAbbreviation() == "BOLT"; }
+  bool getIsAmmunition() const { return getAbbreviation() == "ARRW" || getAbbreviation() == "BOLT"; }
 };
 
 #endif //ITEM_HPP

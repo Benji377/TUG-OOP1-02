@@ -72,35 +72,35 @@ public:
   /// Returns the damage addition of the weapon.
   /// @return The damage addition of the weapon.
   //
-  [[nodiscard]] int getDamageAddition() const;
+  int getDamageAddition() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage pattern of the weapon.
   /// @return The damage pattern of the weapon.
   //
-  [[nodiscard]] std::shared_ptr<DamagePattern> getDamagePattern() const;
+  std::shared_ptr<DamagePattern> getDamagePattern() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the attack type of the weapon.
   /// @return The attack type of the weapon.
   //
-  [[nodiscard]] AttackType getAttackType() const;
+  AttackType getAttackType() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage type of the weapon.
   /// @return The damage type of the weapon.
   //
-  [[nodiscard]] DamageType getDamageType() const;
+  DamageType getDamageType() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns the damage of the weapon. Rolls the dice and then adds the damage addition to the result.
   /// @return The damage of the weapon.
   //
-  [[nodiscard]] int getDamage() const;
+  int getDamage() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

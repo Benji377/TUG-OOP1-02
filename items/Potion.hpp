@@ -51,7 +51,7 @@ public:
   ///
   /// @return The effect of the potion.
   //
-  [[nodiscard]] Effect getEffect() const;
+  Effect getEffect() const;
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

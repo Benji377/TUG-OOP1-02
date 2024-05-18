@@ -36,10 +36,10 @@ class Entity {
           is_lootable_(true){}
     virtual ~Entity() = default;
 
-    [[nodiscard]] virtual char getAbbreviation() const { return abbreviation_; }
-    [[nodiscard]] virtual int getId() const { return id_; }
-    [[nodiscard]] virtual bool isLootable() const { return is_lootable_; }
-    [[nodiscard]] virtual map<string, int> getLoot() const { return loot_; }
+    virtual char getAbbreviation() const { return abbreviation_; }
+    virtual int getId() const { return id_; }
+    virtual bool isLootable() const { return is_lootable_; }
+    virtual map<string, int> getLoot() const { return loot_; }
     virtual bool isCharacter() const { return false; }
     virtual bool isEnemy() const { return false; }
 
