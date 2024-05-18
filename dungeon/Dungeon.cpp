@@ -15,6 +15,8 @@ using std::string;
 
 Dungeon::Dungeon(const char *file_path)
 {
+  boss_dead_ = false;
+
   std::ifstream file(file_path);
   if (file.is_open())
   {
@@ -265,6 +267,11 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
           {
             std::string enemy_name = attacked_enemy->getTypeName() + " " + std::to_string(attacked_enemy->getId());
             attacked_field.setName(enemy_name);
+
+            if(attacked_enemy->is_boss() && attacked_enemy->isDead())
+            {
+              boss_dead_ = true;
+            }
           }          
         }
         attacked_fields.push_back(attacked_field);

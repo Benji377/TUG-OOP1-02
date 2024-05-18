@@ -468,7 +468,10 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   IO::printAttackedCharacters(attacked_fields_sorted);
 
-  //TODO if Lich is dead skip this. 
+  if(game_->getDungeon().isBossDead() == true)
+  {
+    return;
+  }
 
   game_->printStoryAndRoom(false, true, true);
 

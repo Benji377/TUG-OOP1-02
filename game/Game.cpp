@@ -117,6 +117,22 @@ void Game::start()
 
 void Game::step()
 {
+//TODO I put this at the topic because it is described that if game ends, nothing else should happen
+  if (allPlayersAreDead())
+  {
+    std::cout << Game::story_.getStorySegment("N_DEFEAT");
+    is_running_ = false;
+    printAndSaveScore();
+    return;
+  }
+  else if(dungeon_.isBossDead())
+  {
+    std::cout << Game::story_.getStorySegment("N_COMPLETION");
+    is_running_ = false;
+    printAndSaveScore();
+    return;
+  }
+
   if (current_phase_ == Phase::ACTION)
   {
     if (action_count_ < max_players_)
@@ -133,13 +149,6 @@ void Game::step()
   {
     enemyPhase();
     current_phase_ = Phase::ACTION;
-  }
-  if (allPlayersAreDead())
-  {
-    std::cout << Game::story_.getStorySegment("N_DEFEAT");
-    is_running_ = false;
-    printAndSaveScore();
-    return;
   }
 }
 
