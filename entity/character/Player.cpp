@@ -197,7 +197,7 @@ int Player::takeDamage(int damage, DamageType damage_type)
     additional_armor = getArmor()->getArmorValue();
   }
 
-  int defense_points = getBaseArmor() + additional_armor;
+  int defense_points = std::max(getBaseArmor(), additional_armor);
   int damage_taken = damage - defense_points;
   int lost_health = std::min(getHealth(), std::max(0, damage_taken));
   setHealth(getHealth() - lost_health);

@@ -109,14 +109,7 @@ int Enemy::takeDamage(int damage, DamageType damage_type)
     damage /= 2;
   }
 
-  int additional_armor = 0;
-  if(getArmor() != nullptr)
-  {
-    additional_armor = getArmor()->getArmorValue();
-  }
-
-  int defense_points = getBaseArmor() + additional_armor;
-  int damage_taken = damage - defense_points;
+  int damage_taken = damage - getBaseArmor();
   int lost_health = std::min(getHealth(), std::max(0, damage_taken));
   setHealth(getHealth() - lost_health);
 
