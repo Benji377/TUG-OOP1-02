@@ -299,8 +299,14 @@ void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool p
   {
     dungeon_.printCurrentRoom();
   }
+
+  if(print_enemy_health == false)
+  {
+    return;
+  }
+
   std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
-  if (enemies.size() > 0 && print_enemy_health)
+  if (enemies.size() > 0)
   {
     std::cout << "   ";
     for (auto enemy : enemies)
