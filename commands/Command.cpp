@@ -149,7 +149,6 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   for(auto& player : players)
   {
-    // TODO: BENJI -> Check if this line is correct, may need to change the boolean value
     player->printPlayer(current_room->getFieldOfEntity(player), true);
   }
 
@@ -453,7 +452,7 @@ void AttackCommand::execute(std::vector<std::string> params)
   std::vector<AttackedField> attacked_fields_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
 
   IO::printSuccessFullAttack(player, target_position, attacked_fields_sorted);
-  // TODO: Benji -> Since the damage no longer corresponds to the dice roll, I created a function that provides the last dice roll
+
   IO::printDiceRoll(player->getActiveWeapon()->getDice()->getPreviousRoll(), player->getActiveWeapon()->getDice());
 
   IO::printAttackedCharacters(attacked_fields_sorted);

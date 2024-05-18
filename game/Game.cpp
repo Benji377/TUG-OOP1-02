@@ -435,7 +435,7 @@ void Game::enemyPhase()
         int damage = enemy->getAttackDamage();
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
-        IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
+        IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
         break;
       }
@@ -451,7 +451,7 @@ void Game::enemyPhase()
         }
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
-        IO::printDiceRoll(damage, enemy->getWeapon()->getDice());
+        IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
         break;
       }
