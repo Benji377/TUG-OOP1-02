@@ -87,6 +87,12 @@ void Player::setResistance(DamageType damage_type)
 
 void Player::setActiveWeapon(std::string weapon_abbreviation)
 {
+  if (weapon_abbreviation.empty())
+  {
+    weapon_ = nullptr;
+    return;
+  }
+
   std::shared_ptr<Weapon> weapon = inventory_->getWeapon(weapon_abbreviation);
   if (weapon != nullptr)
   {
@@ -100,6 +106,12 @@ void Player::setActiveWeapon(std::string weapon_abbreviation)
 
 void Player::setArmor(std::string armor_abbreviation)
 {
+  if (armor_abbreviation.empty())
+  {
+    weapon_ = nullptr;
+    return;
+  }
+
   std::shared_ptr<Armor> armor = inventory_->getArmor(armor_abbreviation);
   if (armor != nullptr)
   {

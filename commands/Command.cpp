@@ -374,7 +374,8 @@ void UseCommand::execute(std::vector<std::string> params)
   {
     if(player->getActiveWeapon() == weapon)
     {
-      player->setActiveWeapon(nullptr);
+      // TODO: Fixed an issue where an empty weapon was set as the active weapon. Please use empty string instead. - Benji
+      player->setActiveWeapon("");
     }
     else
     {
@@ -389,7 +390,7 @@ void UseCommand::execute(std::vector<std::string> params)
   {
     if(player->getArmor() == armor)
     {
-      player->setArmor(nullptr);
+      player->setArmor("");
     }
     else
     {
@@ -439,7 +440,7 @@ void AttackCommand::execute(std::vector<std::string> params)
     //these 6 lines of code are from Benji, very beautiful!
     std::string ammoType = (players_weapon->getAbbreviation() == "SBOW" ||
                             players_weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
-    //TODO: We need to exclude Quarterstaff from this check, because it doesn't require ammunition
+    //TODO: We need to exclude Quarterstaff from this check, because it doesn't require ammunition - Benji
     if (player->getActiveWeapon()->getAbbreviation().compare(0, 1, "Q") != 0)
     {
       if (player->getActiveWeapon()->getAbbreviation().compare(0, 1, "Q") != 0 ||
