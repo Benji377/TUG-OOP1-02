@@ -434,6 +434,7 @@ void Game::enemyPhase()
       {
         int damage = enemy->getAttackDamage();
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
+        std::cout << std::endl;
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
