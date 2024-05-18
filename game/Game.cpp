@@ -271,7 +271,7 @@ std::shared_ptr<Room> Game::getCurrentRoom()
   return dungeon_.getCurrentRoom();
 }
 
-void Game::printStoryAndRoom(bool print_story, bool print_room_completed)
+void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool print_enemy_health)
 {
   dungeon_.getCurrentRoom()->checkCompletion();
   dungeon_.getCurrentRoom()->openDoors();
@@ -300,7 +300,7 @@ void Game::printStoryAndRoom(bool print_story, bool print_room_completed)
     dungeon_.printCurrentRoom();
   }
   std::vector<std::shared_ptr<Character>> enemies = dungeon_.getCurrentRoom()->getEnemies();
-  if (enemies.size() > 0)
+  if (enemies.size() > 0 && print_enemy_health)
   {
     std::cout << "   ";
     for (auto enemy : enemies)
