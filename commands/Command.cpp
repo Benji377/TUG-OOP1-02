@@ -116,10 +116,7 @@ void MapCommand::execute(std::vector<std::string> params)
 
   game_->toggleMapOutput();
 
-  if(game_->getMapOutPutState() == true)
-  {
-    game_->printStoryAndRoom(false, false);
-  }
+  game_->printStoryAndRoom(false, false);
 
 }
 
@@ -258,8 +255,9 @@ void MoveCommand::execute(std::vector<std::string> params)
   {
     IO::printPlayerMoved(player, target_position);
     game_->getDungeon().characterMove(player, target_position);
-    game_->printStoryAndRoom(false, true);
     game_->plusOneActionCount();
+
+    game_->printStoryAndRoom(false, true);
   }
   else if(std::dynamic_pointer_cast<Door>(entity_on_field) != nullptr)
   {
@@ -279,7 +277,7 @@ void MoveCommand::execute(std::vector<std::string> params)
         game_->printAndSaveScore();
         return;
       }
-      game_->printStoryAndRoom();
+      game_->printStoryAndRoom(false, true);
     }
 
   }
@@ -313,12 +311,13 @@ void LootCommand::execute(std::vector<std::string> params)
 
     std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d20");
     int roll_result = dice->roll();
-    game_->plusOneActionCount();
     IO::printDiceRoll(roll_result, dice);
 
     if(roll_result < min_value_to_roll)
     {
       std::cout << game_->getStory().getStorySegment("N_LOOT_CHEST_LOCKED");
+      game_->plusOneActionCount();
+      game_->printStoryAndRoom();
       return;
     }
   }
@@ -339,6 +338,8 @@ void LootCommand::execute(std::vector<std::string> params)
   IO::printInventory(inv_of_entity, nullptr);
   game_->getDungeon().lootEntity(player, entity_on_field);
   game_->plusOneActionCount();
+
+  game_->printStoryAndRoom(false, true);
 
 }
 
@@ -366,6 +367,7 @@ void UseCommand::execute(std::vector<std::string> params)
     std::cout << " consumed " << potion->getName() << std::endl;
     player->usePotion(abbrev);
     game_->plusOneActionCount();
+    game_->printStoryAndRoom(false, true);
     return;
   }
 
@@ -381,7 +383,10 @@ void UseCommand::execute(std::vector<std::string> params)
     {
     player->setActiveWeapon(weapon->getAbbreviation());
     }
+
     game_->plusOneActionCount();
+    game_->printStoryAndRoom(false, true);
+
     return;
   }
 
