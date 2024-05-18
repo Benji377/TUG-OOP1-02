@@ -399,7 +399,7 @@ void UseCommand::execute(std::vector<std::string> params)
     }
     else
     {
-      player->setArmor(abbrev);
+      player->setArmor(armor->getAbbreviation());
     }
     game_->plusOneActionCount();
     game_->printStoryAndRoom(false, true, true);

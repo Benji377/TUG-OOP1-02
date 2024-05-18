@@ -108,7 +108,7 @@ void Player::setArmor(std::string armor_abbreviation)
 {
   if (armor_abbreviation.empty())
   {
-    weapon_ = nullptr;
+    armor_ = nullptr;
     return;
   }
 
