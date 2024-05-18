@@ -439,12 +439,16 @@ void AttackCommand::execute(std::vector<std::string> params)
     //these 6 lines of code are from Benji, very beautiful!
     std::string ammoType = (players_weapon->getAbbreviation() == "SBOW" ||
                             players_weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
-    if (player->getInventory()->getAmmunition(ammoType) == nullptr ||
-                            player->getInventory()->getAmmunition(ammoType)->getAmount() == 0)
+    //TODO: We need to exclude Quarterstaff from this check, because it doesn't require ammunition
+    if (player->getActiveWeapon()->getAbbreviation().compare(0, 1, "Q") != 0)
     {
-      throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_AMMUNITION);
+      if (player->getActiveWeapon()->getAbbreviation().compare(0, 1, "Q") != 0 ||
+          player->getInventory()->getAmmunition(ammoType) == nullptr ||
+          player->getInventory()->getAmmunition(ammoType)->getAmount() == 0)
+      {
+        throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_AMMUNITION);
+      }
     }
-
   }
 
   int damage = player->getAttackDamage();
