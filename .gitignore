@@ -4,4 +4,5 @@ valgrind_logs/
 testreport.html
 build/
 .vscode
+testrunner
 /saves/*.txt
