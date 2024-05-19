@@ -249,8 +249,10 @@ void MoveCommand::execute(std::vector<std::string> params)
     }
     else
     {
-      IO::printPlayerMoved(player, target_position);
       game_->plusOneActionCount();
+      game_->setActionCount(0); //Action count gets reset if in a new room
+
+      IO::printPlayerMoved(player, target_position);
       int result = game_->getDungeon().moveToRoom(door->getLeadsTo());
       if (result == 1)
       {
