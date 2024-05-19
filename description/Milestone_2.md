@@ -399,7 +399,7 @@ Now a player can [successfully loot](#successful-loot) the death location and th
 The location and contents of a treasure chest are specified in the dungeon config. 
 
 Before a player can loot a locked treasure chest they need to roll `1 d20` to decide if they are able to **unlock the chest**.
-To open the chest the value of `1 d20 + <VIT>` needs to be higher than the `<VALUE_NEEDED_TO_UNLOCK>` in the dungeon config.
+To open the chest the value of `1 d20 + <VIT>` needs to be **higher than or equal to** the `<VALUE_NEEDED_TO_UNLOCK>` in the dungeon config.
 
 `<VIT>` is the vitality stat of the player.
 
