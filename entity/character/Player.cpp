@@ -183,7 +183,8 @@ int Player::getAttackDamage()
     return -1;
   }
 
-  if (getActiveWeapon()->getAttackType() != AttackType::MELEE)
+  if (getActiveWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
+      && getActiveWeapon()->getAbbreviation() != "QFIR" && getActiveWeapon()->getAbbreviation() != "QACD")
   {
     std::string ammoType = (getActiveWeapon()->getAbbreviation() == "SBOW" ||
                             getActiveWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
