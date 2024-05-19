@@ -69,7 +69,7 @@ class Game
     std::shared_ptr<Player> getPlayerByType(char type);
     void printStoryAndRoom(bool print_story = true, bool print_room_completed = true, bool print_enemy_health = true);
     int getActionCount() { return action_count_; }
-    int setActionCount(int new_count) { action_count_ = new_count; }
+    void setActionCount(int new_count) { action_count_ = new_count; }
     int getMaxPlayerCount() { return max_players_; }
     bool allPlayersAreDead();
     void printAndSaveScore();
