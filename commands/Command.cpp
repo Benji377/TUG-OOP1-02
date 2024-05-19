@@ -14,26 +14,6 @@ void Command::checkCommandLenght(std::vector<std::string> params, size_t require
   }
 }
 
-/*void Command::isValidAbbrev(Abbrev type_of_abbrev, std::string input) const
-{
-  switch(type_of_abbrev)
-  {
-    case Abbrev::PLAYER:
-       if(input == "b" || input == "r" || input == "w")
-      {
-        break;
-      }
-      else
-      {
-        throw InvalidParamCommand();
-      }
-      break;
-  case Abbrev::ITEM:
-      break;
-  }
-
-}*/
-
 std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const
 {
   std::string input_abbreviation = params.at(position_of_abbrev_in_params);
@@ -270,6 +250,7 @@ void MoveCommand::execute(std::vector<std::string> params)
     else
     {
       IO::printPlayerMoved(player, target_position);
+      game_->plusOneActionCount();
       int result = game_->getDungeon().moveToRoom(door->getLeadsTo());
       if (result == 1)
       {
@@ -463,6 +444,7 @@ void AttackCommand::execute(std::vector<std::string> params)
   std::vector<AttackedField> attacked_fields_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
 
   IO::printSuccessFullAttack(player, target_position, attacked_fields_sorted);
+  game_->plusOneActionCount();
 
   IO::printDiceRoll(player->getActiveWeapon()->getDice()->getPreviousRoll(), player->getActiveWeapon()->getDice());
 
@@ -475,7 +457,6 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   game_->printStoryAndRoom(false, true, true);
 
-  game_->plusOneActionCount();
 }
 
 

@@ -65,6 +65,8 @@ class Room
     /// Checks if all enemies in the room are dead and sets the is_complete_ attribute accordingly.
     ///
     void checkCompletion();
+    //
+    void setComplete(bool completion_state) {is_complete_ = completion_state; }
     ///-----------------------------------------------------------------------------------------------------------------
     /// Opens all doors in the room.
     ///

@@ -456,7 +456,7 @@ void Game::enemyPhase()
       {
         int damage = enemy->getAttackDamage();
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
-        std::cout << std::endl; //TODO is this alright?!?! added newline
+        std::cout << std::endl; //TODO added this
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
@@ -468,8 +468,9 @@ void Game::enemyPhase()
         if (damage == -1)
         {
           dungeon_.moveToRandomField(enemy);
+          std::pair<int, int> new_enemy_pos = dungeon_.getCurrentRoom()->getFieldOfEntity(enemy);
           std::cout << "\n" << enemy->getTypeName() << " " << enemy->getId() << " [" << enemy->getAbbreviation() <<
-            enemy->getId() << "] moved to (" << enemy_pos.first << "," << enemy_pos.second << ")." << std::endl;
+            enemy->getId() << "] moved to (" << new_enemy_pos.first << "," << new_enemy_pos.second << ")." << std::endl;
           break;
         }
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);

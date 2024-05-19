@@ -271,6 +271,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
             if(attacked_enemy->is_boss() && attacked_enemy->isDead())
             {
               boss_dead_ = true;
+              current_room_->setComplete(true);
             }
           }          
         }
