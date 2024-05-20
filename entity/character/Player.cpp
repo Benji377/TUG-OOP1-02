@@ -154,7 +154,7 @@ int Player::usePotion(std::string abbreviation)
       }
       int health_after = getHealth();
       simplePrintNoId();
-      std::cout << "regenerates " << health_after-health_before << " health." << std::endl;
+      std::cout << " regenerates " << health_after-health_before << " health." << std::endl;
     }
     else
     {
