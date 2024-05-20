@@ -346,7 +346,7 @@ void UseCommand::execute(std::vector<std::string> params)
   if(potion != nullptr)
   {
     player->simplePrintNoId();
-    std::cout << " consumed " << potion->getName() << std::endl;
+    std::cout << " consumed \"" << potion->getName() << "\"." << std::endl;
     player->usePotion(abbrev);
     game_->plusOneActionCount();
     game_->printStoryAndRoom(false, true, true);
