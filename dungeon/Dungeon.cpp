@@ -141,6 +141,7 @@ vector<shared_ptr<Player>> Dungeon::exitCurrentRoom()
         if (player != nullptr)
         {
           current_room_->setFieldEntity(nullptr, i + 1, j + 1);
+          player->setResistance(DamageType::NONE);
           players.push_back(player);
         }
       }
