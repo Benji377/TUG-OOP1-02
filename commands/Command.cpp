@@ -313,7 +313,7 @@ void LootCommand::execute(std::vector<std::string> params)
 
   std::map<string, int> loot = entity_on_field->getLoot();
   std::shared_ptr<Inventory> inv_of_entity = std::make_shared<Inventory>();
-  int ret = inv_of_entity->parseInventory(loot);
+  int ret = inv_of_entity->parseInventory(loot, player->getStrength(), player->getVitality());
   if (ret == 1)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
@@ -358,7 +358,6 @@ void UseCommand::execute(std::vector<std::string> params)
   {
     if(player->getActiveWeapon() == weapon)
     {
-      // TODO: Fixed an issue where an empty weapon was set as the active weapon. Please use empty string instead. - Benji
       player->setActiveWeapon("");
     }
     else
