@@ -123,19 +123,11 @@ class Room
     /// @throws UnavailableItemOrEntityCommand if the entity is not found in any field of the room.
     ///
     std::pair<int, int> getFieldOfEntity(shared_ptr<Entity> entity);
-    ///-----------------------------------------------------------------------------------------------------------------
-    /// Retrieves the surrounding fields of a given field in the room.
-    ///
-    /// This function takes the row and column indices of a field in the room and returns a vector containing
-    /// shared pointers to the fields surrounding the specified field.
-    ///
-    /// @param row The row index of the field for which to retrieve the surrounding fields.
-    /// @param col The column index of the field for which to retrieve the surrounding fields.
-    /// @return A vector containing shared pointers to the fields surrounding the specified field.
-    ///
-    std::vector<std::shared_ptr<Field>> getSurroundingFields(std::pair<int, int> position, int distance = 1);
 
-    std::vector<std::pair<int, int>> getSurroundingFieldPositions(std::pair<int, int> position, int distance = 1);
+    std::vector<std::pair<int, int>> getSurroundingFieldPositions(std::pair<int, int> position);
+
+    std::vector<std::pair<int, int>> getEmptySurroundingFieldPositions(std::pair<int, int> position,
+      int character_count = 1);
 
     template <typename T>
     std::vector<std::shared_ptr<T>> getAllEntitiesOfType() {

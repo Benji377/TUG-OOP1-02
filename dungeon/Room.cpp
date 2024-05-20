@@ -167,57 +167,101 @@ std::vector<char> Room::getEnemiesAbbreviations()
   return enemies_abbreviations;
 }
 
-// TODO: Make this function   re flexible.
-std::vector<std::shared_ptr<Field>> Room::getSurroundingFields(std::pair<int, int> position, int distance)
-{
-  std::vector<std::shared_ptr<Field>> surroundingFields;
-  std::vector<std::pair<int, int>> directions_1 = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
-  std::vector<std::pair<int, int>> directions_2 = {{-2, 0}, {-2, 1}, {-2, 2}, {-1, 2}, {0, 2}, {1, 2}, {2, 2}, {2, 1},
-                                            {2, 0}, {2, -1}, {2, -2}, {1, -2}, {0, -2}, {-1, -2}, {-2, -2}, {-2, -1}};
-  position.first -= 1;
-  position.second -= 1;
-
-  std::vector<std::pair<int, int>> directions = distance == 1 ? directions_1 : directions_2;
-  for (const auto& dir : directions)
-  {
-    int newRow = position.first + dir.first;
-    int newCol = position.second + dir.second;
-
-    // Check if the new row and column are within the grid boundaries
-    if (newRow >= 0 && (size_t)newRow < fields_.size() && newCol >= 0 && (size_t)newCol < fields_[0].size())
-    {
-      surroundingFields.push_back(fields_[newRow][newCol]);
-    }
-  }
-
-  return surroundingFields;
-}
-
-// TODO: Combine this function with the one above.
-std::vector<std::pair<int, int>> Room::getSurroundingFieldPositions(std::pair<int, int> position, int distance)
+std::vector<std::pair<int, int>> Room::getSurroundingFieldPositions(std::pair<int, int> position)
 {
   std::vector<std::pair<int, int>> surroundingFieldPositions;
-  std::vector<std::pair<int, int>> directions_1 = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
-  std::vector<std::pair<int, int>> directions_2 = {{-2, 0}, {-2, 1}, {-2, 2}, {-1, 2}, {0, 2}, {1, 2}, {2, 2}, {2, 1},
-                                            {2, 0}, {2, -1}, {2, -2}, {1, -2}, {0, -2}, {-1, -2}, {-2, -2}, {-2, -1}};
-  position.first -= 1;
-  position.second -= 1;
-
-  std::vector<std::pair<int, int>> directions = distance == 1 ? directions_1 : directions_2;
+  std::vector<std::pair<int, int>> directions = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
   for (const auto& dir : directions)
   {
-    int newRow = position.first + dir.first;
-    int newCol = position.second + dir.second;
+    std::pair<int, int> new_pos = std::make_pair(position.first + dir.first, position.second + dir.second);
 
-    // Check if the new row and column are within the grid boundaries
-    if (newRow >= 0 && (size_t)newRow < fields_.size() && newCol >= 0 && (size_t)newCol < fields_[0].size())
+    if (isValidField(new_pos))
     {
-      surroundingFieldPositions.push_back(std::make_pair(newRow + 1, newCol + 1));
+      surroundingFieldPositions.push_back(new_pos);
     }
   }
-
   return surroundingFieldPositions;
+}
 
+std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pair<int, int> position,
+  int character_count)
+{
+  std::vector<std::pair<int, int>> fields;
+  int i = 0;
+  int vertical = 2;
+  int horizontal = 1;
+  int found_empty_fields = 0;
+  std::pair<int, int> start_positon = std::make_pair(position.first - 1, position.second);
+  std::pair<int, int> cursor = start_positon;
+  while (found_empty_fields < character_count)
+  {
+    if (i % 5 == 0)
+    {
+      for (int j = 0; j < horizontal; j++)
+      {
+        if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
+        {
+          fields.push_back(cursor);
+          found_empty_fields++;
+        }
+        cursor.second++;
+      }
+    }
+    else if (i % 5 == 1)
+    {
+      for (int j = 0; j < vertical; j++)
+      {
+        if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
+        {
+          fields.push_back(cursor);
+          found_empty_fields++;
+        }
+        cursor.first++;
+      }
+    }
+    else if (i % 5 == 2)
+    {
+      for (int j = 0; j < horizontal * 2; j++)
+      {
+        if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
+        {
+          fields.push_back(cursor);
+          found_empty_fields++;
+        }
+        cursor.second--;
+      }
+      horizontal++;
+    }
+    else if (i % 5 == 3)
+    {
+      for (int j = 0; j < vertical; j++)
+      {
+        if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
+        {
+          fields.push_back(cursor);
+          found_empty_fields++;
+        }
+        cursor.first--;
+      }
+      vertical*=2;
+    }
+    else if (i % 5 == 4)
+    {
+      for (int j = 0; j < horizontal - 1; j++)
+      {
+        if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
+        {
+          fields.push_back(cursor);
+          found_empty_fields++;
+        }
+        cursor.second++;
+      }
+      start_positon.first--;
+      cursor = start_positon;
+    }
+    i++;
+  }
+  return fields;
 }
 
 bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2)
