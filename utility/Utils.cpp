@@ -120,7 +120,7 @@ bool Utils::isValidItemAbbrev(std::string abbrev)
   std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
   std::map<std::string, int> parse_input;
   parse_input.insert(make_pair(abbrev, 1));
-  test_inventory->parseInventory(parse_input);
+  test_inventory->parseInventory(parse_input, 0, 0);
 
   if(test_inventory->getAllPotions().empty() && test_inventory->getAllArmor().empty()
       && test_inventory->getAllWeapons().empty())

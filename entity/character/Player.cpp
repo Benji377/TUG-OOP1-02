@@ -96,7 +96,7 @@ void Player::setActiveWeapon(std::string weapon_abbreviation)
   std::shared_ptr<Weapon> weapon = inventory_->getWeapon(weapon_abbreviation);
   if (weapon != nullptr)
   {
-    weapon_ = inventory_->getWeapon(weapon_abbreviation);
+    weapon_ = weapon;
   }
   else
   {
@@ -115,7 +115,7 @@ void Player::setArmor(std::string armor_abbreviation)
   std::shared_ptr<Armor> armor = inventory_->getArmor(armor_abbreviation);
   if (armor != nullptr)
   {
-    armor_ = inventory_->getArmor(armor_abbreviation);
+    armor_ = armor;
   }
   else
   {
