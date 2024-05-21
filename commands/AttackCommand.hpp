@@ -1,0 +1,34 @@
+#ifndef ATTACKCOMMAND_HPP
+#define ATTACKCOMMAND_HPP
+
+//------------------------------------------------------------------------------------------------------------------
+///
+/// LootCommand class: This class is a command that toggles map
+///
+//-----------------------------------------------------------------------------------------------------------------
+#include "Command.hpp"
+
+class AttackCommand: public Command
+{
+public:
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Constructor of Map class calls Constructor of command class.
+  /// Destructor same as abstract class.
+  /// This class should never be copied. Each command type only exists once.
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  AttackCommand(Game* game) : Command(game) {}
+  ~AttackCommand() override {};
+  AttackCommand(const AttackCommand&) = delete;
+
+  //------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Execute method that overrides the abstract classes execute. Executes loot functionality
+  ///
+  //------------------------------------------------------------------------------------------------------------------
+  void execute(std::vector<std::string> params) override;
+};
+
+
+#endif

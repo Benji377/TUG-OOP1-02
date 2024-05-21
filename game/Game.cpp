@@ -24,7 +24,6 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("use", std::make_unique<UseCommand>(this));
   parser_->registerCommand("attack", std::make_unique<AttackCommand>(this));
 
-
 }
 
 void Game::start()
@@ -477,6 +476,7 @@ void Game::enemyPhase()
           break;
         }
         std::vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
+        std::cout << std::endl;
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
