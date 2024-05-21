@@ -14,7 +14,7 @@
 
 #include "Character.hpp"
 #include <cstring> //for strlen in printPlayer
-
+#include "../../items/DamagePattern.hpp"
 class Player: public Character
 {
   std::string name_;
@@ -34,6 +34,8 @@ class Player: public Character
     void setArmor(std::string armor_abbreviation);
     std::shared_ptr<Weapon> getActiveWeapon() const;
     void simplePrintNoId() const;
+    std::shared_ptr<Weapon> getWeapon() const override;
+
 
     ~Player() = default;
 };

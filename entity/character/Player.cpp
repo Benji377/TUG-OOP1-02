@@ -148,6 +148,7 @@ int Player::usePotion(std::string abbreviation)
     {
       int health_before = getHealth();
       setHealth(getHealth() + potion->getDice()->roll());
+      IO::printDiceRoll(potion->getDice()->getPreviousRoll(), potion->getDice());
       if (getHealth() > getMaximumHealth())
       {
         setHealth(getMaximumHealth());
@@ -174,16 +175,16 @@ int Player::usePotion(std::string abbreviation)
 int Player::getAttackDamage()
 {
   // Returns -1 if no weapon is equipped, -2 if no ammunition is available
-  if (getActiveWeapon() == nullptr)
+  if (getWeapon() == nullptr)
   {
     return -1;
   }
 
-  if (getActiveWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
-      && getActiveWeapon()->getAbbreviation() != "QFIR" && getActiveWeapon()->getAbbreviation() != "QACD")
+  if (getWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
+      && getWeapon()->getAbbreviation() != "QFIR" && getWeapon()->getAbbreviation() != "QACD")
   {
-    std::string ammoType = (getActiveWeapon()->getAbbreviation() == "SBOW" ||
-                            getActiveWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
+    std::string ammoType = (getWeapon()->getAbbreviation() == "SBOW" ||
+                            getWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
 
     if (getInventory()->getAmmunition(ammoType) == nullptr || getInventory()->getAmmunition(ammoType)->getAmount() == 0)
     {
@@ -192,7 +193,7 @@ int Player::getAttackDamage()
     getInventory()->useAmmunition(ammoType);
   }
 
-  return getActiveWeapon()->getDamage();
+  return getWeapon()->getDamage();
 }
 
 int Player::takeDamage(int damage, DamageType damage_type)
@@ -261,3 +262,59 @@ void Player::simplePrint() const
             << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
 }
 
+std::shared_ptr<Weapon> Player::getWeapon() const
+{
+  if(weapon_ == nullptr)
+  {
+    return nullptr;
+  }
+
+  if(weapon_->getAbbreviation().compare(0, 1, "Q") == 0)
+  {
+    if(getAbbreviation() == 'W')
+    {
+      if(weapon_->getAbbreviation() == "QFIR")
+      {
+        weapon_->setAttackType(AttackType::RANGED);
+        weapon_->setDamageType(DamageType::FIRE);
+
+        std::string pattern_str = "burst";
+        auto pattern = std::make_shared<DamagePattern>(pattern_str);
+        weapon_->setDamangePattern(pattern);
+      }
+      else if(weapon_->getAbbreviation() == "QCLD")
+      {
+         weapon_->setDamageType(DamageType::COLD);
+
+        std::string pattern_str = "line";
+        auto pattern = std::make_shared<DamagePattern>(pattern_str);
+        weapon_->setDamangePattern(pattern);
+      }
+      else if(weapon_->getAbbreviation() == "QACD")
+      {
+        weapon_->setAttackType(AttackType::RANGED);
+        weapon_->setDamageType(DamageType::ACID);
+
+        std::string pattern_str = "shot";
+        auto pattern = std::make_shared<DamagePattern>(pattern_str);
+        weapon_->setDamangePattern(pattern);
+      }
+      else if(weapon_->getAbbreviation() == "QFRC")
+      {
+        weapon_->setDamageType(DamageType::FORCE);
+      }
+    }
+    else
+    {
+      weapon_->setAttackType(AttackType::MELEE);
+      weapon_->setDamageType(DamageType::PHYSICAL);
+
+      std::string pattern_str = "hit";
+      auto pattern = std::make_shared<DamagePattern>(pattern_str);
+      weapon_->setDamangePattern(pattern);
+    }
+  }
+
+  return weapon_;
+
+}

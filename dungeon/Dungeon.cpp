@@ -259,7 +259,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
               boss_dead_ = true;
               current_room_->setComplete(true);
             }
-          }          
+          }
         }
         attacked_fields.push_back(attacked_field);
       }

@@ -112,6 +112,11 @@ public:
   //
   int getDamage() const;
 
+  //TODO is this alright? Necessary because these things change depending on character. If someone else picks it up it changes. -Hanno
+  void setDamangePattern(std::shared_ptr<DamagePattern> damage_pattern) {damage_pattern_ = damage_pattern; };
+  void setDamageType(DamageType type) {damage_type_ = type; };
+  void setAttackType(AttackType type) {attack_type_ = type;};
+
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// The copy constructor of the Weapon class. It is deleted to prevent copying of Weapon objects.

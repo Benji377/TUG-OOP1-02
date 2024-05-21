@@ -50,7 +50,7 @@ run: all					## runs the project with default configs
 	@printf "[\e[0;36mINFO\e[0m] Executing binary...\n"
 	./$(ASSIGNMENT) configs/dungeon_config.txt configs/story_config.txt
 
-test: all				## runs public testcases on the project
+test: bin				## runs public testcases on the project
 	@printf "[\e[0;36mINFO\e[0m] Executing testrunner...\n"
 	chmod +x testrunner
 	./testrunner -c test.toml

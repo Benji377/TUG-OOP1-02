@@ -13,7 +13,6 @@
 
 #include <string>
 #include "../Entity.hpp"
-
 class Character: public Entity
 {
   protected:
@@ -35,9 +34,8 @@ class Character: public Entity
     int getMaximumHealth() const { return maximum_health_; }
     int getHealth() const { return health_; }
     std::shared_ptr<Armor> getArmor() const { return armor_; }
-    std::shared_ptr<Weapon> getWeapon() const { return weapon_; }
     bool isDead() const { return is_dead_; }
-    
+
     std::shared_ptr<Inventory> getInventory() const { return inventory_; }
     //Nur fürs testen hinzugefügt, gerne wieder löschen -Hanno
 
@@ -58,8 +56,10 @@ class Character: public Entity
     // Methods
     virtual int getAttackDamage() = 0;
     virtual int takeDamage(int damage, DamageType damageType) = 0;
+    virtual std::shared_ptr<Weapon> getWeapon() const = 0;
     virtual void simplePrint() const = 0;
     virtual ~Character() = default;
+
 };
 
 

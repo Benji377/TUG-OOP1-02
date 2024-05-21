@@ -398,7 +398,7 @@ void AttackCommand::execute(std::vector<std::string> params)
   checkCommandLenght(params, 3);
 
   shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
-  shared_ptr<Weapon> players_weapon = player->getActiveWeapon();
+  shared_ptr<Weapon> players_weapon = player->getWeapon();
 
   if(players_weapon == nullptr)
   {

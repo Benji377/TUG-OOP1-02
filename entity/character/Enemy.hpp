@@ -28,6 +28,9 @@ class Enemy: public Character
     void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
     void simplePrint() const override;
     void attackPrint() const;
+
+    std::shared_ptr<Weapon> getWeapon() const override {return weapon_;};
+
     ~Enemy() = default;
     bool isEnemy() const override{ return true; }
 };
