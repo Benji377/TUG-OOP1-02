@@ -32,9 +32,8 @@ class Player: public Character
 
     void setActiveWeapon(std::string weapon_abbreviation);
     void setArmor(std::string armor_abbreviation);
-    std::shared_ptr<Weapon> getActiveWeapon() const;
     void simplePrintNoId() const;
-    std::shared_ptr<Weapon> getWeapon() const override;
+    std::shared_ptr<Weapon> getWeapon() const override { return weapon_; };
 
 
     ~Player() = default;

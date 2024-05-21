@@ -45,18 +45,8 @@ public:
   ///
   /// @return The Weapon object
   //
-  static std::shared_ptr<Weapon> craftWeapon(std::string abbreviation, int strength = 0, int vitality = 0);
-  ///------------------------------------------------------------------------------------------------------------------
-  ///
-  /// Similar to the other Weapon function, this creates a weapon based on a character. Only 'L' and 'W' are valid.
-  /// The character is case sensitive.
-  ///
-  /// @param abbreviation The abbreviation of the weapon
-  /// @param character The character
-  ///
-  /// @return The Weapon object
-  //
-  static std::shared_ptr<Weapon> craftWeapon(std::string abbreviation, char character);
+  static std::shared_ptr<Weapon> craftWeapon(std::string abbreviation, char character,
+                                             int strength = 0, int vitality = 0);
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// This function reads the CSV file and creates an Armor object with the values from the CSV file. The vitality value

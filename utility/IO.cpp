@@ -1,11 +1,6 @@
 #include "IO.hpp"
 #include "../entity/character/Player.hpp"
-#include "../entity/Entity.hpp"
 #include "../dungeon/Room.hpp"
-#include "../entity/character/Inventory.hpp"
-#include "../items/Item.hpp"
-#include "../entity/character/Enemy.hpp"
-#include "../items/Weapon.hpp"
 #include "Dice.hpp"
 #include "../dungeon/Dungeon.hpp"
 
@@ -180,9 +175,9 @@ void IO::printActives(std::shared_ptr<Player> player)
 
   std::cout << "  Equipped Weapon: ";
 
-  if(player->getActiveWeapon() != nullptr)
+  if(player->getWeapon() != nullptr)
   {
-    std::cout << "[" << player->getActiveWeapon()->getAbbreviation() << "] " <<  player->getActiveWeapon()->getName() << std::endl;
+    std::cout << "[" << player->getWeapon()->getAbbreviation() << "] " <<  player->getWeapon()->getName() << std::endl;
   }
   else
   {
@@ -222,7 +217,7 @@ void IO::printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> 
   std::vector<std::shared_ptr<Weapon>> weapon_ptrs = inv->getAllWeapons();
   if(player != nullptr)
   {
-    weapon_ptrs.erase(std::remove(weapon_ptrs.begin(), weapon_ptrs.end(), player->getActiveWeapon()), weapon_ptrs.end());
+    weapon_ptrs.erase(std::remove(weapon_ptrs.begin(), weapon_ptrs.end(), player->getWeapon()), weapon_ptrs.end());
   }
   std::vector<std::shared_ptr<Item>> weapons_as_items;
   for(const auto& weapon_ptr : weapon_ptrs)

@@ -284,7 +284,8 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
 void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
 {
   std::map<string, int> loot = entity->getLoot();
-  int ret = player->getInventory()->parseInventory(loot, player->getStrength(), player->getVitality());
+  int ret = player->getInventory()->parseInventory(loot, player->getAbbreviation(),
+                                                   player->getStrength(), player->getVitality());
   if (ret == 1)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;

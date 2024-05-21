@@ -48,22 +48,22 @@ void Player::initializeInventory()
 
   if (getAbbreviation() == 'B')
   {
-    weapon_ = Props::craftWeapon("GAXE", getStrength(), getVitality());
+    weapon_ = Props::craftWeapon("GAXE", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
     temp_inv->addWeapon(weapon_);
-    temp_inv->addWeapon(Props::craftWeapon("HAXE", getStrength(), getVitality()));
-    temp_inv->addWeapon(Props::craftWeapon("HAXE", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", getAbbreviation(), getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("HAXE", getAbbreviation(), getStrength(), getVitality()));
   }
   else if (getAbbreviation() == 'R')
   {
-    weapon_ = Props::craftWeapon("RAPI", getStrength(), getVitality());
+    weapon_ = Props::craftWeapon("RAPI", getAbbreviation(), getStrength(), getVitality());
     armor_ = Props::craftArmor("LARM", getVitality());
 
     temp_inv->addArmor(armor_);
     temp_inv->addWeapon(weapon_);
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
-    temp_inv->addWeapon(Props::craftWeapon("SBOW", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("SBOW", getAbbreviation(), getStrength(), getVitality()));
     temp_inv->addAmmunition(Props::craftAmmunition("ARRW", 20));
   }
   else if (getAbbreviation() == 'W')
@@ -71,8 +71,8 @@ void Player::initializeInventory()
     weapon_ = Props::craftWeapon("QFRC", 'W');
     armor_ = nullptr;
     temp_inv->addWeapon(weapon_);
-    temp_inv->addWeapon(Props::craftWeapon("QACD", 'W'));
-    temp_inv->addWeapon(Props::craftWeapon("DAGG", getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("QACD", getAbbreviation(), getStrength(), getVitality()));
+    temp_inv->addWeapon(Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality()));
   }
 
   inventory_ = temp_inv;
@@ -123,11 +123,6 @@ void Player::setArmor(std::string armor_abbreviation)
   }
 }
 
-std::shared_ptr<Weapon> Player::getActiveWeapon() const
-{
-  return weapon_;
-}
-
 void Player::simplePrintNoId() const
 {
   std::cout << this->getTypeName() << " " << "[" << this->getAbbreviation() << "] \"" <<
@@ -161,7 +156,6 @@ int Player::usePotion(std::string abbreviation)
     {
       // Map the potion effect enum to the weapons damage type enum
       auto damage_type = static_cast<DamageType>(potion->getEffect());
-      // TODO: This cast may not work properly!
       setResistance(damage_type);
       simplePrintNoId();
       IO::printDamageTypeResistance(damage_type);
@@ -207,16 +201,6 @@ int Player::takeDamage(int damage, DamageType damage_type)
   if(getArmor() != nullptr)
   {
     additional_armor = getArmor()->getArmorValue();
-
-    if(getArmor()->getAbbreviation() == "LARM") //TODO do enemies have armor??
-    {
-      additional_armor = 1 + getVitality();
-    }
-    else if(getArmor()->getAbbreviation() == "BPLT")
-    {
-      additional_armor = 4 + std::min(getVitality(), 2);
-    }
-    additional_armor = getArmor()->getArmorValue();
   }
 
   int defense_points = std::max(getBaseArmor(), additional_armor);
@@ -260,91 +244,4 @@ void Player::simplePrint() const
 {
   std::cout << "Player " << getId() << ": " << getTypeName()
             << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
-}
-
-std::shared_ptr<Weapon> Player::getWeapon() const
-{
-  if(weapon_ == nullptr)
-  {
-    return nullptr;
-  }
-
-  if(weapon_->getAbbreviation().compare(0, 1, "Q") == 0)
-  {
-    if(getAbbreviation() == 'W')
-    {
-
-      if(weapon_->getDamageType() != DamageType::PHYSICAL) //if it has already been made into a wirzards weapon
-      {
-        return weapon_;
-      }
-
-      weapon_->setDamageAddition(0);
-
-      if(weapon_->getAbbreviation() == "QFIR")
-      {
-        weapon_->setAttackType(AttackType::RANGED);
-        weapon_->setDamageType(DamageType::FIRE);
-
-        std::string pattern_str = "burst";
-        auto pattern = std::make_shared<DamagePattern>(pattern_str);
-        weapon_->setDamangePattern(pattern);
-
-        std::shared_ptr<Dice> dice = std::make_shared<Dice>("3 d6");
-        weapon_->setDice(dice);
-      }
-      else if(weapon_->getAbbreviation() == "QCLD")
-      {
-         weapon_->setDamageType(DamageType::COLD);
-
-        std::string pattern_str = "line";
-        auto pattern = std::make_shared<DamagePattern>(pattern_str);
-        weapon_->setDamangePattern(pattern);
-
-        std::shared_ptr<Dice> dice = std::make_shared<Dice>("2 d10");
-        weapon_->setDice(dice);
-      }
-      else if(weapon_->getAbbreviation() == "QACD")
-      {
-        weapon_->setAttackType(AttackType::RANGED);
-        weapon_->setDamageType(DamageType::ACID);
-
-        std::string pattern_str = "shot";
-        auto pattern = std::make_shared<DamagePattern>(pattern_str);
-        weapon_->setDamangePattern(pattern);
-
-        std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d10");
-        weapon_->setDice(dice);
-      }
-      else if(weapon_->getAbbreviation() == "QFRC")
-      {
-        weapon_->setDamageType(DamageType::FORCE);
-
-        std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d10");
-        weapon_->setDice(dice);
-      }
-    }
-    else
-    {
-
-      if(weapon_->getDamageType() == DamageType::PHYSICAL) //if it has already been made into a standard weapon
-      {
-        return weapon_;
-      }
-
-      weapon_->setDamageAddition(getStrength());
-      weapon_->setAttackType(AttackType::MELEE);
-      weapon_->setDamageType(DamageType::PHYSICAL);
-
-      std::string pattern_str = "hit";
-      auto pattern = std::make_shared<DamagePattern>(pattern_str);
-      weapon_->setDamangePattern(pattern);
-
-      std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d6");
-      weapon_->setDice(dice);
-    }
-  }
-
-  return weapon_;
-
 }

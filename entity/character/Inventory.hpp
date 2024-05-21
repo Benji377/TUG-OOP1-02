@@ -27,8 +27,10 @@ class Inventory
 
   public:
     Inventory() = default;
-    explicit Inventory(std::map<std::string, int>& inventory, int player_strength, int player_vitality);
-    int parseInventory(std::map<std::string, int>& inventory, int player_strength, int player_vitality);
+    explicit Inventory(std::map<std::string, int>& inventory, char player_abbreviation,
+                       int player_strength, int player_vitality);
+    int parseInventory(std::map<std::string, int>& inventory, char player_abbreviation,
+                       int player_strength, int player_vitality);
     void addPotion(std::shared_ptr<Potion> potion);
     void addWeapon(std::shared_ptr<Weapon> weapon);
     void addArmor(std::shared_ptr<Armor> armor);

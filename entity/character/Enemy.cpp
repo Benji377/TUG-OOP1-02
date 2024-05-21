@@ -43,32 +43,32 @@ Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
 
 void Enemy::initializeInventory()
 {
-  if (abbreviation_ == 'Z')
+  if (getAbbreviation() == 'Z')
   {
-    weapon_ = Props::craftWeapon("DAGG", strength_, vitality_);
+    weapon_ = Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
     loot_ = {{"DAGG", 1}};
     inventory_ = std::make_shared<Inventory>();
-    inventory_->addWeapon(weapon_);
+    getInventory()->addWeapon(weapon_);
   }
-  else if (abbreviation_ == 'G')
+  else if (getAbbreviation() == 'G')
   {
-    weapon_ = Props::craftWeapon("HAXE", strength_, vitality_);
+    weapon_ = Props::craftWeapon("HAXE", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
     loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
     inventory_ = std::make_shared<Inventory>();
-    inventory_->addWeapon(weapon_);
-    inventory_->addWeapon(Props::craftWeapon("SBOW", strength_, vitality_));
+    getInventory()->addWeapon(weapon_);
+    getInventory()->addWeapon(Props::craftWeapon("SBOW", getAbbreviation(), getStrength(), getVitality()));
   }
-  else if (abbreviation_ == 'L')
+  else if (getAbbreviation() == 'L')
   {
-    weapon_ = Props::craftWeapon("QFIR", 'L');
+    weapon_ = Props::craftWeapon("QFIR", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
     inventory_ = std::make_shared<Inventory>();
-    inventory_->addWeapon(weapon_);
-    inventory_->addWeapon(Props::craftWeapon("QCLD", 'L'));
-    inventory_->addWeapon(Props::craftWeapon("QACD", 'L'));
-    inventory_->addWeapon(Props::craftWeapon("QFRC", 'L'));
+    getInventory()->addWeapon(weapon_);
+    getInventory()->addWeapon(Props::craftWeapon("QCLD", getAbbreviation(), getStrength(), getVitality()));
+    getInventory()->addWeapon(Props::craftWeapon("QACD", getAbbreviation(), getStrength(), getVitality()));
+    getInventory()->addWeapon(Props::craftWeapon("QFRC", getAbbreviation(), getStrength(), getVitality()));
   }
 }
 

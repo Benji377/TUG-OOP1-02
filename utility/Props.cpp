@@ -55,24 +55,26 @@ std::shared_ptr<Armor> Props::craftArmor(std::string abbreviation, int vitality)
   return std::make_shared<Armor>(abbreviation, row[1], std::stoi(row[2]));
 }
 
-std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, char character)
+std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, char character, int strength, int vitality)
 {
-  if (character != 'L' && character != 'W')
+  std::vector<std::string> row;
+  if (character == 'L' || character == 'W')
   {
-    throw std::invalid_argument("[PROPS] Invalid character");
+    row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
+    if (row.empty())
+    {
+      row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
+    }
+    else
+    {
+      return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
+                                      std::make_shared<DamagePattern>(row[4]), row[2], row[3], 0);
+    }
   }
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
-  if (row.empty())
+  else
   {
-    throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for weapon");
+    row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
   }
-  return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
-                              std::make_shared<DamagePattern>(row[4]), row[2], row[3], 0);
-}
-
-std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, int strength, int vitality)
-{
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for weapon");
@@ -81,7 +83,7 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, int strengt
   {
     // It's a weapon that doesn't require a character
     return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
-                                std::make_shared<DamagePattern>(row[4]), row[2], row[3], 0);
+                                    std::make_shared<DamagePattern>(row[4]), row[2], row[3], 0);
   }
   else
   {
@@ -89,13 +91,13 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, int strengt
     {
       // Calculate the damage based on the strength
       return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
-                                   std::make_shared<DamagePattern>(row[4]), row[2], row[3], strength);
+                                      std::make_shared<DamagePattern>(row[4]), row[2], row[3], strength);
     }
     else if (row[6] == "VIT")
     {
       // Calculate the damage based on the vitality
       return std::make_shared<Weapon>(abbreviation, row[1], std::make_shared<Dice>(row[5]),
-                                   std::make_shared<DamagePattern>(row[4]), row[2], row[3], vitality);
+                                      std::make_shared<DamagePattern>(row[4]), row[2], row[3], vitality);
     }
     else
     {

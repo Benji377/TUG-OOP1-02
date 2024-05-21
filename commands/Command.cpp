@@ -102,7 +102,7 @@ void MapCommand::execute(std::vector<std::string> params)
 
   game_->toggleMapOutput();
 
-  if(game_->getMapOutPutState() == true)
+  if(game_->getMapOutPutState())
   {
     game_->printStoryAndRoom(false, false, false);
   }
@@ -319,7 +319,8 @@ void LootCommand::execute(std::vector<std::string> params)
 
   std::map<string, int> loot = entity_on_field->getLoot();
   std::shared_ptr<Inventory> inv_of_entity = std::make_shared<Inventory>();
-  int ret = inv_of_entity->parseInventory(loot, player->getStrength(), player->getVitality());
+  int ret = inv_of_entity->parseInventory(loot, player->getAbbreviation(),
+                                          player->getStrength(), player->getVitality());
   if (ret == 1)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
@@ -362,7 +363,7 @@ void UseCommand::execute(std::vector<std::string> params)
   std::shared_ptr<Weapon> weapon = player_inv->getWeapon(abbrev);
   if(weapon != nullptr)
   {
-    if(player->getActiveWeapon() == weapon)
+    if(player->getWeapon() == weapon)
     {
       player->setActiveWeapon("");
     }
@@ -434,7 +435,7 @@ void AttackCommand::execute(std::vector<std::string> params)
     std::string ammoType = (players_weapon->getAbbreviation() == "SBOW" ||
                             players_weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
 
-      if(player->getActiveWeapon()->getAbbreviation().compare(0, 1, "Q") != 0)
+      if(player->getWeapon()->getAbbreviation().compare(0, 1, "Q") != 0)
       {
         if(player->getInventory()->getAmmunition(ammoType) == nullptr ||
             player->getInventory()->getAmmunition(ammoType)->getAmount() == 0)

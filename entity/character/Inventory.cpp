@@ -2,9 +2,10 @@
 #include "../../utility/CSVParser.hpp"
 #include "../../utility/Props.hpp"
 
-Inventory::Inventory(std::map<std::string, int> &inventory, int player_strength, int player_vitality)
+Inventory::Inventory(std::map<std::string, int> &inventory, char player_abbreviation,
+                     int player_strength, int player_vitality)
 {
-  parseInventory(inventory, player_strength, player_vitality);
+  parseInventory(inventory, player_abbreviation, player_strength, player_vitality);
 }
 
 void Inventory::addPotion(std::shared_ptr<Potion> potion)
@@ -169,7 +170,8 @@ std::shared_ptr<Ammunition> Inventory::getAmmunition(const std::string& abbrevia
   return nullptr;
 }
 
-int Inventory::parseInventory(std::map<std::string, int> &inventory, int player_strength, int player_vitality)
+int Inventory::parseInventory(std::map<std::string, int> &inventory, char player_abbreviation,
+                              int player_strength, int player_vitality)
 {
   for (auto & item : inventory)
   {
@@ -192,7 +194,8 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory, int player_
         }
         else if (parsed_item == "Weapon")
         {
-          addWeapon(Props::craftWeapon(const_cast<std::string &>(item.first), player_strength, player_vitality));
+          addWeapon(Props::craftWeapon(const_cast<std::string &>(item.first), player_abbreviation,
+                                       player_strength, player_vitality));
         }
         else if (parsed_item == "Armor")
         {
