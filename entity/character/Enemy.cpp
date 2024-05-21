@@ -47,7 +47,6 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
-    loot_ = {{"DAGG", 1}};
     inventory_ = std::make_shared<Inventory>();
     getInventory()->addWeapon(weapon_);
   }
@@ -55,12 +54,10 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("HAXE", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
-    loot_ = {{"HAXE", 1},
-             {"SBOW", 1},
-             {"ARRW", 3}};
     inventory_ = std::make_shared<Inventory>();
     getInventory()->addWeapon(weapon_);
     getInventory()->addWeapon(Props::craftWeapon("SBOW", getAbbreviation(), getStrength(), getVitality()));
+    getInventory()->addAmmunition(Props::craftAmmunition("ARRW", 3));
   }
   else if (getAbbreviation() == 'L')
   {
