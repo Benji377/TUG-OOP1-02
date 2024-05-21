@@ -17,6 +17,12 @@ void UseCommand::execute(std::vector<std::string> params)
   }
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+
+  if(player == nullptr)
+  {
+    throw UnavailableItemOrEntityCommand();
+  }
+
   std::shared_ptr<Inventory> player_inv = player->getInventory();
 
   std::shared_ptr<Potion> potion = player_inv->getPotion(abbrev);

@@ -8,7 +8,10 @@ void InventoryCommand::execute(std::vector<std::string> params)
 
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
 
-  
+  if(player == nullptr)
+  {
+    throw UnavailableItemOrEntityCommand();
+  }
 
   IO::printPlayerInventory(player);
 }

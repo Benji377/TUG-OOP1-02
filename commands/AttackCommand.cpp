@@ -8,6 +8,13 @@ void AttackCommand::execute(std::vector<std::string> params)
   checkCommandLenght(params, 3);
 
   shared_ptr<Player> player = getPlayerOfAbbrev(params, 1);
+  std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
+
+  if(player == nullptr)
+  {
+    throw UnavailableItemOrEntityCommand();
+  }
+
   shared_ptr<Weapon> players_weapon = player->getWeapon();
 
   if(players_weapon == nullptr)
@@ -16,8 +23,6 @@ void AttackCommand::execute(std::vector<std::string> params)
     //TODO InvalidPos Command has higher priority that noweaponequipped. This cannot be checked in that order however
     //as the type of weapon influences the valid position
   }
-
-  std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
   if(players_weapon->getAttackType() == AttackType::MELEE)
