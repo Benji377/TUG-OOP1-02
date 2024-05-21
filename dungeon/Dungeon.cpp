@@ -182,20 +182,19 @@ void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int>
 
 void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
   std::pair<int, int> enemy_position = current_room_->getFieldOfEntity(enemy);
+  current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
   std::vector<std::pair<int, int>> surrounding_fields = current_room_->getSurroundingFieldPositions(enemy_position);
   Dice dice = Dice(surrounding_fields.size(), 1);
   int random_index = dice.roll() - 1;
   std::pair<int, int> random_position = surrounding_fields[random_index];
   if (current_room_->getField(random_position)->getEntity() == nullptr)
   {
-    current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
     current_room_->setFieldEntity(enemy, random_position.first, random_position.second);
   }
   else
   {
     std::vector<std::pair<int, int>> new_surrounding_fields =
-      current_room_->getEmptySurroundingFieldPositions(enemy_position, 1);
-    current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
+      current_room_->getEmptySurroundingFieldPositions(random_position, 1);
     current_room_->setFieldEntity(enemy, new_surrounding_fields[0].first, new_surrounding_fields[0].second);
   }
 

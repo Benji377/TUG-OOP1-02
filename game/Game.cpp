@@ -282,8 +282,6 @@ std::shared_ptr<Room> Game::getCurrentRoom()
 
 void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool print_enemy_health)
 {
-  dungeon_.getCurrentRoom()->checkCompletion();
-  dungeon_.getCurrentRoom()->openDoors();
   if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_ && print_story)
   {
     std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
@@ -299,6 +297,8 @@ void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool p
       }
     }
   }
+  dungeon_.getCurrentRoom()->checkCompletion();
+  dungeon_.getCurrentRoom()->openDoors();
   if(print_room_completed)
   {
   std::cout << "\n-- ROOM " << dungeon_.getCurrentRoom()->getId() << " (" << dungeon_.getCompletedRoomsCount()
@@ -459,6 +459,10 @@ void Game::enemyPhase()
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
+        if (allPlayersAreDead())
+        {
+          return;
+        }
         break;
       }
       else
@@ -476,6 +480,10 @@ void Game::enemyPhase()
         IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
         IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         IO::printAttackedCharacters(attacked_fields);
+        if (allPlayersAreDead())
+        {
+          return;
+        }
         break;
       }
     }
