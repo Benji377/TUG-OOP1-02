@@ -144,11 +144,13 @@ class DamagePattern
     /// The copy constructor of the DamagePattern class. Is deleted to avoid copying of the class.
     //
     DamagePattern(const DamagePattern &other) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// The assignment operator of the DamagePattern class. Is deleted to avoid copying of the class.
     //
     DamagePattern &operator=(const DamagePattern &other) = delete;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// The destructor of the DamagePattern class. Is defaulted.

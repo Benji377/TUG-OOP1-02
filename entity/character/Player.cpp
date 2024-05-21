@@ -126,7 +126,7 @@ void Player::setArmor(std::string armor_abbreviation)
 void Player::simplePrintNoId() const
 {
   std::cout << this->getTypeName() << " " << "[" << this->getAbbreviation() << "] \"" <<
-    this->getName() << "\"";
+            this->getName() << "\"";
 }
 
 
@@ -150,7 +150,7 @@ int Player::usePotion(std::string abbreviation)
       }
       int health_after = getHealth();
       simplePrintNoId();
-      std::cout << " regenerates " << health_after-health_before << " health." << std::endl;
+      std::cout << " regenerates " << health_after - health_before << " health." << std::endl;
     }
     else
     {
@@ -198,7 +198,7 @@ int Player::takeDamage(int damage, DamageType damage_type)
   }
 
   int additional_armor = 0;
-  if(getArmor() != nullptr)
+  if (getArmor() != nullptr)
   {
     additional_armor = getArmor()->getArmorValue();
   }
@@ -215,11 +215,11 @@ int Player::takeDamage(int damage, DamageType damage_type)
   return lost_health;
 }
 
-void Player::printPlayer(const std::pair<int, int>& position, bool single_line) const
+void Player::printPlayer(const std::pair<int, int> &position, bool single_line) const
 {
   simplePrintNoId();
 
-  std::cout << " on "<< "(" << position.first << "," << position.second << ")" << std::endl;
+  std::cout << " on " << "(" << position.first << "," << position.second << ")" << std::endl;
   if (single_line)
   {
     return;

@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 #include "../../utility/Props.hpp"
 
-Enemy::Enemy(int id, char abbreviation): Character(id, abbreviation)
+Enemy::Enemy(int id, char abbreviation) : Character(id, abbreviation)
 {
   switch (abbreviation)
   {
@@ -47,7 +47,6 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("DAGG", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
-    loot_ = {{"DAGG", 1}};
     inventory_ = std::make_shared<Inventory>();
     getInventory()->addWeapon(weapon_);
   }
@@ -55,10 +54,10 @@ void Enemy::initializeInventory()
   {
     weapon_ = Props::craftWeapon("HAXE", getAbbreviation(), getStrength(), getVitality());
     armor_ = nullptr;
-    loot_ = {{"HAXE", 1}, {"SBOW", 1}, {"ARRW", 3}};
     inventory_ = std::make_shared<Inventory>();
     getInventory()->addWeapon(weapon_);
     getInventory()->addWeapon(Props::craftWeapon("SBOW", getAbbreviation(), getStrength(), getVitality()));
+    getInventory()->addAmmunition(Props::craftAmmunition("ARRW", 3));
   }
   else if (getAbbreviation() == 'L')
   {
@@ -120,10 +119,10 @@ int Enemy::takeDamage(int damage, DamageType damage_type)
   return lost_health;
 }
 
-void Enemy::printEnemy(const std::string& id_string, const std::pair<int, int>& position) const
+void Enemy::printEnemy(const std::string &id_string, const std::pair<int, int> &position) const
 {
   std::cout << id_string << " [" << getAbbreviation() << getId() << "] on (" << position.first
-            << ","  << position.second << ")" << std::endl;
+            << "," << position.second << ")" << std::endl;
 }
 
 void Enemy::simplePrint() const

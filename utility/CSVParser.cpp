@@ -5,7 +5,7 @@ const std::string CSVParser::potions_csv_path_ = "data/potions.csv";
 const std::string CSVParser::weapon_csv_path_ = "data/weapons.csv";
 const std::string CSVParser::ammunition_csv_path_ = "data/ammunition.csv";
 
-bool checkFile(const std::string& filename)
+bool checkFile(const std::string &filename)
 {
   try
   {
@@ -21,14 +21,14 @@ bool checkFile(const std::string& filename)
     file.close();
     return true;
   }
-  catch (const std::exception& e)
+  catch (const std::exception &e)
   {
     std::cout << "[CSVPARSER] Error: " << e.what() << std::endl;
     return false;
   }
 }
 
-std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& filename)
+std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string &filename)
 {
   std::vector<std::vector<std::string>> data;
   if (checkFile(filename))
@@ -57,7 +57,7 @@ std::vector<std::vector<std::string>> CSVParser::readCSV(const std::string& file
   }
 }
 
-std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& filename, const std::string& abbreviation)
+std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string &filename, const std::string &abbreviation)
 {
   std::vector<std::vector<std::string>> data = readCSV(filename);
   if (data.empty())
@@ -65,7 +65,7 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
     return {};
   }
   // The abbreviation is the first column
-  for (const std::vector<std::string>& row : data)
+  for (const std::vector<std::string> &row: data)
   {
     if (row[0] == abbreviation)
     {
@@ -75,18 +75,18 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string& file
   return {};
 }
 
-std::string CSVParser::getFolderByAbbreviation(const std::string& abbreviation)
+std::string CSVParser::getFolderByAbbreviation(const std::string &abbreviation)
 {
   // Map the filenames to the corresponding item types
   std::map<std::string, std::string> filenameToItemType = {
-          {armor_csv_path_, "Armor"},
-          {potions_csv_path_, "Potion"},
-          {weapon_csv_path_, "Weapon"},
+          {armor_csv_path_,      "Armor"},
+          {potions_csv_path_,    "Potion"},
+          {weapon_csv_path_,     "Weapon"},
           {ammunition_csv_path_, "Ammunition"}
   };
 
   // Iterate through each CSV file in the data folder
-  for (const auto& [filename, itemType] : filenameToItemType)
+  for (const auto &[filename, itemType]: filenameToItemType)
   {
     std::vector<std::string> row = getRowByAbbreviation(filename, abbreviation);
     if (!row.empty())

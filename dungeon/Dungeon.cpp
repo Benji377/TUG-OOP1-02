@@ -200,6 +200,19 @@ void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
 
 }
 
+bool Dungeon::playersInRoomAreDead()
+{
+  vector<std::shared_ptr<Player>> players = current_room_->getAllEntitiesOfType<Player>();
+  for (auto player : players)
+  {
+    if (!player->isDead())
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
 vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, int damage, std::pair <int, int> target_field)
 {
   vector<AttackedField> attacked_fields;
@@ -228,7 +241,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
         shared_ptr<Character> target =
           std::dynamic_pointer_cast<Character>(current_room_->getField({i + 1, j + 1})->getEntity());
         AttackedField attacked_field = AttackedField({i + 1, j + 1});
-        if (target != nullptr && !boss_dead_)
+        if (target != nullptr && !boss_dead_ && !playersInRoomAreDead())
         {
           int lost_health = target->takeDamage(damage, damage_type);
           if (target->isDead())

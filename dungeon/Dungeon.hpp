@@ -45,6 +45,7 @@ class Dungeon
     std::shared_ptr<Room> getCurrentRoom();
 
     bool isBossDead() { return boss_dead_;};
+    bool playersInRoomAreDead();
     vector<char> getOccuredEnemyTypes() const { return occured_enemy_types_; }
     void addOccuredEnemyType(char type) { occured_enemy_types_.push_back(type); }
     int getCompletedRoomsCount() const;
