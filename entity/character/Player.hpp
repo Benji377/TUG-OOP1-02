@@ -19,10 +19,6 @@
 class Player: public Character
 {
   std::string name_;
-  ///------------------------------------------------------------------------------------------------------------------
-  ///
-  /// Initializes the inventory of the player with the default items. Is just called in the constructor.
-  //
   void initializeInventory();
   public:
     ///----------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 #include <utility>
 
-Potion::Potion(std::string& abbreviation, std::string& name, std::string effect, std::shared_ptr<Dice> dice)
+Potion::Potion(std::string &abbreviation, std::string &name, std::string effect, std::shared_ptr<Dice> dice)
 {
   abbreviation_ = abbreviation;
   name_ = name;
@@ -10,16 +10,16 @@ Potion::Potion(std::string& abbreviation, std::string& name, std::string effect,
   effect_ = parseEffect(effect);
 }
 
-Effect Potion::parseEffect(std::string& effect)
+Effect Potion::parseEffect(std::string &effect)
 {
   Utils::normalizeString(effect);
   // Uses the map function to map the string to the enum
   std::map<std::string, Effect> effectMap = {
           {"health", Effect::HEALTH},
-          {"fire", Effect::FIRE},
-          {"cold", Effect::COLD},
-          {"force", Effect::FORCE},
-          {"acid", Effect::ACID}
+          {"fire",   Effect::FIRE},
+          {"cold",   Effect::COLD},
+          {"force",  Effect::FORCE},
+          {"acid",   Effect::ACID}
   };
   if (effectMap.count(effect) == 0)
   {

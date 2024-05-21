@@ -2,14 +2,14 @@
 #include "Exceptions.hpp"
 #include "../entity/character/Inventory.hpp"
 
-bool Utils::decimalStringToInt(const std::string& str, int& number)
+bool Utils::decimalStringToInt(const std::string &str, int &number)
 {
   size_t position = 0;
   try
   {
     number = std::stoul(str, &position, 10);
   }
-  catch (std::exception&)
+  catch (std::exception &)
   {
     return false;
   }
@@ -17,12 +17,12 @@ bool Utils::decimalStringToInt(const std::string& str, int& number)
 }
 
 
-std::fstream& Utils::goToLine(std::fstream& file, int num)
+std::fstream &Utils::goToLine(std::fstream &file, int num)
 {
   file.seekg(std::ios::beg);
-  for(int i=0; i < num - 1; ++i)
+  for (int i = 0; i < num - 1; ++i)
   {
-    file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
   return file;
 }
@@ -47,11 +47,11 @@ std::string Utils::readFileLine(const char *config_path, int line_number)
   return output;
 }
 
-void Utils::isValidConfig(const char *config_path, const char* magic_number)
+void Utils::isValidConfig(const char *config_path, const char *magic_number)
 {
   std::fstream config_file(config_path);
   // We need to check if we can open the file first, else we would get an error when reading from it
-  if(!config_file.is_open())
+  if (!config_file.is_open())
   {
     throw InvalidConfigFileException(config_path);
   }
@@ -64,7 +64,7 @@ void Utils::isValidConfig(const char *config_path, const char* magic_number)
   throw InvalidConfigFileException(config_path);
 }
 
-std::vector<std::string> Utils::splitString(const std::string& string, const std::string& delimiter)
+std::vector<std::string> Utils::splitString(const std::string &string, const std::string &delimiter)
 {
   size_t pos_start = 0, pos_end, delim_len = delimiter.length();
   std::string token;
@@ -74,13 +74,13 @@ std::vector<std::string> Utils::splitString(const std::string& string, const std
   {
     token = string.substr(pos_start, pos_end - pos_start);
     pos_start = pos_end + delim_len;
-    res.push_back (token);
+    res.push_back(token);
   }
-  res.push_back(string.substr (pos_start));
+  res.push_back(string.substr(pos_start));
   return res;
 }
 
-void Utils::normalizeString(std::string& string, bool to_upper)
+void Utils::normalizeString(std::string &string, bool to_upper)
 {
   // Remove trailing whitespaces
   size_t end = string.find_last_not_of(' ');
@@ -95,20 +95,20 @@ void Utils::normalizeString(std::string& string, bool to_upper)
     std::transform(string.begin(), string.end(), string.begin(), ::tolower);
 }
 
-std::vector<char> Utils::getDifference(const std::vector<char>& a, const std::vector<char>& b)
+std::vector<char> Utils::getDifference(const std::vector<char> &a, const std::vector<char> &b)
 {
-    std::vector<char> difference;
-    for (const auto& item : a)
+  std::vector<char> difference;
+  for (const auto &item: a)
+  {
+    if (std::find(b.begin(), b.end(), item) == b.end())
     {
-        if (std::find(b.begin(), b.end(), item) == b.end())
-        {
-            difference.push_back(item);
-        }
+      difference.push_back(item);
     }
-    return difference;
+  }
+  return difference;
 }
 
-void Utils::deleteDuplicates(std::vector<char>& vec)
+void Utils::deleteDuplicates(std::vector<char> &vec)
 {
   std::sort(vec.begin(), vec.end());
   vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
@@ -122,10 +122,10 @@ bool Utils::isValidItemAbbrev(std::string abbrev)
   parse_input.insert(make_pair(abbrev, 1));
   test_inventory->parseInventory(parse_input, 'X', 0, 0);
 
-  if(test_inventory->getAllPotions().empty() && test_inventory->getAllArmor().empty()
+  if (test_inventory->getAllPotions().empty() && test_inventory->getAllArmor().empty()
       && test_inventory->getAllWeapons().empty())
-    {
-      return false;
-    }
-    return true;
+  {
+    return false;
+  }
+  return true;
 }

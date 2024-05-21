@@ -50,6 +50,12 @@ public:
   //
   std::shared_ptr<Dice> getDice() const { return dice_;};
 
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Sets the Dice object of the item.
+  ///
+  /// @param dice The Dice object to set.
+  //
   void setDice(std::shared_ptr<Dice> dice) {dice_ = dice;};
 
   ///------------------------------------------------------------------------------------------------------------------
