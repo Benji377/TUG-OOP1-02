@@ -228,7 +228,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
         shared_ptr<Character> target =
           std::dynamic_pointer_cast<Character>(current_room_->getField({i + 1, j + 1})->getEntity());
         AttackedField attacked_field = AttackedField({i + 1, j + 1});
-        if (target != nullptr)
+        if (target != nullptr && !boss_dead_)
         {
           int lost_health = target->takeDamage(damage, damage_type);
           if (target->isDead())
