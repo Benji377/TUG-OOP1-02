@@ -41,7 +41,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
     }
   }
 
-  throw UnavailableItemOrEntityCommand();
+  return nullptr;
 }
 
 std::vector<int> Command::getPositionAsVecOutOfString(std::string position_string)
@@ -90,6 +90,11 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdj
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
 
   std::pair<int, int> target_position = getPositionAsPairOutOfString(params.at(2));
+
+  if(player == nullptr)
+  {
+    throw UnavailableItemOrEntityCommand();
+  }
 
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
