@@ -1,0 +1,30 @@
+2
+w
+w
+b
+b
+loot w 3,2
+inventory w
+player w
+use w larm
+player b
+inventory b
+use b haxe
+inventory b
+use b haxe
+quit
+2
+w
+w
+b
+b
+loot w 3,2
+inventory w
+player w
+use w larm
+player b
+inventory b
+use b haxe
+inventory b
+use b haxe
+quit

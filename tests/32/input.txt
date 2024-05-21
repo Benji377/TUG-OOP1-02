@@ -1,0 +1,13 @@
+3
+P1
+W
+P2
+B
+P3
+R
+inventory W
+player W
+loot W 3,1
+player W
+inventory W
+quit

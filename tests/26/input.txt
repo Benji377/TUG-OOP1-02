@@ -1,0 +1,63 @@
+3
+b
+b
+r
+r
+w
+w
+loot w 3,4
+use w shep
+use w parm
+use w BOLT
+use w dagg
+attack w 2,3
+use w mace
+attack w 2,3
+use w warh
+attack w 2,3
+player w
+use w haxe
+attack w 2,3
+loot w 2,3
+use w gaxe
+attack w 2,3
+use w rapi
+attack w 2,3
+loot w 2,3
+use w sswd
+attack w 2,3
+use w lswd
+attack w 2,3
+use w gswd
+attack w 2,3
+use w sbow
+attack w 2,3
+loot w 2,3
+loot w 1,3
+use w lbow
+attack w 2,3
+use w lcrs
+attack w 2,3
+loot w 2,3
+use w hcrs
+attack w 3,1
+attack w 2,4
+use w qfir
+attack w 1,3
+atttack
+attack w 2,5
+use w qcld
+attack w 2,3
+loot w 2,3
+use w qacd
+attack w 2,3
+use w qfrc
+attack w 2,3
+use w firs
+attack w 3,4
+player w
+attack w 2,4
+use w qfir
+attack w 2,4
+move w 1,4
+quit

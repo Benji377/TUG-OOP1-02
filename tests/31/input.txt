@@ -1,0 +1,46 @@
+2
+EOF
+W
+QUIT
+B
+player
+player a b
+player 1
+player R
+inventory
+inventory a b
+inventory 1
+inventory R
+help 3
+story 3
+positions 3
+move
+move a b
+move a 3,2
+move w 5
+move w 5,3
+move R 5,3
+loot
+loot a b
+loot a 3,2
+loot w 3
+loot w 3,2
+loot R 3,2
+use
+use a b
+use w a
+use w shep
+use R shep
+use R arrows
+use R ARRW
+use W ARRW
+attack
+attack a b
+attack a 3,2
+attack w 3,2,
+attack w 3,2
+attakc r 3,2
+attack r 3,2
+attack w ,3,2
+attack w 3,,2
+quit

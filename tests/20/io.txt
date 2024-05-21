@@ -1,0 +1,288 @@
+> 
+> ** Welcome to the exciting world of Dungeons & Classes!
+> 
+> How many players want to join the adventure? (1 to 3)
+? > 
+< 2
+> 
+> Player 1 what do you wish to be called? (max length 10 characters)
+? > 
+< w
+> w, please choose a player type:
+>   [W] Wizard     0/1
+>   [B] Barbarian  0/1
+>   [R] Rogue      0/1
+? > 
+< w
+> 
+> Player 2 what do you wish to be called? (max length 10 characters)
+? > 
+< b
+> b, please choose a player type:
+>   [W] Wizard     1/1
+>   [B] Barbarian  0/1
+>   [R] Rogue      0/1
+? > 
+< b
+> 
+> -- Players --------------------------------------
+>   Player 1: Wizard [W] "w"
+>   Player 2: Barbarian [B] "b"
+> 
+> ** You have entered the dungeon of the evil Lich!
+> ** Help the anxious souls of the nearby village by freeing
+> ** them from the monsters that haunt it!
+> 
+> ** Oh no, I have spotted a goblin in the room. Stay safe!
+> ** Beware, there are zombies in this room!
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | W |#T |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> ** What do you want to do?
+? > 
+< loot w 3,2
+> ** To unlock this chest you need to roll at least -3 to reach the 1 needed.
+> RANDOM: 20, Generated: 4
+> [Dice Roll] 1 d20 resulting in a total value of 4.
+> 
+> ** Looting successful! You have received the following items ...
+>   Armor: [LARM] Leather Armor (2)
+>   Weapons: [LBOW] Longbow (2)
+>   Consumables: [ARRW] Arrow (10), [BOLT] Bolt (5), [SHEP] Superior Health Potion (10)
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | W |   |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> ** What do you want to do?
+? > 
+< inventory w
+> Inventory "w"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [QFRC] Quarterstaff of Force
+>   Armor: [LARM] Leather Armor (2)
+>   Weapons: [DAGG] Dagger (1), [LBOW] Longbow (2), [QACD] Quarterstaff of Acid (1)
+>   Consumables: [ARRW] Arrow (10), [BOLT] Bolt (5), [SHEP] Superior Health Potion (10)
+> 
+> ** What do you want to do?
+? > 
+< player w
+> Wizard [W] "w" on (3,1)
+>   Armor Value:        0
+>   Current Health:    10
+>   Max Health:        10
+>   Strength:           1
+>   Vitality:           4
+> 
+> ** What do you want to do?
+? > 
+< use w larm
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | W |   |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 1 [G1] used "Shortbow" on (3,1) affecting (3,1).
+> RANDOM: 6, Generated: 4
+> [Dice Roll] 1 d6 resulting in a total value of 4.
+> 
+> w loses 3 health (8 * 100 % - 5).
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 2 [G2] used "Shortbow" on (3,1) affecting (3,1).
+> RANDOM: 6, Generated: 3
+> [Dice Roll] 1 d6 resulting in a total value of 3.
+> 
+> w loses 2 health (7 * 100 % - 5).
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 3 [G3] used "Shortbow" on (3,1) affecting (3,1).
+> RANDOM: 6, Generated: 5
+> [Dice Roll] 1 d6 resulting in a total value of 5.
+> 
+> w loses 4 health (9 * 100 % - 5).
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 4 [G4] used "Shortbow" on (3,1) affecting (3,1).
+> RANDOM: 6, Generated: 5
+> [Dice Roll] 1 d6 resulting in a total value of 5.
+> 
+> w loses 1 health (9 * 100 % - 5).
+> w was defeated.
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 5 [G5] used "Shortbow" on (4,2) affecting (4,2).
+> RANDOM: 6, Generated: 2
+> [Dice Roll] 1 d6 resulting in a total value of 2.
+> 
+> b loses 4 health (6 * 100 % - 2).
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 6 [G6] used "Shortbow" on (4,2) affecting (4,2).
+> RANDOM: 6, Generated: 2
+> [Dice Roll] 1 d6 resulting in a total value of 2.
+> 
+> b loses 4 health (6 * 100 % - 2).
+> 
+> RANDOM: 3, Generated: 1
+> Zombie 1 [Z1] moved to (1,5).
+> 
+> RANDOM: 5, Generated: 5
+> Zombie 2 [Z2] moved to (1,4).
+> 
+> RANDOM: 5, Generated: 5
+> Zombie 3 [Z3] moved to (2,5).
+> 
+> RANDOM: 5, Generated: 5
+> Zombie 4 [Z4] moved to (1,3).
+> 
+> RANDOM: 8, Generated: 2
+> Zombie 5 [Z5] moved to (2,4).
+> 
+> RANDOM: 5, Generated: 5
+> Zombie 6 [Z6] moved to (3,5).
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | X |   |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> ** What do you want to do?
+? > 
+< player b
+> Barbarian [B] "b" on (4,2)
+>   Armor Value:        2
+>   Current Health:     5
+>   Max Health:        13
+>   Strength:           4
+>   Vitality:           1
+> 
+> ** What do you want to do?
+? > 
+< inventory b
+> Inventory "b"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [GAXE] Greataxe
+>   Weapons: [HAXE] Handaxe (2)
+> 
+> ** What do you want to do?
+? > 
+< use b haxe
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | X |   |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> ** What do you want to do?
+? > 
+< inventory b
+> Inventory "b"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [HAXE] Handaxe
+>   Weapons: [GAXE] Greataxe (1), [HAXE] Handaxe (1)
+> 
+> ** What do you want to do?
+? > 
+< use b haxe
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | G2| G3| Z4| Z2| Z1|
+>    +---+---+---+---+---+
+>  2 |   |   | G1| Z5| Z3|
+>    +---+---+---+---+---+
+>  3 | X |   |   | G4| Z6|
+>    +---+---+---+---+---+
+>  4 |#D0| B |   |   | G5|
+>    +---+---+---+---+---+
+>  5 |#D2|   |   |   | G6|
+>    +---+---+---+---+---+
+>    G1: 10/10, G2: 10/10, G3: 10/10, G4: 10/10, G5: 10/10, G6: 10/10, Z1: 15/15, Z2: 15/15, Z3: 15/15, Z4: 15/15, Z5: 15/15, Z6: 15/15
+> 
+> RANDOM: 1, Generated: 1
+> Goblin 1 [G1] used "Shortbow" on (4,2) affecting (4,2).
+> RANDOM: 6, Generated: 3
+> [Dice Roll] 1 d6 resulting in a total value of 3.
+> 
+> b loses 5 health (7 * 100 % - 2).
+> b was defeated.
+> 
+> ** Unfortunately this adventure has come to a tragic end!
+> ** These brave adventurers did not make it out alive.
+> 
+> -- Players --------------------------------------
+>   Wizard [W] "w", rest in peace.
+>   Barbarian [B] "b", rest in peace.
+> 
+> -- Statistics -----------------------------------
+>   0 rooms completed
+>   4 performed actions
+> 
+> ** Enter the file path of a writable file or
+> ** a path for a new file (including the file format e.g. `.txt`).
+? > 
+< quit

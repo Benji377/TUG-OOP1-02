@@ -1,0 +1,54 @@
+1
+Player
+W
+move W 1,2
+move W 0,1
+move W 0,2
+move W 0,3
+move W 1,3
+move W 0,2
+move W 0,3
+move W 0,4
+move W -1,-1
+move W 1,4
+move W 2,4
+move W 2,3
+move W 1,4
+move W 2,4
+move W 3,4
+move W 3,3
+move W 2,4
+move W 3,4
+move W 4,4
+move W 4,3
+move W 3,4
+move W 4,4
+move W 5,4
+move W 5,3
+move W 5,2
+move W 4,2
+move W 5,3
+move W 5,2
+move W 5,1
+move W 4,1
+move W 5,2
+move W 5,1
+move W 5,0
+move W 4,0
+move W 3,0
+move W 3,1
+move W 4,0
+move W 3,0
+move W 2,0
+move W 2,1
+move W 3,0
+move W 2,0
+move W 1,0
+move W 1,1
+move W 2,0
+move W 1,0
+move W 0,0
+move W 0,1
+move W 0,2
+move W 2,2
+quit

@@ -1,0 +1,25 @@
+3
+w
+w
+b
+b
+r
+r
+loot w 2,2
+loot b 2,3
+loot r 2,4
+attack b 1,2
+attack b 1,4
+use w qfir
+use b parm
+move w 2,1
+attack w 3,3
+attack w 3,3
+attack w 3,3
+attack w 3,3
+attack w 3,3
+attack w 3,3
+move w 3,2
+move r 4,3
+attack b 3,3
+quit

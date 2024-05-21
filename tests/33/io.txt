@@ -1,0 +1,754 @@
+> ** custom story file!
+> 
+> ** Welcome to the exciting world of Dungeons & Classes!
+> 
+> How many players want to join the adventure? (1 to 3)
+? > 
+< 3
+> 
+> Player 1 what do you wish to be called? (max length 10 characters)
+? > 
+< P1
+> P1, please choose a player type:
+>   [W] Wizard     0/1
+>   [B] Barbarian  0/1
+>   [R] Rogue      0/1
+? > 
+< W
+> 
+> Player 2 what do you wish to be called? (max length 10 characters)
+? > 
+< P2
+> P2, please choose a player type:
+>   [W] Wizard     1/1
+>   [B] Barbarian  0/1
+>   [R] Rogue      0/1
+? > 
+< B
+> 
+> Player 3 what do you wish to be called? (max length 10 characters)
+? > 
+< P3
+> P3, please choose a player type:
+>   [W] Wizard     1/1
+>   [B] Barbarian  1/1
+>   [R] Rogue      0/1
+? > 
+< R
+> 
+> -- Players --------------------------------------
+>   Player 1: Wizard [W] "P1"
+>   Player 2: Barbarian [B] "P2"
+>   Player 3: Rogue [R] "P3"
+> 
+> ** custom story file!
+> ** You have entered the dungeon of the evil Lich!
+> ** Help the anxious souls of the nearby village by freeing
+> ** them from the monsters that haunt it!
+> 
+> ** custom story file!
+> ** Beware, there are zombies in this room!
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   | Z1|   |
+>    +---+---+---+---+---+
+>  3 | W | B |   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 15/15
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< use W qacd
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   | Z1|   |
+>    +---+---+---+---+---+
+>  3 | W | B |   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 15/15
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 2,4
+> Wizard [W] "P1" used "Quarterstaff of Acid" on (2,4) affecting (2,4).
+> [Dice Roll] 1 d10 resulting in a total value of 2.
+> 
+> Zombie 1 loses 1 health (2 * 100 % - 1).
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   | Z1|   |
+>    +---+---+---+---+---+
+>  3 | W | B |   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 14/15
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 2,4
+> Wizard [W] "P1" used "Quarterstaff of Acid" on (2,4) affecting (2,4).
+> [Dice Roll] 1 d10 resulting in a total value of 5.
+> 
+> Zombie 1 loses 4 health (5 * 100 % - 1).
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   | Z1|   |
+>    +---+---+---+---+---+
+>  3 | W | B |   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 10/15
+> 
+> Zombie 1 [Z1] moved to (3,4).
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 | W | B |   | Z1|   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 10/15
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,4
+> Wizard [W] "P1" used "Quarterstaff of Acid" on (3,4) affecting (3,4).
+> [Dice Roll] 1 d10 resulting in a total value of 9.
+> 
+> Zombie 1 loses 8 health (9 * 100 % - 1).
+> 
+> -- ROOM 1 (0/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |#D2|#D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 | W | B |   | Z1|   |
+>    +---+---+---+---+---+
+>  4 |#D0|#T |   |   |   |
+>    +---+---+---+---+---+
+>    Z1: 2/15
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,4
+> Wizard [W] "P1" used "Quarterstaff of Acid" on (3,4) affecting (3,4).
+> [Dice Roll] 1 d10 resulting in a total value of 5.
+> 
+> Zombie 1 loses 2 health (5 * 100 % - 1).
+> Zombie 1 was defeated.
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 | W | B |   | X |   |
+>    +---+---+---+---+---+
+>  4 | D0|#T |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< loot W 4,2
+> ** To unlock this chest you need to roll at least -3 to reach the 1 needed.
+> [Dice Roll] 1 d20 resulting in a total value of 13.
+> 
+> ** custom story file!
+> ** Looting successful! You have received the following items ...
+>   Weapons: [QFIR] Quarterstaff of Fire (1)
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 | W | B |   | X |   |
+>    +---+---+---+---+---+
+>  4 | D0|   |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< inventory W
+> Inventory "P1"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [QACD] Quarterstaff of Acid
+>   Weapons: [DAGG] Dagger (1), [QFIR] Quarterstaff of Fire (1), [QFRC] Quarterstaff of Force (1)
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< move W 2,2
+> Wizard [W] "P1" moved to (2,2).
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1|   |   |
+>    +---+---+---+---+---+
+>  2 | R | W |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | B |   | X |   |
+>    +---+---+---+---+---+
+>  4 | D0|   |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< move W 1,3
+> Wizard [W] "P1" moved to (1,3).
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1| W |   |
+>    +---+---+---+---+---+
+>  2 |   |   | R | B |   |
+>    +---+---+---+---+---+
+>  3 |   |   |   | X |   |
+>    +---+---+---+---+---+
+>  4 | D0|   |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< loot B 3,4
+> ** custom story file!
+> ** Looting successful! You have received the following items ...
+>   Weapons: [DAGG] Dagger (1)
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1| W |   |
+>    +---+---+---+---+---+
+>  2 |   |   | R | B |   |
+>    +---+---+---+---+---+
+>  3 |   |   |   |   |   |
+>    +---+---+---+---+---+
+>  4 | D0|   |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< inventory b
+> Inventory "P2"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [GAXE] Greataxe
+>   Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< inventory W
+> Inventory "P1"
+>   Equipped Armor: [-] None
+>   Equipped Weapon: [QACD] Quarterstaff of Acid
+>   Weapons: [DAGG] Dagger (1), [QFIR] Quarterstaff of Fire (1), [QFRC] Quarterstaff of Force (1)
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< use W QFIR
+> 
+> -- ROOM 1 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   | D2| D1| W |   |
+>    +---+---+---+---+---+
+>  2 |   |   | R | B |   |
+>    +---+---+---+---+---+
+>  3 |   |   |   |   |   |
+>    +---+---+---+---+---+
+>  4 | D0|   |   |   |   |
+>    +---+---+---+---+---+
+> 
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< move R 1,2
+> Rogue [R] "P3" moved to (1,2).
+> ** custom story file!
+> ** Well done, you made it through the first room!
+> ** Let's see if you can master this one as well!
+> 
+> ** custom story file!
+> ** We have reached the end of the dungeon!
+> ** Kill the Lich and you should all be celebrated as heroes of the dungeon.
+> 
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 | W | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| B |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 50/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< move W 2,2
+> Wizard [W] "P1" moved to (2,2).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 |   |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R | W |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| B |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 50/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< move W 1,1
+> Wizard [W] "P1" moved to (1,1).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| B |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 50/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 15.
+> 
+> Lich 1 loses 9 health (15 * 100 % - 6).
+> P2 loses 13 health (15 * 100 % - 2).
+> P2 was defeated.
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 41/50
+> 
+> Lich 1 [L1] used "Quarterstaff of Force" on (2,1) affecting (2,1).
+> [Dice Roll] 1 d10 resulting in a total value of 3.
+> 
+> P3 loses 0 health (3 * 100 % - 4).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 41/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 5.
+> 
+> Lich 1 loses 0 health (5 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 41/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 16.
+> 
+> Lich 1 loses 10 health (16 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 31/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 8.
+> 
+> Lich 1 loses 2 health (8 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 29/50
+> 
+> Lich 1 [L1] used "Quarterstaff of Cold" on (2,1) affecting (2,1).
+> [Dice Roll] 2 d10 resulting in a total value of 7.
+> 
+> P3 loses 3 health (7 * 100 % - 4).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 29/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 10.
+> 
+> Lich 1 loses 4 health (10 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 25/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 13.
+> 
+> Lich 1 loses 7 health (13 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 18/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 6.
+> 
+> Lich 1 loses 0 health (6 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 18/50
+> 
+> Lich 1 [L1] used "Quarterstaff of Acid" on (2,1) affecting (2,1).
+> [Dice Roll] 1 d10 resulting in a total value of 5.
+> 
+> P3 loses 1 health (5 * 100 % - 4).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 18/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 7.
+> 
+> Lich 1 loses 1 health (7 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 17/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 10.
+> 
+> Lich 1 loses 4 health (10 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 13/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 12.
+> 
+> Lich 1 loses 6 health (12 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 7/50
+> 
+> Lich 1 [L1] used "Quarterstaff of Force" on (2,1) affecting (2,1).
+> [Dice Roll] 1 d10 resulting in a total value of 1.
+> 
+> P3 loses 0 health (1 * 100 % - 4).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 7/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 10.
+> 
+> Lich 1 loses 4 health (10 * 100 % - 6).
+> 
+> -- ROOM 2 (1/2 completed) --------------------
+> 
+>      1   2   3   4   5  
+>    +---+---+---+---+---+
+>  1 | W |   |   |   |   |
+>    +---+---+---+---+---+
+>  2 | R |   |   |   |   |
+>    +---+---+---+---+---+
+>  3 |   | L1|   |   |   |
+>    +---+---+---+---+---+
+>  4 |#D1| X |   |   |   |
+>    +---+---+---+---+---+
+>    L1: 3/50
+> ** custom story file!
+> 
+> ** What do you want to do?
+? > 
+< attack W 3,2
+> Wizard [W] "P1" used "Quarterstaff of Fire" on (3,2) affecting (2,2), (3,1), (3,2), (3,3), (4,2).
+> [Dice Roll] 3 d6 resulting in a total value of 13.
+> 
+> Lich 1 loses 3 health (13 * 100 % - 6).
+> Lich 1 was defeated.
+> ** custom story file!
+> 
+> ** Wow, you are all heroes!! You defeated the Lich!
+> ** Go to the village! The people there have organised
+> ** a huge festival to celebrate you!
+> 
+> -- Players --------------------------------------
+>   Wizard [W] "P1" survived.
+>   Rogue [R] "P3" survived.
+>   Barbarian [B] "P2", rest in peace.
+> 
+> -- Statistics -----------------------------------
+>   2 rooms completed
+>   25 performed actions
+> 
+> ** custom story file!
+> ** Enter the file path of a writable file or
+> ** a path for a new file (including the file format e.g. `.txt`).
+? > 
+< quit

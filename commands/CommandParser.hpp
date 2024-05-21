@@ -19,6 +19,17 @@ using std::string;
 
 
 #include "Command.hpp"
+#include "AttackCommand.hpp"
+#include "HelpCommand.hpp"
+#include "InventoryCommand.hpp"
+#include "LootCommand.hpp"
+#include "MapCommand.hpp"
+#include "MoveCommand.hpp"
+#include "PlayerCommand.hpp"
+#include "PositionsCommand.hpp"
+#include "QuitCommand.hpp"
+#include "StoryCommand.hpp"
+#include "UseCommand.hpp"
 
 class CommandParser
 {
