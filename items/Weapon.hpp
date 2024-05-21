@@ -116,6 +116,7 @@ public:
   void setDamangePattern(std::shared_ptr<DamagePattern> damage_pattern) {damage_pattern_ = damage_pattern; };
   void setDamageType(DamageType type) {damage_type_ = type; };
   void setAttackType(AttackType type) {attack_type_ = type;};
+  void setDamageAddition(int addition) {damage_addition_ = addition;};
 
   ///------------------------------------------------------------------------------------------------------------------
   ///

@@ -6,7 +6,7 @@
 int main(int argc, char** argv)
 {
   try {
-    if (argc != 3)
+  if (argc != 3)
     {
       throw WrongNumberOfParametersException();
     }
@@ -32,8 +32,9 @@ int main(int argc, char** argv)
     {
       game.step();
     }
-  } catch (const std::exception& e) {
-    std::cout << "Main Error: " << e.what() << '\n';
+  }
+  catch (const std::exception& e) {
+    std::cout << e.what() << '\n'; //TODO I removed "<< "Main Error: " here in case they check for std::bad alloc, they want it to be "Error: " is ok?
   }
 
   return 0;

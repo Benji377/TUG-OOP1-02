@@ -46,7 +46,7 @@ DamageType Weapon::parseDamageType(std::string &damage_type)
 
 int Weapon::getDamage() const
 {
-  if(getAbbreviation().compare(0, 1, "Q") != 0)
+  /*if(getAbbreviation().compare(0, 1, "Q") == 0)
   {
     if(getAbbreviation() == "QFIR" && getDamageType() != DamageType::PHYSICAL)
     {
@@ -68,7 +68,7 @@ int Weapon::getDamage() const
       Dice dice = Dice("1 d10");
       return dice.roll();
     }
-  }
+  }*/
 
   return getDice()->roll() + getDamageAddition();
 }
