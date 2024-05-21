@@ -282,18 +282,24 @@ std::shared_ptr<Room> Game::getCurrentRoom()
 
 void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool print_enemy_health)
 {
+  vector<char> new_enemies = Utils::getDifference(dungeon_.getCurrentRoom()->getEnemiesAbbreviations(),
+              dungeon_.getOccuredEnemyTypes());
+  Utils::deleteDuplicates(new_enemies);
+  if(new_enemies.size() > 0)
+  {
+    for (auto enemy : new_enemies)
+    {
+      dungeon_.addOccuredEnemyType(enemy);
+    }
+  }
   if(!dungeon_.getCurrentRoom()->isComplete() && story_output_active_ && print_story)
   {
     std::cout << Game::story_.getStorySegment("N_ROOM_" + std::to_string(dungeon_.getCurrentRoom()->getId()));
-    vector<char> new_enemies = Utils::getDifference(dungeon_.getCurrentRoom()->getEnemiesAbbreviations(),
-              dungeon_.getOccuredEnemyTypes());
-    Utils::deleteDuplicates(new_enemies);
     if(new_enemies.size() > 0)
     {
       for (auto enemy : new_enemies)
       {
         std::cout << Game::story_.getStorySegment("N_ENEMY_" + string(1, enemy));
-        dungeon_.addOccuredEnemyType(enemy);
       }
     }
   }
