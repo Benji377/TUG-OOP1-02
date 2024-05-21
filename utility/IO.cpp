@@ -306,7 +306,7 @@ void IO::printDamageTypeResistance(DamageType type)
       break;
   }
 
-  std::cout << " is now resistant to " << type_name << " until leaving the room." << std::endl;
+  std::cout << " is now resistant to \"" << type_name << "\" until leaving the room." << std::endl;
 
 }
 

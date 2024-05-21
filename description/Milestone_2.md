@@ -325,7 +325,7 @@ Inventory "John"\n
   Equipped Armor: [-] None\n
   Equipped Weapon: [DAGG] Dagger\n
   Armor: [CHML] Chain Mail (1), [LARM] Leather Armor (1)\n
-  Weapons: [DAGG] DAGGER (2), [SBOW] Shortbow (1)\n
+  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)\n
   Consumables: [ARRW] Arrow (12)\n
 ```
 </details>

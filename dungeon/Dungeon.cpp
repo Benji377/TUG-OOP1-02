@@ -141,6 +141,7 @@ vector<shared_ptr<Player>> Dungeon::exitCurrentRoom()
         if (player != nullptr)
         {
           current_room_->setFieldEntity(nullptr, i + 1, j + 1);
+          player->setResistance(DamageType::NONE);
           players.push_back(player);
         }
       }
@@ -160,25 +161,14 @@ void Dungeon::enterCurrentRoom(int door_id, vector<shared_ptr<Player>> players)
     if (door->getId() == door_id)
     {
       std::pair<int, int> door_position = current_room_->getFieldOfEntity(door);
-      int i = 1;
-      int player_count = 0;
-      while ((size_t)player_count < players.size())
+      vector<std::pair<int, int>> surrounding_fields_pos = current_room_->getEmptySurroundingFieldPositions(door_position, players.size());
+      int i = 0;
+      for (auto player : players)
       {
-        vector<shared_ptr<Field>> surrounding_fields = current_room_->getSurroundingFields(door_position, i);
-        for (size_t j = 0; j < surrounding_fields.size(); j++)
-        {
-          if (surrounding_fields[j]->getEntity() == nullptr)
-          {
-            surrounding_fields[j]->setEntity(players[player_count]);
-            player_count++;
-            if ((size_t)player_count == players.size())
-            {
-              break;
-            }
-          }
-        }
+        current_room_->setFieldEntity(player, surrounding_fields_pos[i].first, surrounding_fields_pos[i].second);
         i++;
       }
+      break;
     }
   }
 }
@@ -192,7 +182,7 @@ void Dungeon::characterMove(shared_ptr<Character> character, std::pair<int, int>
 
 void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
   std::pair<int, int> enemy_position = current_room_->getFieldOfEntity(enemy);
-  std::vector<std::pair<int, int>> surrounding_fields = current_room_->getSurroundingFieldPositions(enemy_position, 1);
+  std::vector<std::pair<int, int>> surrounding_fields = current_room_->getSurroundingFieldPositions(enemy_position);
   Dice dice = Dice(surrounding_fields.size(), 1);
   int random_index = dice.roll() - 1;
   std::pair<int, int> random_position = surrounding_fields[random_index];
@@ -203,25 +193,10 @@ void Dungeon::moveToRandomField(std::shared_ptr<Enemy> enemy) {
   }
   else
   {
-    int i = 1;
-    bool moved = false;
-    while (!moved)
-    {
-      std::vector<std::pair<int, int>> new_surrounding_fields =
-        current_room_->getSurroundingFieldPositions(enemy_position, i);
-      for (size_t j = 0; j < new_surrounding_fields.size(); j++)
-      {
-        if (current_room_->getField(new_surrounding_fields[j])->getEntity() == nullptr)
-        {
-          std::pair<int, int> new_position = new_surrounding_fields[j];
-          current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
-          current_room_->setFieldEntity(enemy, new_position.first, new_position.second);
-          moved = true;
-          break;
-        }
-      }
-      i++;
-    }
+    std::vector<std::pair<int, int>> new_surrounding_fields =
+      current_room_->getEmptySurroundingFieldPositions(enemy_position, 1);
+    current_room_->setFieldEntity(nullptr, enemy_position.first, enemy_position.second);
+    current_room_->setFieldEntity(enemy, new_surrounding_fields[0].first, new_surrounding_fields[0].second);
   }
 
 }
@@ -298,7 +273,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
 void Dungeon::lootEntity(std::shared_ptr<Player> player, std::shared_ptr<Entity> entity)
 {
   std::map<string, int> loot = entity->getLoot();
-  int ret = player->getInventory()->parseInventory(loot);
+  int ret = player->getInventory()->parseInventory(loot, player->getStrength(), player->getVitality());
   if (ret == 1)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;

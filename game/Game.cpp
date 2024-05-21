@@ -390,7 +390,6 @@ void Game::printAndSaveScore()
     std::string file_name = IO::promtUserInput();
     if(file_name == "quit")
     {
-      doCommand(file_name);
       return;
     }
     std::ofstream file(file_name, std::ios::out | std::ios::trunc);
