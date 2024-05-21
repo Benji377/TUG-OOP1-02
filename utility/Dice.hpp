@@ -40,6 +40,7 @@ class Dice
     /// @param roll_amount The number of dice to be rolled.
     //
     Dice(int dice_type, int roll_amount);
+
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the Dice class. Parses the given string and initializes the dice with
@@ -48,6 +49,7 @@ class Dice
     /// @param dice The string to be parsed.
     //
     explicit Dice(const std::string& dice);
+
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Rolls the dice and returns the result. Is marked as nodiscard because the result should be used.
@@ -55,16 +57,19 @@ class Dice
     /// @return The result of the dice roll.
     //
     int roll();
+
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted copy constructor.
     //
     Dice(const Dice& other) = delete;
+
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Deleted assignment operator.
     //
     Dice& operator=(const Dice& other) = delete;
+
     //-----------------------------------------------------------------------------------------------------------------
     ///
     /// Virtual default destructor for the Dice class.

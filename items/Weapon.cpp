@@ -1,7 +1,7 @@
 #include "Weapon.hpp"
 
-Weapon::Weapon(std::string &abbreviation, std::string &name, const std::shared_ptr<Dice>& dice,
-                const std::shared_ptr<DamagePattern>& damage_pattern,
+Weapon::Weapon(std::string &abbreviation, std::string &name, const std::shared_ptr<Dice> &dice,
+               const std::shared_ptr<DamagePattern> &damage_pattern,
                std::string &attack_type, std::string &damage_type, int damage_addition)
 {
   abbreviation_ = abbreviation;

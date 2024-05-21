@@ -1,20 +1,20 @@
 #include "DamagePattern.hpp"
 
-DamagePattern::DamagePattern(std::string& pattern)
+DamagePattern::DamagePattern(std::string &pattern)
 {
   pattern_ = parsePattern(pattern);
 }
 
-Pattern DamagePattern::parsePattern(std::string& pattern)
+Pattern DamagePattern::parsePattern(std::string &pattern)
 {
   Utils::normalizeString(pattern);
   // Uses the map function to map the string to the enum
   std::map<std::string, Pattern> patternMap = {
-          {"hit", Pattern::HIT},
-          {"slash", Pattern::SLASH},
-          {"line", Pattern::LINE},
-          {"burst", Pattern::BURST},
-          {"shot", Pattern::SHOT},
+          {"hit",    Pattern::HIT},
+          {"slash",  Pattern::SLASH},
+          {"line",   Pattern::LINE},
+          {"burst",  Pattern::BURST},
+          {"shot",   Pattern::SHOT},
           {"thrust", Pattern::THRUST}
   };
   if (patternMap.count(pattern) == 0)
@@ -30,7 +30,8 @@ Pattern DamagePattern::getPattern() const
 }
 
 std::vector<std::vector<int>> DamagePattern::getAffectedFields(std::pair<int, int> player_position,
-    std::pair<int, int> target_field, int width, int height) const
+                                                               std::pair<int, int> target_field, int width,
+                                                               int height) const
 {
   // We need to normalize the player position and target field from 1-based to 0-based
   player_position.first -= 1;
@@ -60,11 +61,12 @@ std::vector<std::vector<int>> DamagePattern::getAffectedFields(std::pair<int, in
   }
 }
 
-std::vector<std::vector<int>> DamagePattern::hitPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
-                                                        std::vector<std::vector<int>> affected_fields) const
+std::vector<std::vector<int>>
+DamagePattern::hitPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
+                          std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs ((int)(target_field.first - player_pos.first)) > 1 ||
-      abs((int)(target_field.second - player_pos.second)) > 1 ||
+  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
+      abs((int) (target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Hit - Invalid target field");
@@ -77,8 +79,8 @@ std::vector<std::vector<int>> DamagePattern::thrustPattern(std::pair<int, int> p
                                                            std::pair<int, int> target_field,
                                                            std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs ((int)(target_field.first - player_pos.first)) > 1 ||
-      abs((int)(target_field.second - player_pos.second)) > 1 ||
+  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
+      abs((int) (target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Thrust - Invalid target field");
@@ -100,15 +102,15 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
                                                           std::pair<int, int> target_field,
                                                           std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs ((int)(target_field.first - player_pos.first)) > 1 ||
-      abs((int)(target_field.second - player_pos.second)) > 1 ||
+  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
+      abs((int) (target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Slash - Invalid target field");
   }
 
   // Lets check if the target field is NOT diagonal to the player
-  if((abs(target_field.first - player_pos.first) == 0 || abs(target_field.second - player_pos.second) == 0))
+  if ((abs(target_field.first - player_pos.first) == 0 || abs(target_field.second - player_pos.second) == 0))
   {
     int row_diff = target_field.first - player_pos.first;
     int col_diff = target_field.second - player_pos.second;
@@ -180,8 +182,8 @@ std::vector<std::vector<int>> DamagePattern::linePattern(std::pair<int, int> pla
   int row_diff = target_field.first - player_pos.first;
   int col_diff = target_field.second - player_pos.second;
 
-  if (abs ((int)(target_field.first - player_pos.first)) > 1 ||
-      abs((int)(target_field.second - player_pos.second)) > 1 ||
+  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
+      abs((int) (target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Line - Invalid target field");
@@ -225,12 +227,12 @@ std::vector<std::vector<int>> DamagePattern::burstPattern(std::pair<int, int> ta
   std::vector<std::pair<int, int>> adjacent_fields = {
           {target_field.first - 1, target_field.second},
           {target_field.first + 1, target_field.second},
-          {target_field.first, target_field.second - 1},
-          {target_field.first, target_field.second + 1}
+          {target_field.first,     target_field.second - 1},
+          {target_field.first,     target_field.second + 1}
   };
 
   // Check if the adjacent fields are within the bounds of the grid
-  for (const auto& field : adjacent_fields)
+  for (const auto &field: adjacent_fields)
   {
     if (field.first >= 0 && field.first < static_cast<int>(affected_fields.size()) && field.second >= 0 &&
         field.second < static_cast<int>(affected_fields[0].size()))
