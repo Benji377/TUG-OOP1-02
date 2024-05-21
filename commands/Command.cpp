@@ -24,7 +24,11 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 
   if(input_abbreviation.length() != 1)
   {
-    throw UnavailableItemOrEntityCommand();
+    throw InvalidParamCommand();
+  }
+  if (uppercase_input_abbrev != 'W' && uppercase_input_abbrev != 'B' && uppercase_input_abbrev != 'R') 
+  {
+    throw InvalidParamCommand();
   }
 
   for(auto& player : players)
@@ -62,12 +66,12 @@ std::vector<int> Command::getPositionAsVecOutOfString(std::string position_strin
   }
   catch(const std::exception& e)
   {
-    throw InvalidPositionCommand(); //If someone enters something very weird for the position like asd,asdasd
+    throw InvalidParamCommand(); //If someone enters something very weird for the position like asd,asdasd
   }
 
   if(position.size() != 2 )
   {
-    throw InvalidPositionCommand();
+    throw InvalidParamCommand();
   }
 
   return position;
