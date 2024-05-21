@@ -51,22 +51,38 @@ std::vector<int> Command::getPositionAsVecOutOfString(std::string position_strin
 
   try
   {
-    //Code on how to exctract ints from a string from ChatGPT
-    //begin
+    // Code on how to extract ints from a string from ChatGPT
+    // begin
     std::istringstream iss(position_string);
-
     std::string token;
 
     while (std::getline(iss, token, ','))
     {
-      int num = std::stoi(token);
+      if (token.empty())
+      {
+          throw InvalidParamCommand(); // Throw an exception indicating invalid input format
+      }
+
+      size_t pos;
+      int num = std::stoi(token, &pos);
+
+      // If the entire token is not successfully converted to an integer, throw an exception
+      if (pos < token.size())
+      {
+          throw InvalidParamCommand();
+      }
+
       position.push_back(num);
     }
-    //end
+    // end
   }
   catch(const std::exception& e)
   {
-    throw InvalidParamCommand(); //If someone enters something very weird for the position like asd,asdasd
+    throw InvalidParamCommand();
+  }
+  catch(...)
+  {
+    throw InvalidParamCommand(); // Catch all other exceptions and convert to custom exception
   }
 
   if(position.size() != 2 )
