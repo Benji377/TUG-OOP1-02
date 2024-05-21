@@ -22,11 +22,17 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
   char uppercase_input_abbrev = static_cast<char>(toupper(input_abbreviation[0]));
+
+  if(input_abbreviation.length() != 1)
+  {
+    throw UnavailableItemOrEntityCommand();
+  }
+
   for(auto& player : players)
   {
     char current_player_abbrev = player->getAbbreviation();
 
-    if(current_player_abbrev == uppercase_input_abbrev)
+    if(current_player_abbrev == uppercase_input_abbrev && player->isDead() == false)
     {
       return player;
     }
@@ -447,7 +453,7 @@ void AttackCommand::execute(std::vector<std::string> params)
   IO::printSuccessFullAttack(player, target_position, attacked_fields_sorted);
   game_->plusOneActionCount();
 
-  IO::printDiceRoll(player->getActiveWeapon()->getDice()->getPreviousRoll(), player->getActiveWeapon()->getDice());
+  IO::printDiceRoll(player->getWeapon()->getDice()->getPreviousRoll(), player->getWeapon()->getDice());
 
   IO::printAttackedCharacters(attacked_fields_sorted);
 

@@ -50,6 +50,8 @@ public:
   //
   std::shared_ptr<Dice> getDice() const { return dice_;};
 
+  void setDice(std::shared_ptr<Dice> dice) {dice_ = dice;};
+
   ///------------------------------------------------------------------------------------------------------------------
   ///
   /// Returns true if the item is an ammunition. Required for sorting

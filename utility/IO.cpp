@@ -348,7 +348,6 @@ void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
   std::cout << "[Dice Roll] " << dice->getAmount() << " d" << dice->getType() << " resulting in a total value of "
    << result << "." << std::endl << std::endl;
 
-
 }
 
 void IO::printAttackedCharacters(std::vector<AttackedField> attacked_fields)

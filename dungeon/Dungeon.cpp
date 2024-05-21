@@ -205,8 +205,20 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
 {
   vector<AttackedField> attacked_fields;
   std::pair<int, int> attacker_position = current_room_->getFieldOfEntity(attacker);
-  DamageType damage_type = attacker->getWeapon()->getDamageType();
-  vector<vector<int>> affected_fields = attacker->getWeapon()->getDamagePattern()->getAffectedFields(attacker_position,
+
+  shared_ptr<Weapon> weapon;
+  if(std::dynamic_pointer_cast<Player>(attacker) != nullptr) //otherwise it only takes thge getWeapon() function from Character which chage Quarterstaffs depending on the holder
+  {
+    shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(attacker);
+    weapon = player->getWeapon();
+  }
+  else
+  {
+    weapon = attacker->getWeapon();
+  }
+
+  DamageType damage_type = weapon->getDamageType();
+  vector<vector<int>> affected_fields = weapon->getDamagePattern()->getAffectedFields(attacker_position,
     target_field, current_room_->getWidth(), current_room_->getHeight());
   for (size_t i = 0; i < affected_fields.size(); i++)
   {

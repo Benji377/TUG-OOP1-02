@@ -206,7 +206,7 @@ int Player::takeDamage(int damage, DamageType damage_type)
   int additional_armor = 0;
   if(getArmor() != nullptr)
   {
-        additional_armor = getArmor()->getArmorValue();
+    additional_armor = getArmor()->getArmorValue();
 
     if(getArmor()->getAbbreviation() == "LARM") //TODO do enemies have armor??
     {
@@ -273,6 +273,14 @@ std::shared_ptr<Weapon> Player::getWeapon() const
   {
     if(getAbbreviation() == 'W')
     {
+
+      if(weapon_->getDamageType() != DamageType::PHYSICAL) //if it has already been made into a wirzards weapon
+      {
+        return weapon_;
+      }
+
+      weapon_->setDamageAddition(0);
+
       if(weapon_->getAbbreviation() == "QFIR")
       {
         weapon_->setAttackType(AttackType::RANGED);
@@ -281,6 +289,9 @@ std::shared_ptr<Weapon> Player::getWeapon() const
         std::string pattern_str = "burst";
         auto pattern = std::make_shared<DamagePattern>(pattern_str);
         weapon_->setDamangePattern(pattern);
+
+        std::shared_ptr<Dice> dice = std::make_shared<Dice>("3 d6");
+        weapon_->setDice(dice);
       }
       else if(weapon_->getAbbreviation() == "QCLD")
       {
@@ -289,6 +300,9 @@ std::shared_ptr<Weapon> Player::getWeapon() const
         std::string pattern_str = "line";
         auto pattern = std::make_shared<DamagePattern>(pattern_str);
         weapon_->setDamangePattern(pattern);
+
+        std::shared_ptr<Dice> dice = std::make_shared<Dice>("2 d10");
+        weapon_->setDice(dice);
       }
       else if(weapon_->getAbbreviation() == "QACD")
       {
@@ -298,20 +312,36 @@ std::shared_ptr<Weapon> Player::getWeapon() const
         std::string pattern_str = "shot";
         auto pattern = std::make_shared<DamagePattern>(pattern_str);
         weapon_->setDamangePattern(pattern);
+
+        std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d10");
+        weapon_->setDice(dice);
       }
       else if(weapon_->getAbbreviation() == "QFRC")
       {
         weapon_->setDamageType(DamageType::FORCE);
+
+        std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d10");
+        weapon_->setDice(dice);
       }
     }
     else
     {
+
+      if(weapon_->getDamageType() == DamageType::PHYSICAL) //if it has already been made into a standard weapon
+      {
+        return weapon_;
+      }
+
+      weapon_->setDamageAddition(getStrength());
       weapon_->setAttackType(AttackType::MELEE);
       weapon_->setDamageType(DamageType::PHYSICAL);
 
       std::string pattern_str = "hit";
       auto pattern = std::make_shared<DamagePattern>(pattern_str);
       weapon_->setDamangePattern(pattern);
+
+      std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d6");
+      weapon_->setDice(dice);
     }
   }
 
