@@ -8,12 +8,13 @@
 // Author: Elija Innerkofler 12320034
 //----------------------------------------------------------------------------------------------------------------------
 //
+
 #ifndef DOOR_HPP
 #define DOOR_HPP
 
-#define DOOR_ABBREVIATION 'D'
-
 #include "Entity.hpp"
+
+const char DOOR_ABBREVIATION = 'D';
 
 class Door : public Entity
 {
@@ -22,34 +23,37 @@ class Door : public Entity
     int leads_to_;
 
   public:
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the Door class
     /// @param leads_to the room the door leads to
     //
     Door(int leads_to) : Entity(leads_to, DOOR_ABBREVIATION, false), is_locked_(true), leads_to_(leads_to) {}
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the Door class
     //
     ~Door() override {}
-    ///-----------------------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether the door is locked
+    ///
     /// @return true if the door is locked, false otherwise
     //
     bool isLocked() const { return is_locked_; }
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the room the door leads to
+    ///
+    /// @return the room the door leads to
+    //
+    int getLeadsTo() const { return leads_to_; }
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Unlocks the door
     //
     void unlock() { is_locked_ = false; }
-    ///-----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Returns the room the door leads to
-    /// @return the room the door leads to
-    //
-    int getLeadsTo() const { return leads_to_; }
 };
 
 #endif //DOOR_HPP

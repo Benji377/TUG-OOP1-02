@@ -1,6 +1,6 @@
-#include <fstream>
 #include "Story.hpp"
 #include "../utility/Utils.hpp"
+#include <fstream>
 
 void Story::parseStory(const char *file_path)
 {
@@ -23,10 +23,7 @@ StorySegment Story::getStorySegment(string key)
 {
   for (auto &segment : story_)
   {
-    if (segment.getKey() == key)
-    {
-      return segment;
-    }
+    if (segment.getKey() == key) { return segment; }
   }
   return StorySegment("", "Could not find story segment with key: " + key, StorySegmentType::ERROR);
 }

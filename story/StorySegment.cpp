@@ -2,7 +2,7 @@
 #include "../utility/Utils.hpp"
 #include <fstream>
 
-std::ostream &operator<<(std::ostream &os, const StorySegment &story_segment)
+ostream &operator<<(ostream &os, const StorySegment &story_segment)
 {
   vector<string> lines = Utils::splitString(story_segment.text_, ";");
   string text;
@@ -16,7 +16,9 @@ std::ostream &operator<<(std::ostream &os, const StorySegment &story_segment)
       {
         text += symbol + " " + line;
         isFirst = false;
-      } else {
+      }
+      else
+      {
         text += "\n" + symbol + " " + line;
       }
     }

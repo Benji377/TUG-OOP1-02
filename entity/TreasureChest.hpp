@@ -12,9 +12,9 @@
 #ifndef TREASURECHEST_HPP
 #define TREASURECHEST_HPP
 
-#define TREASURE_CHEST_ABBREVIATION 'T'
-
 #include "Entity.hpp"
+
+const char TREASURE_CHEST_ABBREVIATION = 'T';
 
 class TreasureChest : public Entity
 {
@@ -24,26 +24,33 @@ class TreasureChest : public Entity
     int min_value_;
 
   public:
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the TreasureChest class
     /// @param min_value the minimum value to open the treasure chest
     //
     TreasureChest(int min_value, map<string, int> loot) : Entity(treasure_chest_count_++, TREASURE_CHEST_ABBREVIATION,
       loot), is_locked_(true), min_value_(min_value) {}
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Destructor for the TreasureChest class
     //
-    ~TreasureChest() override {}
-    ///-----------------------------------------------------------------------------------------------------------------
+    ~TreasureChest() override { treasure_chest_count_--; }
+
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether the treasure chest is locked
+    ///
     /// @return true if the treasure chest is locked, false otherwise
     //
     bool isLocked() const { return is_locked_; }
-
-    int getMinValue() const {return min_value_; };
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the minimum value of the treasure chest
+    ///
+    /// @return the minimum value of the treasure chest
+    //
+    int getMinValue() const { return min_value_; };
 };
 
 #endif //TREASURECHEST_HPP

@@ -7,6 +7,7 @@
 // Author: Elija Innerkofler 12320034
 //----------------------------------------------------------------------------------------------------------------------
 //
+
 #ifndef FIELD_HPP
 #define FIELD_HPP
 
@@ -15,7 +16,7 @@
 
 using std::shared_ptr;
 
-class Field : public std::enable_shared_from_this<Field>
+class Field
 {
   private:
     inline static int field_count_ = 0;
@@ -28,6 +29,7 @@ class Field : public std::enable_shared_from_this<Field>
     /// Constructor for the Field class
     //
     Field() : id_(field_count_++), entity_(nullptr) {}
+
     ///-----------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the id
@@ -45,8 +47,7 @@ class Field : public std::enable_shared_from_this<Field>
     /// Setter for the entity
     /// @param entity the entity to set
     //
-    void setEntity(std::shared_ptr<Entity> entity) {entity_ = entity; }
-
+    void setEntity(shared_ptr<Entity> entity) { entity_ = entity; }
 };
 
 #endif // FIELD_HPP

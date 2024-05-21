@@ -1,8 +1,23 @@
+//----------------------------------------------------------------------------------------------------------------------
+// main.cpp
+//
+// Group: 068
+//----------------------------------------------------------------------------------------------------------------------
+
 #include "game/Game.hpp"
 #include "utility/Exceptions.hpp"
 #include "utility/Utils.hpp"
 
-
+//----------------------------------------------------------------------------------------------------------------------
+///
+/// Main function of the game. It checks if the number of arguments is correct and if the config files are valid. If the
+/// arguments are correct and the config files are valid, the game is started and the game loop is executed.
+///
+/// @param argc number of arguments
+/// @param argv array of arguments
+///
+/// @return 0 if the program was successful
+//
 int main(int argc, char** argv)
 {
   try {

@@ -1,203 +1,107 @@
 #include "Room.hpp"
-#include "../utility/Utils.hpp"
+#include "../entity/DeathLocation.hpp"
 #include "../entity/Door.hpp"
 #include "../entity/TreasureChest.hpp"
-#include "../entity/DeathLocation.hpp"
 #include "../entity/character/Enemy.hpp"
 #include "../entity/character/Player.hpp"
 #include "../utility/Exceptions.hpp"
+#include "../utility/Utils.hpp"
 #include <algorithm>
 
+using std::cout;
+using std::dynamic_pointer_cast;
+using std::endl;
+using std::make_pair;
 
 Room::Room(int id, int width, int height)
 {
   id_ = id;
   is_complete_ = false;
-  for (int i = 0; i < height; i++)
+  for (int row_index = 0; row_index < height; row_index++)
   {
     vector<shared_ptr<Field>> row;
-    for (int j = 0; j < width; j++)
-    {
-      row.push_back(std::make_shared<Field>());
-    }
+    for (int column_index = 0; column_index < width; column_index++) { row.push_back(std::make_shared<Field>()); }
     fields_.push_back(row);
   }
 }
 
-void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
+vector<shared_ptr<Character>> Room::getEnemies() const
 {
-  fields_[row - 1][col - 1]->setEntity(entity);
+  vector<shared_ptr<Character>> enemies;
+  for (auto &row : fields_)
+  {
+    for (auto &fieldPtr : row)
+    {
+      if (fieldPtr->getEntity() && fieldPtr->getEntity()->isCharacter() && fieldPtr->getEntity()->isEnemy())
+      {
+        enemies.push_back(dynamic_pointer_cast<Character>(fieldPtr->getEntity()));
+      }
+    }
+  }
+  std::sort(enemies.begin(), enemies.end(), [](const shared_ptr<Character> &a, const shared_ptr<Character> &b) -> bool {
+    if (a->getAbbreviation() == b->getAbbreviation()) { return a->getId() < b->getId(); }
+    return a->getAbbreviation() < b->getAbbreviation();
+  });
+  return enemies;
 }
 
-std::pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity)
+vector<char> Room::getEnemiesAbbreviations() const
+{
+  vector<char> enemies_abbreviations;
+  vector<shared_ptr<Character>> enemies = getEnemies();
+  for (auto &enemy : enemies) { enemies_abbreviations.push_back(enemy->getAbbreviation()); }
+  return enemies_abbreviations;
+}
+
+shared_ptr<Field> Room::getField(pair<int, int> position) const
+{
+  return fields_[(position.first - 1)][(position.second - 1)];
+}
+
+pair<int, int> Room::getFieldOfEntity(shared_ptr<Entity> entity) const
 {
   int row_idx = 1;
   int column_idx = 1;
-
-  for(auto row : fields_)
+  for (auto row : fields_)
   {
-    for(auto column : row)
+    for (auto column : row)
     {
-      if(column->getEntity() == entity)
-      {
-        return std::make_pair(row_idx, column_idx);
-      }
+      if (column->getEntity() == entity) { return make_pair(row_idx, column_idx); }
       ++column_idx;
     }
     ++row_idx;
     column_idx = 1;
   }
-
   throw UnavailableItemOrEntityCommand();
-  return std::make_pair(-1, -1);
+  return make_pair(-1, -1);
 }
 
-
-void Room::printRoom()
+vector<pair<int, int>> Room::getSurroundingFieldPositions(pair<int, int> position) const
 {
-  std::cout << "    ";
-  for (size_t i = 0; i < fields_[0].size(); i++)
+  vector<pair<int, int>> surroundingFieldPositions;
+  vector<pair<int, int>> directions = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
+  for (const auto &dir : directions)
   {
-    std::cout << " " << i + 1 << "  ";
-  }
-  std::cout << std::endl;
-  printSeparationLine();
-  for (size_t i = 0; i < fields_.size(); i++)
-  {
-    std::cout << " " << i + 1 << " |";
-    for (size_t j = 0; j < fields_[i].size(); j++)
-    {
-      shared_ptr<Entity> entity = fields_[i][j]->getEntity();
-      printEntityInMap(entity);
-    }
-    std::cout << std::endl;
-    printSeparationLine();
-  }
-}
-
-void Room::printEntityInMap(shared_ptr<Entity> entity)
-{
-  if (entity == nullptr)
-  {
-    std::cout << "   |";
-  }
-  else
-  {
-    std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(entity);
-    std::shared_ptr<TreasureChest> chest = std::dynamic_pointer_cast<TreasureChest>(entity);
-    std::shared_ptr<DeathLocation> death_location = std::dynamic_pointer_cast<DeathLocation>(entity);
-    if (door != nullptr)
-    {
-      std::cout << (door->isLocked() ? "#D" : " D");
-      std::cout << door->getLeadsTo() << "|";
-    }
-    else if (chest != nullptr)
-    {
-      std::cout << (chest->isLocked() ? "#T |" : " T |");
-    }
-    else if (death_location != nullptr)
-    {
-      std::cout << " X |";
-    }
-    else
-    {
-      std::cout << " ";
-      std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(entity);
-      std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(entity);
-      if (player != nullptr)
-      {
-        std::cout << player->getAbbreviation() << " |";
-      }
-      else if (enemy != nullptr)
-      {
-        std::cout << enemy->getAbbreviation() << enemy->getId() << "|";
-      }
-    }
-  }
-}
-
-void Room::printSeparationLine()
-{
-  std::cout << "   +";
-  for (size_t i = 0; i < fields_[0].size(); i++)
-  {
-    std::cout << "---+";
-  }
-  std::cout << std::endl;
-}
-
-std::vector<std::shared_ptr<Character>> Room::getEnemies()
-{
-  std::vector<std::shared_ptr<Character>> enemies;
-
-  for (auto& row : fields_)
-  {
-    for (auto& fieldPtr : row)
-    {
-      //Checks first if it isn't the nullptr, then dereferences and checks if it's a character
-      if(fieldPtr->getEntity() && fieldPtr->getEntity()->isCharacter() && fieldPtr->getEntity()->isEnemy())
-      {
-        enemies.push_back(std::dynamic_pointer_cast<Character>(fieldPtr->getEntity()));
-      }
-    }
-  }
-
-  // Sort the enemies vector
-  std::sort(enemies.begin(), enemies.end(),
-    [](const std::shared_ptr<Character>& a, const std::shared_ptr<Character>& b) -> bool
-    {
-      if (a->getAbbreviation() == b->getAbbreviation())
-      {
-        return a->getId() < b->getId();
-      }
-      return a->getAbbreviation() < b->getAbbreviation();
-    });
-
-  return enemies;
-}
-
-std::vector<char> Room::getEnemiesAbbreviations()
-{
-  std::vector<char> enemies_abbreviations;
-  std::vector<std::shared_ptr<Character>> enemies = getEnemies();
-  for (auto& enemy : enemies)
-  {
-    enemies_abbreviations.push_back(enemy->getAbbreviation());
-  }
-  return enemies_abbreviations;
-}
-
-std::vector<std::pair<int, int>> Room::getSurroundingFieldPositions(std::pair<int, int> position)
-{
-  std::vector<std::pair<int, int>> surroundingFieldPositions;
-  std::vector<std::pair<int, int>> directions = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1},{-1, -1}};
-  for (const auto& dir : directions)
-  {
-    std::pair<int, int> new_pos = std::make_pair(position.first + dir.first, position.second + dir.second);
-
-    if (isValidField(new_pos))
-    {
-      surroundingFieldPositions.push_back(new_pos);
-    }
+    pair<int, int> new_pos = make_pair(position.first + dir.first, position.second + dir.second);
+    if (isValidField(new_pos)) { surroundingFieldPositions.push_back(new_pos); }
   }
   return surroundingFieldPositions;
 }
 
-std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pair<int, int> position,
-  int character_count)
+vector<pair<int, int>> Room::getEmptySurroundingFieldPositions(pair<int, int> position, int character_count) const
 {
-  std::vector<std::pair<int, int>> fields;
-  int i = 0;
+  vector<pair<int, int>> fields;
+  int index = 0;
   int vertical = 2;
   int horizontal = 1;
   int found_empty_fields = 0;
-  std::pair<int, int> start_positon = std::make_pair(position.first - 1, position.second);
-  std::pair<int, int> cursor = start_positon;
+  pair<int, int> start_positon = make_pair(position.first - 1, position.second);
+  pair<int, int> cursor = start_positon;
   while (found_empty_fields < character_count)
   {
-    if (i % 5 == 0)
+    if (index % 5 == 0)
     {
-      for (int j = 0; j < horizontal; j++)
+      for (int counter = 0; counter < horizontal; counter++)
       {
         if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
         {
@@ -207,9 +111,9 @@ std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pa
         cursor.second++;
       }
     }
-    else if (i % 5 == 1)
+    else if (index % 5 == 1)
     {
-      for (int j = 0; j < vertical; j++)
+      for (int counter = 0; counter < vertical; counter++)
       {
         if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
         {
@@ -219,9 +123,9 @@ std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pa
         cursor.first++;
       }
     }
-    else if (i % 5 == 2)
+    else if (index % 5 == 2)
     {
-      for (int j = 0; j < horizontal * 2; j++)
+      for (int counter = 0; counter < horizontal * 2; counter++)
       {
         if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
         {
@@ -232,9 +136,9 @@ std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pa
       }
       horizontal++;
     }
-    else if (i % 5 == 3)
+    else if (index % 5 == 3)
     {
-      for (int j = 0; j < vertical; j++)
+      for (int counter = 0; counter < vertical; counter++)
       {
         if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
         {
@@ -243,11 +147,11 @@ std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pa
         }
         cursor.first--;
       }
-      vertical*=2;
+      vertical *= 2;
     }
-    else if (i % 5 == 4)
+    else if (index % 5 == 4)
     {
-      for (int j = 0; j < horizontal - 1; j++)
+      for (int counter = 0; counter < horizontal - 1; counter++)
       {
         if (isValidField(cursor) && getField(cursor)->getEntity() == nullptr)
         {
@@ -259,40 +163,107 @@ std::vector<std::pair<int, int>> Room::getEmptySurroundingFieldPositions(std::pa
       start_positon.first--;
       cursor = start_positon;
     }
-    i++;
+    index++;
   }
   return fields;
 }
 
-bool Room::isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2)
+bool Room::isAdjacentField(pair<int, int> field_1, pair<int, int> field_2) const
 {
-  if(!isValidField(field_2) || !isValidField(field_1))
-  {
-    return false;
-  }
-
-  //Check their distance
+  if (!isValidField(field_2) || !isValidField(field_1)) { return false; }
   int distance_rows = std::abs(field_1.first - field_2.first);
   int distance_columns = std::abs(field_1.second - field_2.second);
-
-  if(distance_rows > 1 || distance_columns > 1)
-  {
-    return false;
-  }
-
+  if (distance_rows > 1 || distance_columns > 1) { return false; }
   return true;
+}
 
+bool Room::isValidField(pair<int, int> field) const
+{
+  if (field.first < 1 || field.second < 1 || field.first > getHeight() || field.second > getWidth()) { return false; }
+  return true;
+}
+
+void Room::printEntityInMap(shared_ptr<Entity> entity) const
+{
+  if (entity == nullptr)
+  {
+    cout << "   |";
+  }
+  else
+  {
+    shared_ptr<Door> door = dynamic_pointer_cast<Door>(entity);
+    shared_ptr<TreasureChest> chest = dynamic_pointer_cast<TreasureChest>(entity);
+    shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(entity);
+    if (door != nullptr)
+    {
+      cout << (door->isLocked() ? "#D" : " D");
+      cout << door->getLeadsTo() << "|";
+    }
+    else if (chest != nullptr)
+    {
+      cout << (chest->isLocked() ? "#T |" : " T |");
+    }
+    else if (death_location != nullptr)
+    {
+      cout << " X |";
+    }
+    else
+    {
+      cout << " ";
+      shared_ptr<Player> player = dynamic_pointer_cast<Player>(entity);
+      shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(entity);
+      if (player != nullptr)
+      {
+        cout << player->getAbbreviation() << " |";
+      }
+      else if (enemy != nullptr)
+      {
+        cout << enemy->getAbbreviation() << enemy->getId() << "|";
+      }
+    }
+  }
+}
+
+void Room::printSeparationLine() const
+{
+  cout << "   +";
+  for (size_t index = 0; index < fields_[0].size(); index++) { cout << "---+"; }
+  cout << endl;
+}
+
+void Room::setFieldEntity(shared_ptr<Entity> entity, int row, int col)
+{
+  fields_[row - 1][col - 1]->setEntity(entity);
+}
+
+void Room::printRoom()
+{
+  cout << "    ";
+  for (size_t index = 0; index < fields_[0].size(); index++) { cout << " " << index + 1 << "  "; }
+  cout << endl;
+  printSeparationLine();
+  for (size_t row_index = 0; row_index < fields_.size(); row_index++)
+  {
+    cout << " " << row_index + 1 << " |";
+    for (size_t column_index = 0; column_index < fields_[row_index].size(); column_index++)
+    {
+      shared_ptr<Entity> entity = fields_[row_index][column_index]->getEntity();
+      printEntityInMap(entity);
+    }
+    cout << endl;
+    printSeparationLine();
+  }
 }
 
 void Room::checkCompletion()
 {
-  for (const auto& row : fields_)
+  for (const auto &row : fields_)
   {
-    for (const auto& field : row)
+    for (const auto &field : row)
     {
       if (field->getEntity() != nullptr)
       {
-        std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(field->getEntity());
+        shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(field->getEntity());
         if (enemy != nullptr)
         {
           is_complete_ = false;
@@ -308,27 +279,13 @@ void Room::openDoors()
 {
   if (is_complete_)
   {
-    for (auto& row : fields_)
+    for (auto &row : fields_)
     {
-      for (auto& field : row)
+      for (auto &field : row)
       {
-        std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>(field->getEntity());
-        if (door != nullptr)
-        {
-          door->unlock();
-        }
+        shared_ptr<Door> door = dynamic_pointer_cast<Door>(field->getEntity());
+        if (door != nullptr) { door->unlock(); }
       }
     }
   }
-}
-
-bool Room::isValidField(std::pair<int,int> field)
-{
-  if(field.first < 1 || field.second < 1 || field.first > getHeight()
-    || field.second > getWidth())
-  {
-    return false;
-  }
-
-  return true;
 }

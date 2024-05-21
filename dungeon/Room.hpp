@@ -7,20 +7,19 @@
 // Author: Elija Innerkofler 12320034
 //----------------------------------------------------------------------------------------------------------------------
 //
+
 #ifndef ROOM_HPP
 #define ROOM_HPP
 
 #include <vector>
 #include <memory>
-#include <cmath> //For adjacent field
+#include <cmath>
 #include "Field.hpp"
-
+#include "../entity/character/Character.hpp"
 
 using std::vector;
 using std::shared_ptr;
-
-class UnavailableItemOrEntityCommand;
-class Character;
+using std::pair;
 
 class Room
 {
@@ -28,20 +27,21 @@ class Room
     int id_;
     vector<vector<shared_ptr<Field>>> fields_;
     bool is_complete_;
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Private helper function to print an entity
+    ///
     /// @param entity the entity to print
     //
-    void printEntityInMap(shared_ptr<Entity> entity);
-    ///-----------------------------------------------------------------------------------------------------------------
+    void printEntityInMap(shared_ptr<Entity> entity) const;
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Private helper function that prints the separation line
     //
-    void printSeparationLine();
+    void printSeparationLine() const;
 
   public:
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Constructor for the Room class
     /// @param id the id of the room
@@ -49,93 +49,113 @@ class Room
     /// @param height the height of the room
     //
     Room(int id, int width, int height);
-    ///-----------------------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the id
+    ///
     /// @return the id of the room
     //
     int getId() const { return id_; }
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter for the height of the room
+    ///
+    /// @return the height of the room
+    //
+    int getHeight() const { return fields_.size(); }
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Getter for the width of the room
+    ///
+    /// @return the width of the room
+    //
+    int getWidth() const { return fields_[0].size(); }
+    //------------------------------------------------------------------------------------------------------------------
+    ///
     /// Getter for the is_complete_ attribute
     ///
     /// @return A boolean value indicating whether the room is complete or not.
-    ///
-    bool isComplete() const { return is_complete_; }
-    ///-----------------------------------------------------------------------------------------------------------------
-    /// Checks if all enemies in the room are dead and sets the is_complete_ attribute accordingly.
-    ///
-    void checkCompletion();
     //
-    void setComplete(bool completion_state) {is_complete_ = completion_state; }
-    ///-----------------------------------------------------------------------------------------------------------------
-    /// Opens all doors in the room.
-    ///
-    void openDoors();
-    ///-----------------------------------------------------------------------------------------------------------------
+    bool isComplete() const { return is_complete_; }
+    //------------------------------------------------------------------------------------------------------------------
     ///
     /// Getter for the fields
     /// @return the fields of the room
     //
     vector<vector<shared_ptr<Field>>> getFields() const { return fields_; }
-    ///-----------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     ///
-    /// Sets an entity to a field
-    /// @param entity the entity to set
-    /// @param row the row of the field
-    /// @param col the column of the field
-    //
-    void setFieldEntity(shared_ptr<Entity> entity, int row, int col);
-    ///-----------------------------------------------------------------------------------------------------------------
-    ///
-    /// Prints the room
-    //
-    void printRoom();
-    ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves enemies present in the room
     ///
     /// @return A vector containing pointers to the entities found in the room
+    //
+    vector<shared_ptr<Character>> getEnemies() const;
+    //------------------------------------------------------------------------------------------------------------------
     ///
-    std::vector<std::shared_ptr<Character>> getEnemies();
-    ///-----------------------------------------------------------------------------------------------------------------
     /// Retrieves the abbreviation of the enemies present in the room
     ///
     /// @return A vector containing the abbreviations of the enemies found in the room
+    //
+    vector<char> getEnemiesAbbreviations() const;
+    //------------------------------------------------------------------------------------------------------------------
     ///
-    std::vector<char> getEnemiesAbbreviations();
-    ///-----------------------------------------------------------------------------------------------------------------
     /// Returns the field at the specified position in the room.
     ///
     /// @param position A pair containing the row and column indices of the field to retrieve.
-    /// @return A shared pointer to the field at the specified position in the room.
     ///
-    std::shared_ptr<Field> getField(std::pair<int, int> position) { return fields_[(position.first - 1)][(position.second - 1)]; }
-    ///-----------------------------------------------------------------------------------------------------------------
+    /// @return A shared pointer to the field at the specified position in the room.
+    //
+    shared_ptr<Field> getField(pair<int, int> position) const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
     /// Retrieves the field position of a given entity in the room.
     ///
-    /// This function iterates over the fields of the room, checking if each field contains the specified entity.
-    /// If the entity is found, the function returns a pair containing the row and column indices of the field
-    /// where the entity is located. If the entity is not found, the function throws an UnavailableItemOrEntityCommand
-    /// exception and returns a pair with values (-1, -1).
-    ///
     /// @param entity A shared pointer to the entity to search for in the room.
+    ///
     /// @return A pair containing the row and column indices of the field where the entity is located.
     ///
     /// @throws UnavailableItemOrEntityCommand if the entity is not found in any field of the room.
+    //
+    pair<int, int> getFieldOfEntity(shared_ptr<Entity> entity) const;
+    //------------------------------------------------------------------------------------------------------------------
     ///
-    std::pair<int, int> getFieldOfEntity(shared_ptr<Entity> entity);
-
-    std::vector<std::pair<int, int>> getSurroundingFieldPositions(std::pair<int, int> position);
-
-    std::vector<std::pair<int, int>> getEmptySurroundingFieldPositions(std::pair<int, int> position,
-      int character_count = 1);
-
+    /// Retrieves the surrounding field positions of a given field in the room.
+    ///
+    /// @param position A pair containing the row and column indices of the field for which to retrieve the surrounding
+    /// field positions.
+    ///
+    /// @return A vector containing pairs of row and column indices of the surrounding fields of the given field.
+    //
+    vector<pair<int, int>> getSurroundingFieldPositions(pair<int, int> position) const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Retrieves the empty surrounding field positions of a given field in the room. The number of the empty
+    /// surrounding fields can be specified.
+    ///
+    /// @param position A pair containing the row and column indices of the field for which to retrieve the empty
+    /// surrounding field positions.
+    /// @param character_count The number of empty surrounding fields to retrieve.
+    ///
+    /// @return A vector containing pairs of row and column indices of the empty surrounding fields of the given field.
+    //
+    vector<pair<int, int>> getEmptySurroundingFieldPositions(pair<int, int> position,
+      int character_count = 1) const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Retruns all entities of a given type in the room
+    ///
+    /// @tparam T The type of the entities to retrieve
+    ///
+    /// @return A vector containing shared pointers to the entities of the given type found in the room
+    //
     template <typename T>
-    std::vector<std::shared_ptr<T>> getAllEntitiesOfType() {
-      std::vector<std::shared_ptr<T>> entities;
+    vector<shared_ptr<T>> getAllEntitiesOfType() const {
+      vector<shared_ptr<T>> entities;
       for (const auto& row : fields_) {
           for (const auto& field : row) {
               if (field->getEntity() != nullptr) {
-                  std::shared_ptr<T> entity = std::dynamic_pointer_cast<T>(field->getEntity());
+                  shared_ptr<T> entity = std::dynamic_pointer_cast<T>(field->getEntity());
                   if (entity != nullptr) {
                       entities.push_back(entity);
                   }
@@ -144,15 +164,56 @@ class Room
       }
       return entities;
     }
-
-    int getHeight() const { return fields_.size(); }
-    int getWidth() const { return fields_[0].size(); }
-    //Only a suggestion, you can oc change this if you want to. I originially had it in the Commands.cpp
-    //but it actually belongs here, right? -Hanno
-    bool isAdjacentField(std::pair<int,int> field_1, std::pair<int,int> field_2);
-
-    //as well as this
-    bool isValidField(std::pair<int,int> field);
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns whether two fields are adjacent to each other
+    ///
+    /// @param field_1 the first field
+    /// @param field_2 the second field
+    ///
+    /// @return true if the fields are adjacent, false otherwise
+    //
+    bool isAdjacentField(pair<int,int> field_1, pair<int,int> field_2) const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns whether a field is valid. A field is valid if it is within the bounds of the room.
+    ///
+    /// @param field the field to check
+    ///
+    /// @return true if the field is valid, false otherwise
+    //
+    bool isValidField(pair<int,int> field) const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Sets the completion state of the room
+    ///
+    /// @param completion_state the completion state of the room
+    //
+    void setComplete(bool completion_state) {is_complete_ = completion_state; }
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Sets the entity of a field in the room
+    ///
+    /// @param entity the entity to set
+    /// @param row the row of the field
+    /// @param col the column of the field
+    //
+    void setFieldEntity(shared_ptr<Entity> entity, int row, int col);
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Checks whether the room is complete and sets the completion state accordingly
+    //
+    void checkCompletion();
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Opens all doors in the room
+    //
+    void openDoors();
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Prints the room
+    //
+    void printRoom();
 };
 
 #endif // ROOM_HPP
