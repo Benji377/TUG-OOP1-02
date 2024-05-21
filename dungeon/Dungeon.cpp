@@ -253,8 +253,19 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
           int armor_value = target->getBaseArmor();
           if(target->getArmor() != nullptr)
           {
-            armor_value = target->getArmor()->getArmorValue(); //fixed case where target has no armor
+            armor_value = target->getArmor()->getArmorValue();
+
+            if(target->getArmor()->getAbbreviation() == "LARM")
+            {
+              armor_value = 1 + target->getVitality();
+            }
+            else if(target->getArmor()->getAbbreviation() == "BPLT")
+            {
+              armor_value = 4 + std::min(target->getVitality(), 2);
+            }
+
           }
+
           attacked_field.setCharacterWithoutName(lost_health, damage,
             target->getResistantTo() == damage_type ? 50 : 100, armor_value, target->isDead());
           shared_ptr<Player> attacked_player = std::dynamic_pointer_cast<Player>(target);

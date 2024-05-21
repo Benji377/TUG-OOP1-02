@@ -207,6 +207,16 @@ int Player::takeDamage(int damage, DamageType damage_type)
   int additional_armor = 0;
   if(getArmor() != nullptr)
   {
+        additional_armor = getArmor()->getArmorValue();
+
+    if(getArmor()->getAbbreviation() == "LARM") //TODO do enemies have armor??
+    {
+      additional_armor = 1 + getVitality();
+    }
+    else if(getArmor()->getAbbreviation() == "BPLT")
+    {
+      additional_armor = 4 + std::min(getVitality(), 2);
+    }
     additional_armor = getArmor()->getArmorValue();
   }
 
