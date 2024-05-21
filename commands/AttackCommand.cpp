@@ -71,6 +71,11 @@ void AttackCommand::execute(std::vector<std::string> params)
     return;
   }
 
+  if(game_->allPlayersAreDead())
+  {
+    return;
+  }
+
   game_->printStoryAndRoom(false, true, true);
 
 }
