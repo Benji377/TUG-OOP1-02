@@ -13,6 +13,7 @@
 
 #include <string>
 #include "../Entity.hpp"
+
 class Character: public Entity
 {
   protected:
@@ -171,15 +172,45 @@ class Character: public Entity
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// "Kills" the character by setting the is_dead_ attribute to true.
+    //
     void kill() { is_dead_ = true; }
-    // Methods
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the attack damage of the character. This is a pure virtual function and has to be implemented by the
+    /// derived classes.
+    ///
+    /// @return The attack damage of the character.
+    //
     virtual int getAttackDamage() = 0;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Makes the Character take damage. This is a pure virtual function and has to be implemented by the derived
+    /// classes.
+    ///
+    /// @param damage The amount of damage the character takes.
+    /// @param damageType The type of damage the character takes.
+    ///
+    /// @return The remaining health of the character.
+    //
     virtual int takeDamage(int damage, DamageType damageType) = 0;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the currently equipped weapon of the character. This is a pure virtual function and has to be
+    /// implemented by the derived classes.
+    ///
+    /// @return The currently equipped weapon of the character.
+    //
     virtual std::shared_ptr<Weapon> getWeapon() const = 0;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Prints the character. This is a pure virtual function and has to be implemented by the derived classes.
+    //
     virtual void simplePrint() const = 0;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Destructor for the Character class.
+    //
     virtual ~Character() = default;
-
 };
-
 
 #endif //CHARACTER_HPP

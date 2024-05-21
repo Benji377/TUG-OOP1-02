@@ -17,23 +17,92 @@
 
 class Enemy: public Character
 {
+  // If the enemy is a boss, aka Lich
   bool is_boss_;
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
+  /// Initializes the Enemy inventory by creating ist weapons and loot. Gets called inside the constructor.
+  //
   void initializeInventory();
   public:
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Constructor for the Enemy class
+    /// @param id the id of the enemy
+    /// @param abbreviation the abbreviation of the enemy
+    //
     Enemy(int id, char abbreviation);
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns if the enemy is a boss
+    ///
+    /// @return true if the enemy is a boss, false otherwise
+    //
     bool is_boss() const;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the attack damage of the enemy. Depends on the equipped weapon and the dice roll.
+    ///
+    /// @return the attack damage of the enemy
+    //
     int getAttackDamage() override;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the attack damage of the enemy. This time also specifies the attack type.
+    ///
+    /// @param attack_type the attack type
+    /// @return the attack damage of the enemy
+    //
     int getAttackDamage(AttackType attack_type);
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the remaining health after taking damage. The damage taken is influenced by Armor and Resistance
+    ///
+    /// @param damage the damage taken
+    /// @param damage_type the type of the damage
+    ///
+    /// @return the remaining health
+    //
     int takeDamage(int damage, DamageType damage_type) override;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the remaining health after taking damage. The damage taken is influenced by Armor and Resistance
+    ///
+    /// @param damage the damage taken
+    /// @param damage_type the type of the damage
+    ///
+    /// @return the remaining health
+    //
     void printEnemy(const std::string& id_string, const std::pair<int, int>& position) const;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Prints the enemy's information
+    //
     void simplePrint() const override;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Prints the Enemy attack action
+    //
     void attackPrint() const;
-
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the weapon of the enemy
+    ///
+    /// @return the weapon of the enemy
+    //
     std::shared_ptr<Weapon> getWeapon() const override {return weapon_;};
-
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Default Destructor
+    //
     ~Enemy() = default;
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns if the base class character is an enemy. Always true (Replaces typeof)
+    ///
+    /// @return true
+    //
     bool isEnemy() const override{ return true; }
 };
-
 
 #endif //ENEMY_HPP
