@@ -1,9 +1,5 @@
 #include "Command.hpp"
 #include "../game/Game.hpp"
-#include "../entity/Door.hpp"
-#include "../dungeon/Field.hpp"
-#include "../entity/TreasureChest.hpp"
-#include "../entity/DeathLocation.hpp"
 
 void Command::checkCommandLenght(std::vector<std::string> params, size_t required_size) const
 {
@@ -46,35 +42,27 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 
 std::vector<int> Command::getPositionAsVecOutOfString(std::string position_string)
 {
-
   std::vector<int> position; //Works with a vector to check for stuff like 1,2,3
 
   try
   {
-    // Code on how to extract ints from a string from ChatGPT
-    // begin
-    std::istringstream iss(position_string);
-    std::string token;
-
-    while (std::getline(iss, token, ','))
+    std::vector<std::string> split_s = Utils::splitString(position_string, ",");
+    if (split_s.size() != 2)
     {
-      if (token.empty())
-      {
-          throw InvalidParamCommand(); // Throw an exception indicating invalid input format
-      }
-
+      throw InvalidParamCommand();
+    }
+    for (const std::string& s : split_s)
+    {
       size_t pos;
-      int num = std::stoi(token, &pos);
-
-      // If the entire token is not successfully converted to an integer, throw an exception
-      if (pos < token.size())
+      int num = std::stoi(s, &pos); // pos Tells us how many digits the number stoi has found has
+      if (pos < s.size()) // If this number is smaller than the size of the string, then the string is not a complete number
       {
-          throw InvalidParamCommand();
+        throw InvalidParamCommand();
       }
-
+      // Else if pos == s.size() then the entire string is a number
       position.push_back(num);
     }
-    // end
+
   }
   catch(const std::exception& e)
   {
