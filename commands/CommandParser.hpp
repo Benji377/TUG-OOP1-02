@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------------------------
-///
-/// CommandParser class: This class provides functionality to register and execute commands.
-/// It stores a map of string keys that map to unique pointers to the different commands that exist
-/// The idea for this type of implementation comes from the Practicals of OOP Week 5
-///
+//
+// CommandParser class: This class provides functionality to register and execute commands.
+// It stores a map of string keys that map to unique pointers to the different commands that exist
+// The idea for this type of implementation comes from the Practicals of OOP Week 5
+//
 // Group: 068
 //
-// Author: Hanno Elsnig
+// Author: Tutors KU OOP, Hanno Elsnig 12303626
 //------------------------------------------------------------------------------------------------------------------
 #ifndef COMMAND_PARSER_HPP
 #define COMMAND_PARSER_HPP
@@ -14,9 +14,6 @@
 #include <memory>
 #include <map>
 #include <vector>
-
-using std::string;
-
 
 #include "Command.hpp"
 #include "AttackCommand.hpp"

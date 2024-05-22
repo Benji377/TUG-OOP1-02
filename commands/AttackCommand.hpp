@@ -1,11 +1,14 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// AttackCommand class: This class is a command that performs attack ingame
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef ATTACKCOMMAND_HPP
 #define ATTACKCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// LootCommand class: This class is a command that toggles map
-///
-//-----------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class AttackCommand: public Command
@@ -17,16 +20,17 @@ public:
   /// Destructor same as abstract class.
   /// This class should never be copied. Each command type only exists once.
   ///
-  //------------------------------------------------------------------------------------------------------------------
+  //
   AttackCommand(Game* game) : Command(game) {}
   ~AttackCommand() override {};
   AttackCommand(const AttackCommand&) = delete;
 
-  //------------------------------------------------------------------------------------------------------------------
+  ///------------------------------------------------------------------------------------------------------------------
   ///
-  /// Execute method that overrides the abstract classes execute. Executes loot functionality
+  /// Execute method that overrides the abstract classes execute. Executes attack functionality
   ///
-  //------------------------------------------------------------------------------------------------------------------
+  /// @param params Vector of strings which is the command
+  //
   void execute(std::vector<std::string> params) override;
 };
 

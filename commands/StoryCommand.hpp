@@ -1,11 +1,14 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// StoryCommand class: Toggles story
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef STORYCOMMAND_HPP
 #define STORYCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// StoryCommand class: Toggles story
-///
-//-----------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class StoryCommand: public Command
@@ -25,7 +28,7 @@ public:
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
-  /// then prints the Map text
+  /// then toggles the story output
   ///
   //------------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;

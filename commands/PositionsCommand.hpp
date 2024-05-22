@@ -1,12 +1,15 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// PositionsCommand class: This class represents a command prints the positions of enemies and players. 
+// Gets initialised with the address of the game.
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef POSITIONSCOMMAND_HPP
 #define POSITIONSCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// PositionsCommand class: This class represents a command prints the positions of enemies and players. 
-//  Gets initialised with the address of the game.
-///
-//------------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class PositionsCommand: public Command
@@ -26,7 +29,7 @@ public:
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
-  /// Then prints the positions of the players.
+  /// Then prints the positions of the entites.
   ///
   //-----------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;

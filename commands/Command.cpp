@@ -13,8 +13,6 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
 {
   std::string input_abbreviation = params.at(position_of_abbrev_in_params);
 
-  //isValidAbbrev(Abbrev::PLAYER, input_abbreviation);
-
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
   char uppercase_input_abbrev = static_cast<char>(toupper(input_abbreviation[0]));
 
@@ -40,7 +38,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   return nullptr;
 }
 
-std::vector<int> Command::getPositionAsVecOutOfString(std::string position_string)
+std::vector<int> Command::getPositionAsVecOutOfString(std::string position_string) const
 {
   std::vector<int> position; //Works with a vector to check for stuff like 1,2,3
 
@@ -81,7 +79,7 @@ std::vector<int> Command::getPositionAsVecOutOfString(std::string position_strin
   return position;
 }
 
-std::pair<int,int> Command::getPositionAsPairOutOfString(std::string position)
+std::pair<int,int> Command::getPositionAsPairOutOfString(std::string position) const
 {
   std::vector<int> position_as_vector = getPositionAsVecOutOfString(position);
   std::pair<int, int> position_pair = std::make_pair(position_as_vector.at(0), position_as_vector.at(1));
@@ -89,7 +87,8 @@ std::pair<int,int> Command::getPositionAsPairOutOfString(std::string position)
   return position_pair;
 }
 
-std::pair<std::shared_ptr<Player>, std::pair<int, int>> Command::getPlayerAndAdjacentField(std::vector<std::string> params)
+std::pair<std::shared_ptr<Player>, std::pair<int, int>>
+        Command::getPlayerAndAdjacentField(std::vector<std::string> params)
 {
   std::shared_ptr<Player> player = getPlayerOfAbbrev(params, 1); //Get player first to envoke right order of exceptions
 

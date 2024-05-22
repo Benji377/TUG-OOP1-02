@@ -1,11 +1,13 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// HelpCommand class: This class represents a command that provides help information.
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef HELPCOMMAND_HPP
 #define HELPCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// HelpCommand class: This class represents a command that provides help information.
-///
-//-----------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class HelpCommand: public Command

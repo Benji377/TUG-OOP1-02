@@ -1,11 +1,14 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// InventoryCommand class: This class represents a command prints the inventory of specified player
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef INVENTORYCOMMAND_HPP
 #define INVENTORYCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// InventoryCommand class: This class represents a command prints the inventory of specified player
-///
-//------------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class InventoryCommand: public Command
@@ -25,7 +28,7 @@ public:
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
-  /// Then prints the positions of the players.
+  /// Then prints the inventory of the player.
   ///
   //-----------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;

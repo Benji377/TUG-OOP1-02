@@ -1,11 +1,14 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// PlayerCommand class: This class represents a command prints stats of a player
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//---------------------------------------------------------------------------------------------------------------------
 #ifndef PLAYERCOMMAND_HPP
 #define PLAYERCOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// PlayerCommand class: This class represents a command prints stats of a player
-///
-//------------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class PlayerCommand: public Command
@@ -25,7 +28,7 @@ public:
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// Execute method that overrides the abstract classes execute. First checks whether the parameters match
-  /// Then prints the stats of the players.
+  /// Then prints the stats of the player.
   ///
   //-----------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;

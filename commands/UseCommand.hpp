@@ -1,11 +1,14 @@
+//------------------------------------------------------------------------------------------------------------------
+//
+// LootCommand class: This class is a command that performs move action
+//
+// Group: 068
+//
+// Author: Hanno Elsnig, 12303626
+//-----------------------------------------------------------------------------------------------------------------
 #ifndef USECOMMAND_HPP
 #define USECOMMAND_HPP
 
-//------------------------------------------------------------------------------------------------------------------
-///
-/// LootCommand class: This class is a command that toggles map
-///
-//-----------------------------------------------------------------------------------------------------------------
 #include "Command.hpp"
 
 class UseCommand: public Command
@@ -24,7 +27,7 @@ public:
 
   //------------------------------------------------------------------------------------------------------------------
   ///
-  /// Execute method that overrides the abstract classes execute. Executes loot functionality
+  /// Execute method that overrides the abstract classes execute. Executes use functionality
   ///
   //------------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;
