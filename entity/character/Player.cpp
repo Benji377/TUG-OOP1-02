@@ -177,14 +177,15 @@ int Player::getAttackDamage()
   if (getWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
       && getWeapon()->getAbbreviation() != "QFIR" && getWeapon()->getAbbreviation() != "QACD")
   {
-    std::string ammoType = (getWeapon()->getAbbreviation() == "SBOW" ||
+    std::string ammo_type = (getWeapon()->getAbbreviation() == "SBOW" ||
                             getWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
 
-    if (getInventory()->getAmmunition(ammoType) == nullptr || getInventory()->getAmmunition(ammoType)->getAmount() == 0)
+    if (getInventory()->getAmmunition(ammo_type) == nullptr ||
+        getInventory()->getAmmunition(ammo_type)->getAmount() == 0)
     {
       return -2;
     }
-    getInventory()->useAmmunition(ammoType);
+    getInventory()->useAmmunition(ammo_type);
   }
 
   return getWeapon()->getDamage();
@@ -224,19 +225,19 @@ void Player::printPlayer(const std::pair<int, int> &position, bool single_line) 
   {
     return;
   }
-  const int name_width = 17;
-  const int value_width = 6;
-  const int armor_value = std::max(getBaseArmor(), getArmor() ? getArmor()->getArmorValue() : 0);
+  const int NAME_WIDTH = 17;
+  const int VALUE_WIDTH = 6;
+  const int ARMOR_VALUE = std::max(getBaseArmor(), getArmor() ? getArmor()->getArmorValue() : 0);
 
-  std::cout << std::setw(name_width) << std::left << "  Armor Value:" << std::setw(value_width)
-            << std::right << armor_value << "\n"
-            << std::setw(name_width) << std::left << "  Current Health:" << std::setw(value_width)
+  std::cout << std::setw(NAME_WIDTH) << std::left << "  Armor Value:" << std::setw(VALUE_WIDTH)
+            << std::right << ARMOR_VALUE << "\n"
+            << std::setw(NAME_WIDTH) << std::left << "  Current Health:" << std::setw(VALUE_WIDTH)
             << std::right << getHealth() << "\n"
-            << std::setw(name_width) << std::left << "  Max Health:" << std::setw(value_width)
+            << std::setw(NAME_WIDTH) << std::left << "  Max Health:" << std::setw(VALUE_WIDTH)
             << std::right << getMaximumHealth() << "\n"
-            << std::setw(name_width) << std::left << "  Strength:" << std::setw(value_width)
+            << std::setw(NAME_WIDTH) << std::left << "  Strength:" << std::setw(VALUE_WIDTH)
             << std::right << getStrength() << "\n"
-            << std::setw(name_width) << std::left << "  Vitality:" << std::setw(value_width)
+            << std::setw(NAME_WIDTH) << std::left << "  Vitality:" << std::setw(VALUE_WIDTH)
             << std::right << getVitality() << std::endl;
 }
 

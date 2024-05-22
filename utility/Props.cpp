@@ -2,7 +2,7 @@
 
 std::shared_ptr<Potion> Props::craftPotion(std::string abbreviation)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::potions_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::POTIONS_CSV_PATH, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for potion");
@@ -21,7 +21,7 @@ std::shared_ptr<Potion> Props::craftPotion(std::string abbreviation)
 
 std::shared_ptr<Ammunition> Props::craftAmmunition(std::string abbreviation, int amount)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::ammunition_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::AMMUNITION_CSV_PATH, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for ammunition");
@@ -33,7 +33,7 @@ std::shared_ptr<Ammunition> Props::craftAmmunition(std::string abbreviation, int
 
 std::shared_ptr<Armor> Props::craftArmor(std::string abbreviation, int vitality)
 {
-  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::armor_csv_path_, abbreviation);
+  std::vector<std::string> row = CSVParser::getRowByAbbreviation(CSVParser::ARMOR_CSV_PATH, abbreviation);
   if (row.empty())
   {
     throw std::invalid_argument("[PROPS] Invalid abbreviation: \" " + abbreviation + " \" for armor");
@@ -60,10 +60,10 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, char charac
   std::vector<std::string> row;
   if (character == 'L' || character == 'W')
   {
-    row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation + "-X");
+    row = CSVParser::getRowByAbbreviation(CSVParser::WEAPON_CSV_PATH, abbreviation + "-X");
     if (row.empty())
     {
-      row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
+      row = CSVParser::getRowByAbbreviation(CSVParser::WEAPON_CSV_PATH, abbreviation);
     }
     else
     {
@@ -73,7 +73,7 @@ std::shared_ptr<Weapon> Props::craftWeapon(std::string abbreviation, char charac
   }
   else
   {
-    row = CSVParser::getRowByAbbreviation(CSVParser::weapon_csv_path_, abbreviation);
+    row = CSVParser::getRowByAbbreviation(CSVParser::WEAPON_CSV_PATH, abbreviation);
   }
   if (row.empty())
   {

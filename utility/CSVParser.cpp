@@ -1,9 +1,9 @@
 #include "CSVParser.hpp"
 
-const std::string CSVParser::armor_csv_path_ = "data/armor.csv";
-const std::string CSVParser::potions_csv_path_ = "data/potions.csv";
-const std::string CSVParser::weapon_csv_path_ = "data/weapons.csv";
-const std::string CSVParser::ammunition_csv_path_ = "data/ammunition.csv";
+const std::string CSVParser::ARMOR_CSV_PATH = "data/armor.csv";
+const std::string CSVParser::POTIONS_CSV_PATH = "data/potions.csv";
+const std::string CSVParser::WEAPON_CSV_PATH = "data/weapons.csv";
+const std::string CSVParser::AMMUNITION_CSV_PATH = "data/ammunition.csv";
 
 bool checkFile(const std::string &filename)
 {
@@ -12,11 +12,11 @@ bool checkFile(const std::string &filename)
     std::ifstream file(filename);
     if (!file.good())
     {
-      throw std::runtime_error("Error: File " + filename + " does not exist");
+      throw std::runtime_error("File " + filename + " does not exist");
     }
     if (!file.is_open())
     {
-      throw std::runtime_error("Error: Could not open file " + filename);
+      throw std::runtime_error("Could not open file " + filename);
     }
     file.close();
     return true;
@@ -78,15 +78,15 @@ std::vector<std::string> CSVParser::getRowByAbbreviation(const std::string &file
 std::string CSVParser::getFolderByAbbreviation(const std::string &abbreviation)
 {
   // Map the filenames to the corresponding item types
-  std::map<std::string, std::string> filenameToItemType = {
-          {armor_csv_path_,      "Armor"},
-          {potions_csv_path_,    "Potion"},
-          {weapon_csv_path_,     "Weapon"},
-          {ammunition_csv_path_, "Ammunition"}
+  std::map<std::string, std::string> filename_to_item_type = {
+          {ARMOR_CSV_PATH,       "Armor"},
+          {POTIONS_CSV_PATH,     "Potion"},
+          {WEAPON_CSV_PATH,      "Weapon"},
+          {AMMUNITION_CSV_PATH, "Ammunition"}
   };
 
   // Iterate through each CSV file in the data folder
-  for (const auto &[filename, itemType]: filenameToItemType)
+  for (const auto &[filename, itemType]: filename_to_item_type)
   {
     std::vector<std::string> row = getRowByAbbreviation(filename, abbreviation);
     if (!row.empty())

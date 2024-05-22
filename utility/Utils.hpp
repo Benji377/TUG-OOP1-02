@@ -27,11 +27,11 @@ class Utils
     /// This is a helper function for the readConfigLine function.
     ///
     /// @param file The file to be read
-    /// @param num The line number to be read
+    /// @param line_number The line number to be read
     ///
     /// @return The file with the file pointer at the specified line
     //
-    static std::fstream& goToLine(std::fstream& file, int num);
+    static std::fstream& goToLine(std::fstream& file, int line_number);
   public:
     ///------------------------------------------------------------------------------------------------------------------
     /// Constructor, Copy-Constructor and Destructor are deleted, as this class should never be instantiated.
@@ -105,30 +105,30 @@ class Utils
     /// comparing the elements of the first vector with the elements of the second vector. If an element is not found in
     /// the second vector, it is added to the result vector.
     ///
-    /// @param a The first vector
-    /// @param b The second vector
+    /// @param first_vector The first vector
+    /// @param second_vector The second vector
     ///
     /// @return A vector containing the difference between the two input vectors
     //
-    static std::vector<char> getDifference(const std::vector<char> &a, const std::vector<char> &b);
+    static std::vector<char> getDifference(const std::vector<char> &first_vector, const std::vector<char> &second_vector);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function deletes duplicates from a vector. The function iterates over the vector and
     /// removes all duplicates. The vector is modified in place.
     ///
-    /// @param vec The vector to be modified
+    /// @param char_vector The vector to be modified
     //
-    static void deleteDuplicates(std::vector<char> &vec);
+    static void deleteDuplicates(std::vector<char> &char_vector);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function checks if a given item abbreviation is valid. An item abbreviation is valid
     /// if it is contained in the item abbreviation map of the inventory.
     ///
-    /// @param abbrev The item abbreviation to be checked
+    /// @param item_abbreviation The item abbreviation to be checked
     ///
     /// @return True if the item abbreviation is valid, false otherwise
     //
-    static bool isValidItemAbbrev(std::string abbrev);
+    static bool isValidItemAbbrev(std::string item_abbreviation);
 };
 
 #endif // UTILS_HPP

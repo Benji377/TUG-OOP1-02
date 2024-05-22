@@ -1,8 +1,6 @@
 #include "Dice.hpp"
 
-Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount), previous_roll_(-1)
-{
-}
+Dice::Dice(int dice_type, int roll_amount) : dice_type_(dice_type), roll_amount_(roll_amount), previous_roll_(-1) {}
 
 Dice::Dice(const std::string &dice)
 {
@@ -15,10 +13,10 @@ Dice::Dice(const std::string &dice)
 int Dice::roll()
 {
   int result = 0;
-  for (int i = 0; i < getAmount(); i++)
+  for (int current_roll = 0; current_roll < getAmount(); current_roll++)
   {
     // The random number is generated in the range [1, dice_type_]
-    result += (int) Oop::Random::getInstance().getRandomNumber(getType());
+    result += static_cast<int>(Oop::Random::getInstance().getRandomNumber(getType()));
   }
   setPreviousRoll(result);
   return result;

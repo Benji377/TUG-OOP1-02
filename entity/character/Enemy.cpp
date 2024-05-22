@@ -71,7 +71,7 @@ void Enemy::initializeInventory()
   }
 }
 
-bool Enemy::is_boss() const
+bool Enemy::isBoss() const
 {
   return is_boss_;
 }

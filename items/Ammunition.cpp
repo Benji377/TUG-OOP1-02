@@ -12,15 +12,15 @@ Ammunition::Ammunition(std::string &abbreviation, std::string &type, std::vector
 AmmunitionType Ammunition::parseType(std::string &type)
 {
   Utils::normalizeString(type);
-  std::map<std::string, AmmunitionType> typeMap = {
+  std::map<std::string, AmmunitionType> type_map = {
           {"arrow", AmmunitionType::ARROW},
           {"bolt",  AmmunitionType::BOLT}
   };
-  if (typeMap.count(type) == 0)
+  if (type_map.count(type) == 0)
   {
     throw std::invalid_argument("[AMMUNITION] Invalid ammunition type.");
   }
-  return typeMap[type];
+  return type_map[type];
 }
 
 AmmunitionType Ammunition::getType() const

@@ -14,18 +14,18 @@ Effect Potion::parseEffect(std::string &effect)
 {
   Utils::normalizeString(effect);
   // Uses the map function to map the string to the enum
-  std::map<std::string, Effect> effectMap = {
+  std::map<std::string, Effect> effect_map = {
           {"health", Effect::HEALTH},
           {"fire",   Effect::FIRE},
           {"cold",   Effect::COLD},
           {"force",  Effect::FORCE},
           {"acid",   Effect::ACID}
   };
-  if (effectMap.count(effect) == 0)
+  if (effect_map.count(effect) == 0)
   {
     throw std::invalid_argument("[POTION] Invalid effect");
   }
-  return effectMap[effect];
+  return effect_map[effect];
 }
 
 Effect Potion::getEffect() const

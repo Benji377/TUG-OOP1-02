@@ -41,35 +41,35 @@ void Inventory::addAmmunition(std::shared_ptr<Ammunition> ammunition)
 int Inventory::removeItem(std::shared_ptr<Item> item)
 {
   // Loop through all the items and remove the item if the abbreviation matches
-  for (auto it = potions_.begin(); it != potions_.end(); ++it)
+  for (auto iterator = potions_.begin(); iterator != potions_.end(); ++iterator)
   {
-    if ((*it)->getAbbreviation() == item->getAbbreviation())
+    if ((*iterator)->getAbbreviation() == item->getAbbreviation())
     {
-      potions_.erase(it);
+      potions_.erase(iterator);
       return 0;
     }
   }
-  for (auto it = weapons_.begin(); it != weapons_.end(); ++it)
+  for (auto iterator = weapons_.begin(); iterator != weapons_.end(); ++iterator)
   {
-    if ((*it)->getAbbreviation() == item->getAbbreviation())
+    if ((*iterator)->getAbbreviation() == item->getAbbreviation())
     {
-      weapons_.erase(it);
+      weapons_.erase(iterator);
       return 0;
     }
   }
-  for (auto it = armor_.begin(); it != armor_.end(); ++it)
+  for (auto iterator = armor_.begin(); iterator != armor_.end(); ++iterator)
   {
-    if ((*it)->getAbbreviation() == item->getAbbreviation())
+    if ((*iterator)->getAbbreviation() == item->getAbbreviation())
     {
-      armor_.erase(it);
+      armor_.erase(iterator);
       return 0;
     }
   }
-  for (auto it = ammunition_.begin(); it != ammunition_.end(); ++it)
+  for (auto iterator = ammunition_.begin(); iterator != ammunition_.end(); ++iterator)
   {
-    if ((*it)->getAbbreviation() == item->getAbbreviation())
+    if ((*iterator)->getAbbreviation() == item->getAbbreviation())
     {
-      ammunition_.erase(it);
+      ammunition_.erase(iterator);
       return 0;
     }
   }
@@ -185,7 +185,7 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory, char player
       addAmmunition(Props::craftAmmunition(const_cast<std::string &>(item.first), item.second));
     } else
     {
-      for (int i = 0; i < item.second; i++)
+      for (int item_index = 0; item_index < item.second; item_index++)
       {
         if (parsed_item == "Potion")
         {

@@ -255,7 +255,7 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
           {
             string enemy_name = attacked_enemy->getTypeName() + " " + std::to_string(attacked_enemy->getId());
             attacked_field.setName(enemy_name);
-            if (attacked_enemy->is_boss() && attacked_enemy->isDead())
+            if (attacked_enemy->isBoss() && attacked_enemy->isDead())
             {
               boss_dead_ = true;
               current_room_->setComplete(true);

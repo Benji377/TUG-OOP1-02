@@ -17,10 +17,10 @@ bool Utils::decimalStringToInt(const std::string &str, int &number)
 }
 
 
-std::fstream &Utils::goToLine(std::fstream &file, int num)
+std::fstream &Utils::goToLine(std::fstream &file, int line_number)
 {
   file.seekg(std::ios::beg);
-  for (int i = 0; i < num - 1; ++i)
+  for (int current_line = 0; current_line < line_number - 1; ++current_line)
   {
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
@@ -66,18 +66,20 @@ void Utils::isValidConfig(const char *config_path, const char *magic_number)
 
 std::vector<std::string> Utils::splitString(const std::string &string, const std::string &delimiter)
 {
-  size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+  size_t pos_start = 0;
+  size_t delimiter_length = delimiter.length();
+  size_t pos_end;
   std::string token;
-  std::vector<std::string> res;
+  std::vector<std::string> split_string_vector;
 
   while ((pos_end = string.find(delimiter, pos_start)) != std::string::npos)
   {
     token = string.substr(pos_start, pos_end - pos_start);
-    pos_start = pos_end + delim_len;
-    res.push_back(token);
+    pos_start = pos_end + delimiter_length;
+    split_string_vector.push_back(token);
   }
-  res.push_back(string.substr(pos_start));
-  return res;
+  split_string_vector.push_back(string.substr(pos_start));
+  return split_string_vector;
 }
 
 void Utils::normalizeString(std::string &string, bool to_upper)
@@ -95,12 +97,12 @@ void Utils::normalizeString(std::string &string, bool to_upper)
     std::transform(string.begin(), string.end(), string.begin(), ::tolower);
 }
 
-std::vector<char> Utils::getDifference(const std::vector<char> &a, const std::vector<char> &b)
+std::vector<char> Utils::getDifference(const std::vector<char> &first_vector, const std::vector<char> &second_vector)
 {
   std::vector<char> difference;
-  for (const auto &item: a)
+  for (const auto &item: first_vector)
   {
-    if (std::find(b.begin(), b.end(), item) == b.end())
+    if (std::find(second_vector.begin(), second_vector.end(), item) == second_vector.end())
     {
       difference.push_back(item);
     }
@@ -108,18 +110,18 @@ std::vector<char> Utils::getDifference(const std::vector<char> &a, const std::ve
   return difference;
 }
 
-void Utils::deleteDuplicates(std::vector<char> &vec)
+void Utils::deleteDuplicates(std::vector<char> &char_vector)
 {
-  std::sort(vec.begin(), vec.end());
-  vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+  std::sort(char_vector.begin(), char_vector.end());
+  char_vector.erase(std::unique(char_vector.begin(), char_vector.end()), char_vector.end());
 }
 
-bool Utils::isValidItemAbbrev(std::string abbrev)
+bool Utils::isValidItemAbbrev(std::string item_abbreviation)
 {
   std::shared_ptr<Inventory> test_inventory = std::make_shared<Inventory>();
-  std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
+  std::transform(item_abbreviation.begin(), item_abbreviation.end(), item_abbreviation.begin(), ::toupper);
   std::map<std::string, int> parse_input;
-  parse_input.insert(make_pair(abbrev, 1));
+  parse_input.insert(make_pair(item_abbreviation, 1));
   test_inventory->parseInventory(parse_input, 'X', 0, 0);
 
   if (test_inventory->getAllPotions().empty() && test_inventory->getAllArmor().empty()

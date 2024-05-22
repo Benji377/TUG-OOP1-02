@@ -9,7 +9,7 @@ Pattern DamagePattern::parsePattern(std::string &pattern)
 {
   Utils::normalizeString(pattern);
   // Uses the map function to map the string to the enum
-  std::map<std::string, Pattern> patternMap = {
+  std::map<std::string, Pattern> pattern_map = {
           {"hit",    Pattern::HIT},
           {"slash",  Pattern::SLASH},
           {"line",   Pattern::LINE},
@@ -17,11 +17,11 @@ Pattern DamagePattern::parsePattern(std::string &pattern)
           {"shot",   Pattern::SHOT},
           {"thrust", Pattern::THRUST}
   };
-  if (patternMap.count(pattern) == 0)
+  if (pattern_map.count(pattern) == 0)
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Invalid pattern during parsing");
   }
-  return patternMap[pattern];
+  return pattern_map[pattern];
 }
 
 Pattern DamagePattern::getPattern() const
@@ -65,8 +65,8 @@ std::vector<std::vector<int>>
 DamagePattern::hitPattern(std::pair<int, int> player_pos, std::pair<int, int> target_field,
                           std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
-      abs((int) (target_field.second - player_pos.second)) > 1 ||
+  if (abs(static_cast<int>(target_field.first - player_pos.first)) > 1 ||
+      abs(static_cast<int>(target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Hit - Invalid target field");
@@ -79,8 +79,8 @@ std::vector<std::vector<int>> DamagePattern::thrustPattern(std::pair<int, int> p
                                                            std::pair<int, int> target_field,
                                                            std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
-      abs((int) (target_field.second - player_pos.second)) > 1 ||
+  if (abs(static_cast<int>(target_field.first - player_pos.first)) > 1 ||
+      abs(static_cast<int>(target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Thrust - Invalid target field");
@@ -102,8 +102,8 @@ std::vector<std::vector<int>> DamagePattern::slashPattern(std::pair<int, int> pl
                                                           std::pair<int, int> target_field,
                                                           std::vector<std::vector<int>> affected_fields) const
 {
-  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
-      abs((int) (target_field.second - player_pos.second)) > 1 ||
+  if (abs(static_cast<int>(target_field.first - player_pos.first)) > 1 ||
+      abs(static_cast<int>(target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Slash - Invalid target field");
@@ -182,8 +182,8 @@ std::vector<std::vector<int>> DamagePattern::linePattern(std::pair<int, int> pla
   int row_diff = target_field.first - player_pos.first;
   int col_diff = target_field.second - player_pos.second;
 
-  if (abs((int) (target_field.first - player_pos.first)) > 1 ||
-      abs((int) (target_field.second - player_pos.second)) > 1 ||
+  if (abs(static_cast<int>(target_field.first - player_pos.first)) > 1 ||
+      abs(static_cast<int>(target_field.second - player_pos.second)) > 1 ||
       (target_field.first == player_pos.first && target_field.second == player_pos.second))
   {
     throw std::invalid_argument("[DAMAGEPATTERN] Line - Invalid target field");

@@ -38,7 +38,7 @@ class Enemy: public Character
     ///
     /// @return true if the enemy is a boss, false otherwise
     //
-    bool is_boss() const;
+    bool isBoss() const;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Returns the attack damage of the enemy. Depends on the equipped weapon and the dice roll.
