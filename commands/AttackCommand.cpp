@@ -27,7 +27,8 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   if(players_weapon->getAttackType() == AttackType::MELEE)
   {
-    if(!(game_->getCurrentRoom()->isAdjacentField(target_position, current_position)) || target_position == current_position)
+    if(!(game_->getCurrentRoom()->isAdjacentField(target_position, current_position)) 
+                      || target_position == current_position)
     {
       throw InvalidPositionCommand();
     }
@@ -57,14 +58,15 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   int damage = player->getAttackDamage();
 
-  std::vector<AttackedField> attacked_fields_sorted = game_->getDungeon().characterAttack(player, damage, target_position);
+  std::vector<AttackedField> attacked_fields_sorted =
+                                  game_->getDungeon().characterAttack(player, damage, target_position);
 
-  IO::printSuccessFullAttack(player, target_position, attacked_fields_sorted);
+  InputOutput::printSuccessFullAttack(player, target_position, attacked_fields_sorted);
   game_->plusOneActionCount();
 
-  IO::printDiceRoll(player->getWeapon()->getDice()->getPreviousRoll(), player->getWeapon()->getDice());
+  InputOutput::printDiceRoll(player->getWeapon()->getDice()->getPreviousRoll(), player->getWeapon()->getDice());
 
-  IO::printAttackedCharacters(attacked_fields_sorted);
+  InputOutput::printAttackedCharacters(attacked_fields_sorted);
 
   if(game_->getDungeon().isBossDead())
   {

@@ -1,6 +1,6 @@
 #include "PositionsCommand.hpp"
 #include "../game/Game.hpp"
-#include "../utility/IO.hpp"
+#include "../utility/InputOutput.hpp"
 
 void PositionsCommand::execute(std::vector<std::string> params)
 {
@@ -11,7 +11,7 @@ void PositionsCommand::execute(std::vector<std::string> params)
   //Assuming Players are always stored by id, otherwise sort them
   std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
 
-  for(auto& player : players)
+  for(const auto& player : players)
   {
     if(player->isDead() == false)
     {
@@ -23,11 +23,11 @@ void PositionsCommand::execute(std::vector<std::string> params)
 
   std::map<std::string, std::shared_ptr<Character>> enemies_mapped;
 
-  for(auto& enemy : enemies)
+  for(const auto& enemy : enemies)
   {
     std::string enemy_string_to_be_sorted = enemy->getTypeName() + " " + std::to_string(enemy->getId());
     enemies_mapped.insert(std::make_pair(enemy_string_to_be_sorted, enemy));
   }
 
-  IO::printEnemyPosition(enemies_mapped, current_room);
+  InputOutput::printEnemyPosition(enemies_mapped, current_room);
 }

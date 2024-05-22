@@ -10,7 +10,6 @@ void UseCommand::execute(std::vector<std::string> params)
   std::string abbrev = params.at(2);
   std::transform(abbrev.begin(), abbrev.end(), abbrev.begin(), ::toupper);
 
-
   if(abbrev == "BOLT" || abbrev == "ARRW" || !(Utils::isValidItemAbbrev(abbrev)))
   {
     throw InvalidParamCommand();
@@ -69,8 +68,6 @@ void UseCommand::execute(std::vector<std::string> params)
     game_->printStoryAndRoom(false, true, true);
     return;
   }
-
-  //TODO figure out if an error should be seen as error and promt user again?
 
   throw UnavailableItemOrEntityCommand();
 

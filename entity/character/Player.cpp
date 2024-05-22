@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <utility>
 #include "../../utility/Props.hpp"
-#include "../../utility/IO.hpp"
+#include "../../utility/InputOutput.hpp"
 
 Player::Player(int id, char abbreviation, std::string name) : Character(id, abbreviation)
 {
@@ -143,7 +143,7 @@ int Player::usePotion(std::string abbreviation)
     {
       int health_before = getHealth();
       setHealth(getHealth() + potion->getDice()->roll());
-      IO::printDiceRoll(potion->getDice()->getPreviousRoll(), potion->getDice());
+      InputOutput::printDiceRoll(potion->getDice()->getPreviousRoll(), potion->getDice());
       if (getHealth() > getMaximumHealth())
       {
         setHealth(getMaximumHealth());
@@ -158,7 +158,7 @@ int Player::usePotion(std::string abbreviation)
       auto damage_type = static_cast<DamageType>(potion->getEffect());
       setResistance(damage_type);
       simplePrintNoId();
-      IO::printDamageTypeResistance(damage_type);
+      InputOutput::printDamageTypeResistance(damage_type);
     }
     getInventory()->removeItem(potion);
     return 0;

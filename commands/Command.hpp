@@ -34,10 +34,10 @@ class Command
 protected:
   //All commands except for the help command need the game. So I just added it for all of them
   Game* game_;
+
   //------------------------------------------------------------------------------------------------------------------
   ///
   /// Constructor is set to protected so this class can only be initiated by subclasses.
-  ///
   //
   Command(Game* game) : game_(game) {};
 

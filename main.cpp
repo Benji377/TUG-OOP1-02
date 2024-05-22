@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     }
   }
   catch (const std::exception& e) {
-    std::cout << e.what() << '\n'; //TODO I removed "<< "Main Error: " here in case they check for std::bad alloc, they want it to be "Error: " is ok?
+    std::cout << e.what() << '\n';
   }
 
   return 0;

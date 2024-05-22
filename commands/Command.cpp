@@ -9,7 +9,8 @@ void Command::checkCommandLenght(std::vector<std::string> params, size_t require
   }
 }
 
-std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const
+std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params,
+                size_t position_of_abbrev_in_params) const
 {
   std::string input_abbreviation = params.at(position_of_abbrev_in_params);
 
@@ -20,7 +21,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   {
     throw InvalidParamCommand();
   }
-  if (uppercase_input_abbrev != 'W' && uppercase_input_abbrev != 'B' && uppercase_input_abbrev != 'R') 
+  if(uppercase_input_abbrev != 'W' && uppercase_input_abbrev != 'B' && uppercase_input_abbrev != 'R')
   {
     throw InvalidParamCommand();
   }
@@ -45,22 +46,21 @@ std::vector<int> Command::getPositionAsVecOutOfString(std::string position_strin
   try
   {
     std::vector<std::string> split_s = Utils::splitString(position_string, ",");
-    if (split_s.size() != 2)
+    if(split_s.size() != 2)
     {
       throw InvalidParamCommand();
     }
-    for (const std::string& s : split_s)
+    for(const std::string& s : split_s)
     {
       size_t pos;
       int num = std::stoi(s, &pos); // pos Tells us how many digits the number stoi has found has
-      if (pos < s.size()) // If this number is smaller than the size of the string, then the string is not a complete number
+      if(pos < s.size()) // If this number is smaller than the size of the string, then the string is not a complete number
       {
         throw InvalidParamCommand();
       }
       // Else if pos == s.size() then the entire string is a number
       position.push_back(num);
     }
-
   }
   catch(const std::exception& e)
   {

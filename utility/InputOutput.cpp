@@ -1,4 +1,4 @@
-#include "IO.hpp"
+#include "InputOutput.hpp"
 #include "../entity/character/Player.hpp"
 #include "../dungeon/Room.hpp"
 #include "Dice.hpp"
@@ -12,13 +12,13 @@
 /// @param pair The pair of integers to be printed.
 /// @return A reference to the output stream.
 //
-std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& pair) 
+std::ostream& operator<<(std::ostream& os, const std::pair<int, int>& pair)
 {
     os << "(" << pair.first << "," << pair.second << ")";
     return os;
 }
 
-std::string IO::promtUserInput(bool check_input)
+std::string InputOutput::promtUserInput(bool check_input)
 {
   std::cout << "> " << std::flush;
 
@@ -39,7 +39,7 @@ std::string IO::promtUserInput(bool check_input)
 
 }
 
-std::vector<std::string> IO::commandifyString(std::string input)
+std::vector<std::string> InputOutput::commandifyString(std::string input)
 {
   Utils::normalizeString(input);
 
@@ -48,7 +48,7 @@ std::vector<std::string> IO::commandifyString(std::string input)
   std::vector<std::string> tokens;
   std::string token;
   bool in_token = false;
-  for (std::string::const_iterator it = input.begin(); it != input.end(); ++it) 
+  for(std::string::const_iterator it = input.begin(); it != input.end(); ++it)
   {
     if(std::isspace(*it))
     {
@@ -74,7 +74,7 @@ std::vector<std::string> IO::commandifyString(std::string input)
   return tokens;
 }
 
-void IO::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room)
+void InputOutput::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Room> room)
 {
   std::cout << player->getTypeName() << " ";
   std::cout << "[" << player->getAbbreviation() << "]" << " ";
@@ -84,14 +84,14 @@ void IO::printPlayerPosition(std::shared_ptr<Player> player, std::shared_ptr<Roo
 }
 
 
-void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
+void InputOutput::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> enemies_mapped,
   std::shared_ptr<Room>  current_room)
 {
-  for(auto& enemy : enemies_mapped)
+  for(const auto& enemy : enemies_mapped)
   {
     std::pair<int, int> field = current_room->getFieldOfEntity(enemy.second);
     auto enemy_ptr = std::dynamic_pointer_cast<Enemy>(enemy.second);
-    if (enemy_ptr != nullptr)
+    if(enemy_ptr != nullptr)
     {
       enemy_ptr->printEnemy(enemy.first, field);
     }
@@ -103,7 +103,7 @@ void IO::printEnemyPosition(std::map<std::string, std::shared_ptr<Character>> en
 }
 
 
-void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items)
+void InputOutput::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> items)
 {
   std::map<std::string, int> item_strings_sorted_with_map;
 
@@ -130,12 +130,13 @@ void IO::printVectorOfItemsAlphabetically(std::vector<std::shared_ptr<Item>> ite
     }
   }
 
-for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item_strings_sorted_with_map.end(); ++item_string)
+for(auto item_string = item_strings_sorted_with_map.begin();
+                              item_string != item_strings_sorted_with_map.end(); ++item_string)
 {
   std::cout << item_string->first << " (" << item_string->second << ")";
   if (std::next(item_string) != item_strings_sorted_with_map.end())
   {
-    // Not the end, print a delimiter (e.g., comma)
+    // Not the end, print a comma
     std::cout << ",";
   }
   else
@@ -147,7 +148,7 @@ for(auto item_string = item_strings_sorted_with_map.begin(); item_string != item
 
 }
 
-void IO::printActives(std::shared_ptr<Player> player)
+void InputOutput::printActives(std::shared_ptr<Player> player)
 {
   std::cout << "Inventory " << "\"" << player->getName() << "\"" << std::endl;
   std::cout << "  Equipped Armor: ";
@@ -173,23 +174,20 @@ void IO::printActives(std::shared_ptr<Player> player)
   }
 }
 
-void IO::printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> player)
+void InputOutput::printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> player)
 {
   std::vector<std::shared_ptr<Armor>> armor_ptrs = inv->getAllArmor();
-  //Code from https://stackoverflow.com/questions/26567687/how-to-erase-vector-element-by-pointer to erase single element
-  //begin
   if(player != nullptr)
   {
+    //Code from https://stackoverflow.com/questions/26567687/how-to-erase-vector-element-by-pointer to erase single element
+    //begin
     armor_ptrs.erase(std::remove(armor_ptrs.begin(), armor_ptrs.end(), player->getArmor()), armor_ptrs.end());
+    //end
   }
-  //end
   std::vector<std::shared_ptr<Item>> armor_as_items;
   for(const auto& armor_ptr : armor_ptrs)
   {
-    //Code line from GeminiAI to perform a dynamic pointer cast
-    //Begin
     std::shared_ptr<Item> item = std::dynamic_pointer_cast<Item>(armor_ptr);
-    //end
     if(item != nullptr)
     {
       armor_as_items.push_back(item);
@@ -252,7 +250,7 @@ void IO::printInventory(std::shared_ptr<Inventory> inv, std::shared_ptr<Player> 
 
 }
 
-void IO::printPlayerInventory(std::shared_ptr<Player> player)
+void InputOutput::printPlayerInventory(std::shared_ptr<Player> player)
 {
   printActives(player);
 
@@ -261,13 +259,13 @@ void IO::printPlayerInventory(std::shared_ptr<Player> player)
   printInventory(inv, player);
 }
 
-void IO::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
+void InputOutput::printPlayerMoved(std::shared_ptr<Player> player, std::pair<int,int> position)
 {
   player->simplePrintNoId();
   std::cout << " moved to " << position << "." << std::endl;
 }
 
-void IO::printDamageTypeResistance(DamageType type)
+void InputOutput::printDamageTypeResistance(DamageType type)
 {
   std::string type_name;
 
@@ -293,7 +291,7 @@ void IO::printDamageTypeResistance(DamageType type)
 
 }
 
-void IO::printSuccessFullAttack(std::shared_ptr<Character> attacker, std::pair<int, int>& target_position,
+void InputOutput::printSuccessFullAttack(std::shared_ptr<Character> attacker, std::pair<int, int>& target_position,
     std::vector<AttackedField>& attacked_fields)
 {
   std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(attacker);
@@ -326,14 +324,13 @@ void IO::printSuccessFullAttack(std::shared_ptr<Character> attacker, std::pair<i
   std::cout << "." << std::endl;
 }
 
-void IO::printDiceRoll(int result, std::shared_ptr<Dice> dice)
+void InputOutput::printDiceRoll(int result, std::shared_ptr<Dice> dice)
 {
   std::cout << "[Dice Roll] " << dice->getAmount() << " d" << dice->getType() << " resulting in a total value of "
    << result << "." << std::endl << std::endl;
-
 }
 
-void IO::printAttackedCharacters(std::vector<AttackedField> attacked_fields)
+void InputOutput::printAttackedCharacters(std::vector<AttackedField> attacked_fields)
 {
   for(AttackedField field : attacked_fields)
   {
@@ -344,7 +341,6 @@ void IO::printAttackedCharacters(std::vector<AttackedField> attacked_fields)
       {
         std::cout << field.getName() << " was defeated." << std::endl;
       }
-    
     }
   }
 }

@@ -8,8 +8,8 @@
 // Author: Hanno Elsnig, 12303626
 //---------------------------------------------------------------------------------------------------------------------
 //
-#ifndef IO_HPP
-#define IO_HPP
+#ifndef INPUTOUTPUT_HPP
+#define INPUTOUTPUT_HPP
 
 #include "Utils.hpp"
 #include "../entity/character/Enemy.hpp"
@@ -27,7 +27,7 @@ class Dice;
 
 enum class DamageType;
 
-class IO
+class InputOutput
 {
 public:
   //---------------------------------------------------------------------------------------------------------------------

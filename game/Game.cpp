@@ -33,7 +33,7 @@ void Game::start()
   int num_players;
   while (true)
   {
-    string input = IO::promtUserInput();
+    string input = InputOutput::promtUserInput();
     if (input == "quit")
     {
       doCommand(input);
@@ -57,7 +57,7 @@ void Game::start()
     while (true)
     {
       name.clear();
-      name = IO::promtUserInput(false);
+      name = InputOutput::promtUserInput(false);
       if (name.length() > MAX_NAME_LENGTH || playerExists(name))
       {
         cout << "Please enter a unique name with not more than " << MAX_NAME_LENGTH << " characters." << endl;
@@ -74,7 +74,7 @@ void Game::start()
     char type;
     while (true)
     {
-      string input = IO::promtUserInput();
+      string input = InputOutput::promtUserInput();
       if (input == "quit")
       {
         doCommand(input);
@@ -147,40 +147,46 @@ void Game::step()
 
 void Game::doCommand()
 {
-  command_finished_ = false;
+  bool command_finished = false;
 
   cout << Game::story_.getStorySegment("N_PROMPT_MESSAGE");
 
-  while (!command_finished_)
+  while (!command_finished)
   {
-    string input = IO::promtUserInput();
+    string input = InputOutput::promtUserInput();
 
-    vector<string> command_input = IO::commandifyString(input);
+    vector<string> command_input = InputOutput::commandifyString(input);
 
     try
     {
       parser_->execute(command_input);
-    } catch (const UnknownCommand &e)
+    }
+    catch (const UnknownCommand &e)
     {
       cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
       continue;
-    } catch (const WrongNumberOfParametersException &e)
+    }
+    catch (const WrongNumberOfParametersException &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
       continue;
-    } catch (const InvalidParamCommand &e)
+    }
+    catch (const InvalidParamCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM");
       continue;
-    } catch (const UnavailableItemOrEntityCommand &e)
+    }
+    catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
       continue;
-    } catch (const InvalidPositionCommand &e)
+    }
+    catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
       continue;
-    } catch (const CommandExecutionException &e)
+    }
+    catch (const CommandExecutionException &e)
     {
       switch (e.getType())
       {
@@ -195,18 +201,16 @@ void Game::doCommand()
         default:
           break;
       }
-
-
       continue;
     }
 
-    command_finished_ = true;
+    command_finished = true;
   }
 }
 
 void Game::doCommand(string input)
 {
-  vector<string> command_input = IO::commandifyString(input);
+  vector<string> command_input = InputOutput::commandifyString(input);
 
   try
   {
@@ -354,7 +358,7 @@ void Game::printAndSaveScore()
   cout << Game::story_.getStorySegment("N_SCORING_FILE");
   while (true)
   {
-    string file_name = IO::promtUserInput();
+    string file_name = InputOutput::promtUserInput();
     if (file_name == "quit") { return; }
     // Open file in write mode and delete content if it already exists
     std::ofstream file(file_name, std::ios::out | std::ios::trunc);
@@ -413,9 +417,9 @@ void Game::enemyPhase()
         int damage = enemy->getAttackDamage();
         vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
         cout << endl;
-        IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
-        IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
-        IO::printAttackedCharacters(attacked_fields);
+        InputOutput::printSuccessFullAttack(enemy, player_pos, attacked_fields);
+        InputOutput::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
+        InputOutput::printAttackedCharacters(attacked_fields);
         if (allPlayersAreDead()) { return; }
         break;
       }
@@ -433,9 +437,9 @@ void Game::enemyPhase()
         }
         vector<AttackedField> attacked_fields = getDungeon().characterAttack(enemy, damage, player_pos);
         cout << endl;
-        IO::printSuccessFullAttack(enemy, player_pos, attacked_fields);
-        IO::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
-        IO::printAttackedCharacters(attacked_fields);
+        InputOutput::printSuccessFullAttack(enemy, player_pos, attacked_fields);
+        InputOutput::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
+        InputOutput::printAttackedCharacters(attacked_fields);
         if (allPlayersAreDead()) { return; }
         break;
       }

@@ -1,7 +1,7 @@
 #include "MoveCommand.hpp"
 #include "../game/Game.hpp"
 #include "../entity/Door.hpp"
-#include "../utility/IO.hpp"
+#include "../utility/InputOutput.hpp"
 
 void MoveCommand::execute(std::vector<std::string> params)
 {
@@ -16,7 +16,7 @@ void MoveCommand::execute(std::vector<std::string> params)
 
   if(entity_on_field == nullptr)
   {
-    IO::printPlayerMoved(player, target_position);
+    InputOutput::printPlayerMoved(player, target_position);
     game_->getDungeon().characterMove(player, target_position);
     game_->plusOneActionCount();
     game_->printStoryAndRoom(false, true, true);
@@ -32,7 +32,7 @@ void MoveCommand::execute(std::vector<std::string> params)
     {
       game_->plusOneActionCount();
       game_->setActionCount(0); //Action count gets reset if in a new room
-      IO::printPlayerMoved(player, target_position);
+      InputOutput::printPlayerMoved(player, target_position);
       int result = game_->getDungeon().moveToRoom(door->getLeadsTo());
       if (result == 1)
       {

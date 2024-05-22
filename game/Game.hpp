@@ -14,7 +14,7 @@
 #include "../dungeon/Dungeon.hpp"
 #include "../commands/CommandParser.hpp"
 #include "../utility/Props.hpp"
-#include "../utility/IO.hpp"
+#include "../utility/InputOutput.hpp"
 #include "../story/Story.hpp"
 #include "../entity/character/Player.hpp"
 #include "../entity/character/Enemy.hpp"
@@ -47,7 +47,6 @@ class Game
     bool is_running_ = true;
     bool map_output_active_ = true;
     bool story_output_active_ = true;
-    bool command_finished_;
 
   public:
     //------------------------------------------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ void LootCommand::execute(std::vector<std::string> params)
 
     std::shared_ptr<Dice> dice = std::make_shared<Dice>("1 d20");
     int roll_result = dice->roll();
-    IO::printDiceRoll(roll_result, dice);
+    InputOutput::printDiceRoll(roll_result, dice);
 
     if(roll_result < min_value_to_roll)
     {
@@ -50,7 +50,7 @@ void LootCommand::execute(std::vector<std::string> params)
   {
     std::cout << "The entity contains an unknown item. The loot could not be parsed." << std::endl;
   }
-  IO::printInventory(inv_of_entity, nullptr);
+  InputOutput::printInventory(inv_of_entity, nullptr);
   game_->getDungeon().lootEntity(player, entity_on_field);
   game_->plusOneActionCount();
   game_->printStoryAndRoom(false, true, true);

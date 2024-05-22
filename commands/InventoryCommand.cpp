@@ -1,6 +1,6 @@
 #include "InventoryCommand.hpp"
 #include "../game/Game.hpp"
-#include "../utility/IO.hpp"
+#include "../utility/InputOutput.hpp"
 
 void InventoryCommand::execute(std::vector<std::string> params)
 {
@@ -13,5 +13,5 @@ void InventoryCommand::execute(std::vector<std::string> params)
     throw UnavailableItemOrEntityCommand();
   }
 
-  IO::printPlayerInventory(player);
+  InputOutput::printPlayerInventory(player);
 }

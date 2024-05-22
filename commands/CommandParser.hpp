@@ -36,7 +36,8 @@ private:
 public:
   //------------------------------------------------------------------------------------------------------------------
   ///
-  /// Constructer and Destructor are set to default. This class should never be copied.
+  /// Constructer is set to default. Destructor is set to empty as no extra memory handling is necessary. 
+  /// This class should never be copied.
   ///
   //------------------------------------------------------------------------------------------------------------------
   ~CommandParser();
