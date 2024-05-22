@@ -693,8 +693,8 @@ The distance between an enemy and a player is calculated as follows:
 If multiple player characters share the same distance to the enemy's position, the player with the **least amount of 
 health** should be chosen as the target.
 
-If both of these attributes are the same for multiple players, the target player should be the player first in clockwise
-order starting from above the enemy's current position, going outwards in circles from the enemy's position (this is similar to the prioritization in collision handling (see [Milestone 1](Milestone_1.md))).
+If both of these attributes are the same for multiple players, the target player should be chosen out of these players by going outwards in circles from the enemy's position in clockwise
+order starting from above the enemy's current position  (this is similar to the prioritization in collision handling (see [Milestone 1](Milestone_1.md))).
 
 #### Choose Weapon
 Each enemy has a set number of weapons they can attack with, which are listed in the enemy's description in the
