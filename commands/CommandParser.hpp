@@ -28,6 +28,9 @@
 #include "StoryCommand.hpp"
 #include "UseCommand.hpp"
 
+#include "PlayCommand.hpp"
+#include "WhoamiCommand.hpp"
+
 class CommandParser
 {
 private:

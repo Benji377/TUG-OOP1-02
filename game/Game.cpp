@@ -24,6 +24,10 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("loot", make_unique<LootCommand>(this));
   parser_->registerCommand("use", make_unique<UseCommand>(this));
   parser_->registerCommand("attack", make_unique<AttackCommand>(this));
+
+  parser_->registerCommand("play", make_unique<PlayCommand>(this));
+  parser_->registerCommand("whoami", make_unique<WhoamiCommand>());
+
 }
 
 void Game::start()
