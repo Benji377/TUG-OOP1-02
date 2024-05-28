@@ -16,10 +16,34 @@
 #define ROBOT_HPP
 
 #include <iostream>
+#include <map>
+#include <tuple>
+#include <fstream>
+#include <sstream>
+#include "State.hpp"
 
 // TODO: We might also put some helper methods in a RobotHelper class in the same folder to organize the code better
 class Robot
 {
+  State current_state_;
+  std::map<std::tuple<State, RobotAction>, double> q_table_;
+  // TODO: The following numbers will have to be adjusted and tested to find the best values
+  double alpha = 0.1;
+  double gamma = 0.95;
+  double epsilon = 0.9;
+  double epsilon_decay = 0.995;
+  double epsilon_min = 0.01;
+
+public:
+  Robot();
+  void saveQTable();
+  void loadQTable();
+  void updateQTable(State state, RobotAction action, State new_state, double reward);
+  RobotAction getBestAction(State state);
+  void executeAction(RobotAction action);
+  double getMaximumQValue(State state);
+  State getCurrentState();
+  void setCurrentState(State state);
 
 };
 

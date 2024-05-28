@@ -39,6 +39,7 @@ enum class RobotAction
   ATTACK,
   USE_RANGED, // Uses a ranged weapon
   USE_MELEE, // Uses a melee weapon
+  SWITCH_PLAYER, // Switches to the next player W -> B -> R
 };
 
 
@@ -58,7 +59,7 @@ class State
   int door_pos_x_, door_pos_y_; // The position of the door in the room
 
 public:
-  State();
+  State() = default;
 
   // Getter and Setter methods
   void setCurrentPosition(std::pair<int, int> current_position) { current_position_ = current_position; };
@@ -88,8 +89,6 @@ public:
   std::pair<int, int> getDoorPosition() { return std::make_pair(door_pos_x_, door_pos_y_); };
 
   // Methods to update the state
-  void serializeState(); // Serializes the state to a file
-  void deserializeState(); // Deserializes the state from a file
   std::vector<RobotAction> getPossibleActions();
 };
 
