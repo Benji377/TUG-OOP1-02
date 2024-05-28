@@ -48,6 +48,10 @@ int main(int argc, char** argv)
       game.step();
     }
   }
+  catch (const std::bad_alloc& e) {
+    std::cout << "Memory allocation failed: " << e.what() << '\n';
+  }
+
   catch (const std::exception& e) {
     std::cout << e.what() << '\n';
   }
