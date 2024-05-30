@@ -52,8 +52,6 @@ void AttackCommand::execute(std::vector<std::string> params)
           throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_AMMUNITION);
         }
       }
-
-
   }
 
   int damage = player->getAttackDamage();

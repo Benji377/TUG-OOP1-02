@@ -39,7 +39,7 @@ public:
   void saveQTable();
   void loadQTable();
   void updateQTable(State state, RobotAction action, State new_state, double reward);
-  RobotAction getBestAction(State state);
+  RobotAction getBestAction(); //Removed :(State state); //TODO already has action right?
   void executeAction(RobotAction action);
   double getMaximumQValue(State state);
   State getCurrentState() const { return current_state_; };

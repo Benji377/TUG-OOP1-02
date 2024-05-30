@@ -164,6 +164,29 @@ class Room
       }
       return entities;
     }
+
+
+    template <typename T>
+    std::vector<std::vector<int>> getEntitiesAsInt()
+    {
+    std::vector<std::vector<int>> fields_as_ints;
+    std::transform(fields_.begin(), fields_.end(), std::back_inserter(fields_as_ints), [](const std::vector<std::shared_ptr<Field>>& row) {
+        std::vector<int> row_as_ints;
+        std::transform(row.begin(), row.end(), std::back_inserter(row_as_ints), [](const std::shared_ptr<Field>& field) {
+            auto entity = field->getEntity();
+            auto casted_entity = std::dynamic_pointer_cast<T>(entity);
+            if (casted_entity)
+            {
+                return casted_entity->getHealth();
+            } else
+            {
+                return 0;
+            }
+        });
+        return row_as_ints;
+    });
+    return fields_as_ints;
+    }
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether two fields are adjacent to each other

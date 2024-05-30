@@ -61,6 +61,7 @@ class State
   bool can_attack_range_; // If the robot can attack from a distance
   bool can_attack_melee_; // If the robot can attack in melee
   bool can_heal_; // If the robot can heal itself
+
   // Methods
   std::set<RobotAction> getPossibleMoves();
   bool canLoot();
@@ -90,7 +91,7 @@ public:
   void setCanAttackMelee(bool can_attack_melee) { can_attack_melee_ = can_attack_melee; };
   void setCanHeal(bool can_heal) { can_heal_ = can_heal; };
   void setEnemies(std::vector<std::vector<int>> enemies) { enemies_ = enemies; };
-  void setPlayer(std::vector<std::vector<int>> players) { players_ = players; };
+  void setPlayers(std::vector<std::vector<int>> players) { players_ = players; };
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
   void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
 

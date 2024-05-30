@@ -10,6 +10,8 @@
 #define PLAYCOMMAND_HPP
 
 #include "Command.hpp"
+#include "../robot/State.hpp"
+
 
 class PlayCommand: public Command
 {
@@ -32,6 +34,10 @@ public:
   ///
   //------------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;
+
+
+
+  void updateState(shared_ptr<State> state);
 };
 
 

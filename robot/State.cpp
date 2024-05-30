@@ -9,7 +9,7 @@ State::State(int remaining_actions, std::pair<int, int> position, Player player,
   health_ = player.getHealth();
   remaining_action_count_ = remaining_actions;
   damage_output_ = player.getWeapon()->getDamage();
-  damage_input_ = player.getArmor()->getArmorValue();
+  //damage_input_ = player.getArmor()->getArmorValue(); Only if player has armor //TODO 
   enemies_ = enemies;
   players_ = players;
   lootables_ = lootables;
@@ -287,6 +287,6 @@ void State::deserializeState(std::string state_string)
   setCanHeal(std::stoi(state_items[9]));
   setDoorPosition(std::make_pair(std::stoi(state_items[10]), std::stoi(state_items[11])));
   setEnemies(Utils::deserializeMap(state_items[12]));
-  setPlayer(Utils::deserializeMap(state_items[13]));
+  setPlayers(Utils::deserializeMap(state_items[13]));
   setLootables(Utils::deserializeMap(state_items[14]));
 }
