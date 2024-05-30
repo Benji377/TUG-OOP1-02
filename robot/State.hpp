@@ -52,13 +52,14 @@ class State
   int remaining_action_count_;
   int damage_output_; // The amount of damage the robot can deal
   int damage_input_; // The amount of damage the robot can take
-  bool can_attack_range_; // If the robot can attack from a distance
-  bool can_attack_melee_; // If the robot can attack in melee
-  bool can_heal_; // If the robot can heal itself
   std::vector<std::vector<int>> enemies_; // map of the game, where 0 is empty, everything > 1 is the health of the enemy
   std::vector<std::vector<int>> players_; // map of the game, where 0 is empty, everything > 1 is the health of the player
   std::vector<std::vector<int>> lootables_; // map of the game, where 0 is empty, 1 is a lootable item
-  int door_pos_x_, door_pos_y_; // The position of the door in the room
+  std::pair<int, int> door_position_; // The position of the door in the room
+  // SET BY THE STATE INTERNALLY
+  bool can_attack_range_; // If the robot can attack from a distance
+  bool can_attack_melee_; // If the robot can attack in melee
+  bool can_heal_; // If the robot can heal itself
   // Methods
   std::set<RobotAction> getPossibleMoves();
   bool canLoot();
@@ -73,7 +74,8 @@ class State
   bool canSwitchPlayer();
 
 public:
-  // TODO: Define proper constructor
+  State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
+        std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables, std::pair<int, int> door_position);
   State() = default;
 
   // Getter and Setter methods
@@ -88,7 +90,7 @@ public:
   void setEnemies(std::vector<std::vector<int>> enemies) { enemies_ = enemies; };
   void setPlayer(std::vector<std::vector<int>> players) { players_ = players; };
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
-  void setDoorPosition(int x, int y) { door_pos_x_ = x; door_pos_y_ = y; };
+  void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
 
   std::pair<int, int> getCurrentPosition() { return current_position_; };
   int getHealth() const { return health_; };
@@ -101,7 +103,7 @@ public:
   std::vector<std::vector<int>> getEnemies() { return enemies_; };
   std::vector<std::vector<int>> getPlayers() { return players_; };
   std::vector<std::vector<int>> getLootables() { return lootables_; };
-  std::pair<int, int> getDoorPosition() { return std::make_pair(door_pos_x_, door_pos_y_); };
+  std::pair<int, int> getDoorPosition() { return door_position_; };
   // Methods
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState();

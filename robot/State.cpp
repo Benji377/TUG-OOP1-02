@@ -1,5 +1,25 @@
 #include "State.hpp"
 
+State::State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
+             std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables, std::pair<int, int> door_position)
+{
+  // TODO: This constructor may throw an exception if any of the arguments are invalid or null
+  current_position_ = position;
+  health_ = player.getHealth();
+  remaining_action_count_ = remaining_actions;
+  damage_output_ = player.getWeapon()->getDamage();
+  damage_input_ = player.getArmor()->getArmorValue();
+  enemies_ = enemies;
+  players_ = players;
+  lootables_ = lootables;
+  door_position_ = door_position;
+  can_attack_range_ = canAttackAnywhere(player);
+  can_attack_melee_ = canAttackAdjacent(player);
+  can_heal_ = canRegenerate(player);
+}
+
+
+
 // Returns the possible actions that the robot can take in the current state
 std::set<RobotAction> State::getPossibleActions(Player player)
 {
@@ -87,10 +107,12 @@ bool State::canRegenerate(Player player)
   if (!player.getInventory()->getAllPotions().empty()) {
     for (const auto& potion : player.getInventory()->getAllPotions()) {
       if (potion->getEffect() == Effect::HEALTH && player.getHealth() < player.getMaximumHealth()) {
+        setCanHeal(true);
         return true;
       }
     }
   }
+  setCanHeal(false);
   return false;
 }
 
@@ -147,11 +169,13 @@ bool State::canAttackAdjacent(Player player)
         if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
             && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
             getEnemies()[new_x][new_y] > 0) {
+          setCanAttackMelee(true);
           return true;
         }
       }
     }
   }
+  setCanAttackMelee(false);
   return false;
 }
 
@@ -160,6 +184,7 @@ bool State::canAttackAnywhere(Player player)
   // Check if the player has the required ammunition for the ranged weapon, or a weapon that doesn't require ammunition
   if (player.getWeapon()->getAttackType() == AttackType::RANGED) {
     if (player.getWeapon()->getAbbreviation().find('Q') != std::string::npos) {
+      setCanAttackRange(true);
       return true;
     } else {
       std::vector<std::shared_ptr<Ammunition>> ammunition = player.getInventory()->getAllAmmunition();
@@ -167,12 +192,14 @@ bool State::canAttackAnywhere(Player player)
         for (const auto& ammo : ammunition) {
           std::vector<std::string> ammo_weapon = ammo->getWeapons();
           if (std::find(ammo_weapon.begin(), ammo_weapon.end(), player.getWeapon()->getAbbreviation()) != ammo_weapon.end()) {
+            setCanAttackRange(true);
             return true;
           }
         }
       }
     }
   }
+  setCanAttackRange(false);
   return false;
 }
 
@@ -210,7 +237,7 @@ bool State::canUseMelee(Player player)
 
 bool State::canSwitchPlayer()
 {
-  // The robot can switch player if there are more than one player in the game
+  // The robot can switch player if there are more than one player in the game (and not all players are dead)
   for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
     for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {
       // Skip the current player's position
@@ -255,7 +282,7 @@ void State::deserializeState(std::string state_string)
   setCanAttackRange(std::stoi(state_items[6]));
   setCanAttackMelee(std::stoi(state_items[7]));
   setCanHeal(std::stoi(state_items[8]));
-  setDoorPosition(std::stoi(state_items[9]), std::stoi(state_items[10]));
+  setDoorPosition(std::make_pair(std::stoi(state_items[9]), std::stoi(state_items[10])));
   setEnemies(Utils::deserializeMap(state_items[11]));
   setPlayer(Utils::deserializeMap(state_items[12]));
   setLootables(Utils::deserializeMap(state_items[13]));
