@@ -129,6 +129,19 @@ class Utils
     /// @return True if the item abbreviation is valid, false otherwise
     //
     static bool isValidItemAbbrev(std::string item_abbreviation);
+
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Utils class extension: This function serializes a map into a string.
+    /// The map is represented as a 2D vector of integers.
+    ///
+    /// @param map The map to be serialized
+    ///
+    /// @return The serialized map as a string
+    //
+    static std::string serializeMap(std::vector<std::vector<int>> map);
+
+    static std::vector<std::vector<int>> deserializeMap(std::string map);
 };
 
 #endif // UTILS_HPP

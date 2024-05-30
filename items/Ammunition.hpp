@@ -74,6 +74,14 @@ public:
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
+  /// Returns the weapons that can use the ammunition.
+  ///
+  /// @return The weapons that can use the ammunition.
+  //
+  std::vector<std::string> getWeapons() const { return weapons_; }
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
   /// Deleted copy constructor.
   //
   Ammunition(Ammunition const &) = delete;

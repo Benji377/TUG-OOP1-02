@@ -16,6 +16,8 @@
 
 #include <iostream>
 #include <vector>
+#include <set>
+#include "../entity/character/Player.hpp"
 
 // TODO: Specify the Actions in more detail, to make each decision more precise and easier to handle
 // PS: Not all actions are possible at all times, so we will have to filter them and only allow the ones
@@ -36,7 +38,7 @@ enum class RobotAction
   SET_RES_COLD,
   SET_RES_FORCE,
   SET_RES_ACID,
-  ATTACK,
+  ATTACK, // Attacks the nearest enemy
   USE_RANGED, // Uses a ranged weapon
   USE_MELEE, // Uses a melee weapon
   SWITCH_PLAYER, // Switches to the next player W -> B -> R
@@ -57,6 +59,18 @@ class State
   std::vector<std::vector<int>> players_; // map of the game, where 0 is empty, everything > 1 is the health of the player
   std::vector<std::vector<int>> lootables_; // map of the game, where 0 is empty, 1 is a lootable item
   int door_pos_x_, door_pos_y_; // The position of the door in the room
+  // Methods
+  std::set<RobotAction> getPossibleMoves();
+  bool canLoot();
+  bool canRegenerate(Player player);
+  std::set<RobotAction> getPossibleResistances(Player player);
+  bool canAttack(Player player);
+  bool hasEnemies();
+  bool canAttackAdjacent(Player player);
+  bool canAttackAnywhere(Player player);
+  bool canUseRanged(Player player);
+  bool canUseMelee(Player player);
+  bool canSwitchPlayer();
 
 public:
   State() = default;
@@ -89,7 +103,9 @@ public:
   std::pair<int, int> getDoorPosition() { return std::make_pair(door_pos_x_, door_pos_y_); };
 
   // Methods to update the state
-  std::vector<RobotAction> getPossibleActions();
+  std::set<RobotAction> getPossibleActions(Player player);
+  std::string serializeState();
+  void deserializeState(std::string state_string);
 };
 
 

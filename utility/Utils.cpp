@@ -1,3 +1,4 @@
+#include <sstream>
 #include "Utils.hpp"
 #include "Exceptions.hpp"
 #include "../entity/character/Inventory.hpp"
@@ -130,4 +131,42 @@ bool Utils::isValidItemAbbrev(std::string item_abbreviation)
     return false;
   }
   return true;
+}
+
+std::string Utils::serializeMap(std::vector<std::vector<int>> map)
+{
+  std::string serialized_map;
+  // For each item in a row, we want to separate it with a comma
+  // For each row we want to separate it with a slash
+  for (const auto &row : map)
+  {
+    for (const auto &item : row)
+    {
+      serialized_map += std::to_string(item) + ",";
+    }
+    serialized_map.pop_back();
+    serialized_map += "/";
+  }
+  return serialized_map;
+}
+
+std::vector<std::vector<int>> Utils::deserializeMap(std::string map)
+{
+  // Each item in a row is separated by a comma
+  // Each row is separated by a slash. The amount of rows can vary
+  std::vector<std::vector<int>> deserialized_map;
+  std::vector<int> row;
+  std::string item;
+  std::istringstream map_stream(map);
+  while (std::getline(map_stream, item, '/'))
+  {
+    std::istringstream row_stream(item);
+    while (std::getline(row_stream, item, ','))
+    {
+      row.push_back(std::stoi(item));
+    }
+    deserialized_map.push_back(row);
+    row.clear();
+  }
+  return deserialized_map;
 }
