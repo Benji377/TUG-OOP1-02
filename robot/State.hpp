@@ -47,6 +47,7 @@ enum class RobotAction
 
 class State
 {
+  char current_player_;
   std::pair<int, int> current_position_;
   int health_;
   int remaining_action_count_;
@@ -79,6 +80,7 @@ public:
   State() = default;
 
   // Getter and Setter methods
+  void setCurrentPlayer(char current_player) { current_player_ = current_player; };
   void setCurrentPosition(std::pair<int, int> current_position) { current_position_ = current_position; };
   void setHealth(int health) { health_ = health; };
   void setRemainingActionCount(int remaining_action_count) { remaining_action_count_ = remaining_action_count; };
@@ -92,6 +94,7 @@ public:
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
   void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
 
+  char getCurrentPlayer() { return current_player_; };
   std::pair<int, int> getCurrentPosition() { return current_position_; };
   int getHealth() const { return health_; };
   int getRemainingActionCount() const { return remaining_action_count_; };

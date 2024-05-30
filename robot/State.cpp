@@ -4,6 +4,7 @@ State::State(int remaining_actions, std::pair<int, int> position, Player player,
              std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables, std::pair<int, int> door_position)
 {
   // TODO: This constructor may throw an exception if any of the arguments are invalid or null
+  current_player_ = player.getAbbreviation();
   current_position_ = position;
   health_ = player.getHealth();
   remaining_action_count_ = remaining_actions;
@@ -255,6 +256,7 @@ bool State::canSwitchPlayer()
 std::string State::serializeState()
 {
   std::string serialized_state;
+  serialized_state += std::to_string(getCurrentPlayer()) + ";";
   serialized_state += std::to_string(getCurrentPosition().first) + ";" + std::to_string(getCurrentPosition().second) + ";";
   serialized_state += std::to_string(getHealth()) + ";" + std::to_string(getRemainingActionCount()) + ";";
   serialized_state += std::to_string(getDamageOutput()) + ";" + std::to_string(getDamageInput()) + ";";
@@ -274,16 +276,17 @@ void State::deserializeState(std::string state_string)
   // TODO: Test this input
   // Each item is separated by a semicolon
   std::vector<std::string> state_items = Utils::splitString(state_string, ";");
-  setCurrentPosition(std::make_pair(std::stoi(state_items[0]), std::stoi(state_items[1])));
-  setHealth(std::stoi(state_items[2]));
-  setRemainingActionCount(std::stoi(state_items[3]));
-  setDamageOutput(std::stoi(state_items[4]));
-  setDamageInput(std::stoi(state_items[5]));
-  setCanAttackRange(std::stoi(state_items[6]));
-  setCanAttackMelee(std::stoi(state_items[7]));
-  setCanHeal(std::stoi(state_items[8]));
-  setDoorPosition(std::make_pair(std::stoi(state_items[9]), std::stoi(state_items[10])));
-  setEnemies(Utils::deserializeMap(state_items[11]));
-  setPlayer(Utils::deserializeMap(state_items[12]));
-  setLootables(Utils::deserializeMap(state_items[13]));
+  setCurrentPlayer(state_items[0][0]);
+  setCurrentPosition(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[1])));
+  setHealth(std::stoi(state_items[3]));
+  setRemainingActionCount(std::stoi(state_items[4]));
+  setDamageOutput(std::stoi(state_items[5]));
+  setDamageInput(std::stoi(state_items[6]));
+  setCanAttackRange(std::stoi(state_items[7]));
+  setCanAttackMelee(std::stoi(state_items[8]));
+  setCanHeal(std::stoi(state_items[9]));
+  setDoorPosition(std::make_pair(std::stoi(state_items[10]), std::stoi(state_items[11])));
+  setEnemies(Utils::deserializeMap(state_items[12]));
+  setPlayer(Utils::deserializeMap(state_items[13]));
+  setLootables(Utils::deserializeMap(state_items[14]));
 }
