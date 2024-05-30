@@ -253,7 +253,7 @@ bool State::canSwitchPlayer()
   return false;
 }
 
-std::string State::serializeState()
+std::string State::serializeState() const
 {
   std::string serialized_state;
   serialized_state += std::to_string(getCurrentPlayer()) + ";";

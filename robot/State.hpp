@@ -94,8 +94,10 @@ public:
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
   void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
 
-  char getCurrentPlayer() { return current_player_; };
-  std::pair<int, int> getCurrentPosition() { return current_position_; };
+  char getCurrentPlayer() const
+  { return current_player_; };
+  std::pair<int, int> getCurrentPosition() const
+  { return current_position_; };
   int getHealth() const { return health_; };
   int getRemainingActionCount() const { return remaining_action_count_; };
   int getDamageOutput() const { return damage_output_; };
@@ -103,13 +105,17 @@ public:
   bool getCanAttackRange() const { return can_attack_range_; };
   bool getCanAttackMelee() const { return can_attack_melee_; };
   bool getCanHeal() const { return can_heal_; };
-  std::vector<std::vector<int>> getEnemies() { return enemies_; };
-  std::vector<std::vector<int>> getPlayers() { return players_; };
-  std::vector<std::vector<int>> getLootables() { return lootables_; };
-  std::pair<int, int> getDoorPosition() { return door_position_; };
+  std::vector<std::vector<int>> getEnemies() const
+  { return enemies_; };
+  std::vector<std::vector<int>> getPlayers() const
+  { return players_; };
+  std::vector<std::vector<int>> getLootables() const
+  { return lootables_; };
+  std::pair<int, int> getDoorPosition() const
+  { return door_position_; };
   // Methods
   std::set<RobotAction> getPossibleActions(Player player);
-  std::string serializeState();
+  std::string serializeState() const;
   void deserializeState(std::string state_string);
 };
 

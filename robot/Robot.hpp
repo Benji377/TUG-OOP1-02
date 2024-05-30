@@ -27,15 +27,16 @@ class Robot
 {
   State current_state_;
   std::map<std::tuple<State, RobotAction>, double> q_table_;
+  static const std::string q_table_file_path_;
   // TODO: The following numbers will have to be adjusted and tested to find the best values
-  double alpha = 0.1;
-  double gamma = 0.95;
-  double epsilon = 0.9;
-  double epsilon_decay = 0.995;
-  double epsilon_min = 0.01;
+  double alpha_ = 0.1;
+  double gamma_ = 0.95;
+  double epsilon_ = 0.9;
+  double epsilon_decay_ = 0.995;
+  double epsilon_min_ = 0.01;
 
 public:
-  Robot();
+  explicit Robot(State state);
   void saveQTable();
   void loadQTable();
   void updateQTable(State state, RobotAction action, State new_state, double reward);
