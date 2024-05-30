@@ -253,6 +253,22 @@ bool State::canSwitchPlayer()
   return false;
 }
 
+bool State::canUseArmor(Player player)
+{
+  // The robot can use armor if the player has armor in his inventory, and it provides better protection than the current armor
+  if (!player.getInventory()->getAllArmor().empty())
+  {
+    for (const auto& armor : player.getInventory()->getAllArmor())
+    {
+      if (armor->getArmorValue() > player.getArmor()->getArmorValue())
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 std::string State::serializeState() const
 {
   std::string serialized_state;
@@ -289,4 +305,26 @@ void State::deserializeState(std::string state_string)
   setEnemies(Utils::deserializeMap(state_items[12]));
   setPlayers(Utils::deserializeMap(state_items[13]));
   setLootables(Utils::deserializeMap(state_items[14]));
+}
+
+bool State::operator==(const State& other) const
+{
+  return current_player_ == other.current_player_ &&
+         current_position_ == other.current_position_ &&
+         health_ == other.health_ &&
+         remaining_action_count_ == other.remaining_action_count_ &&
+         damage_output_ == other.damage_output_ &&
+         damage_input_ == other.damage_input_ &&
+         enemies_ == other.enemies_ &&
+         players_ == other.players_ &&
+         lootables_ == other.lootables_ &&
+         door_position_ == other.door_position_ &&
+         can_attack_range_ == other.can_attack_range_ &&
+         can_attack_melee_ == other.can_attack_melee_ &&
+         can_heal_ == other.can_heal_;
+}
+
+bool State::operator<(const State& other) const
+{
+  return serializeState() < other.serializeState();
 }

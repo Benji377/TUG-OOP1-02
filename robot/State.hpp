@@ -41,6 +41,7 @@ enum class RobotAction
   ATTACK, // Attacks the nearest enemy
   USE_RANGED, // Uses a ranged weapon
   USE_MELEE, // Uses a melee weapon
+  USE_ARMOR, // Uses an armor item. Only available if it has a better armor than the current one
   SWITCH_PLAYER, // Switches to the next player W -> B -> R
 };
 
@@ -74,6 +75,7 @@ class State
   bool canUseRanged(Player player);
   bool canUseMelee(Player player);
   bool canSwitchPlayer();
+  bool canUseArmor(Player player);
 
 public:
   State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
@@ -118,6 +120,10 @@ public:
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState() const;
   void deserializeState(std::string state_string);
+
+  // Overloading some important operators
+  bool operator==(const State& state) const;
+  bool operator<(const State& state) const;
 };
 
 
