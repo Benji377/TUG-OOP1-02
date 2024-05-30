@@ -253,6 +253,22 @@ bool State::canSwitchPlayer()
   return false;
 }
 
+bool State::canUseArmor(Player player)
+{
+  // The robot can use armor if the player has armor in his inventory, and it provides better protection than the current armor
+  if (!player.getInventory()->getAllArmor().empty())
+  {
+    for (const auto& armor : player.getInventory()->getAllArmor())
+    {
+      if (armor->getArmorValue() > player.getArmor()->getArmorValue())
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 std::string State::serializeState() const
 {
   std::string serialized_state;

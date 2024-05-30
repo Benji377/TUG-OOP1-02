@@ -127,6 +127,9 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
     case RobotAction::SWITCH_PLAYER:
       reward = performAction.perform_switch_player(current_state_.getCurrentPlayer(), players);
       break;
+    case RobotAction::USE_ARMOR:
+      reward = performAction.perform_use_armor(player);
+      break;
     default:
       std::cerr << "Invalid action: " << static_cast<int>(action) << std::endl;
       break;
@@ -136,4 +139,19 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
   State new_state = current_state_; // Assuming the state has been updated after performing the action
   updateQTable(current_state_, action, new_state, player, reward);
   current_state_ = new_state;
+}
+
+double Robot::getMaximumQValue(State state, Player player)
+{
+  std::set<RobotAction> possible_actions = state.getPossibleActions(player);
+  double max_q_value = -std::numeric_limits<double>::infinity();
+
+  for (const RobotAction& action : possible_actions) {
+    double q_value = q_table_[std::make_tuple(state, action)];
+    if (q_value > max_q_value) {
+      max_q_value = q_value;
+    }
+  }
+
+  return max_q_value;
 }

@@ -172,3 +172,18 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
   // If the player is not found, return a big negative number
   return -100.0;
 }
+
+double PerformAction::perform_use_armor(Player player)
+{
+  // Get the best armor from the player's inventory
+  if (!player.getInventory()->getAllArmor().empty()) {
+    for (const auto &armor : player.getInventory()->getAllArmor()) {
+      if (armor->getArmorValue() > player.getArmor()->getArmorValue()) {
+        // TODO Replace with actual command to use armor
+        std::cout << "Robot equipped armor" << std::endl;
+        return 1.0;
+      }
+    }
+  }
+  return -10.0;
+}

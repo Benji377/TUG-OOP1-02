@@ -17,6 +17,7 @@ public:
   double perform_use_ranged(Player player);
   double perform_use_melee(Player player);
   double perform_switch_player(char current_player, std::vector<Player> players);
+  double perform_use_armor(Player player);
 };
 
 
