@@ -40,7 +40,7 @@ double PerformAction::perform_loot(std::pair<int, int> player_position, std::vec
     int new_y = player_position.second + offset.second;
 
     // Check if the new position is within the bounds of the lootables vector
-    if (new_x >= 0 && new_x < lootables.size() && new_y >= 0 && new_y < lootables[0].size()) {
+    if (new_x >= 0 && new_x < static_cast<int>(lootables.size()) && new_y >= 0 && new_y < static_cast<int>(lootables[0].size())) {
       if (lootables[new_y][new_x] == 1) {
         // TODO Replace with actual command to loot the player
         std::cout << "Robot looted at: (" << new_x << ", " << new_y << ")" << std::endl;
@@ -55,6 +55,14 @@ double PerformAction::perform_loot(std::pair<int, int> player_position, std::vec
 
 double PerformAction::perform_regeneration(Player player)
 {
+  // If the player has lost more than 10% of its health, provide a big reward
+  if (player.getHealth() < player.getMaximumHealth() * 0.9)
+  {
+    // TODO Replace with actual command to regenerate the player
+    std::cout << "Robot used health potion" << std::endl;
+    return 10.0;
+  }
+
   // TODO Replace with actual command to regenerate the player
   std::cout << "Robot used health potion" << std::endl;
   return 1.0;
@@ -72,11 +80,17 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
 
   if (resistanceTypes.count(action))
   {
+    // If the player has lost more than 10% of its health, provide a big reward
+    if (player.getHealth() < player.getMaximumHealth() * 0.9)
+    {
+      // TODO Replace with actual command to regenerate the player
+      std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
+      return 10.0;
+    }
     // TODO Replace with actual command to set resistance
     std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
     return 1.0;
   }
-
   // If the action is not a resistance action, return a big negative number
   return -100.0;
 }
@@ -103,7 +117,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
       int new_y = player_position.second + offset.second;
 
       // Check if the new position is within the bounds of the enemies vector
-      if (new_x >= 0 && new_x < enemies.size() && new_y >= 0 && new_y < enemies[0].size())
+      if (new_x >= 0 && new_x < static_cast<int>(enemies.size()) && new_y >= 0 && new_y < static_cast<int>(enemies[0].size()))
       {
         if (enemies[new_y][new_x] > 0)
         {
@@ -115,9 +129,9 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
     }
   } else {
     // If the player has a ranged weapon, check if there is an enemy in range
-    for (int i = 0; i < enemies.size(); i++)
+    for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
-      for (int j = 0; j < enemies[0].size(); j++)
+      for (int j = 0; j < static_cast<int>(enemies[0].size()); j++)
       {
         if (enemies[i][j] > 0)
         {
@@ -133,14 +147,14 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   return -100.0;
 }
 
-double PerformAction::perform_use_ranged(Player player)
+double PerformAction::perform_use_ranged()
 {
   // TODO Replace with actual command to use ranged weapon
   std::cout << "Robot equipped ranged weapon" << std::endl;
   return 1.0;
 }
 
-double PerformAction::perform_use_melee(Player player)
+double PerformAction::perform_use_melee()
 {
   // TODO Replace with actual command to use melee weapon
   std::cout << "Robot equipped melee weapon" << std::endl;
@@ -151,7 +165,7 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
 {
   // Find the index of the current player
   int current_player_index = -1;
-  for (int i = 0; i < players.size(); i++)
+  for (int i = 0; i < static_cast<int>(players.size()); i++)
   {
     if (players[i].getAbbreviation() == current_player)
     {

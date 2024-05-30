@@ -23,7 +23,7 @@ void Robot::saveQTable()
     RobotAction action = std::get<1>(state_action);
     double q_value = entry.second;
 
-    file << getCurrentState().serializeState() << "," << static_cast<int>(action) << "," << q_value << ";";
+    file << state.serializeState() << "," << static_cast<int>(action) << "," << q_value << ";";
   }
 
   file.close();
@@ -31,6 +31,12 @@ void Robot::saveQTable()
 
 void Robot::loadQTable()
 {
+  std::ifstream file(q_table_file_path_);
+  if (!file.is_open()) {
+    std::cerr << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
+    // No need to initialize Q-table here as it will be done on-the-fly
+    return;
+  }
   std::vector<std::vector<std::string>> q_table_data = CSVParser::readCSV(q_table_file_path_);
 
   for (const auto& row : q_table_data) {
@@ -119,10 +125,10 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
       reward = performAction.perform_attack(player, current_state_.getCurrentPosition(), current_state_.getEnemies());
       break;
     case RobotAction::USE_RANGED:
-      reward = performAction.perform_use_ranged(player);
+      reward = performAction.perform_use_ranged();
       break;
     case RobotAction::USE_MELEE:
-      reward = performAction.perform_use_melee(player);
+      reward = performAction.perform_use_melee();
       break;
     case RobotAction::SWITCH_PLAYER:
       reward = performAction.perform_switch_player(current_state_.getCurrentPlayer(), players);
