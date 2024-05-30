@@ -22,7 +22,6 @@
 #include <sstream>
 #include "State.hpp"
 
-// TODO: We might also put some helper methods in a RobotHelper class in the same folder to organize the code better
 class Robot
 {
   State current_state_;
@@ -43,8 +42,8 @@ public:
   RobotAction getBestAction(State state);
   void executeAction(RobotAction action);
   double getMaximumQValue(State state);
-  State getCurrentState();
-  void setCurrentState(State state);
+  State getCurrentState() const { return current_state_; };
+  void setCurrentState(State state) { current_state_ = state; };
 
 };
 

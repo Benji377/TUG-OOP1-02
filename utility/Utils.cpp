@@ -142,7 +142,7 @@ std::string Utils::serializeMap(std::vector<std::vector<int>> map)
   {
     for (const auto &item : row)
     {
-      serialized_map += std::to_string(item) + ",";
+      serialized_map += std::to_string(item) + " ";
     }
     serialized_map.pop_back();
     serialized_map += "/";
@@ -161,7 +161,7 @@ std::vector<std::vector<int>> Utils::deserializeMap(std::string map)
   while (std::getline(map_stream, item, '/'))
   {
     std::istringstream row_stream(item);
-    while (std::getline(row_stream, item, ','))
+    while (std::getline(row_stream, item, ' '))
     {
       row.push_back(std::stoi(item));
     }

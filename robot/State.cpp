@@ -256,15 +256,15 @@ bool State::canSwitchPlayer()
 std::string State::serializeState() const
 {
   std::string serialized_state;
-  serialized_state += std::to_string(getCurrentPlayer()) + ";";
-  serialized_state += std::to_string(getCurrentPosition().first) + ";" + std::to_string(getCurrentPosition().second) + ";";
-  serialized_state += std::to_string(getHealth()) + ";" + std::to_string(getRemainingActionCount()) + ";";
-  serialized_state += std::to_string(getDamageOutput()) + ";" + std::to_string(getDamageInput()) + ";";
-  serialized_state += std::to_string(getCanAttackRange()) + ";" + std::to_string(getCanAttackMelee()) + ";";
-  serialized_state += std::to_string(getCanHeal()) + ";";
-  serialized_state += std::to_string(getDoorPosition().first) + ";" + std::to_string(getDoorPosition().second) + ";";
-  serialized_state += Utils::serializeMap(getEnemies()) + ";";
-  serialized_state += Utils::serializeMap(getPlayers()) + ";";
+  serialized_state += std::to_string(getCurrentPlayer()) + "|";
+  serialized_state += std::to_string(getCurrentPosition().first) + "|" + std::to_string(getCurrentPosition().second) + "|";
+  serialized_state += std::to_string(getHealth()) + "|" + std::to_string(getRemainingActionCount()) + "|";
+  serialized_state += std::to_string(getDamageOutput()) + "|" + std::to_string(getDamageInput()) + "|";
+  serialized_state += std::to_string(getCanAttackRange()) + "|" + std::to_string(getCanAttackMelee()) + "|";
+  serialized_state += std::to_string(getCanHeal()) + "|";
+  serialized_state += std::to_string(getDoorPosition().first) + "|" + std::to_string(getDoorPosition().second) + "|";
+  serialized_state += Utils::serializeMap(getEnemies()) + "|";
+  serialized_state += Utils::serializeMap(getPlayers()) + "|";
   serialized_state += Utils::serializeMap(getLootables());
   // TODO: Test this output and remove once it's working
   std::cout << "Serialized state: " << serialized_state << std::endl;
@@ -274,8 +274,8 @@ std::string State::serializeState() const
 void State::deserializeState(std::string state_string)
 {
   // TODO: Test this input
-  // Each item is separated by a semicolon
-  std::vector<std::string> state_items = Utils::splitString(state_string, ";");
+  // Each item is separated by a pipe
+  std::vector<std::string> state_items = Utils::splitString(state_string, "|");
   setCurrentPlayer(state_items[0][0]);
   setCurrentPosition(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[1])));
   setHealth(std::stoi(state_items[3]));
