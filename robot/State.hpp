@@ -19,7 +19,7 @@
 #include <set>
 #include "../entity/character/Player.hpp"
 
-// TODO: Specify the Actions in more detail, to make each decision more precise and easier to handle
+
 // PS: Not all actions are possible at all times, so we will have to filter them and only allow the ones
 // that are possible in the current state. This will be done in the Robot class.
 enum class RobotAction
@@ -73,6 +73,7 @@ class State
   bool canSwitchPlayer();
 
 public:
+  // TODO: Define proper constructor
   State() = default;
 
   // Getter and Setter methods
@@ -90,19 +91,18 @@ public:
   void setDoorPosition(int x, int y) { door_pos_x_ = x; door_pos_y_ = y; };
 
   std::pair<int, int> getCurrentPosition() { return current_position_; };
-  int getHealth() { return health_; };
-  int getRemainingActionCount() { return remaining_action_count_; };
-  int getDamageOutput() { return damage_output_; };
-  int getDamageInput() { return damage_input_; };
-  bool getCanAttackRange() { return can_attack_range_; };
-  bool getCanAttackMelee() { return can_attack_melee_; };
-  bool getCanHeal() { return can_heal_; };
+  int getHealth() const { return health_; };
+  int getRemainingActionCount() const { return remaining_action_count_; };
+  int getDamageOutput() const { return damage_output_; };
+  int getDamageInput() const { return damage_input_; };
+  bool getCanAttackRange() const { return can_attack_range_; };
+  bool getCanAttackMelee() const { return can_attack_melee_; };
+  bool getCanHeal() const { return can_heal_; };
   std::vector<std::vector<int>> getEnemies() { return enemies_; };
   std::vector<std::vector<int>> getPlayers() { return players_; };
   std::vector<std::vector<int>> getLootables() { return lootables_; };
   std::pair<int, int> getDoorPosition() { return std::make_pair(door_pos_x_, door_pos_y_); };
-
-  // Methods to update the state
+  // Methods
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState();
   void deserializeState(std::string state_string);

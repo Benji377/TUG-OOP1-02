@@ -1,5 +1,6 @@
 #include "State.hpp"
 
+// Returns the possible actions that the robot can take in the current state
 std::set<RobotAction> State::getPossibleActions(Player player)
 {
   // We use a std::set to avoid duplicates
@@ -53,7 +54,8 @@ std::set<RobotAction> State::getPossibleMoves()
   for (const auto& move : moves) {
     int new_x = getCurrentPosition().first + move.second.first;
     int new_y = getCurrentPosition().second + move.second.second;
-    if (new_x >= 0 && new_x < getEnemies().size() && new_y >= 0 && new_y < getEnemies()[0].size() &&
+    if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
+        && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
         getEnemies()[new_x][new_y] == 0) {
       possible_moves.insert(move.first);
     }
@@ -69,7 +71,8 @@ bool State::canLoot() {
     for (int j = -1; j <= 1; j++) {
       int new_x = getCurrentPosition().first + i;
       int new_y = getCurrentPosition().second + j;
-      if (new_x >= 0 && new_x < getLootables().size() && new_y >= 0 && new_y < getLootables()[0].size() &&
+      if (new_x >= 0 && new_x < static_cast<int>(getLootables().size())
+          && new_y >= 0 && new_y < static_cast<int>(getLootables()[0].size()) &&
           getLootables()[new_x][new_y] == 1) {
         return true;
       }
@@ -93,6 +96,7 @@ bool State::canRegenerate(Player player)
 
 std::set<RobotAction> State::getPossibleResistances(Player player)
 {
+  // We simply map the effect of each potion to the corresponding resistance action
   std::set<RobotAction> possible_resistances;
   std::map<Effect, RobotAction> effectToAction = {
           {Effect::FIRE, RobotAction::SET_RES_FIRE},
@@ -100,7 +104,8 @@ std::set<RobotAction> State::getPossibleResistances(Player player)
           {Effect::FORCE, RobotAction::SET_RES_FORCE},
           {Effect::ACID, RobotAction::SET_RES_ACID}
   };
-
+  // We iterate over the player's potions and add the corresponding resistance action to the set
+  // if the potion's effect is in the effectToAction map
   for (const auto& potion : player.getInventory()->getAllPotions()) {
     if (effectToAction.count(potion->getEffect())) {
       possible_resistances.insert(effectToAction[potion->getEffect()]);
@@ -112,6 +117,8 @@ std::set<RobotAction> State::getPossibleResistances(Player player)
 
 bool State::canAttack(Player player)
 {
+  // To attack, there must be at least one enemy in the room, and depending on the player's weapon,
+  // the player must be able to attack adjacent enemies or enemies from a distance
   if (hasEnemies() && (canAttackAdjacent(player) || canAttackAnywhere(player))) {
     return true;
   }
@@ -120,6 +127,7 @@ bool State::canAttack(Player player)
 
 bool State::hasEnemies()
 {
+  // Check if there are any enemies left in the room
   for (const auto& row : getEnemies()) {
     if (std::any_of(row.begin(), row.end(), [](int cell) { return cell > 0; })) {
       return true;
@@ -130,12 +138,14 @@ bool State::hasEnemies()
 
 bool State::canAttackAdjacent(Player player)
 {
+  // Check if there is an enemy in any of the 8 adjacent positions, only for melee weapons
   if (player.getWeapon()->getAttackType() == AttackType::MELEE) {
     for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
         int new_x = getCurrentPosition().first + i;
         int new_y = getCurrentPosition().second + j;
-        if (new_x >= 0 && new_x < getEnemies().size() && new_y >= 0 && new_y < getEnemies()[0].size() &&
+        if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
+            && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
             getEnemies()[new_x][new_y] > 0) {
           return true;
         }
@@ -147,6 +157,7 @@ bool State::canAttackAdjacent(Player player)
 
 bool State::canAttackAnywhere(Player player)
 {
+  // Check if the player has the required ammunition for the ranged weapon, or a weapon that doesn't require ammunition
   if (player.getWeapon()->getAttackType() == AttackType::RANGED) {
     if (player.getWeapon()->getAbbreviation().find('Q') != std::string::npos) {
       return true;
@@ -200,8 +211,8 @@ bool State::canUseMelee(Player player)
 bool State::canSwitchPlayer()
 {
   // The robot can switch player if there are more than one player in the game
-  for (int i = 0; i < getPlayers().size(); i++) {
-    for (int j = 0; j < getPlayers()[i].size(); j++) {
+  for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
+    for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {
       // Skip the current player's position
       if (i == getCurrentPosition().first && j == getCurrentPosition().second) {
         continue;
@@ -226,11 +237,14 @@ std::string State::serializeState()
   serialized_state += Utils::serializeMap(getEnemies()) + ";";
   serialized_state += Utils::serializeMap(getPlayers()) + ";";
   serialized_state += Utils::serializeMap(getLootables());
+  // TODO: Test this output and remove once it's working
+  std::cout << "Serialized state: " << serialized_state << std::endl;
   return serialized_state;
 }
 
 void State::deserializeState(std::string state_string)
 {
+  // TODO: Test this input
   // Each item is separated by a semicolon
   std::vector<std::string> state_items = Utils::splitString(state_string, ";");
   setCurrentPosition(std::make_pair(std::stoi(state_items[0]), std::stoi(state_items[1])));
