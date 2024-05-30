@@ -117,6 +117,10 @@ public:
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState() const;
   void deserializeState(std::string state_string);
+
+  // Overloading some important operators
+  bool operator==(const State& state) const;
+  bool operator<(const State& state) const;
 };
 
 

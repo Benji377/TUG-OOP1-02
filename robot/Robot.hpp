@@ -38,10 +38,10 @@ public:
   explicit Robot(State state);
   void saveQTable();
   void loadQTable();
-  void updateQTable(State state, RobotAction action, State new_state, double reward);
-  RobotAction getBestAction(State state);
-  void executeAction(RobotAction action);
-  double getMaximumQValue(State state);
+  void updateQTable(State state, RobotAction action, State new_state, Player player, double reward);
+  RobotAction getBestAction(State state, Player player);
+  void executeAction(RobotAction action, Player player, std::vector<Player> players);
+  double getMaximumQValue(State state, Player player);
   State getCurrentState() const { return current_state_; };
   void setCurrentState(State state) { current_state_ = state; };
 
