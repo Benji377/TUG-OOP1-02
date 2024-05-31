@@ -1,9 +1,10 @@
 #include "AttackedField.hpp"
 
-void AttackedField::setCharacter(string name, int lost_health, int total_damage, int resistance_modifier,
-                                 int armor_value, bool is_dead)
+void AttackedField::setCharacter(string name, CharacterType character_type, int lost_health, int total_damage,
+                                  int resistance_modifier, int armor_value, bool is_dead)
 {
   contains_character_ = true;
+  character_type_ = character_type;
   character_name_ = name;
   lost_health_ = lost_health;
   total_damage_ = total_damage;
@@ -12,10 +13,11 @@ void AttackedField::setCharacter(string name, int lost_health, int total_damage,
   is_dead_ = is_dead;
 }
 
-void AttackedField::setCharacterWithoutName(int lost_health, int total_damage, int resistance_modifier, int armor_value,
-                                            bool is_dead)
+void AttackedField::setCharacterWithoutName(CharacterType character_type, int lost_health, int total_damage,
+                                            int resistance_modifier, int armor_value, bool is_dead)
 {
   contains_character_ = true;
+  character_type_ = character_type;
   lost_health_ = lost_health;
   total_damage_ = total_damage;
   resistance_modifier_ = resistance_modifier;

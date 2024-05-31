@@ -242,7 +242,22 @@ vector<AttackedField> Dungeon::characterAttack(shared_ptr<Character> attacker, i
               armor_value = 4 + std::min(target->getVitality(), 2);
             }
           }
-          attacked_field.setCharacterWithoutName(lost_health, damage,
+          shared_ptr<Player> target_player = dynamic_pointer_cast<Player>(target);
+          shared_ptr<Enemy> target_enemy = dynamic_pointer_cast<Enemy>(target);
+          CharacterType character_type;
+          if (target_player != nullptr)
+          {
+            character_type = CharacterType::PLAYER;
+          }
+          else if (target_enemy != nullptr)
+          {
+            character_type = CharacterType::ENEMY;
+          }
+          else
+          {
+            character_type = CharacterType::NONE;
+          }
+          attacked_field.setCharacterWithoutName(character_type, lost_health, damage,
                                                  target->getResistantTo() == damage_type ? 50 : 100, armor_value,
                                                  target->isDead());
           shared_ptr<Player> attacked_player = dynamic_pointer_cast<Player>(target);

@@ -19,10 +19,18 @@
 using std::pair;
 using std::string;
 
+enum class CharacterType
+{
+  NONE,
+  PLAYER,
+  ENEMY
+};
+
 class AttackedField
 {
   private:
     bool contains_character_;
+    CharacterType character_type_;
     pair<int, int> position_;
     string character_name_;
     int lost_health_;
@@ -86,8 +94,8 @@ class AttackedField
     /// @param armor_value the armor value of the character
     /// @param is_dead whether the character is dead
     //
-    void setCharacter(string name, int lost_health, int total_damage, int resistance_modifier, int armor_value,
-      bool is_dead);
+    void setCharacter(string name, CharacterType character_type, int lost_health, int total_damage,
+      int resistance_modifier, int armor_value, bool is_dead);
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Sets the character without a name on the AttackedField with the given parameters
@@ -98,8 +106,8 @@ class AttackedField
     /// @param armor_value the armor value of the character
     /// @param is_dead whether the character is dead
     //
-    void setCharacterWithoutName(int lost_health, int total_damage, int resistance_modifier, int armor_value,
-      bool is_dead);
+    void setCharacterWithoutName(CharacterType character_type, int lost_health, int total_damage,
+      int resistance_modifier, int armor_value, bool is_dead);
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Friend function to overload the << operator for the AttackedField class
