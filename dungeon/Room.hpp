@@ -166,6 +166,17 @@ class Room
     }
     //------------------------------------------------------------------------------------------------------------------
     ///
+    /// Returns a integer map of the room with the health of the enemies on their respective positions
+    ///
+    /// @return A 2D vector containing the health of the enemies on their respective positions
+    //
+    vector<vector<int>> getEnemieMap() const;
+
+    vector<vector<int>> getPlayerMap() const;
+
+    vector<vector<int>> getLootableMap() const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
     /// Returns whether two fields are adjacent to each other
     ///
     /// @param field_1 the first field
