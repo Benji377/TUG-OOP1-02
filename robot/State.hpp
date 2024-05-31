@@ -41,6 +41,7 @@ enum class RobotAction
   ATTACK, // Attacks the nearest enemy
   USE_RANGED, // Uses a ranged weapon
   USE_MELEE, // Uses a melee weapon
+  USE_ARMOR, // Uses an armor item. Only available if it has a better armor than the current one
   SWITCH_PLAYER, // Switches to the next player W -> B -> R
 };
 
@@ -61,6 +62,7 @@ class State
   bool can_attack_range_; // If the robot can attack from a distance
   bool can_attack_melee_; // If the robot can attack in melee
   bool can_heal_; // If the robot can heal itself
+
   // Methods
   std::set<RobotAction> getPossibleMoves();
   bool canLoot();
@@ -73,6 +75,7 @@ class State
   bool canUseRanged(Player player);
   bool canUseMelee(Player player);
   bool canSwitchPlayer();
+  bool canUseArmor(Player player);
 
 public:
   State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
@@ -90,7 +93,7 @@ public:
   void setCanAttackMelee(bool can_attack_melee) { can_attack_melee_ = can_attack_melee; };
   void setCanHeal(bool can_heal) { can_heal_ = can_heal; };
   void setEnemies(std::vector<std::vector<int>> enemies) { enemies_ = enemies; };
-  void setPlayer(std::vector<std::vector<int>> players) { players_ = players; };
+  void setPlayers(std::vector<std::vector<int>> players) { players_ = players; };
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
   void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
 

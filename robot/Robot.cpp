@@ -23,7 +23,7 @@ void Robot::saveQTable()
     RobotAction action = std::get<1>(state_action);
     double q_value = entry.second;
 
-    file << getCurrentState().serializeState() << "," << static_cast<int>(action) << "," << q_value << ";";
+    file << state.serializeState() << "," << static_cast<int>(action) << "," << q_value << ";";
   }
 
   file.close();
@@ -31,6 +31,12 @@ void Robot::saveQTable()
 
 void Robot::loadQTable()
 {
+  std::ifstream file(q_table_file_path_);
+  if (!file.is_open()) {
+    std::cerr << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
+    // No need to initialize Q-table here as it will be done on-the-fly
+    return;
+  }
   std::vector<std::vector<std::string>> q_table_data = CSVParser::readCSV(q_table_file_path_);
 
   for (const auto& row : q_table_data) {
@@ -119,13 +125,16 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
       reward = performAction.perform_attack(player, current_state_.getCurrentPosition(), current_state_.getEnemies());
       break;
     case RobotAction::USE_RANGED:
-      reward = performAction.perform_use_ranged(player);
+      reward = performAction.perform_use_ranged();
       break;
     case RobotAction::USE_MELEE:
-      reward = performAction.perform_use_melee(player);
+      reward = performAction.perform_use_melee();
       break;
     case RobotAction::SWITCH_PLAYER:
       reward = performAction.perform_switch_player(current_state_.getCurrentPlayer(), players);
+      break;
+    case RobotAction::USE_ARMOR:
+      reward = performAction.perform_use_armor(player);
       break;
     default:
       std::cerr << "Invalid action: " << static_cast<int>(action) << std::endl;
@@ -136,4 +145,19 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
   State new_state = current_state_; // Assuming the state has been updated after performing the action
   updateQTable(current_state_, action, new_state, player, reward);
   current_state_ = new_state;
+}
+
+double Robot::getMaximumQValue(State state, Player player)
+{
+  std::set<RobotAction> possible_actions = state.getPossibleActions(player);
+  double max_q_value = -std::numeric_limits<double>::infinity();
+
+  for (const RobotAction& action : possible_actions) {
+    double q_value = q_table_[std::make_tuple(state, action)];
+    if (q_value > max_q_value) {
+      max_q_value = q_value;
+    }
+  }
+
+  return max_q_value;
 }

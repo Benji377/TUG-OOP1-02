@@ -19,6 +19,9 @@
 #include "../entity/character/Player.hpp"
 #include "../entity/character/Enemy.hpp"
 
+#include "../robot/State.hpp"
+#include "../robot/Robot.hpp"
+
 using std::vector;
 using std::shared_ptr;
 
@@ -47,6 +50,8 @@ class Game
     bool is_running_ = true;
     bool map_output_active_ = true;
     bool story_output_active_ = true;
+    std::shared_ptr<State> state_;
+    std::shared_ptr<Robot> robot_;
 
   public:
     //------------------------------------------------------------------------------------------------------------------
@@ -232,6 +237,12 @@ class Game
     /// Executes the enemy phase
     //
     void enemyPhase();
+
+
+
+
+    shared_ptr<State> getState() { return state_;};
+    shared_ptr<Robot> getRobot() { return robot_;};
 };
 
 #endif //GAME_HPP

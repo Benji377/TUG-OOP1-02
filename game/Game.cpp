@@ -27,7 +27,6 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
 
   parser_->registerCommand("play", make_unique<PlayCommand>(this));
   parser_->registerCommand("whoami", make_unique<WhoamiCommand>());
-
 }
 
 void Game::start()
@@ -111,6 +110,11 @@ void Game::start()
   cout << endl;
   dungeon_.enterCurrentRoom(0, players_);
   printStoryAndRoom();
+
+  //TODO make better, this is just for testing
+  state_ = std::make_shared<State>(max_players_, std::make_pair<int,int>(0,0), *(players_.at(0)), getCurrentRoom()->getEntitiesAsInt<Enemy>(),
+    getCurrentRoom()->getEntitiesAsInt<Player>(), getCurrentRoom()->getEntitiesAsInt<Player>(), std::make_pair(0,0));
+  robot_ = std::make_shared<Robot>(*state_);
 }
 
 void Game::step()
@@ -216,12 +220,58 @@ void Game::doCommand(string input)
 {
   vector<string> command_input = InputOutput::commandifyString(input);
 
-  try
+  bool command_finished = false;
+
+  while (!command_finished)
   {
-    parser_->execute(command_input);
-  } catch (const std::exception &e)
-  {
-    cout << e.what() << '\n';
+    try
+    {
+      parser_->execute(command_input);
+    }
+    catch (const UnknownCommand &e)
+    {
+      cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
+      continue;
+    }
+    catch (const WrongNumberOfParametersException &e)
+    {
+      cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
+      continue;
+    }
+    catch (const InvalidParamCommand &e)
+    {
+      cout << Game::story_.getStorySegment("E_INVALID_PARAM");
+      continue;
+    }
+    catch (const UnavailableItemOrEntityCommand &e)
+    {
+      cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+      continue;
+    }
+    catch (const InvalidPositionCommand &e)
+    {
+      cout << Game::story_.getStorySegment("E_INVALID_POSITION");
+      continue;
+    }
+    catch (const CommandExecutionException &e)
+    {
+      switch (e.getType())
+      {
+        case CommandExecutionException::ExceptionType::LOCKED_DOOR:
+          cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
+          break;
+        case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
+          cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
+          break;
+        case CommandExecutionException::ExceptionType::NO_AMMUNITION:
+          cout << Game::story_.getStorySegment("E_ATTACK_NO_AMMUNITION");
+        default:
+          break;
+      }
+      continue;
+    }
+
+    command_finished = true;
   }
 }
 

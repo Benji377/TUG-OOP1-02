@@ -39,7 +39,7 @@ public:
   void saveQTable();
   void loadQTable();
   void updateQTable(State state, RobotAction action, State new_state, Player player, double reward);
-  RobotAction getBestAction(State state, Player player);
+  RobotAction getBestAction(State state, Player player); //TODO doesn't this already have current_state_?
   void executeAction(RobotAction action, Player player, std::vector<Player> players);
   double getMaximumQValue(State state, Player player);
   State getCurrentState() const { return current_state_; };
