@@ -253,36 +253,6 @@ void Room::printRoom()
     cout << endl;
     printSeparationLine();
   }
-  vector<vector<int>> enemy_map = getEnemieMap();
-  vector<vector<int>> player_map = getPlayerMap();
-  vector<vector<int>> lootable_map = getLootableMap();
-  cout << "Enemies: ";
-  for (const auto &row : enemy_map)
-  {
-    for (const auto &enemy : row)
-    {
-      cout << enemy << " ";
-    }
-    cout << endl;
-  }
-  cout << "Players: ";
-  for (const auto &row : player_map)
-  {
-    for (const auto &player : row)
-    {
-      cout << player << " ";
-    }
-    cout << endl;
-  }
-  cout << "Lootable: ";
-  for (const auto &row : lootable_map)
-  {
-    for (const auto &lootable : row)
-    {
-      cout << lootable << " ";
-    }
-    cout << endl;
-  }
 }
 
 void Room::checkCompletion()
@@ -320,67 +290,7 @@ void Room::openDoors()
   }
 }
 
-vector<vector<int>> Room::getEnemieMap() const
-{
-  vector<vector<int>> enemy_map;
-  for (const auto &row : fields_)
-  {
-    vector<int> enemy_row;
-    for (const auto &field : row)
-    {
-      if (field->getEntity() != nullptr)
-      {
-        shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(field->getEntity());
-        if (enemy != nullptr)
-        {
-          enemy_row.push_back(enemy->getHealth());
-        }
-        else
-        {
-          enemy_row.push_back(0);
-        }
-      }
-      else
-      {
-        enemy_row.push_back(0);
-      }
-    }
-    enemy_map.push_back(enemy_row);
-  }
-  return enemy_map;
-}
-
-vector<vector<int>> Room::getPlayerMap() const
-{
-  vector<vector<int>> player_map;
-  for (const auto &row : fields_)
-  {
-    vector<int> player_row;
-    for (const auto &field : row)
-    {
-      if (field->getEntity() != nullptr)
-      {
-        shared_ptr<Player> player = dynamic_pointer_cast<Player>(field->getEntity());
-        if (player != nullptr)
-        {
-          player_row.push_back(player->getHealth());
-        }
-        else
-        {
-          player_row.push_back(0);
-        }
-      }
-      else
-      {
-        player_row.push_back(0);
-      }
-    }
-    player_map.push_back(player_row);
-  }
-  return player_map;
-}
-
-vector<vector<int>> Room::getLootableMap() const
+vector<vector<int>> Room::getLootableAsInt() const
 {
   vector<vector<int>> lootable_map;
   for (const auto &row : fields_)

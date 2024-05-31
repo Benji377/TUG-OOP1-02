@@ -31,8 +31,9 @@ void PlayCommand::updateState(shared_ptr<State> state)
       break;
     }
   }
-  state->setEnemies(game_->getCurrentRoom()->getEntitiesAsInt<Enemy>());
-  state->setPlayers(game_->getCurrentRoom()->getEntitiesAsInt<Player>());
+  state->setEnemies(game_->getCurrentRoom()->getCharacterAsInt<Enemy>());
+  state->setPlayers(game_->getCurrentRoom()->getCharacterAsInt<Player>());
+  state->setLootables(game_->getCurrentRoom()->getLootableAsInt());
   //TODO implement setter for Doors, DeathLocations and Chests
 }
 

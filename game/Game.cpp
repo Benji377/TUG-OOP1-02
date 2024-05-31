@@ -112,8 +112,8 @@ void Game::start()
   printStoryAndRoom();
 
   //TODO make better, this is just for testing
-  state_ = std::make_shared<State>(max_players_, std::make_pair<int,int>(0,0), *(players_.at(0)), getCurrentRoom()->getEntitiesAsInt<Enemy>(),
-    getCurrentRoom()->getEntitiesAsInt<Player>(), getCurrentRoom()->getEntitiesAsInt<Player>(), std::make_pair(0,0));
+  state_ = std::make_shared<State>(max_players_, std::make_pair<int,int>(0,0), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
+    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), std::make_pair(0,0));
   robot_ = std::make_shared<Robot>(*state_);
 }
 
