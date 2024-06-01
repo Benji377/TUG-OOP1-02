@@ -25,14 +25,13 @@ double PerformAction::perform_move(Player player, std::pair<int, int> player_pos
             + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
     std::cout << command;
     game_->doCommand(command);
-    std::cout << "Robot moved to: (" << new_x << ", " << new_y << ")" << std::endl;
     // Check if the robot moved to the exit door and there are no enemies left
-    if (new_x == exit_door_position.first && new_y == exit_door_position.second && enemies_left == 0)
+    if (new_y == exit_door_position.first && new_x == exit_door_position.second && enemies_left == 0)
     {
       return 100.0;
     }
     // Check if the robot moved to the entry door
-    if (new_x == entry_door_position.first && new_y == entry_door_position.second)
+    if (new_y == entry_door_position.first && new_x == entry_door_position.second)
     {
       return -50.0;
     }
@@ -157,6 +156,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   // TODO: Add a big reward if the enemy is killed
   if (player.getWeapon()->getAttackType() == AttackType::MELEE)
   {
+    std::cout << "[DEBUG] Robot has a melee weapon in attack perform" << std::endl;
     // Define the offsets for the surrounding cells
     std::vector<std::pair<int, int>> offsets = {{0,  0},
                                                 {-1, 0},
@@ -172,11 +172,14 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
     {
       int new_x = player_position.first + offset.first;
       int new_y = player_position.second + offset.second;
+      std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << new_x << ", " << new_y << ")" << std::endl;
 
       // Check if the new position is within the bounds of the enemies vector
-      if (new_x >= 0 && new_x < static_cast<int>(enemies.size()) && new_y >= 0 && new_y < static_cast<int>(enemies[0].size()))
+      if (new_y >= 0 && new_y < static_cast<int>(enemies.size()) && new_x >= 0 && new_x < static_cast<int>(enemies[0].size()))
       {
-        int temp = enemies[new_y][new_x]; //TODO sometimes skips over this 
+        std::cout << "[DEBUG] Field is not out of bounds" << std::endl;
+        int temp = enemies[new_y][new_x]; //TODO sometimes skips over this
+        std::cout << "[DEBUG] Enemy at: (" << new_x << ", " << new_y << ") has health: " << temp << std::endl;
         if (temp > 0)
         {
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
@@ -187,14 +190,20 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
           return 10.0;
         }
       }
+      else
+      {
+        std::cout << "[DEBUG] Field is out of bounds" << std::endl;
+
+      }
     }
   } else {
     // If the player has a ranged weapon, check if there is an enemy in range
+    std::cout << "[DEBUG] Robot has a ranged weapon in attack perform" << std::endl;
     for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
       for (int j = 0; j < static_cast<int>(enemies[0].size()); j++)
       {
-        if (enemies[i][j] > 0)
+        if (enemies[j][i] > 0)
         {
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";

@@ -6,3 +6,4 @@ build/
 .vscode
 testrunner
 /saves/*.txt
+/data/q_table.csv

@@ -357,6 +357,6 @@ std::pair<int, int> Room::getEntryDoorPosition()
         [](const std::shared_ptr<Door>& a, const std::shared_ptr<Door>& b) {
             return a->getLeadsTo() < b->getLeadsTo();
         });
-    
+
     return getFieldOfEntity((*minDoorIt));
 }

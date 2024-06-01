@@ -84,14 +84,14 @@ std::set<RobotAction> State::getPossibleMoves()
   // (i.e., within the room and not occupied by an enemy). If the move is valid, it is added to the possible_moves set.
   // This reduces the number of conditional checks and makes the code more concise and easier to understand.
   for (const auto& move : moves) {
-    int new_x = getCurrentPosition().first + move.second.first;
-    int new_y = getCurrentPosition().second + move.second.second;
-    if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
-        && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
-        getEnemies()[new_x][new_y] == 0) {
+    int new_y = getCurrentPosition().first + move.second.first;
+    int new_x = getCurrentPosition().second + move.second.second;
+    if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size()) // P(y,x)
+        && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size())
+        && getEnemies()[new_y][new_x] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
-      if ((std::make_pair(new_x, new_y) != getExitDoorPosition() &&
-          std::make_pair(new_x, new_y) != getEntryDoorPosition()) || enemies_left == 0) {
+      if ((std::make_pair(new_y, new_x) != getExitDoorPosition() &&
+          std::make_pair(new_y, new_x) != getEntryDoorPosition()) || enemies_left == 0) {
         possible_moves.insert(move.first);
       }
     }
@@ -105,11 +105,11 @@ bool State::canLoot() {
   // or in the 8 adjacent positions, the player can loot.
   for (int i = -1; i <= 1; i++) {
     for (int j = -1; j <= 1; j++) {
-      int new_x = getCurrentPosition().first + i;
-      int new_y = getCurrentPosition().second + j;
-      if (new_x >= 0 && new_x < static_cast<int>(getLootables().size())
-          && new_y >= 0 && new_y < static_cast<int>(getLootables()[0].size()) &&
-          getLootables()[new_x][new_y] == 1) {
+      int new_y = getCurrentPosition().second + i;
+      int new_x = getCurrentPosition().first + j;
+      if (new_y >= 0 && new_y < static_cast<int>(getLootables().size())
+          && new_x >= 0 && new_x < static_cast<int>(getLootables()[0].size()) &&
+          getLootables()[new_y][new_x] == 1) {
         return true;
       }
     }
@@ -180,11 +180,11 @@ bool State::canAttackAdjacent(Player player)
   if (player.getWeapon()->getAttackType() == AttackType::MELEE) {
     for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        int new_x = getCurrentPosition().first + i;
-        int new_y = getCurrentPosition().second + j;
-        if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
-            && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
-            getEnemies()[new_x][new_y] > 0) {
+        int new_y = getCurrentPosition().first + i;
+        int new_x = getCurrentPosition().second + j;
+        if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size())
+            && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size()) &&
+            getEnemies()[new_y][new_x] > 0) {
           setCanAttackMelee(true);
           return true;
         }
