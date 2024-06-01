@@ -40,7 +40,8 @@ void PlayCommand::updateState(shared_ptr<State> state)
   state->setEnemies(current_room->getCharacterAsInt<Enemy>());
   state->setPlayers(current_room->getCharacterAsInt<Player>());
   state->setLootables(current_room->getLootableAsInt());
-  state->setDoorPosition(current_room->getNextDoorPosition());
+  state->setEntryDoorPosition(current_room->getEntryDoorPosition());
+  state->setExitDoorPosition(current_room->getNextDoorPosition());
 }
 
 void PlayCommand::execute(std::vector<std::string> params)

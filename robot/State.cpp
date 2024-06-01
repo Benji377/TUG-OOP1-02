@@ -1,7 +1,8 @@
 #include "State.hpp"
 
 State::State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
-             std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables, std::pair<int, int> door_position)
+             std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
+             std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position)
 {
   // TODO: This constructor may throw an exception if any of the arguments are invalid or null
   current_player_ = player.getAbbreviation();
@@ -13,7 +14,8 @@ State::State(int remaining_actions, std::pair<int, int> position, Player player,
   enemies_ = enemies;
   players_ = players;
   lootables_ = lootables;
-  door_position_ = door_position;
+  entry_door_position_ = entry_door_position;
+  exit_door_position_ = exit_door_position;
   can_attack_range_ = canAttackAnywhere(player);
   can_attack_melee_ = canAttackAdjacent(player);
   can_heal_ = canRegenerate(player);
@@ -88,7 +90,8 @@ std::set<RobotAction> State::getPossibleMoves()
         && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
         getEnemies()[new_x][new_y] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
-      if (std::make_pair(new_x, new_y) != getDoorPosition() || enemies_left == 0) {
+      if ((std::make_pair(new_x, new_y) != getExitDoorPosition() &&
+          std::make_pair(new_x, new_y) != getEntryDoorPosition()) || enemies_left == 0) {
         possible_moves.insert(move.first);
       }
     }
@@ -322,7 +325,8 @@ std::string State::serializeState() const
   serialized_state += std::to_string(getDamageOutput()) + "|" + std::to_string(getDamageInput()) + "|";
   serialized_state += std::to_string(getCanAttackRange()) + "|" + std::to_string(getCanAttackMelee()) + "|";
   serialized_state += std::to_string(getCanHeal()) + "|";
-  serialized_state += std::to_string(getDoorPosition().first) + "|" + std::to_string(getDoorPosition().second) + "|";
+  serialized_state += std::to_string(getExitDoorPosition().first) + "|" + std::to_string(getExitDoorPosition().second) + "|";
+  serialized_state += std::to_string(getEntryDoorPosition().first) + "|" + std::to_string(getEntryDoorPosition().second) + "|";
   serialized_state += Utils::serializeMap(getEnemies()) + "|";
   serialized_state += Utils::serializeMap(getPlayers()) + "|";
   serialized_state += Utils::serializeMap(getLootables());
@@ -343,10 +347,11 @@ void State::deserializeState(std::string state_string)
   setCanAttackRange(std::stoi(state_items[7]));
   setCanAttackMelee(std::stoi(state_items[8]));
   setCanHeal(std::stoi(state_items[9]));
-  setDoorPosition(std::make_pair(std::stoi(state_items[10]), std::stoi(state_items[11])));
-  setEnemies(Utils::deserializeMap(state_items[12]));
-  setPlayers(Utils::deserializeMap(state_items[13]));
-  setLootables(Utils::deserializeMap(state_items[14]));
+  setExitDoorPosition(std::make_pair(std::stoi(state_items[10]), std::stoi(state_items[11])));
+  setEntryDoorPosition(std::make_pair(std::stoi(state_items[12]), std::stoi(state_items[13])));
+  setEnemies(Utils::deserializeMap(state_items[14]));
+  setPlayers(Utils::deserializeMap(state_items[15]));
+  setLootables(Utils::deserializeMap(state_items[16]));
 }
 
 bool State::operator==(const State& other) const
@@ -360,7 +365,8 @@ bool State::operator==(const State& other) const
          enemies_ == other.enemies_ &&
          players_ == other.players_ &&
          lootables_ == other.lootables_ &&
-         door_position_ == other.door_position_ &&
+         entry_door_position_ == other.entry_door_position_ &&
+         exit_door_position_ == other.exit_door_position_ &&
          can_attack_range_ == other.can_attack_range_ &&
          can_attack_melee_ == other.can_attack_melee_ &&
          can_heal_ == other.can_heal_;

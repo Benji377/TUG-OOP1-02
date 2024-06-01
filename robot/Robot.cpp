@@ -159,8 +159,8 @@ double Robot::executeAction(RobotAction action, Player player, std::vector<Playe
     case RobotAction::MOVE_UP_RIGHT:
     case RobotAction::MOVE_DOWN_LEFT:
     case RobotAction::MOVE_DOWN_RIGHT:
-      return performAction.perform_move(player, current_state_.getCurrentPosition(),
-                                          action, current_state_.getDoorPosition(), enemies_left);
+      return performAction.perform_move(player, current_state_.getCurrentPosition(), action,
+                                        current_state_.getEntryDoorPosition(), current_state_.getExitDoorPosition(), enemies_left);
     case RobotAction::LOOT:
       return performAction.perform_loot(player, current_state_.getCurrentPosition(), current_state_.getLootables());
     case RobotAction::REGENERATE:

@@ -197,6 +197,7 @@ class Room
 
     
     std::pair<int, int> getNextDoorPosition();
+    std::pair<int, int> getEntryDoorPosition();
 
 
 

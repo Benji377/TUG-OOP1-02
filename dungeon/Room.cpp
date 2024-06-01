@@ -340,3 +340,23 @@ std::pair<int, int> Room::getNextDoorPosition()
 
     return getFieldOfEntity((*maxDoorIt));
 }
+
+std::pair<int, int> Room::getEntryDoorPosition()
+{
+    std::vector<std::shared_ptr<Door>> doors;
+
+    for (const auto& row : fields_) {
+        for (const auto& field : row) {
+            if (auto door = std::dynamic_pointer_cast<Door>(field->getEntity())) {
+                doors.push_back(door);
+            }
+        }
+    }
+
+    auto minDoorIt = std::min_element(doors.begin(), doors.end(),
+        [](const std::shared_ptr<Door>& a, const std::shared_ptr<Door>& b) {
+            return a->getLeadsTo() < b->getLeadsTo();
+        });
+    
+    return getFieldOfEntity((*minDoorIt));
+}

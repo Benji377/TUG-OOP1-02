@@ -113,7 +113,7 @@ void Game::start()
 
   //TODO make better, this is just for testing.
   state_ = std::make_shared<State>(max_players_, getCurrentRoom()->getFieldOfEntity(players_.at(0)), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
-    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), getCurrentRoom()->getNextDoorPosition());
+    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), getCurrentRoom()->getEntryDoorPosition(), getCurrentRoom()->getNextDoorPosition());
   robot_ = std::make_shared<Robot>(*state_, this);
 }
 

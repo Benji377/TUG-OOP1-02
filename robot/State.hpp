@@ -56,7 +56,8 @@ class State
   std::vector<std::vector<int>> enemies_; // map of the game, where 0 is empty, everything > 1 is the health of the enemy
   std::vector<std::vector<int>> players_; // map of the game, where 0 is empty, everything > 1 is the health of the player
   std::vector<std::vector<int>> lootables_; // map of the game, where 0 is empty, 1 is a lootable item
-  std::pair<int, int> door_position_; // The position of the door in the room
+  std::pair<int, int> exit_door_position_; // The position of the door in the room
+  std::pair<int, int> entry_door_position_;
   // SET BY THE STATE INTERNALLY
   bool can_attack_range_; // If the robot can attack from a distance
   bool can_attack_melee_; // If the robot can attack in melee
@@ -78,7 +79,8 @@ class State
 
 public:
   State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
-        std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables, std::pair<int, int> door_position);
+        std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
+        std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position);
   State() = default;
 
   // Getter and Setter methods
@@ -94,7 +96,8 @@ public:
   void setEnemies(std::vector<std::vector<int>> enemies) { enemies_ = enemies; };
   void setPlayers(std::vector<std::vector<int>> players) { players_ = players; };
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
-  void setDoorPosition(std::pair<int, int> door_position) { door_position_ = door_position;};
+  void setExitDoorPosition(std::pair<int, int> door_position) { exit_door_position_ = door_position;};
+  void setEntryDoorPosition(std::pair<int, int> door_position) { entry_door_position_ = door_position;};
 
   char getCurrentPlayer() const
   { return current_player_; };
@@ -113,8 +116,10 @@ public:
   { return players_; };
   std::vector<std::vector<int>> getLootables() const
   { return lootables_; };
-  std::pair<int, int> getDoorPosition() const
-  { return door_position_; };
+  std::pair<int, int> getExitDoorPosition() const
+  { return exit_door_position_; };
+  std::pair<int, int> getEntryDoorPosition() const
+  { return entry_door_position_; };
   // Methods
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState() const;
