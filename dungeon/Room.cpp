@@ -320,3 +320,23 @@ vector<vector<int>> Room::getLootableAsInt() const
   }
   return lootable_map;
 }
+
+std::pair<int, int> Room::getNextDoorPosition() 
+{
+    std::vector<std::shared_ptr<Door>> doors;
+
+    for (const auto& row : fields_) {
+        for (const auto& field : row) {
+            if (auto door = std::dynamic_pointer_cast<Door>(field->getEntity())) {
+                doors.push_back(door);
+            }
+        }
+    }
+
+    auto maxDoorIt = std::max_element(doors.begin(), doors.end(),
+        [](const std::shared_ptr<Door>& a, const std::shared_ptr<Door>& b) {
+            return a->getLeadsTo() < b->getLeadsTo();
+        });
+
+    return getFieldOfEntity((*maxDoorIt));
+}

@@ -1,10 +1,12 @@
 #include "PerformAction.hpp"
+#include "../game/Game.hpp"
+#include "../entity/character/Inventory.hpp"
 
-double PerformAction::perform_move(std::pair<int, int> player_position, RobotAction action, std::pair<int, int> door_position)
+double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action, std::pair<int, int> door_position)
 {
   std::map<RobotAction, std::pair<int, int>> actionToMove = {
-          {RobotAction::MOVE_UP, {0, -1}},
-          {RobotAction::MOVE_DOWN, {0, 1}},
+          {RobotAction::MOVE_UP, {0, 1}}, //these names are mixed up. In the game 3,2 means 3=y and 2=x. Up would be 1,0.
+          {RobotAction::MOVE_DOWN, {0, -1}},
           {RobotAction::MOVE_LEFT, {-1, 0}},
           {RobotAction::MOVE_RIGHT, {1, 0}},
           {RobotAction::MOVE_UP_LEFT, {-1, -1}},
@@ -17,7 +19,11 @@ double PerformAction::perform_move(std::pair<int, int> player_position, RobotAct
   {
     int new_x = player_position.first + actionToMove[action].first;
     int new_y = player_position.second + actionToMove[action].second;
-    // TODO Replace with actual command to move the player
+  
+    std::string command = "move " + std::string(1, player.getAbbreviation()) + " " 
+            + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+    std::cout << command;
+    game_->doCommand(command);
     std::cout << "Robot moved to: (" << new_x << ", " << new_y << ")" << std::endl;
     if (new_x >= 0 && new_x < door_position.first && new_y >= 0 && new_y < door_position.second)
     {
@@ -30,7 +36,7 @@ double PerformAction::perform_move(std::pair<int, int> player_position, RobotAct
   return -100.0;
 }
 
-double PerformAction::perform_loot(std::pair<int, int> player_position, std::vector<std::vector<int>> lootables)
+double PerformAction::perform_loot(Player player, std::pair<int, int> player_position, std::vector<std::vector<int>> lootables)
 {
   // Define the offsets for the surrounding cells
   std::vector<std::pair<int, int>> offsets = {{0, 0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
@@ -42,12 +48,26 @@ double PerformAction::perform_loot(std::pair<int, int> player_position, std::vec
     // Check if the new position is within the bounds of the lootables vector
     if (new_x >= 0 && new_x < static_cast<int>(lootables.size()) && new_y >= 0 && new_y < static_cast<int>(lootables[0].size())) {
       if (lootables[new_y][new_x] == 1) {
-        // TODO Replace with actual command to loot the player
+        
+        std::string command = "loot " + std::string(1, player.getAbbreviation()) + " " 
+                + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+        std::cout << command;
+        game_->doCommand(command);
+
         std::cout << "Robot looted at: (" << new_x << ", " << new_y << ")" << std::endl;
         return 10.0;
       }
     }
   }
+
+//This is just so we have some fail output when it finds no loot. This code can be removed later
+//BEGIN
+    std::string command = "loot " + std::string(1, player.getAbbreviation()) + " " 
+            + std::to_string(player_position.first +1) + "," + std::to_string(player_position.second+1) + "\n";
+    std::cout << command;
+    game_->doCommand(command); 
+    std::cout << "Robot loot failed\n"; 
+//END
 
   // If there is no loot, return a big negative number
   return -100.0;
@@ -56,15 +76,39 @@ double PerformAction::perform_loot(std::pair<int, int> player_position, std::vec
 double PerformAction::perform_regeneration(Player player)
 {
   // If the player has lost more than 10% of its health, provide a big reward
-  if (player.getHealth() < player.getMaximumHealth() * 0.9)
+  if (true)//player.getHealth() < player.getMaximumHealth() * 0.9)
   {
-    // TODO Replace with actual command to regenerate the player
+    std::string command = "use " + std::string(1, player.getAbbreviation()) + " ";
+
+    std::shared_ptr<Potion> potion1 = player.getInventory()->getPotion("NHEP");
+    std::shared_ptr<Potion> potion2 = player.getInventory()->getPotion("GHEP");
+    std::shared_ptr<Potion> potion3 = player.getInventory()->getPotion("SHEP");
+    if (potion1) {
+        command += potion1->getAbbreviation();
+        std::cout << command << std::endl;
+        game_->doCommand(command);
+    } 
+    else if (potion2) {
+        command += potion2->getAbbreviation();
+        std::cout << command << std::endl;
+        game_->doCommand(command);
+    } 
+    else if (potion3) {
+        command += potion3->getAbbreviation();
+        std::cout << command << std::endl;
+        game_->doCommand(command);
+    } 
+    else {
+        std::cout << "No suitable potion found in inventory." << std::endl;
+        return -50; // Regeneration not possible.
+    }
+
     std::cout << "Robot used health potion" << std::endl;
     return 10.0;
   }
 
   // TODO Replace with actual command to regenerate the player
-  std::cout << "Robot used health potion" << std::endl;
+  std::cout << "Robot tried to heal" << std::endl;
   return 1.0;
 }
 
@@ -80,14 +124,21 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
 
   if (resistanceTypes.count(action))
   {
+    std::string resistanceType = resistanceTypes[action];
+    std::string abbreviation = resistanceType.substr(0, 2); //only first two characters
+    std::transform(abbreviation.begin(), abbreviation.end(), abbreviation.begin(), ::toupper);
+    abbreviation = abbreviation + "RS";
+
+    std::string command = "use " + std::string(1, player.getAbbreviation()) + " " + abbreviation;
+    std::cout << command << std::endl;
+    game_->doCommand(command);
+
     // If the player has lost more than 10% of its health, provide a big reward
     if (player.getHealth() < player.getMaximumHealth() * 0.9)
     {
-      // TODO Replace with actual command to regenerate the player
       std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
       return 10.0;
     }
-    // TODO Replace with actual command to set resistance
     std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
     return 1.0;
   }
@@ -119,9 +170,13 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
       // Check if the new position is within the bounds of the enemies vector
       if (new_x >= 0 && new_x < static_cast<int>(enemies.size()) && new_y >= 0 && new_y < static_cast<int>(enemies[0].size()))
       {
-        if (enemies[new_y][new_x] > 0)
+        int temp = enemies[new_y][new_x]; //TODO sometimes skips over this 
+        if (temp > 0)
         {
-          // TODO Replace with actual command to attack the enemy
+          std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
+                  + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+          std::cout << command;
+          game_->doCommand(command); 
           std::cout << "Robot attacked enemy at: (" << new_x << ", " << new_y << ") using melee weapon" << std::endl;
           return 10.0;
         }
@@ -135,7 +190,10 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
       {
         if (enemies[i][j] > 0)
         {
-          // TODO Replace with actual command to attack the enemy
+          std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
+                  + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";
+          std::cout << command;
+          game_->doCommand(command);           
           std::cout << "Robot attacked enemy at: (" << j << ", " << i << ") using ranged weapon" << std::endl;
           return 10.0;
         }
@@ -147,18 +205,77 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   return -100.0;
 }
 
-double PerformAction::perform_use_ranged()
+double PerformAction::perform_use_ranged(Player player)
 {
-  // TODO Replace with actual command to use ranged weapon
-  std::cout << "Robot equipped ranged weapon" << std::endl;
-  return 1.0;
+  auto weapons = player.getInventory()->getAllWeapons();
+
+  auto it = std::remove_if(weapons.begin(), weapons.end(),
+                          [player](const std::shared_ptr<Weapon>& weapon) {
+                              return weapon == player.getWeapon();
+                          });
+  weapons.erase(it, weapons.end()); //We don't want to just unequip the current weapon
+
+    std::vector<std::shared_ptr<Weapon>> rangedWeapons; //ChatGPT Begin
+    std::copy_if(weapons.begin(), weapons.end(), std::back_inserter(rangedWeapons),
+              [](const std::shared_ptr<Weapon>& weapon) {
+                  return weapon->getAttackType() == AttackType::RANGED;
+              });
+    auto maxWeaponIt = std::max_element(rangedWeapons.begin(), rangedWeapons.end(),
+              [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
+                  return a->getDamageAddition() < b->getDamageAddition();
+              }); //TODO damageAddition is what checks if it's the biggest weapon, right?
+//ChatGPT End
+  if(maxWeaponIt != rangedWeapons.end())
+  {
+    std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
+                  + (*maxWeaponIt)->getAbbreviation() + "\n";
+    std::cout << command;
+    game_->doCommand(command);
+
+    std::cout << "Robot equipped ranged weapon" << std::endl;
+    return 1.0;
+  }
+  else
+  {
+        std::cout << "Robot failed to equip ranged weapon" << std::endl;
+    return -5; //tried to equip meele but there wasn't one.
+  }
 }
 
-double PerformAction::perform_use_melee()
+double PerformAction::perform_use_melee(Player player)
 {
-  // TODO Replace with actual command to use melee weapon
-  std::cout << "Robot equipped melee weapon" << std::endl;
-  return 1.0;
+  auto weapons = player.getInventory()->getAllWeapons();
+
+  auto it = std::remove_if(weapons.begin(), weapons.end(),
+                          [player](const std::shared_ptr<Weapon>& weapon) {
+                              return weapon == player.getWeapon();
+                          });
+  weapons.erase(it, weapons.end()); //We don't want to just unequip the current weapon
+
+    std::vector<std::shared_ptr<Weapon>> meleeWeapons;
+    std::copy_if(weapons.begin(), weapons.end(), std::back_inserter(meleeWeapons),
+              [](const std::shared_ptr<Weapon>& weapon) {
+                  return weapon->getAttackType() == AttackType::MELEE;
+              });
+    auto maxWeaponIt = std::max_element(meleeWeapons.begin(), meleeWeapons.end(),
+              [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
+                  return a->getDamageAddition() < b->getDamageAddition();
+              }); //TODO damageAddition is what checks if it's the biggest weapon, right?
+  if(maxWeaponIt != meleeWeapons.end())
+  {
+    std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
+                  + (*maxWeaponIt)->getAbbreviation() + "\n";
+    std::cout << command;
+    game_->doCommand(command);
+
+    std::cout << "Robot equipped melee weapon" << std::endl;
+    return 1.0;
+  }
+  else
+  {
+        std::cout << "Robot failed to equip melee weapon" << std::endl;
+    return -5; //tried to equip meele but there wasn't one.
+  }
 }
 
 double PerformAction::perform_switch_player(char current_player, std::vector<Player> players)
@@ -189,15 +306,37 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
 
 double PerformAction::perform_use_armor(Player player)
 {
+  auto player_armor = player.getArmor();
   // Get the best armor from the player's inventory
   if (!player.getInventory()->getAllArmor().empty()) {
-    for (const auto &armor : player.getInventory()->getAllArmor()) {
-      if (armor->getArmorValue() > player.getArmor()->getArmorValue()) {
-        // TODO Replace with actual command to use armor
+    for (const auto &armor : player.getInventory()->getAllArmor()) 
+    {
+      if(player_armor != nullptr)
+      {
+        if (armor->getArmorValue() > player_armor->getArmorValue()) {
+        
+        std::string command = "use " + std::string(1, player.getAbbreviation()) + " " +
+                  armor->getAbbreviation() + "\n";
+        std::cout << command;
+        game_->doCommand(command);
+
+        std::cout << "Robot equipped armor" << std::endl;
+        return 1.0;
+        }
+      }
+      else
+      {
+        std::string command = "use " + std::string(1, player.getAbbreviation()) + " " +
+          armor->getAbbreviation() + "\n";
+        std::cout << command;
+        game_->doCommand(command);
+
         std::cout << "Robot equipped armor" << std::endl;
         return 1.0;
       }
     }
   }
+          std::cout << "Robot failed to equip armor" << std::endl;
+
   return -10.0;
 }

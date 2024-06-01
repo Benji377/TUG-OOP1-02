@@ -111,10 +111,10 @@ void Game::start()
   dungeon_.enterCurrentRoom(0, players_);
   printStoryAndRoom();
 
-  //TODO make better, this is just for testing
-  state_ = std::make_shared<State>(max_players_, std::make_pair<int,int>(0,0), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
-    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), std::make_pair(0,0));
-  robot_ = std::make_shared<Robot>(*state_);
+  //TODO make better, this is just for testing.
+  state_ = std::make_shared<State>(max_players_, getCurrentRoom()->getFieldOfEntity(players_.at(0)), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
+    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), getCurrentRoom()->getNextDoorPosition());
+  robot_ = std::make_shared<Robot>(*state_, this);
 }
 
 void Game::step()
@@ -219,11 +219,6 @@ void Game::doCommand()
 void Game::doCommand(string input)
 {
   vector<string> command_input = InputOutput::commandifyString(input);
-
-  bool command_finished = false;
-
-  while (!command_finished)
-  {
     try
     {
       parser_->execute(command_input);
@@ -231,27 +226,22 @@ void Game::doCommand(string input)
     catch (const UnknownCommand &e)
     {
       cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
-      continue;
     }
     catch (const WrongNumberOfParametersException &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
-      continue;
     }
     catch (const InvalidParamCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM");
-      continue;
     }
     catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
-      continue;
     }
     catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
-      continue;
     }
     catch (const CommandExecutionException &e)
     {
@@ -268,11 +258,8 @@ void Game::doCommand(string input)
         default:
           break;
       }
-      continue;
-    }
 
-    command_finished = true;
-  }
+    }
 }
 
 bool Game::isRunning() const

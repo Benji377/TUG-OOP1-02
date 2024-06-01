@@ -4,7 +4,7 @@
 
 const std::string Robot::q_table_file_path_ = "data/q_table.csv";
 
-Robot::Robot(State state) : current_state_(state)
+Robot::Robot(State state, Game* game) : current_state_(state), game_(game)
 {
   loadQTable();
 }
@@ -95,7 +95,7 @@ RobotAction Robot::getBestAction(State state, Player player)
 
 void Robot::executeAction(RobotAction action, Player player, std::vector<Player> players)
 {
-  PerformAction performAction;
+  PerformAction performAction = PerformAction(game_);
   double reward;
 
   switch (action) {
@@ -107,10 +107,10 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
     case RobotAction::MOVE_UP_RIGHT:
     case RobotAction::MOVE_DOWN_LEFT:
     case RobotAction::MOVE_DOWN_RIGHT:
-      reward = performAction.perform_move(current_state_.getCurrentPosition(), action, current_state_.getDoorPosition());
+      reward = performAction.perform_move(player, current_state_.getCurrentPosition(), action, current_state_.getDoorPosition());
       break;
     case RobotAction::LOOT:
-      reward = performAction.perform_loot(current_state_.getCurrentPosition(), current_state_.getLootables());
+      reward = performAction.perform_loot(player, current_state_.getCurrentPosition(), current_state_.getLootables());
       break;
     case RobotAction::REGENERATE:
       reward = performAction.perform_regeneration(player);
@@ -125,10 +125,10 @@ void Robot::executeAction(RobotAction action, Player player, std::vector<Player>
       reward = performAction.perform_attack(player, current_state_.getCurrentPosition(), current_state_.getEnemies());
       break;
     case RobotAction::USE_RANGED:
-      reward = performAction.perform_use_ranged();
+      reward = performAction.perform_use_ranged(player);
       break;
     case RobotAction::USE_MELEE:
-      reward = performAction.perform_use_melee();
+      reward = performAction.perform_use_melee(player);
       break;
     case RobotAction::SWITCH_PLAYER:
       reward = performAction.perform_switch_player(current_state_.getCurrentPlayer(), players);

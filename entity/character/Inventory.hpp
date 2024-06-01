@@ -185,7 +185,7 @@ class Inventory
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to get the inventory mapped to a string and its quantity. When a player dies, its items are stored as
-    /// a map and then when looted are recreated with the stats of the player.
+    /// a map and then whefn looted are recreated with the stats of the player.
     ///
     /// @return a map containing the items and their quantities
     //

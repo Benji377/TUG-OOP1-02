@@ -22,6 +22,8 @@
 #include <sstream>
 #include "State.hpp"
 
+class Game;
+
 class Robot
 {
   State current_state_;
@@ -34,12 +36,14 @@ class Robot
   double epsilon_decay_ = 0.995;
   double epsilon_min_ = 0.01;
 
+  Game* game_;
+
 public:
-  explicit Robot(State state);
+  explicit Robot(State state, Game* game);
   void saveQTable();
   void loadQTable();
   void updateQTable(State state, RobotAction action, State new_state, Player player, double reward);
-  RobotAction getBestAction(State state, Player player); //TODO doesn't this already have current_state_?
+  RobotAction getBestAction(State state, Player player);
   void executeAction(RobotAction action, Player player, std::vector<Player> players);
   double getMaximumQValue(State state, Player player);
   State getCurrentState() const { return current_state_; };

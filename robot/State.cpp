@@ -282,8 +282,8 @@ std::string State::serializeState() const
   serialized_state += Utils::serializeMap(getEnemies()) + "|";
   serialized_state += Utils::serializeMap(getPlayers()) + "|";
   serialized_state += Utils::serializeMap(getLootables());
-  // TODO: Test this output and remove once it's working
-  std::cout << "Serialized state: " << serialized_state << std::endl;
+  // TODO: Test this output and remove once it's working. removed it only for testing -hanno
+  //std::cout << "Serialized state: " << serialized_state << std::endl;
   return serialized_state;
 }
 

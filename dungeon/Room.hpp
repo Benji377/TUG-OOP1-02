@@ -194,6 +194,13 @@ class Room
       });
       return fields_as_ints;
     }
+
+    
+    std::pair<int, int> getNextDoorPosition();
+
+
+
+
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns a 2D vector of the lootables in the room

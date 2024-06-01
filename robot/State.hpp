@@ -19,7 +19,6 @@
 #include <set>
 #include "../entity/character/Player.hpp"
 
-
 // PS: Not all actions are possible at all times, so we will have to filter them and only allow the ones
 // that are possible in the current state. This will be done in the Robot class.
 enum class RobotAction
