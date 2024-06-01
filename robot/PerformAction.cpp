@@ -2,16 +2,17 @@
 #include "../game/Game.hpp"
 #include "../entity/character/Inventory.hpp"
 
-double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action, std::pair<int, int> door_position)
+double PerformAction::perform_move(Player player, std::pair<int, int> player_position,
+                                   RobotAction action, std::pair<int, int> door_position, int enemies_left)
 {
   std::map<RobotAction, std::pair<int, int>> actionToMove = {
-          {RobotAction::MOVE_UP, {0, 1}}, //these names are mixed up. In the game 3,2 means 3=y and 2=x. Up would be 1,0.
-          {RobotAction::MOVE_DOWN, {0, -1}},
-          {RobotAction::MOVE_LEFT, {-1, 0}},
-          {RobotAction::MOVE_RIGHT, {1, 0}},
+          {RobotAction::MOVE_UP, {1, 0}},
+          {RobotAction::MOVE_DOWN, {-1, 0}},
+          {RobotAction::MOVE_LEFT, {0, -1}},
+          {RobotAction::MOVE_RIGHT, {0, 1}},
           {RobotAction::MOVE_UP_LEFT, {-1, -1}},
-          {RobotAction::MOVE_UP_RIGHT, {1, -1}},
-          {RobotAction::MOVE_DOWN_LEFT, {-1, 1}},
+          {RobotAction::MOVE_UP_RIGHT, {-1, 1}},
+          {RobotAction::MOVE_DOWN_LEFT, {1, -1}},
           {RobotAction::MOVE_DOWN_RIGHT, {1, 1}}
   };
 
@@ -27,8 +28,17 @@ double PerformAction::perform_move(Player player, std::pair<int, int> player_pos
     std::cout << "Robot moved to: (" << new_x << ", " << new_y << ")" << std::endl;
     if (new_x >= 0 && new_x < door_position.first && new_y >= 0 && new_y < door_position.second)
     {
-      std::cout << "Robot reached the door!" << std::endl;
-      return 100.0;
+      // If there are no enemies in the room, provide a big reward, else provide a punishment
+      if (enemies_left <= 0)
+      {
+        std::cout << "Robot reached the door!" << std::endl;
+        return 100.0;
+      }
+      else
+      {
+        std::cout << "Robot reached the door, but there are still enemies left!" << std::endl;
+        return -50.0;
+      }
     }
     return -1.0;
   }

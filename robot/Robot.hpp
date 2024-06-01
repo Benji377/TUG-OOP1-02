@@ -27,6 +27,7 @@ class Game;
 class Robot
 {
   State current_state_;
+  State previous_state_;
   std::map<std::tuple<State, RobotAction>, double> q_table_;
   static const std::string q_table_file_path_;
   // TODO: The following numbers will have to be adjusted and tested to find the best values
@@ -42,13 +43,14 @@ public:
   explicit Robot(State state, Game* game);
   void saveQTable();
   void loadQTable();
-  void updateQTable(State state, RobotAction action, State new_state, Player player, double reward);
+  void updateQTable(RobotAction action, Player player, double reward);
   RobotAction getBestAction(State state, Player player);
-  void executeAction(RobotAction action, Player player, std::vector<Player> players);
+  double executeAction(RobotAction action, Player player, std::vector<Player> players);
   double getMaximumQValue(State state, Player player);
   State getCurrentState() const { return current_state_; };
   void setCurrentState(State state) { current_state_ = state; };
-
+  State getPreviousState() const { return previous_state_; };
+  void setPreviousState(State state) { previous_state_ = state; };
 };
 
 

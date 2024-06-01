@@ -56,16 +56,25 @@ std::set<RobotAction> State::getPossibleActions(Player player)
 
 std::set<RobotAction> State::getPossibleMoves()
 {
+  int enemies_left = 0;
+  for (const auto& row : getEnemies()) {
+    for (const auto& enemy : row) {
+      if (enemy > 0) {
+        enemies_left++;
+      }
+    }
+  }
+
   std::set<RobotAction> possible_moves;
   std::vector<std::pair<RobotAction, std::pair<int, int>>> moves = {
-          {RobotAction::MOVE_RIGHT, {1, 0}},
-          {RobotAction::MOVE_LEFT, {-1, 0}},
-          {RobotAction::MOVE_DOWN, {0, 1}},
-          {RobotAction::MOVE_UP, {0, -1}},
+          {RobotAction::MOVE_RIGHT, {0, 1}},
+          {RobotAction::MOVE_LEFT, {0, -1}},
+          {RobotAction::MOVE_DOWN, {1, 0}},
+          {RobotAction::MOVE_UP, {-1, 0}},
           {RobotAction::MOVE_DOWN_RIGHT, {1, 1}},
           {RobotAction::MOVE_UP_LEFT, {-1, -1}},
-          {RobotAction::MOVE_DOWN_LEFT, {-1, 1}},
-          {RobotAction::MOVE_UP_RIGHT, {1, -1}}
+          {RobotAction::MOVE_DOWN_LEFT, {1, -1}},
+          {RobotAction::MOVE_UP_RIGHT, {-1, 1}}
   };
   // In this simplified version, the possible moves and their corresponding changes in position
   // are defined in the moves vector. The code then iterates over these moves,
@@ -78,7 +87,10 @@ std::set<RobotAction> State::getPossibleMoves()
     if (new_x >= 0 && new_x < static_cast<int>(getEnemies().size())
         && new_y >= 0 && new_y < static_cast<int>(getEnemies()[0].size()) &&
         getEnemies()[new_x][new_y] == 0) {
-      possible_moves.insert(move.first);
+      // Check if the robot is not moving onto the door if there are still enemies left
+      if (std::make_pair(new_x, new_y) != getDoorPosition() || enemies_left == 0) {
+        possible_moves.insert(move.first);
+      }
     }
   }
 
@@ -213,7 +225,22 @@ bool State::canUseRanged(Player player)
     {
       if (weapon->getAttackType() == AttackType::RANGED)
       {
-        return true;
+        if (player.getWeapon()->getAttackType() == AttackType::MELEE)
+        {
+          if (weapon->getDamageAddition() + weapon->getDice()->getType() >
+              player.getWeapon()->getDamageAddition() + player.getWeapon()->getDice()->getType())
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
+        else
+        {
+          return true;
+        }
       }
     }
   }
@@ -229,7 +256,22 @@ bool State::canUseMelee(Player player)
     {
       if (weapon->getAttackType() == AttackType::MELEE)
       {
-        return true;
+        if (player.getWeapon()->getAttackType() == AttackType::MELEE)
+        {
+          if (weapon->getDamageAddition() + weapon->getDice()->getType() >
+              player.getWeapon()->getDamageAddition() + player.getWeapon()->getDice()->getType())
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
+        else
+        {
+          return true;
+        }
       }
     }
   }
@@ -238,6 +280,8 @@ bool State::canUseMelee(Player player)
 
 bool State::canSwitchPlayer()
 {
+  // TODO: For testing:
+  return false;
   // The robot can switch player if there are more than one player in the game (and not all players are dead)
   for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
     for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {
@@ -282,8 +326,6 @@ std::string State::serializeState() const
   serialized_state += Utils::serializeMap(getEnemies()) + "|";
   serialized_state += Utils::serializeMap(getPlayers()) + "|";
   serialized_state += Utils::serializeMap(getLootables());
-  // TODO: Test this output and remove once it's working. removed it only for testing -hanno
-  //std::cout << "Serialized state: " << serialized_state << std::endl;
   return serialized_state;
 }
 

@@ -11,8 +11,9 @@ class PerformAction
 {
 public:
   Game* game_;
-  PerformAction(Game* game) : game_(game) {}
-  double perform_move(Player player, std::pair<int, int> player_position, RobotAction action, std::pair<int, int> door_position);
+  explicit PerformAction(Game* game) : game_(game) {}
+  double perform_move(Player player, std::pair<int, int> player_position,
+                      RobotAction action, std::pair<int, int> door_position, int enemies_left);
   double perform_loot(Player player, std::pair<int, int> player_position, std::vector<std::vector<int>> lootables);
   double perform_regeneration(Player player);
   double perform_resistance(Player player, RobotAction action);
