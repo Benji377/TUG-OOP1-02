@@ -170,8 +170,8 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
 
     for (const auto &offset: offsets)
     {
-      int new_x = player_position.first + offset.first;
-      int new_y = player_position.second + offset.second;
+      int new_y = player_position.first + offset.first;
+      int new_x = player_position.second + offset.second;
       std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << new_x << ", " << new_y << ")" << std::endl;
 
       // Check if the new position is within the bounds of the enemies vector
@@ -201,16 +201,23 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
     std::cout << "[DEBUG] Robot has a ranged weapon in attack perform" << std::endl;
     for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
+      std::cout << "[DEBUG] Checking row: " << i << " of: " << enemies.size() << std::endl;
       for (int j = 0; j < static_cast<int>(enemies[0].size()); j++)
       {
+        std::cout << "[DEBUG] Checking column: " << j << " of: " << enemies[0].size() << std::endl;
         if (enemies[j][i] > 0)
         {
+          std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << j << ", " << i << ")" << std::endl;
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";
           std::cout << command;
           game_->doCommand(command);           
           std::cout << "Robot attacked enemy at: (" << j << ", " << i << ") using ranged weapon" << std::endl;
           return 10.0;
+        }
+        else
+        {
+          std::cout << "[DEBUG] No enemy found at: (" << j << ", " << i << ")" << std::endl;
         }
       }
     }
