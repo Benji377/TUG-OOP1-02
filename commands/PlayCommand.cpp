@@ -21,7 +21,7 @@ void PlayCommand::execute(std::vector<std::string> params)
   do
   {
   action = game_->getRobot()->getBestAction(*(game_->getState()), players.at(0));
-  reward = game_->getRobot()->executeAction(action, players.at(0), players);
+  reward = game_->getRobot()->executeAction(action, *(game_->getActivePlayerQLearn()), players);
   setCurrentRobotAction(action);
   setCurrentReward(reward); //This reward is only saved in case it's a switch command.
   } while (action == RobotAction::SWITCH_PLAYER); //if it's switchplayer the next 4 lines will be handled automatically.
