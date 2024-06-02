@@ -64,7 +64,6 @@ class State
   bool can_heal_; // If the robot can heal itself
 
   // Methods
-  std::set<RobotAction> getPossibleMoves();
   bool canLoot();
   bool canRegenerate(Player player);
   std::set<RobotAction> getPossibleResistances(Player player);
@@ -76,6 +75,8 @@ class State
   bool canUseMelee(Player player);
   bool canSwitchPlayer();
   bool canUseArmor(Player player);
+  std::set<RobotAction> getPossibleMoves();
+
 
 public:
   State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,

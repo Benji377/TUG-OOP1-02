@@ -1,17 +1,18 @@
+
 //------------------------------------------------------------------------------------------------------------------
 //
-// PlayCommand class: This class is a command performs move action
+// SwitchCommand class: This class is a command performs a switch for Q learning
 //
 // Group: 068
 //
 // Author: Hanno Elsnig, 12303626
 //---------------------------------------------------------------------------------------------------------------------
-#ifndef PLAYCOMMAND_HPP
-#define PLAYCOMMAND_HPP
+#ifndef SWITCHCOMMAND_HPP
+#define SWITCHCOMMAND_HPP
 
 #include "Command.hpp"
 
-class PlayCommand: public Command
+class SwitchCommand: public Command
 {
 public:
   //------------------------------------------------------------------------------------------------------------------
@@ -21,9 +22,9 @@ public:
   /// This class should never be copied. Each command type only exists once.
   ///
   //------------------------------------------------------------------------------------------------------------------
-  PlayCommand(Game* game) : Command(game) {}
-  ~PlayCommand() override {};
-  PlayCommand(const PlayCommand&) = delete;
+  SwitchCommand(Game* game) : Command(game) {}
+  ~SwitchCommand() override {};
+  SwitchCommand(const SwitchCommand&) = delete;
 
   //------------------------------------------------------------------------------------------------------------------
   ///

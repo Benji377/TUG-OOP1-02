@@ -52,6 +52,8 @@ class Game
     bool story_output_active_ = true;
     std::shared_ptr<State> state_;
     std::shared_ptr<Robot> robot_;
+    std::shared_ptr<Player> active_player_q_learn_;
+
 
   public:
     //------------------------------------------------------------------------------------------------------------------
@@ -243,6 +245,8 @@ class Game
 
     shared_ptr<State> getState() { return state_;};
     shared_ptr<Robot> getRobot() { return robot_;};
+    shared_ptr<Player> getActivePlayerQLearn() {return active_player_q_learn_;};
+    void setActivePlayerQLearn(char abbreviation);
 };
 
 #endif //GAME_HPP

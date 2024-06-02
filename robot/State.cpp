@@ -69,15 +69,16 @@ std::set<RobotAction> State::getPossibleMoves()
 
   std::set<RobotAction> possible_moves;
   std::vector<std::pair<RobotAction, std::pair<int, int>>> moves = {
-          {RobotAction::MOVE_RIGHT, {0, 1}},
-          {RobotAction::MOVE_LEFT, {0, -1}},
+          {RobotAction::MOVE_UP, {-1, 0}}, //up means one less in y
           {RobotAction::MOVE_DOWN, {1, 0}},
-          {RobotAction::MOVE_UP, {-1, 0}},
-          {RobotAction::MOVE_DOWN_RIGHT, {1, 1}},
+          {RobotAction::MOVE_LEFT, {0, -1}},
+          {RobotAction::MOVE_RIGHT, {0, 1}},
           {RobotAction::MOVE_UP_LEFT, {-1, -1}},
+          {RobotAction::MOVE_UP_RIGHT, {-1, 1}},
           {RobotAction::MOVE_DOWN_LEFT, {1, -1}},
-          {RobotAction::MOVE_UP_RIGHT, {-1, 1}}
+          {RobotAction::MOVE_DOWN_RIGHT, {1, 1}}
   };
+
   // In this simplified version, the possible moves and their corresponding changes in position
   // are defined in the moves vector. The code then iterates over these moves,
   // calculates the new position for each move, and checks if the move is valid
@@ -86,6 +87,7 @@ std::set<RobotAction> State::getPossibleMoves()
   for (const auto& move : moves) {
     int new_y = getCurrentPosition().first + move.second.first;
     int new_x = getCurrentPosition().second + move.second.second;
+
     if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size()) // P(y,x)
         && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size())
         && getEnemies()[new_y][new_x] == 0) {

@@ -109,3 +109,46 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>>
 
   return std::make_pair(player, target_position);
 }
+
+
+
+void Command::updateState(shared_ptr<State> state)
+{
+  auto current_room = game_->getCurrentRoom();
+  std::shared_ptr<Player> current_player = game_->getActivePlayerQLearn();
+  state->setCurrentPlayer(current_player->getAbbreviation());
+
+  auto current_pos = current_room->getFieldOfEntity(current_player);
+  std::pair<int, int> new_pos = std::make_pair(current_pos.first - 1, current_pos.second - 1);
+  state->setCurrentPosition(new_pos);
+
+  state->setHealth(current_player->getHealth());
+  state->setRemainingActionCount(game_->getActionCount());
+  std::shared_ptr<Weapon> weapon = current_player->getWeapon();
+  state->setDamageOutput(weapon->getDamage());
+  if(weapon->getAttackType() == AttackType::MELEE)
+  {
+    state->setCanAttackRange(false);
+  }
+  else
+  {
+    state->setCanAttackRange(true);
+  }
+  state->setCanAttackMelee(true);
+  auto armor = current_player->getArmor();
+  if(armor) state->setDamageInput(armor->getArmorValue());
+  std::vector<std::shared_ptr<Potion>> potions = current_player->getInventory()->getAllPotions();
+  for(auto potion : potions)
+  {
+    if(potion->getEffect() == Effect::HEALTH)
+    {
+      state->setCanHeal(true);
+      break;
+    }
+  }
+  state->setEnemies(current_room->getCharacterAsInt<Enemy>());
+  state->setPlayers(current_room->getCharacterAsInt<Player>());
+  state->setLootables(current_room->getLootableAsInt());
+  state->setEntryDoorPosition(current_room->getEntryDoorPosition());
+  state->setExitDoorPosition(current_room->getNextDoorPosition());
+}

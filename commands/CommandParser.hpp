@@ -30,6 +30,7 @@
 
 #include "PlayCommand.hpp"
 #include "WhoamiCommand.hpp"
+#include "SwitchCommand.hpp"
 
 class CommandParser
 {

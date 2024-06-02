@@ -12,6 +12,7 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_ = make_unique<CommandParser>();
   story_.parseStory(config_path);
   current_phase_ = Phase::ACTION;
+  //display commands
   parser_->registerCommand("help", make_unique<HelpCommand>());
   parser_->registerCommand("map", make_unique<MapCommand>(this));
   parser_->registerCommand("story", make_unique<StoryCommand>(this));
@@ -19,14 +20,15 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("positions", make_unique<PositionsCommand>(this));
   parser_->registerCommand("player", make_unique<PlayerCommand>(this));
   parser_->registerCommand("inventory", make_unique<InventoryCommand>(this));
-
+  //action commands
   parser_->registerCommand("move", make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", make_unique<LootCommand>(this));
   parser_->registerCommand("use", make_unique<UseCommand>(this));
   parser_->registerCommand("attack", make_unique<AttackCommand>(this));
-
+  //a3 commands
   parser_->registerCommand("play", make_unique<PlayCommand>(this));
   parser_->registerCommand("whoami", make_unique<WhoamiCommand>());
+  parser_->registerCommand("switch", make_unique<SwitchCommand>(this));
 }
 
 void Game::start()
@@ -112,6 +114,7 @@ void Game::start()
   printStoryAndRoom();
 
   //TODO make better, this is just for testing.
+  active_player_q_learn_ = players_.at(0);
   state_ = std::make_shared<State>(max_players_, getCurrentRoom()->getFieldOfEntity(players_.at(0)), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
     getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), getCurrentRoom()->getEntryDoorPosition(), getCurrentRoom()->getNextDoorPosition());
   robot_ = std::make_shared<Robot>(*state_, this);
@@ -487,4 +490,18 @@ void Game::enemyPhase()
     }
   }
   printStoryAndRoom(false);
+}
+
+
+void Game::setActivePlayerQLearn(char abbreviation)
+{
+  for(auto& player : players_)
+  {
+    char current_player_abbrev = player->getAbbreviation();
+
+    if(current_player_abbrev == abbreviation && player->isDead() == false)
+    {
+      active_player_q_learn_ = player;
+    }
+  }
 }

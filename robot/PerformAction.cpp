@@ -5,9 +5,10 @@
 double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action,
                                    std::pair<int, int> entry_door_position, std::pair<int,int> exit_door_position, int enemies_left)
 {
+  //Player position written in: y-Axis, x-Axis
   std::map<RobotAction, std::pair<int, int>> actionToMove = {
-          {RobotAction::MOVE_UP, {1, 0}},
-          {RobotAction::MOVE_DOWN, {-1, 0}},
+          {RobotAction::MOVE_UP, {-1, 0}}, //up means one less in y
+          {RobotAction::MOVE_DOWN, {1, 0}},
           {RobotAction::MOVE_LEFT, {0, -1}},
           {RobotAction::MOVE_RIGHT, {0, 1}},
           {RobotAction::MOVE_UP_LEFT, {-1, -1}},
@@ -18,11 +19,12 @@ double PerformAction::perform_move(Player player, std::pair<int, int> player_pos
 
   if (actionToMove.count(action))
   {
-    int new_x = player_position.first + actionToMove[action].first;
-    int new_y = player_position.second + actionToMove[action].second;
-  
+    int new_y = player_position.first + actionToMove[action].first;
+    int new_x = player_position.second + actionToMove[action].second; 
+
+    //But player input is in new_y-Axis and new_x-Axis
     std::string command = "move " + std::string(1, player.getAbbreviation()) + " " 
-            + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+            + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
     std::cout << command;
     game_->doCommand(command);
     // Check if the robot moved to the exit door and there are no enemies left
@@ -306,7 +308,7 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
   int current_player_index = -1;
   for (int i = 0; i < static_cast<int>(players.size()); i++)
   {
-    if (players[i].getAbbreviation() == current_player)
+    if (players[i].getAbbreviation() == current_player && players[i].isDead() == false)
     {
       current_player_index = i;
       break;
@@ -317,7 +319,8 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
   {
     // Switch to the next player in the list
     int next_player_index = (current_player_index + 1) % players.size();
-    // TODO Replace with actual command to switch player
+    std::string command = "switch " + std::string(1, game_->getPlayers().at(next_player_index)->getAbbreviation());
+    game_->doCommand(command);
     std::cout << "Switched to player: " << players[next_player_index].getAbbreviation() << std::endl;
     return 1.0;
   }

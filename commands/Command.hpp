@@ -12,6 +12,8 @@
 
 #include "../utility/Exceptions.hpp"
 #include "../dungeon/Room.hpp"
+#include "../robot/State.hpp"
+
 #include <cctype>
 #include <memory>
 #include <vector>
@@ -34,6 +36,12 @@ class Command
 protected:
   //All commands except for the help command need the game. So I just added it for all of them
   Game* game_;
+
+
+
+
+  RobotAction switch_current_action;
+  double switch_current_reward;
 
   //------------------------------------------------------------------------------------------------------------------
   ///
@@ -97,7 +105,12 @@ protected:
   //
   std::pair<int,int> getPositionAsPairOutOfString(std::string position) const;
 
+  void updateState(shared_ptr<State> state);
 
+  void setCurrentRobotAction(RobotAction& action) {switch_current_action = action;};
+  void setCurrentReward(double rew_new) {switch_current_reward = rew_new;};
+  RobotAction& getCurrentRobotAction() {return switch_current_action;};
+  double getCurrentReward() {return switch_current_reward;};
 
 public:
   //------------------------------------------------------------------------------------------------------------------
@@ -116,7 +129,6 @@ public:
   ///
   //------------------------------------------------------------------------------------------------------------------
   virtual void execute(std::vector<std::string> params) = 0;
-
 
 };
 
