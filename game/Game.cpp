@@ -113,11 +113,11 @@ void Game::start()
   dungeon_.enterCurrentRoom(0, players_);
   printStoryAndRoom();
 
-  //TODO make better, this is just for testing.
   active_player_q_learn_ = players_.at(0);
   state_ = std::make_shared<State>(max_players_, getCurrentRoom()->getFieldOfEntity(players_.at(0)), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
     getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), getCurrentRoom()->getEntryDoorPosition(), getCurrentRoom()->getNextDoorPosition());
   robot_ = std::make_shared<Robot>(*state_, this);
+  additional_reward_ = 0;
 }
 
 void Game::step()
@@ -241,10 +241,12 @@ void Game::doCommand(string input)
     catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
+      additional_reward_ = -10;
     }
     catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
+      additional_reward_ = -10;;
     }
     catch (const CommandExecutionException &e)
     {
@@ -252,12 +254,15 @@ void Game::doCommand(string input)
       {
         case CommandExecutionException::ExceptionType::LOCKED_DOOR:
           cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
+                additional_reward_ = -10;;
           break;
         case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
+                additional_reward_ = -10;;
           break;
         case CommandExecutionException::ExceptionType::NO_AMMUNITION:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_AMMUNITION");
+                additional_reward_ = -10;;
         default:
           break;
       }
@@ -465,6 +470,17 @@ void Game::enemyPhase()
         InputOutput::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         InputOutput::printAttackedCharacters(attacked_fields);
         if (allPlayersAreDead()) { return; }
+        else if(player->isDead() == true)          //Soly for A3 so it switches players if one is dead
+        {
+          for(auto player : players_)
+          {
+            if(player->isDead() == false)
+            {
+              active_player_q_learn_ = player;
+              break;
+            }
+          }
+        }          //Soly for A3
         break;
       }
       else

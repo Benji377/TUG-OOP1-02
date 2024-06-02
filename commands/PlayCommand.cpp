@@ -15,23 +15,15 @@ void PlayCommand::execute(std::vector<std::string> params)
   
   updateState(game_->getState());
   game_->getRobot()->setCurrentState(*(game_->getState()));
-  //game_->getRobot()->executeAction(RobotAction::MOVE_UP, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::LOOT, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::SET_RES_ACID, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::ATTACK, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::USE_RANGED, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::USE_MELEE, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::USE_ARMOR, players.at(0), players);
-  //game_->getRobot()->executeAction(RobotAction::SWITCH_PLAYER, players.at(0), players);
-
   RobotAction action;
   double reward;
+  game_->setAdditionalreward(0); //This is the additional reward, in case robot does something very good or very evil inside the game.
   do
   {
   action = game_->getRobot()->getBestAction(*(game_->getState()), players.at(0));
   reward = game_->getRobot()->executeAction(action, players.at(0), players);
   setCurrentRobotAction(action);
-  setCurrentReward(reward);
+  setCurrentReward(reward); //This reward is only saved in case it's a switch command.
   } while (action == RobotAction::SWITCH_PLAYER); //if it's switchplayer the next 4 lines will be handled automatically.
   
   // TODO: We need to update the state here, because the Q-Learning algorithm will update the Q-table based on the new state
@@ -39,6 +31,6 @@ void PlayCommand::execute(std::vector<std::string> params)
   game_->getRobot()->setPreviousState(*(game_->getState()));
   updateState(game_->getState());
   game_->getRobot()->setCurrentState(*(game_->getState()));
-  game_->getRobot()->updateQTable(action, players.at(0), reward);
-
+  game_->getRobot()->updateQTable(action, players.at(0), reward + game_->getAdditionalreward());
+  game_->setAdditionalreward(0);
 }

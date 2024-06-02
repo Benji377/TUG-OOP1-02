@@ -93,7 +93,8 @@ std::set<RobotAction> State::getPossibleMoves()
         && getEnemies()[new_y][new_x] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
       if ((std::make_pair(new_y, new_x) != getExitDoorPosition() &&
-          std::make_pair(new_y, new_x) != getEntryDoorPosition()) || enemies_left == 0) {
+          std::make_pair(new_y, new_x) != getEntryDoorPosition()) || enemies_left == 0) 
+      {
         possible_moves.insert(move.first);
       }
     }
@@ -285,8 +286,6 @@ bool State::canUseMelee(Player player)
 
 bool State::canSwitchPlayer()
 {
-  // TODO: For testing:
-  return false;
   // The robot can switch player if there are more than one player in the game (and not all players are dead)
   for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
     for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {

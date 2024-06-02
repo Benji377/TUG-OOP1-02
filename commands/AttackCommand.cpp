@@ -66,6 +66,30 @@ void AttackCommand::execute(std::vector<std::string> params)
 
   InputOutput::printAttackedCharacters(attacked_fields_sorted);
 
+  //Soly for a3 qlearning so it switches if a player kills another
+  auto players = game_->getPlayers();
+  for(auto field : attacked_fields_sorted)
+  {
+    if(field.getName() == players.at(0)->getName() || field.getName() == players.at(1)->getName()
+        || field.getName() == players.at(2)->getName())
+    {
+      game_->setAdditionalreward(-10);
+      if(game_->getActivePlayerQLearn()->isDead())
+      {
+          for(auto player : game_->getPlayers())
+          {
+            if(player->isDead() == false)
+            {
+              game_->setActivePlayerQLearn(player->getAbbreviation());
+              break;
+            }
+          }
+      }
+
+    }
+  }
+  //Soly for a3 qlearning so it switches if a player kills another
+
   if(game_->getDungeon().isBossDead())
   {
     return;

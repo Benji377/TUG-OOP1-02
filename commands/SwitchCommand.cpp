@@ -14,4 +14,6 @@ void SwitchCommand::execute(std::vector<std::string> params)
   updateState(game_->getState());
   game_->getRobot()->setCurrentState(*(game_->getState()));
   game_->getRobot()->updateQTable(getCurrentRobotAction(), *(game_->getPlayers().at(0)), getCurrentReward());
+  
+  game_->setAdditionalreward(0);
 }

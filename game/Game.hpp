@@ -54,6 +54,8 @@ class Game
     std::shared_ptr<Robot> robot_;
     std::shared_ptr<Player> active_player_q_learn_;
 
+    double additional_reward_;
+
 
   public:
     //------------------------------------------------------------------------------------------------------------------
@@ -247,6 +249,8 @@ class Game
     shared_ptr<Robot> getRobot() { return robot_;};
     shared_ptr<Player> getActivePlayerQLearn() {return active_player_q_learn_;};
     void setActivePlayerQLearn(char abbreviation);
+    double getAdditionalreward() {return additional_reward_;};
+    void setAdditionalreward(double number) {additional_reward_ = number;};
 };
 
 #endif //GAME_HPP
