@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include <cmath>
+#include <algorithm>
 #include "Field.hpp"
 #include "../entity/character/Character.hpp"
 
@@ -201,6 +202,25 @@ class Room
     /// @return A 2D vector containing the lootables in the room
     //
     vector<vector<int>> getLootableAsInt() const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the best move for a player in the room
+    ///
+    /// @tparam T The type of the player to get the best move for
+    ///
+    /// @param player the player to get the best move for
+    ///
+    /// @return A pair containing the row and column indices of the best move
+    //
+    template <typename T>
+    pair<int,int> getBestMove(shared_ptr<Player> player) const
+    {
+      vector<pair<int,int>> surrounding_fields = getSurroundingFieldPositions(getFieldOfEntity(player));
+      surrounding_fields.erase(std::remove_if(surrounding_fields.begin(), surrounding_fields.end(), [](const std::string& field) {
+        return !field.empty();
+      }), surrounding_fields.end());
+      return best_move;
+    }
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether two fields are adjacent to each other

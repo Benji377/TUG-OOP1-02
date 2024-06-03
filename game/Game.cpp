@@ -112,9 +112,6 @@ void Game::start()
   printStoryAndRoom();
 
   //TODO make better, this is just for testing
-  state_ = std::make_shared<State>(max_players_, std::make_pair<int,int>(0,0), *(players_.at(0)), getCurrentRoom()->getCharacterAsInt<Enemy>(),
-    getCurrentRoom()->getCharacterAsInt<Player>(), getCurrentRoom()->getLootableAsInt(), std::make_pair(0,0));
-  robot_ = std::make_shared<Robot>(*state_);
 }
 
 void Game::step()
@@ -287,6 +284,16 @@ bool Game::playerExists(string name) const
     if (player->getName() == name) { return true; }
   }
   return false;
+}
+
+vector<shared_ptr<Player>> Game::getLivingPlayers() const
+{
+  vector<shared_ptr<Player>> living_players;
+  for (auto player : players_)
+  {
+    if (!player->isDead()) { living_players.push_back(player); }
+  }
+  return living_players;
 }
 
 int Game::getPlayerTypeAmount(char type) const
