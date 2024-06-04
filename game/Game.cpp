@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include <algorithm>
+#include "../robot/PerformAction.hpp"
 
 using std::cout;
 using std::endl;
@@ -241,12 +242,12 @@ void Game::doCommand(string input)
     catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
-      additional_reward_ = -10;
+      additional_reward_ = REWARD_EXCEPTION;
     }
     catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
-      additional_reward_ = -10;;
+      additional_reward_ = REWARD_EXCEPTION;
     }
     catch (const CommandExecutionException &e)
     {
@@ -254,15 +255,15 @@ void Game::doCommand(string input)
       {
         case CommandExecutionException::ExceptionType::LOCKED_DOOR:
           cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
-                additional_reward_ = -10;;
+                additional_reward_ = REWARD_EXCEPTION;
           break;
         case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
-                additional_reward_ = -10;;
+                additional_reward_ = REWARD_EXCEPTION;
           break;
         case CommandExecutionException::ExceptionType::NO_AMMUNITION:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_AMMUNITION");
-                additional_reward_ = -10;;
+                additional_reward_ = REWARD_EXCEPTION;
         default:
           break;
       }

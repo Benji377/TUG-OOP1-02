@@ -109,6 +109,9 @@ class AttackedField
     void setCharacterWithoutName(CharacterType character_type, int lost_health, int total_damage,
       int resistance_modifier, int armor_value, bool is_dead);
     //------------------------------------------------------------------------------------------------------------------
+
+    CharacterType getChracterType() { return character_type_;};
+
     ///
     /// Friend function to overload the << operator for the AttackedField class
     ///

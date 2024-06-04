@@ -36,7 +36,7 @@ void MoveCommand::execute(std::vector<std::string> params)
       int result = game_->getDungeon().moveToRoom(door->getLeadsTo());
       if (result == 1)
       {
-        game_->setAdditionalreward(-50); //if they flee
+        game_->setAdditionalreward(-500); //if they flee
         std::cout << game_->getStory().getStorySegment("N_FLIGHT");
         game_->toggleGameRunning();
         game_->printAndSaveScore();

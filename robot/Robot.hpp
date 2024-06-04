@@ -43,6 +43,7 @@ public:
   explicit Robot(State state, Game* game);
   void saveQTable();
   void loadQTable();
+  
   void updateQTable(RobotAction action, Player player, double reward);
   RobotAction getBestAction(State state, Player player);
   double executeAction(RobotAction action, Player player, std::vector<Player> players);

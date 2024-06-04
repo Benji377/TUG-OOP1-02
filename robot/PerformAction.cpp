@@ -1,24 +1,6 @@
 #include "PerformAction.hpp"
 #include "../game/Game.hpp"
 
-const double REWARD_EXCEPTION = -100.0;
-const double REWARD_MOVE = -1.0;
-const double REWARD_MOVE_DOOR_ENTRY = -50.0;
-const double REWARD_MOVE_DOOR_EXIT = 100.0;
-const double REWARD_LOOT = 10.0;
-const double REWARD_HEAL_FULL = -100.0;
-const double REWARD_HEAL_HALF = 10.0;
-const double REWARD_HEAL_SOME = 5.0;
-const double REWARD_USE_RESISTANCE_FULL = 1.0;
-const double REWARD_USE_RESISTANCE_SOME = 10.0;
-const double REWARD_ATTACK = 100.0;
-const double REWARD_ENEMY_KILLED = 100.0;
-const double REWARD_PLAYER_HIT = -100.0;
-const double REWARD_PLAYER_KILLED = -100.0;
-const double REWARD_EQUIP_WEAPON = 1.0;
-const double REWARD_EQUIP_ARMOR = 1.0;
-const double REWARD_SWITCH_PLAYER = 1.0;
-
 
 double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action,
                                    std::pair<int, int> entry_door_position, std::pair<int,int> exit_door_position, int enemies_left)
@@ -67,15 +49,15 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
   std::vector<std::pair<int, int>> offsets = {{0, 0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
   for (const auto& offset : offsets) {
-    int new_x = player_position.first + offset.first;
-    int new_y = player_position.second + offset.second;
+    int new_y = player_position.first + offset.first;
+    int new_x = player_position.second + offset.second;
 
     // Check if the new position is within the bounds of the lootables vector
     if (new_x >= 0 && new_x < static_cast<int>(lootables.size()) && new_y >= 0 && new_y < static_cast<int>(lootables[0].size())) {
       if (lootables[new_y][new_x] == 1) {
-        
+
         std::string command = "loot " + std::string(1, player.getAbbreviation()) + " " 
-                + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+                + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
         std::cout << command;
         game_->doCommand(command);
 
@@ -190,14 +172,14 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
     {
       int new_y = player_position.first + offset.first;
       int new_x = player_position.second + offset.second;
-      std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << new_x << ", " << new_y << ")" << std::endl;
+      std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << new_y + 1 << ", " << new_x + 1 << ")" << std::endl;
 
       // Check if the new position is within the bounds of the enemies vector
       if (new_y >= 0 && new_y < static_cast<int>(enemies.size()) && new_x >= 0 && new_x < static_cast<int>(enemies[0].size()))
       {
         std::cout << "[DEBUG] Field is not out of bounds" << std::endl;
         int temp = enemies[new_y][new_x]; //TODO sometimes skips over this
-        std::cout << "[DEBUG] Enemy at: (" << new_y << ", " << new_x << ") has health: " << temp << std::endl;
+        std::cout << "[DEBUG] Enemy at: (" << new_y + 1 << ", " << new_x + 1 << ") has health: " << temp << std::endl;
         if (temp > 0)
         {
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
@@ -214,28 +196,29 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
 
       }
     }
-  } else {
+  } else 
+  {
     // If the player has a ranged weapon, check if there is an enemy in range
     std::cout << "[DEBUG] Robot has a ranged weapon in attack perform" << std::endl;
     for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
-      std::cout << "[DEBUG] Checking row: " << i << " of: " << enemies.size() << std::endl;
+      std::cout << "[DEBUG] Checking column: " << i << " of: " << enemies.size() << std::endl;
       for (int j = 0; j < static_cast<int>(enemies[0].size()); j++)
       {
-        std::cout << "[DEBUG] Checking column: " << j << " of: " << enemies[0].size() << std::endl;
-        if (enemies[j][i] > 0)
+        std::cout << "[DEBUG] Checking row: " << j << " of: " << enemies[0].size() << std::endl;
+        if (enemies[i][j] > 0)
         {
           std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << j << ", " << i << ")" << std::endl;
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";
           std::cout << command;
-          game_->doCommand(command);           
-          std::cout << "Robot attacked enemy at: (" << j << ", " << i << ") using ranged weapon" << std::endl;
+          game_->doCommand(command);
+          std::cout << "Robot attacked enemy at: (" << i + 1 << ", " << j + 1 << ") using ranged weapon" << std::endl;
           return REWARD_ATTACK;
         }
         else
         {
-          std::cout << "[DEBUG] No enemy found at: (" << j << ", " << i << ")" << std::endl;
+          std::cout << "[DEBUG] No enemy found at: (" << i + 1 << ", " << j + 1 << ")" << std::endl;
         }
       }
     }
@@ -280,7 +263,7 @@ double PerformAction::perform_use_ranged(Player player)
   }
   else
   {
-        std::cout << "Robot failed to equip ranged weapon" << std::endl;
+    std::cout << "Robot failed to equip ranged weapon" << std::endl;
     return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }
@@ -291,20 +274,22 @@ double PerformAction::perform_use_melee(Player player)
 
   auto it = std::remove_if(weapons.begin(), weapons.end(),
                           [player](const std::shared_ptr<Weapon>& weapon) {
-                              return weapon == player.getWeapon();
+                              return weapon->getAbbreviation() == player.getWeapon()->getAbbreviation();
                           });
-  weapons.erase(it, weapons.end()); //We don't want to just unequip the current weapon
+  weapons.erase(it, weapons.end()); //We don't want to just unequip the current weapon or equip the same.
 
     std::vector<std::shared_ptr<Weapon>> meleeWeapons;
     std::copy_if(weapons.begin(), weapons.end(), std::back_inserter(meleeWeapons),
               [](const std::shared_ptr<Weapon>& weapon) {
                   return weapon->getAttackType() == AttackType::MELEE;
               });
-    auto maxWeaponIt = std::max_element(meleeWeapons.begin(), meleeWeapons.end(),
-              [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
-                  return (a->getDice()->getType() + a->getDamageAddition()) <
-                         (b->getDice()->getType() + b->getDamageAddition());
-              });
+
+  auto maxWeaponIt = std::max_element(meleeWeapons.begin(), meleeWeapons.end(),
+            [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
+                return (a->getDice()->getType() + a->getDamageAddition()) <
+                        (b->getDice()->getType() + b->getDamageAddition());
+            });
+
   if(maxWeaponIt != meleeWeapons.end())
   {
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
@@ -317,7 +302,7 @@ double PerformAction::perform_use_melee(Player player)
   }
   else
   {
-        std::cout << "Robot failed to equip melee weapon" << std::endl;
+    std::cout << "Robot failed to equip melee weapon" << std::endl;
     return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }
@@ -381,8 +366,8 @@ double PerformAction::perform_use_armor(Player player)
     {
       if(player_armor != nullptr)
       {
-        if (armor->getArmorValue() > player_armor->getArmorValue()) {
-        
+        if (armor->getArmorValue() > player_armor->getArmorValue()) 
+        {
         std::string command = "use " + std::string(1, player.getAbbreviation()) + " " +
                   armor->getAbbreviation() + "\n";
         std::cout << command;

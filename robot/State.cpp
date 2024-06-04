@@ -53,6 +53,9 @@ std::set<RobotAction> State::getPossibleActions(Player player)
   if (canSwitchPlayer()) {
     possible_actions.insert(RobotAction::SWITCH_PLAYER);
   }
+  if(canUseArmor(player)) {
+    possible_actions.insert(RobotAction::USE_ARMOR);
+  }
   return possible_actions;
 }
 
@@ -110,8 +113,8 @@ bool State::canLoot() {
   // or in the 8 adjacent positions, the player can loot.
   for (int i = -1; i <= 1; i++) {
     for (int j = -1; j <= 1; j++) {
-      int new_y = getCurrentPosition().second + i;
-      int new_x = getCurrentPosition().first + j;
+      int new_y = getCurrentPosition().first + i;
+      int new_x = getCurrentPosition().second + j;
       if (new_y >= 0 && new_y < static_cast<int>(getLootables().size())
           && new_x >= 0 && new_x < static_cast<int>(getLootables()[0].size()) &&
           getLootables()[new_y][new_x] == 1) {
@@ -231,24 +234,9 @@ bool State::canUseRanged(Player player)
   {
     for (const auto& weapon : player.getInventory()->getAllWeapons())
     {
-      if (weapon->getAttackType() == AttackType::RANGED)
+      if (weapon->getAttackType() == AttackType::RANGED && player.getWeapon()->getAbbreviation() != weapon->getAbbreviation())
       {
-        if (player.getWeapon()->getAttackType() == AttackType::MELEE)
-        {
-          if (weapon->getDamageAddition() + weapon->getDice()->getType() >
-              player.getWeapon()->getDamageAddition() + player.getWeapon()->getDice()->getType())
-          {
-            return true;
-          }
-          else
-          {
-            return false;
-          }
-        }
-        else
-        {
-          return true;
-        }
+        return true;
       }
     }
   }
@@ -257,29 +245,16 @@ bool State::canUseRanged(Player player)
 
 bool State::canUseMelee(Player player)
 {
+  auto weapons = player.getInventory()->getAllWeapons();
+
   // Can use melee weapon if the player has a melee weapon in his inventory
-  if (!player.getInventory()->getAllWeapons().empty())
+  if (!weapons.empty())
   {
-    for (const auto& weapon : player.getInventory()->getAllWeapons())
+    for (const auto& weapon : weapons)
     {
-      if (weapon->getAttackType() == AttackType::MELEE)
+      if (weapon->getAttackType() == AttackType::MELEE && player.getWeapon()->getAbbreviation() != weapon->getAbbreviation())
       {
-        if (player.getWeapon()->getAttackType() == AttackType::MELEE)
-        {
-          if (weapon->getDamageAddition() + weapon->getDice()->getType() >
-              player.getWeapon()->getDamageAddition() + player.getWeapon()->getDice()->getType())
-          {
-            return true;
-          }
-          else
-          {
-            return false;
-          }
-        }
-        else
-        {
-          return true;
-        }
+        return true;
       }
     }
   }
@@ -308,6 +283,10 @@ bool State::canUseArmor(Player player)
   // The robot can use armor if the player has armor in his inventory, and it provides better protection than the current armor
   if (!player.getInventory()->getAllArmor().empty())
   {
+    if(player.getArmor() == nullptr)
+    {
+      return true;
+    }
     for (const auto& armor : player.getInventory()->getAllArmor())
     {
       if (armor->getArmorValue() > player.getArmor()->getArmorValue())
