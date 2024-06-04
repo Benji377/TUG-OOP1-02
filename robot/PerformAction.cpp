@@ -148,10 +148,8 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
     // If the player has lost more than 10% of its health, provide a big reward
     if (player.getHealth() < player.getMaximumHealth() * 0.9)
     {
-      std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
       return REWARD_USE_RESISTANCE_SOME;
     }
-    std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
     return REWARD_USE_RESISTANCE_FULL;
   }
   // If the action is not a resistance action, return a big negative number
@@ -163,7 +161,6 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   // TODO: Add a big reward if the enemy is killed
   if (player.getWeapon()->getAttackType() == AttackType::MELEE)
   {
-    std::cout << "[DEBUG] Robot has a melee weapon in attack perform" << std::endl;
     // Define the offsets for the surrounding cells
     std::vector<std::pair<int, int>> offsets = {{0, 0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1},
                                                 {-1, 1}, {1, -1}, {1, 1}};
@@ -185,21 +182,18 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
           std::cout << command;
-          game_->doCommand(command); 
-          std::cout << "Robot attacked enemy at: (" << new_x << ", " << new_y << ") using melee weapon" << std::endl;
+          game_->doCommand(command);
           return REWARD_ATTACK;
         }
       }
       else
       {
         std::cout << "[DEBUG] Field is out of bounds" << std::endl;
-
       }
     }
   } else 
   {
     // If the player has a ranged weapon, check if there is an enemy in range
-    std::cout << "[DEBUG] Robot has a ranged weapon in attack perform" << std::endl;
     for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
       std::cout << "[DEBUG] Checking column: " << i << " of: " << enemies.size() << std::endl;
@@ -257,8 +251,6 @@ double PerformAction::perform_use_ranged(Player player)
                   + (*maxWeaponIt)->getAbbreviation() + "\n";
     std::cout << command;
     game_->doCommand(command);
-
-    std::cout << "Robot equipped ranged weapon" << std::endl;
     return REWARD_EQUIP_WEAPON;
   }
   else
@@ -296,8 +288,6 @@ double PerformAction::perform_use_melee(Player player)
                   + (*maxWeaponIt)->getAbbreviation() + "\n";
     std::cout << command;
     game_->doCommand(command);
-
-    std::cout << "Robot equipped melee weapon" << std::endl;
     return REWARD_EQUIP_WEAPON;
   }
   else
@@ -311,7 +301,6 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
 {
   // Find the index of the current player
   int current_player_index = -1;
-  std::cout << "[DEBUG] Performing switch player for: " << current_player << std::endl;
   // We need to iterate through the players and find the next player that is still alive
   // If there is no more player alive, we will not switch the player
   for (int i = 0; i < static_cast<int>(players.size()); i++)
@@ -343,13 +332,9 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
   if (current_player_index != -1)
   {
     // Switch to the next player in the list
-    std::cout << "[DEBUG] Switching to next player" << std::endl;
     int next_player_index = (current_player_index + 1) % players.size();
-    std::cout << "[DEBUG] Next player index: " << next_player_index << std::endl;
     std::string command = "switch " + std::string(1, game_->getPlayers().at(next_player_index)->getAbbreviation());
-    std::cout << "[DEBUG] Command: " << command << std::endl;
     game_->doCommand(command);
-    std::cout << "Switched to player: " << players[next_player_index].getAbbreviation() << std::endl;
     return REWARD_SWITCH_PLAYER;
   }
 
@@ -372,8 +357,6 @@ double PerformAction::perform_use_armor(Player player)
                   armor->getAbbreviation() + "\n";
         std::cout << command;
         game_->doCommand(command);
-
-        std::cout << "Robot equipped armor" << std::endl;
         return REWARD_EQUIP_ARMOR;
         }
       }
@@ -383,13 +366,9 @@ double PerformAction::perform_use_armor(Player player)
           armor->getAbbreviation() + "\n";
         std::cout << command;
         game_->doCommand(command);
-
-        std::cout << "Robot equipped armor" << std::endl;
         return REWARD_EQUIP_ARMOR;
       }
     }
   }
-          std::cout << "Robot failed to equip armor" << std::endl;
-
   return REWARD_EXCEPTION;
 }

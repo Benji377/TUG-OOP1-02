@@ -75,7 +75,7 @@ void Robot::loadQTable()
     auto action = static_cast<RobotAction>(std::stoi(row[1]));
     double q_value = std::stod(row[2]);
 
-    q_table_[std::make_tuple(getCurrentState(), static_cast<RobotAction>(action))] = q_value;
+    q_table_[std::make_tuple(state, static_cast<RobotAction>(action))] = q_value;
   }
   // Print size of Q-table
   std::cout << "Q-table loaded with " << q_table_.size() << " entries" << std::endl;
@@ -86,32 +86,17 @@ void Robot::updateQTable(RobotAction action, Player player, double reward)
   State state = getPreviousState();
   State new_state = getCurrentState();
 
-  std::cout << "[DEBUG] Q-Table is of size: " << q_table_.size() << std::endl;
-
-  std::cout << "[DEBUG] Updating Q-table" << std::endl;
   double q_value = q_table_[std::make_tuple(state, action)];
   double max_q_value = getMaximumQValue(new_state, player);
-  std::cout << "[DEBUG] Reward: " << reward << ", Q-value: " << q_value << ", Max Q-value: " << max_q_value << std::endl;
   double new_q_value = q_value + alpha_ * (reward + gamma_ * max_q_value - q_value);
   q_table_[std::make_tuple(state, action)] = new_q_value;
-  std::cout << "[DEBUG] Q-value updated: " << new_q_value << std::endl;
-
-  // Print the state-action pair being added
-  std::cout << "[DEBUG] Adding state-action pair: (" << state.serializeState() << ", " << getRobotActionAsString(action) << ")" << std::endl;
-
-  q_table_[std::make_tuple(state, action)] = new_q_value;
-  std::cout << "[DEBUG] Q-value updated: " << new_q_value << std::endl;
-
-  // Print the size of the Q-table after the update
-  std::cout << "[DEBUG] Q-Table is of size after update: " << q_table_.size() << std::endl;
-
 
   saveQTable();
 }
 
 RobotAction Robot::getBestAction(State state, Player player)
 {
-  std::cout << "[DEBUG] Getting best action for player " << player.getName() << std::endl;
+  std::cout << "[DEBUG] Getting best action for player: " << player.getName() << std::endl;
   std::set<RobotAction> possible_actions = state.getPossibleActions(player);
   // Output possible actions
   std::cout << "[DEBUG] Possible actions: ";
@@ -119,17 +104,20 @@ RobotAction Robot::getBestAction(State state, Player player)
     std::cout << getRobotActionAsString(action) << ", ";
   }
   std::cout << std::endl;
-  RobotAction best_action;
+  RobotAction best_action = RobotAction::UNKNOWN;
   double max_q_value = -std::numeric_limits<double>::infinity();
   std::cout << "[DEBUG] Max Q-value: " << max_q_value << std::endl;
 
   // Exploitation: Choose the action with the highest Q-value
   for (const RobotAction& action : possible_actions) {
-    double q_value = q_table_[std::make_tuple(state, action)];
-    std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
-    if (q_value > max_q_value) {
-      max_q_value = q_value;
-      best_action = action;
+    auto it = q_table_.find(std::make_tuple(state, action));
+    if (it != q_table_.end()) {
+      double q_value = it->second;
+      std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
+      if (q_value > max_q_value) {
+        max_q_value = q_value;
+        best_action = action;
+      }
     }
   }
 
@@ -137,13 +125,13 @@ RobotAction Robot::getBestAction(State state, Player player)
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> distribution(0, 1);
-  if (distribution(gen) < epsilon_) {
+  if (distribution(gen) < epsilon_ || best_action == RobotAction::UNKNOWN) {
     std::cout << "[DEBUG] Exploration: Choosing random action" << std::endl;
     std::uniform_int_distribution<> dis(0, possible_actions.size() - 1);
     auto it = std::next(possible_actions.begin(), dis(gen));
     best_action = *it;
   }
-  std::cout << "[DEBUG] Best action: " << getRobotActionAsString(best_action) << std::endl;
+  std::cout << "[DEBUG] Best action: (" << static_cast<int>(best_action) << ") " << getRobotActionAsString(best_action) << std::endl;
 
   // Decay epsilon
   epsilon_ = std::max(epsilon_ * epsilon_decay_, epsilon_min_);
@@ -196,7 +184,7 @@ double Robot::executeAction(RobotAction action, Player player, std::vector<Playe
       return performAction.perform_use_armor(player);
     default:
       std::cout << "Invalid action: " << getRobotActionAsString(action) << std::endl;
-      break;
+      throw std::invalid_argument("Invalid action");
   }
 }
 
@@ -206,10 +194,18 @@ double Robot::getMaximumQValue(State state, Player player)
   double max_q_value = -std::numeric_limits<double>::infinity();
 
   for (const RobotAction& action : possible_actions) {
-    double q_value = q_table_[std::make_tuple(state, action)];
-    if (q_value > max_q_value) {
-      max_q_value = q_value;
+    auto it = q_table_.find(std::make_tuple(state, action));
+    if (it != q_table_.end()) {
+      double q_value = it->second;
+      if (q_value > max_q_value) {
+        max_q_value = q_value;
+      }
     }
+  }
+
+  // If max_q_value is still negative infinity, return 0 instead
+  if (max_q_value == -std::numeric_limits<double>::infinity()) {
+    return 0;
   }
 
   return max_q_value;

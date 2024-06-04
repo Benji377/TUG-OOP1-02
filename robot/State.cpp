@@ -50,6 +50,9 @@ std::set<RobotAction> State::getPossibleActions(Player player)
   if (canUseMelee(player)) {
     possible_actions.insert(RobotAction::USE_MELEE);
   }
+  if (canUseArmor(player)) {
+    possible_actions.insert(RobotAction::USE_ARMOR);
+  }
   if (canSwitchPlayer()) {
     possible_actions.insert(RobotAction::SWITCH_PLAYER);
   }
