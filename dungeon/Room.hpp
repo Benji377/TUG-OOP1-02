@@ -17,6 +17,8 @@
 #include <algorithm>
 #include "Field.hpp"
 #include "../entity/character/Character.hpp"
+#include "../entity/character/Player.hpp"
+#include "../entity/Door.hpp"
 
 using std::vector;
 using std::shared_ptr;
@@ -215,12 +217,24 @@ class Room
     template <typename T>
     pair<int,int> getBestMove(shared_ptr<Player> player) const
     {
-      vector<pair<int,int>> surrounding_fields = getSurroundingFieldPositions(getFieldOfEntity(player));
-      surrounding_fields.erase(std::remove_if(surrounding_fields.begin(), surrounding_fields.end(), [](const std::string& field) {
-        return !field.empty();
-      }), surrounding_fields.end());
+      vector<pair<int, int>> surrounding_fields = getSurroundingFieldPositions(getFieldOfEntity(player));
+      vector<shared_ptr<T>> available_entities = getAllEntitiesOfType<T>();
+      map<int, pair<int, int>> distances;
+      for (auto& field : surrounding_fields)
+      {
+        if (getField(field)->getEntity() == nullptr)
+        {
+          for (auto& entity : available_entities)
+          {
+            distances[getDistance(field, getFieldOfEntity(dynamic_pointer_cast<Entity>(entity)))] = field;
+          }
+        }
+      }
+      pair<int, int> best_move = distances.begin()->second;
       return best_move;
     }
+
+    int getDistance(pair<int, int> field_1, pair<int, int> field_2) const;
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether two fields are adjacent to each other

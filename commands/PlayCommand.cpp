@@ -8,5 +8,4 @@ void PlayCommand::execute(std::vector<std::string> params)
   Decision decision(game_);
   std::string command = decision.getBestCommand();
   std::cout << "AI: " << command << std::endl;
-  game_->doCommand(command);
 }

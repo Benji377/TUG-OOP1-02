@@ -320,3 +320,8 @@ vector<vector<int>> Room::getLootableAsInt() const
   }
   return lootable_map;
 }
+
+int Room::getDistance(pair<int, int> start, pair<int, int> end) const
+{
+  return std::abs(start.first - end.first) + std::abs(start.second - end.second);
+}
