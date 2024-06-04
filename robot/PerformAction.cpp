@@ -197,11 +197,11 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
       {
         std::cout << "[DEBUG] Field is not out of bounds" << std::endl;
         int temp = enemies[new_y][new_x]; //TODO sometimes skips over this
-        std::cout << "[DEBUG] Enemy at: (" << new_x << ", " << new_y << ") has health: " << temp << std::endl;
+        std::cout << "[DEBUG] Enemy at: (" << new_y << ", " << new_x << ") has health: " << temp << std::endl;
         if (temp > 0)
         {
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
-                  + std::to_string(new_x + 1) + "," + std::to_string(new_y + 1) + "\n";
+                  + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
           std::cout << command;
           game_->doCommand(command); 
           std::cout << "Robot attacked enemy at: (" << new_x << ", " << new_y << ") using melee weapon" << std::endl;

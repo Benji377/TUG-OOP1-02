@@ -90,7 +90,9 @@ std::set<RobotAction> State::getPossibleMoves()
 
     if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size()) // P(y,x)
         && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size())
-        && getEnemies()[new_y][new_x] == 0) {
+        && getEnemies()[new_y][new_x] == 0
+        && getPlayers()[new_y][new_x] == 0
+        && getLootables()[new_y][new_x] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
       if ((std::make_pair(new_y, new_x) != getExitDoorPosition() &&
           std::make_pair(new_y, new_x) != getEntryDoorPosition()) || enemies_left == 0) 

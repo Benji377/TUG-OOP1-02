@@ -149,6 +149,14 @@ void Command::updateState(shared_ptr<State> state)
   state->setEnemies(current_room->getCharacterAsInt<Enemy>());
   state->setPlayers(current_room->getCharacterAsInt<Player>());
   state->setLootables(current_room->getLootableAsInt());
-  state->setEntryDoorPosition(current_room->getEntryDoorPosition());
-  state->setExitDoorPosition(current_room->getNextDoorPosition());
+
+  std::pair<int,int> door_position = current_room->getEntryDoorPosition();
+  --door_position.first; //Convert it to vector coordinates.
+  --door_position.second;
+  state->setEntryDoorPosition(door_position);
+
+  door_position = current_room->getNextDoorPosition();
+  --door_position.first;
+  --door_position.second;
+  state->setExitDoorPosition(door_position);
 }
