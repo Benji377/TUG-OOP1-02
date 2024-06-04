@@ -23,6 +23,7 @@
 // that are possible in the current state. This will be done in the Robot class.
 enum class RobotAction
 {
+  UNKNOWN,
   MOVE_UP,
   MOVE_UP_RIGHT, // Diagonally moving to upper right
   MOVE_UP_LEFT, // Diagonally moving to upper left
