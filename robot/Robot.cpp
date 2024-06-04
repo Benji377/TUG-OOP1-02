@@ -72,13 +72,13 @@ void Robot::loadQTable()
 
     State state = State();
     state.deserializeState(row[0]);
-    std::cout << "[DEBUG] Read state: " << row[0] << std::endl;
-    std::cout << "[DEBUG] State: " << state.serializeState() << std::endl;
     auto action = static_cast<RobotAction>(std::stoi(row[1]));
     double q_value = std::stod(row[2]);
 
     q_table_[std::make_tuple(getCurrentState(), static_cast<RobotAction>(action))] = q_value;
   }
+  // Print size of Q-table
+  std::cout << "Q-table loaded with " << q_table_.size() << " entries" << std::endl;
 }
 
 void Robot::updateQTable(RobotAction action, Player player, double reward)
@@ -86,13 +86,27 @@ void Robot::updateQTable(RobotAction action, Player player, double reward)
   State state = getPreviousState();
   State new_state = getCurrentState();
 
+  std::cout << "[DEBUG] Q-Table is of size: " << q_table_.size() << std::endl;
+
   std::cout << "[DEBUG] Updating Q-table" << std::endl;
   double q_value = q_table_[std::make_tuple(state, action)];
   double max_q_value = getMaximumQValue(new_state, player);
+  std::cout << "[DEBUG] Reward: " << reward << ", Q-value: " << q_value << ", Max Q-value: " << max_q_value << std::endl;
   double new_q_value = q_value + alpha_ * (reward + gamma_ * max_q_value - q_value);
   q_table_[std::make_tuple(state, action)] = new_q_value;
   std::cout << "[DEBUG] Q-value updated: " << new_q_value << std::endl;
-  saveQTable(); // TODO: Maybe execute this at the end of the game instead?
+
+  // Print the state-action pair being added
+  std::cout << "[DEBUG] Adding state-action pair: (" << state.serializeState() << ", " << getRobotActionAsString(action) << ")" << std::endl;
+
+  q_table_[std::make_tuple(state, action)] = new_q_value;
+  std::cout << "[DEBUG] Q-value updated: " << new_q_value << std::endl;
+
+  // Print the size of the Q-table after the update
+  std::cout << "[DEBUG] Q-Table is of size after update: " << q_table_.size() << std::endl;
+
+
+  saveQTable();
 }
 
 RobotAction Robot::getBestAction(State state, Player player)

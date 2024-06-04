@@ -30,7 +30,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   {
     char current_player_abbrev = player->getAbbreviation();
 
-    if(current_player_abbrev == uppercase_input_abbrev && player->isDead() == false)
+    if(current_player_abbrev == uppercase_input_abbrev && !player->isDead())
     {
       return player;
     }

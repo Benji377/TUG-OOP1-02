@@ -326,20 +326,43 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
 {
   // Find the index of the current player
   int current_player_index = -1;
+  std::cout << "[DEBUG] Performing switch player for: " << current_player << std::endl;
+  // We need to iterate through the players and find the next player that is still alive
+  // If there is no more player alive, we will not switch the player
   for (int i = 0; i < static_cast<int>(players.size()); i++)
   {
-    if (players[i].getAbbreviation() == current_player && !players[i].isDead())
+    if (players[i].getAbbreviation() == current_player)
     {
       current_player_index = i;
       break;
     }
   }
+  for (int i = current_player_index; i < static_cast<int>(players.size()); i++)
+  {
+    if (i == static_cast<int>(players.size()) - 1)
+    {
+      i = 0;
+    }
+    if (!players[i].isDead())
+    {
+      if (i == current_player_index) {
+        // In this case, no switching is needed, as its the only player left
+        return REWARD_EXCEPTION;
+      }
+      current_player_index = i;
+      break;
+    }
+  }
+
 
   if (current_player_index != -1)
   {
     // Switch to the next player in the list
+    std::cout << "[DEBUG] Switching to next player" << std::endl;
     int next_player_index = (current_player_index + 1) % players.size();
+    std::cout << "[DEBUG] Next player index: " << next_player_index << std::endl;
     std::string command = "switch " + std::string(1, game_->getPlayers().at(next_player_index)->getAbbreviation());
+    std::cout << "[DEBUG] Command: " << command << std::endl;
     game_->doCommand(command);
     std::cout << "Switched to player: " << players[next_player_index].getAbbreviation() << std::endl;
     return REWARD_SWITCH_PLAYER;
