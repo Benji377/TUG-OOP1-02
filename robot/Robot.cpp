@@ -75,7 +75,7 @@ void Robot::loadQTable()
     auto action = static_cast<RobotAction>(std::stoi(row[1]));
     double q_value = std::stod(row[2]);
 
-    q_table_[std::make_tuple(getCurrentState(), static_cast<RobotAction>(action))] = q_value;
+    q_table_[std::make_tuple(state, static_cast<RobotAction>(action))] = q_value;
   }
   // Print size of Q-table
   std::cout << "Q-table loaded with " << q_table_.size() << " entries" << std::endl;
@@ -85,8 +85,6 @@ void Robot::updateQTable(RobotAction action, Player player, double reward)
 {
   State state = getPreviousState();
   State new_state = getCurrentState();
-
-  std::cout << "[DEBUG] Q-Table is of size: " << q_table_.size() << std::endl;
 
   std::cout << "[DEBUG] Updating Q-table" << std::endl;
   double q_value = q_table_[std::make_tuple(state, action)];
@@ -125,11 +123,14 @@ RobotAction Robot::getBestAction(State state, Player player)
 
   // Exploitation: Choose the action with the highest Q-value
   for (const RobotAction& action : possible_actions) {
-    double q_value = q_table_[std::make_tuple(state, action)];
-    std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
-    if (q_value > max_q_value) {
-      max_q_value = q_value;
-      best_action = action;
+    auto it = q_table_.find(std::make_tuple(state, action));
+    if (it != q_table_.end()) {
+      double q_value = it->second;
+      std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
+      if (q_value > max_q_value) {
+        max_q_value = q_value;
+        best_action = action;
+      }
     }
   }
 
@@ -205,11 +206,24 @@ double Robot::getMaximumQValue(State state, Player player)
   std::set<RobotAction> possible_actions = state.getPossibleActions(player);
   double max_q_value = -std::numeric_limits<double>::infinity();
 
+  std::cout << "[DEBUG] Q-Table is of size before getMaximumQValue: " << q_table_.size() << std::endl;
+
   for (const RobotAction& action : possible_actions) {
-    double q_value = q_table_[std::make_tuple(state, action)];
-    if (q_value > max_q_value) {
-      max_q_value = q_value;
+    auto it = q_table_.find(std::make_tuple(state, action));
+    if (it != q_table_.end()) {
+      double q_value = it->second;
+      std::cout << "[DEBUG] Accessing Q-value for state-action pair: (" << state.serializeState() << ", " << getRobotActionAsString(action) << ")" << std::endl;
+      if (q_value > max_q_value) {
+        max_q_value = q_value;
+      }
     }
+  }
+
+  std::cout << "[DEBUG] Q-Table is of size after getMaximumQValue: " << q_table_.size() << std::endl;
+
+  // If max_q_value is still negative infinity, return 0 instead
+  if (max_q_value == -std::numeric_limits<double>::infinity()) {
+    return 0;
   }
 
   return max_q_value;
