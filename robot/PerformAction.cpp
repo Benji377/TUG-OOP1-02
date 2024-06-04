@@ -1,6 +1,24 @@
 #include "PerformAction.hpp"
 #include "../game/Game.hpp"
-#include "../entity/character/Inventory.hpp"
+
+const double REWARD_EXCEPTION = -100.0;
+const double REWARD_MOVE = -1.0;
+const double REWARD_MOVE_DOOR_ENTRY = -50.0;
+const double REWARD_MOVE_DOOR_EXIT = 100.0;
+const double REWARD_LOOT = 10.0;
+const double REWARD_HEAL_FULL = -100.0;
+const double REWARD_HEAL_HALF = 10.0;
+const double REWARD_HEAL_SOME = 5.0;
+const double REWARD_USE_RESISTANCE_FULL = 1.0;
+const double REWARD_USE_RESISTANCE_SOME = 10.0;
+const double REWARD_ATTACK = 100.0;
+const double REWARD_ENEMY_KILLED = 100.0;
+const double REWARD_PLAYER_HIT = -100.0;
+const double REWARD_PLAYER_KILLED = -100.0;
+const double REWARD_EQUIP_WEAPON = 1.0;
+const double REWARD_EQUIP_ARMOR = 1.0;
+const double REWARD_SWITCH_PLAYER = 1.0;
+
 
 double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action,
                                    std::pair<int, int> entry_door_position, std::pair<int,int> exit_door_position, int enemies_left)
@@ -30,17 +48,17 @@ double PerformAction::perform_move(Player player, std::pair<int, int> player_pos
     // Check if the robot moved to the exit door and there are no enemies left
     if (new_y == exit_door_position.first && new_x == exit_door_position.second && enemies_left == 0)
     {
-      return 100.0;
+      return REWARD_MOVE_DOOR_EXIT;
     }
     // Check if the robot moved to the entry door
     if (new_y == entry_door_position.first && new_x == entry_door_position.second)
     {
-      return -50.0;
+      return REWARD_MOVE_DOOR_ENTRY;
     }
-    return -1.0;
+    return REWARD_MOVE;
   }
   // If the action is not a move action, return a big negative number
-  return -100.0;
+  return REWARD_EXCEPTION;
 }
 
 double PerformAction::perform_loot(Player player, std::pair<int, int> player_position, std::vector<std::vector<int>> lootables)
@@ -62,7 +80,7 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
         game_->doCommand(command);
 
         std::cout << "Robot looted at: (" << new_x << ", " << new_y << ")" << std::endl;
-        return 10.0;
+        return REWARD_LOOT;
       }
     }
   }
@@ -77,14 +95,11 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
 //END
 
   // If there is no loot, return a big negative number
-  return -100.0;
+  return REWARD_EXCEPTION;
 }
 
 double PerformAction::perform_regeneration(Player player)
 {
-  // If the player has lost more than 10% of its health, provide a big reward
-  if (true)//player.getHealth() < player.getMaximumHealth() * 0.9)
-  {
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " ";
 
     std::shared_ptr<Potion> potion1 = player.getInventory()->getPotion("NHEP");
@@ -107,16 +122,24 @@ double PerformAction::perform_regeneration(Player player)
     } 
     else {
         std::cout << "No suitable potion found in inventory." << std::endl;
-        return -50; // Regeneration not possible.
+        return REWARD_EXCEPTION; // Regeneration not possible.
     }
 
-    std::cout << "Robot used health potion" << std::endl;
-    return 10.0;
+  // Provide reward depending on health
+  if (player.getHealth() == player.getMaximumHealth())
+  {
+    // No health loss, health potion is wasted
+    return REWARD_HEAL_FULL;
   }
-
-  // TODO Replace with actual command to regenerate the player
-  std::cout << "Robot tried to heal" << std::endl;
-  return 1.0;
+  else if (player.getHealth() < player.getMaximumHealth() * 0.5) {
+    // If the player has lost more than 50% of its health, provide a big reward
+    return REWARD_HEAL_HALF;
+  }
+  else
+  {
+    // If the player has lost less than 50% of its health, provide a small reward
+    return REWARD_HEAL_SOME;
+  }
 }
 
 double PerformAction::perform_resistance(Player player, RobotAction action)
@@ -144,13 +167,13 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
     if (player.getHealth() < player.getMaximumHealth() * 0.9)
     {
       std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
-      return 10.0;
+      return REWARD_USE_RESISTANCE_SOME;
     }
     std::cout << "Robot used " << resistanceTypes[action] << " resistance potion" << std::endl;
-    return 1.0;
+    return REWARD_USE_RESISTANCE_FULL;
   }
   // If the action is not a resistance action, return a big negative number
-  return -100.0;
+  return REWARD_EXCEPTION;
 }
 
 double PerformAction::perform_attack(Player player, std::pair<int, int> player_position, std::vector<std::vector<int>> enemies)
@@ -160,15 +183,8 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   {
     std::cout << "[DEBUG] Robot has a melee weapon in attack perform" << std::endl;
     // Define the offsets for the surrounding cells
-    std::vector<std::pair<int, int>> offsets = {{0,  0},
-                                                {-1, 0},
-                                                {1,  0},
-                                                {0,  -1},
-                                                {0,  1},
-                                                {-1, -1},
-                                                {-1, 1},
-                                                {1,  -1},
-                                                {1,  1}};
+    std::vector<std::pair<int, int>> offsets = {{0, 0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1},
+                                                {-1, 1}, {1, -1}, {1, 1}};
 
     for (const auto &offset: offsets)
     {
@@ -189,7 +205,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
           std::cout << command;
           game_->doCommand(command); 
           std::cout << "Robot attacked enemy at: (" << new_x << ", " << new_y << ") using melee weapon" << std::endl;
-          return 10.0;
+          return REWARD_ATTACK;
         }
       }
       else
@@ -215,7 +231,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
           std::cout << command;
           game_->doCommand(command);           
           std::cout << "Robot attacked enemy at: (" << j << ", " << i << ") using ranged weapon" << std::endl;
-          return 10.0;
+          return REWARD_ATTACK;
         }
         else
         {
@@ -226,7 +242,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
   }
 
   // If there is no enemy to attack, return a big negative number
-  return -100.0;
+  return REWARD_EXCEPTION;
 }
 
 double PerformAction::perform_use_ranged(Player player)
@@ -244,10 +260,13 @@ double PerformAction::perform_use_ranged(Player player)
               [](const std::shared_ptr<Weapon>& weapon) {
                   return weapon->getAttackType() == AttackType::RANGED;
               });
+    // We use the damage addition in addition to the dice type to determine the best weapon
+    // This is because a higher dice type means a higher chance of dealing more damage
     auto maxWeaponIt = std::max_element(rangedWeapons.begin(), rangedWeapons.end(),
               [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
-                  return a->getDamageAddition() < b->getDamageAddition();
-              }); //TODO damageAddition is what checks if it's the biggest weapon, right?
+                  return (a->getDice()->getType() + a->getDamageAddition()) <
+                        (b->getDice()->getType() + b->getDamageAddition());
+              });
 //ChatGPT End
   if(maxWeaponIt != rangedWeapons.end())
   {
@@ -257,12 +276,12 @@ double PerformAction::perform_use_ranged(Player player)
     game_->doCommand(command);
 
     std::cout << "Robot equipped ranged weapon" << std::endl;
-    return 1.0;
+    return REWARD_EQUIP_WEAPON;
   }
   else
   {
         std::cout << "Robot failed to equip ranged weapon" << std::endl;
-    return -5; //tried to equip meele but there wasn't one.
+    return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }
 
@@ -283,8 +302,9 @@ double PerformAction::perform_use_melee(Player player)
               });
     auto maxWeaponIt = std::max_element(meleeWeapons.begin(), meleeWeapons.end(),
               [](const std::shared_ptr<Weapon>& a, const std::shared_ptr<Weapon>& b) {
-                  return a->getDamageAddition() < b->getDamageAddition();
-              }); //TODO damageAddition is what checks if it's the biggest weapon, right?
+                  return (a->getDice()->getType() + a->getDamageAddition()) <
+                         (b->getDice()->getType() + b->getDamageAddition());
+              });
   if(maxWeaponIt != meleeWeapons.end())
   {
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
@@ -293,12 +313,12 @@ double PerformAction::perform_use_melee(Player player)
     game_->doCommand(command);
 
     std::cout << "Robot equipped melee weapon" << std::endl;
-    return 1.0;
+    return REWARD_EQUIP_WEAPON;
   }
   else
   {
         std::cout << "Robot failed to equip melee weapon" << std::endl;
-    return -5; //tried to equip meele but there wasn't one.
+    return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }
 
@@ -308,7 +328,7 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
   int current_player_index = -1;
   for (int i = 0; i < static_cast<int>(players.size()); i++)
   {
-    if (players[i].getAbbreviation() == current_player && players[i].isDead() == false)
+    if (players[i].getAbbreviation() == current_player && !players[i].isDead())
     {
       current_player_index = i;
       break;
@@ -322,11 +342,11 @@ double PerformAction::perform_switch_player(char current_player, std::vector<Pla
     std::string command = "switch " + std::string(1, game_->getPlayers().at(next_player_index)->getAbbreviation());
     game_->doCommand(command);
     std::cout << "Switched to player: " << players[next_player_index].getAbbreviation() << std::endl;
-    return 1.0;
+    return REWARD_SWITCH_PLAYER;
   }
 
   // If the player is not found, return a big negative number
-  return -100.0;
+  return REWARD_EXCEPTION;
 }
 
 double PerformAction::perform_use_armor(Player player)
@@ -346,7 +366,7 @@ double PerformAction::perform_use_armor(Player player)
         game_->doCommand(command);
 
         std::cout << "Robot equipped armor" << std::endl;
-        return 1.0;
+        return REWARD_EQUIP_ARMOR;
         }
       }
       else
@@ -357,11 +377,11 @@ double PerformAction::perform_use_armor(Player player)
         game_->doCommand(command);
 
         std::cout << "Robot equipped armor" << std::endl;
-        return 1.0;
+        return REWARD_EQUIP_ARMOR;
       }
     }
   }
           std::cout << "Robot failed to equip armor" << std::endl;
 
-  return -10.0;
+  return REWARD_EXCEPTION;
 }

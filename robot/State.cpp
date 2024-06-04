@@ -10,7 +10,7 @@ State::State(int remaining_actions, std::pair<int, int> position, Player player,
   health_ = player.getHealth();
   remaining_action_count_ = remaining_actions;
   damage_output_ = player.getWeapon()->getDamage();
-  //damage_input_ = player.getArmor()->getArmorValue(); Only if player has armor //TODO 
+  damage_input_ = (player.getArmor() != nullptr) ? player.getArmor()->getArmorValue() : 0;
   enemies_ = enemies;
   players_ = players;
   lootables_ = lootables;
@@ -336,7 +336,6 @@ std::string State::serializeState() const
 
 void State::deserializeState(std::string state_string)
 {
-  // TODO: Test this input
   // Each item is separated by a pipe
   std::vector<std::string> state_items = Utils::splitString(state_string, "|");
   setCurrentPlayer(state_items[0][0]);

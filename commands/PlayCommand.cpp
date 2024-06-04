@@ -26,7 +26,7 @@ void PlayCommand::execute(std::vector<std::string> params)
   setCurrentReward(reward); //This reward is only saved in case it's a switch command.
   } while (action == RobotAction::SWITCH_PLAYER); //if it's switchplayer the next 4 lines will be handled automatically.
   
-  // TODO: We need to update the state here, because the Q-Learning algorithm will update the Q-table based on the new state
+  // We need to update the state here, because the Q-Learning algorithm will update the Q-table based on the new state
   // and the previous state. We need to make sure that the state is updated before the Q-Learning algorithm is called.
   game_->getRobot()->setPreviousState(*(game_->getState()));
   updateState(game_->getState());
