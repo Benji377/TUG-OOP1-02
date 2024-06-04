@@ -1,24 +1,6 @@
 #include "PerformAction.hpp"
 #include "../game/Game.hpp"
 
-const double REWARD_EXCEPTION = -100.0;
-const double REWARD_MOVE = -1.0;
-const double REWARD_MOVE_DOOR_ENTRY = -50.0;
-const double REWARD_MOVE_DOOR_EXIT = 100.0;
-const double REWARD_LOOT = 10.0;
-const double REWARD_HEAL_FULL = -100.0;
-const double REWARD_HEAL_HALF = 10.0;
-const double REWARD_HEAL_SOME = 5.0;
-const double REWARD_USE_RESISTANCE_FULL = 1.0;
-const double REWARD_USE_RESISTANCE_SOME = 10.0;
-const double REWARD_ATTACK = 100.0;
-const double REWARD_ENEMY_KILLED = 100.0;
-const double REWARD_PLAYER_HIT = -100.0;
-const double REWARD_PLAYER_KILLED = -100.0;
-const double REWARD_EQUIP_WEAPON = 1.0;
-const double REWARD_EQUIP_ARMOR = 1.0;
-const double REWARD_SWITCH_PLAYER = 1.0;
-
 
 double PerformAction::perform_move(Player player, std::pair<int, int> player_position, RobotAction action,
                                    std::pair<int, int> entry_door_position, std::pair<int,int> exit_door_position, int enemies_left)
