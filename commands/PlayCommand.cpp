@@ -1,11 +1,13 @@
 #include "PlayCommand.hpp"
 #include "../game/Game.hpp"
-#include "../decision/Decision.hpp"
+#include "../decision_tree/DecisionTree.hpp"
 
 void PlayCommand::execute(std::vector<std::string> params)
 {
   checkCommandLenght(params, 1);
-  Decision decision(game_);
-  std::string command = decision.getBestCommand();
-  std::cout << "AI: " << command << std::endl;
+  std::shared_ptr<DecisionTree> decision_tree = std::make_shared<DecisionTree>(game_);
+  for (auto player : game_->getPlayers())
+  {
+    Action action = decision_tree->traverse(player);
+  }
 }

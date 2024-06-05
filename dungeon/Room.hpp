@@ -19,6 +19,7 @@
 #include "../entity/character/Character.hpp"
 #include "../entity/character/Player.hpp"
 #include "../entity/Door.hpp"
+#include "../decision_tree/Pathfinder.hpp"
 
 using std::vector;
 using std::shared_ptr;
@@ -214,6 +215,7 @@ class Room
     ///
     /// @return A pair containing the row and column indices of the best move
     //
+    /*
     template <typename T>
     pair<int,int> getBestMove(shared_ptr<Player> player) const
     {
@@ -233,6 +235,27 @@ class Room
       pair<int, int> best_move = distances.begin()->second;
       return best_move;
     }
+    */
+
+    bool hasLoot() const;
+
+    bool isLootNearby(shared_ptr<Player> player) const;
+
+    bool isEnemyNearby(shared_ptr<Player> player) const;
+
+    vector<vector<int>> getMapForPathfinding(pair<int, int> player_position, pair<int, int> target_position) const;
+
+    bool getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    bool getBestMoveToDoor(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    bool getBestMoveToLoot(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    std::pair<int, int> getClosestEnemyPosition(shared_ptr<Player> player) const;
+
+    std::pair<int, int> getClosestLootposition(shared_ptr<Player> player) const;
+
+
 
     int getDistance(pair<int, int> field_1, pair<int, int> field_2) const;
     //------------------------------------------------------------------------------------------------------------------
