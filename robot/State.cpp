@@ -1,23 +1,28 @@
 #include "State.hpp"
 
-State::State(char current_player, std::pair<int, int> current_position, int health, int remaining_enemies,
-              int damage_output, int damage_input, std::map<char, int> distance_to_enemy,
-              std::map<char, int> distance_to_player, std::map<char, int> distance_to_lootable,
-              int distance_to_exit, int distance_to_entry, std::vector<std::vector<int>> enemies,
+State::State(char current_player, std::pair<int, int> current_position, int health,
+              int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
               std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
               std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position)
   : current_player_(current_player), current_position_(current_position), health_(health),
-    damage_output_(damage_output), damage_input_(damage_input), remaining_enemies_(remaining_enemies),
-    distance_to_enemy_(distance_to_enemy), distance_to_player_(distance_to_player),
-    distance_to_lootable_(distance_to_lootable), distance_to_exit_(distance_to_exit),
-    distance_to_entry_(distance_to_entry), enemies_(enemies), players_(players), lootables_(lootables),
-    entry_door_position_(entry_door_position), exit_door_position_(exit_door_position)
+    damage_output_(damage_output), damage_input_(damage_input), enemies_(enemies), players_(players),
+    lootables_(lootables), entry_door_position_(entry_door_position), exit_door_position_(exit_door_position)
 {
   can_attack_melee_ = getCanAttackMelee();
   can_attack_range_ = getCanAttackRange();
+  distance_to_entry_ = getMoveIndicator(entry_door_position);
+  distance_to_exit_ = getMoveIndicator(exit_door_position);
+  distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(current_position, enemies));
+  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(current_position, players));
+  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(current_position, lootables));
+
+  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
+  remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
+    return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
+  });
+
   can_heal_ = false;
 }
-
 
 
 // Returns the possible actions that the robot can take in the current state
@@ -100,12 +105,22 @@ std::set<RobotAction> State::getPossibleMoves()
 }
 
 bool State::canLoot() {
-  bool canLoot = std::any_of(distance_to_lootable_.begin(), distance_to_lootable_.end(), []
-              (const std::pair<char, int>& lootable) {
-    return lootable.second == 0;
-  });
-  return canLoot;
+  // Looking at the items map and the player position. If there is an item in the player position
+  // or in the 8 adjacent positions, the player can loot.
+  for (int i = -1; i <= 1; i++) {
+    for (int j = -1; j <= 1; j++) {
+      int new_y = getCurrentPosition().first + i;
+      int new_x = getCurrentPosition().second + j;
+      if (new_y >= 0 && new_y < static_cast<int>(getLootables().size())
+          && new_x >= 0 && new_x < static_cast<int>(getLootables()[0].size()) &&
+          getLootables()[new_y][new_x] == 1) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
+
 
 bool State::canRegenerate(Player player)
 {
@@ -159,17 +174,23 @@ bool State::canAttackAdjacent(Player player)
 {
   // Check if there is an enemy in any of the 8 adjacent positions, only for melee weapons
   if (player.getWeapon()->getAttackType() == AttackType::MELEE) {
-    // Check if there is any enemy has the distance of 1 from the player
-    bool canAttack = std::any_of(distance_to_enemy_.begin(), distance_to_enemy_.end(), []
-            (const std::pair<char, int>& enemy) {
-      return enemy.second == 0;
-    });
-    setCanAttackMelee(canAttack);
-    return canAttack;
+    for (int i = -1; i <= 1; i++) {
+      for (int j = -1; j <= 1; j++) {
+        int new_y = getCurrentPosition().first + i;
+        int new_x = getCurrentPosition().second + j;
+        if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size())
+            && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size()) &&
+            getEnemies()[new_y][new_x] > 0) {
+          setCanAttackMelee(true);
+          return true;
+        }
+      }
+    }
   }
   setCanAttackMelee(false);
   return false;
 }
+
 
 bool State::canAttackAnywhere(Player player)
 {
@@ -231,9 +252,21 @@ bool State::canUseMelee(Player player)
 
 bool State::canSwitchPlayer()
 {
-  // Returns true if there is at least another player in the player map
-  return getDistanceToPlayer().size() > 1;
+  // The robot can switch player if there are more than one player in the game (and not all players are dead)
+  for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
+    for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {
+      // Skip the current player's position
+      if (i == getCurrentPosition().first && j == getCurrentPosition().second) {
+        continue;
+      }
+      if (getPlayers()[i][j] > 1) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
+
 
 bool State::canUseArmor(Player player)
 {
@@ -259,20 +292,20 @@ std::string State::serializeState() const
 {
   std::string serialized_state;
   serialized_state += std::to_string(getCurrentPlayer()) + "|"
-          + std::to_string(getCurrentPosition().first) + "|"
-          + std::to_string(getCurrentPosition().second) + "|"
-          + std::to_string(getHealth())+ "|"
-          + std::to_string(getDamageOutput()) + "|"
-          + std::to_string(getDamageInput()) + "|"
-          + std::to_string(getRemainingEnemies()) + "|"
-          + Utils::serializeDistanceMap(getDistanceToEnemy()) + "|"
-          + Utils::serializeDistanceMap(getDistanceToPlayer()) + "|"
-          + Utils::serializeDistanceMap(getDistanceToLootable()) + "|"
-          + std::to_string(getDistanceToExit()) + "|"
-          + std::to_string(getDistanceToEntry()) + "|"
-          + std::to_string(getCanAttackRange()) + "|"
-          + std::to_string(getCanAttackMelee()) + "|"
-          + std::to_string(getCanHeal()) + "|";
+                      + std::to_string(getCurrentPosition().first) + "|"
+                      + std::to_string(getCurrentPosition().second) + "|"
+                      + std::to_string(getHealth()) + "|"
+                      + std::to_string(getDamageOutput()) + "|"
+                      + std::to_string(getDamageInput()) + "|"
+                      + std::to_string(getRemainingEnemies()) + "|"
+                      + std::to_string(static_cast<int>(getDistanceToClosestEnemy())) + "|"
+                      + std::to_string(static_cast<int>(getDistanceToClosestPlayer())) + "|"
+                      + std::to_string(static_cast<int>(getDistanceToClosestLootable())) + "|"
+                      + std::to_string(static_cast<int>(getDistanceToExit())) + "|"
+                      + std::to_string(static_cast<int>(getDistanceToEntry())) + "|"
+                      + std::to_string(getCanAttackRange()) + "|"
+                      + std::to_string(getCanAttackMelee()) + "|"
+                      + std::to_string(getCanHeal()) + "|";
   return serialized_state;
 }
 
@@ -286,11 +319,11 @@ void State::deserializeState(std::string state_string)
   setDamageOutput(std::stoi(state_items[4]));
   setDamageInput(std::stoi(state_items[5]));
   setRemainingEnemies(std::stoi(state_items[6]));
-  setDistanceToEnemy(Utils::deserializeDistanceMap(state_items[7]));
-  setDistanceToPlayer(Utils::deserializeDistanceMap(state_items[8]));
-  setDistanceToLootable(Utils::deserializeDistanceMap(state_items[9]));
-  setDistanceToExit(std::stoi(state_items[10]));
-  setDistanceToEntry(std::stoi(state_items[11]));
+  setDistanceToClosestEnemy(static_cast<MoveIndicator>(std::stoi(state_items[7])));
+  setDistanceToClosestPlayer(static_cast<MoveIndicator>(std::stoi(state_items[8])));
+  setDistanceToClosestLootable(static_cast<MoveIndicator>(std::stoi(state_items[9])));
+  setDistanceToExit(static_cast<MoveIndicator>(std::stoi(state_items[10])));
+  setDistanceToEntry(static_cast<MoveIndicator>(std::stoi(state_items[11])));
   setCanAttackRange(std::stoi(state_items[12]));
   setCanAttackMelee(std::stoi(state_items[13]));
   setCanHeal(std::stoi(state_items[14]));
@@ -306,9 +339,9 @@ bool State::operator==(const State& other) const
          damage_output_ >= other.damage_output_ - 2 && damage_output_ <= other.damage_output_ + 2 &&
          damage_input_ >= other.damage_input_ - 2 && damage_input_ <= other.damage_input_ + 2 &&
          remaining_enemies_ == other.remaining_enemies_ &&
-         distance_to_enemy_ == other.distance_to_enemy_ &&
-         distance_to_player_ == other.distance_to_player_ &&
-         distance_to_lootable_ == other.distance_to_lootable_ &&
+         distance_to_closest_enemy_ == other.distance_to_closest_enemy_ &&
+         distance_to_closest_player_ == other.distance_to_closest_player_ &&
+         distance_to_closest_lootable_ == other.distance_to_closest_lootable_ &&
          distance_to_exit_ == other.distance_to_exit_ &&
          distance_to_entry_ == other.distance_to_entry_ &&
          can_attack_melee_ == other.can_attack_melee_ &&
@@ -319,4 +352,29 @@ bool State::operator==(const State& other) const
 bool State::operator<(const State& other) const
 {
   return serializeState() < other.serializeState();
+}
+
+MoveIndicator State::getMoveIndicator(std::pair<int, int> position) const
+{
+  if (position.first == -1 || position.second == -1) {
+    return MoveIndicator::NONE;
+  }
+
+  // It uses the current position and the target position to calculate the move indicator
+  // It defines if the target position is above, below, to the left, to the right, or diagonal to the current position
+  int y_diff = position.first - getCurrentPosition().first;
+  int x_diff = position.second - getCurrentPosition().second;
+
+  std::map<std::pair<int, int>, MoveIndicator> move_indicators = {
+          {{-1, 0}, MoveIndicator::UP},
+          {{1, 0}, MoveIndicator::DOWN},
+          {{0, -1}, MoveIndicator::LEFT},
+          {{0, 1}, MoveIndicator::RIGHT},
+          {{-1, -1}, MoveIndicator::UP_LEFT},
+          {{-1, 1}, MoveIndicator::UP_RIGHT},
+          {{1, -1}, MoveIndicator::DOWN_LEFT},
+          {{1, 1}, MoveIndicator::DOWN_RIGHT}
+  };
+  // If no move indicator is found, it returns NONE
+  return move_indicators.count(std::make_pair(y_diff, x_diff)) ? move_indicators[std::make_pair(y_diff, x_diff)] : MoveIndicator::NONE;
 }

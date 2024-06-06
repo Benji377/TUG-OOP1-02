@@ -133,29 +133,24 @@ bool Utils::isValidItemAbbrev(std::string item_abbreviation)
   return true;
 }
 
-std::string Utils::serializeDistanceMap(std::map<char, int> distance_map)
+std::pair<int, int> Utils::getClosestPosition(const std::pair<int, int> current_position,
+                                              const std::vector<std::vector<int>> positions)
 {
-  std::string serialized_map;
-  for (const auto &item : distance_map)
-  {
-    serialized_map += item.first;
-    serialized_map += ":";
-    serialized_map += std::to_string(item.second);
-    serialized_map += "/";
-  }
-  return serialized_map;
-}
+  int closest_distance = std::numeric_limits<int>::max();
+  std::pair<int, int> closest_position = std::make_pair(-1, -1);
 
-std::map<char, int> Utils::deserializeDistanceMap(std::string distance_map)
-{
-  std::map<char, int> deserialized_map;
-  std::string item;
-  std::istringstream map_stream(distance_map);
-  while (std::getline(map_stream, item, '/'))
-  {
-    char key = item[0];
-    item.erase(0, 2);
-    deserialized_map[key] = std::stoi(item);
+  for (int i = 0; i < static_cast<int>(positions.size()); i++) {
+    for (int j = 0; j < static_cast<int>(positions[i].size()); j++) {
+      // Only consider positions where the value is greater than 0
+      if (positions[i][j] > 0) {
+        int distance = std::abs(current_position.first - i) + std::abs(current_position.second - j);
+        if (distance < closest_distance) {
+          closest_distance = distance;
+          closest_position = std::make_pair(i, j);
+        }
+      }
+    }
   }
-  return deserialized_map;
+
+  return closest_position;
 }
