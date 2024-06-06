@@ -8,26 +8,7 @@ State::State(char current_player, std::pair<int, int> current_position, int heal
     damage_output_(damage_output), damage_input_(damage_input), enemies_(enemies), players_(players),
     lootables_(lootables), entry_door_position_(entry_door_position), exit_door_position_(exit_door_position)
 {
-  can_attack_melee_ = getCanAttackMelee();
-  can_attack_range_ = getCanAttackRange();
-  distance_to_entry_ = getMoveIndicator(entry_door_position);
-  distance_to_exit_ = getMoveIndicator(exit_door_position);
-  distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(current_position, enemies));
-  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(current_position, players));
-  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(current_position, lootables));
-
-  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
-  remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
-    return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
-  });
-
-  if (getDistanceToClosestEnemy() != MoveIndicator::NONE) {
-    distance_to_target_ = Utils::getDistanceToPosition(current_position, Utils::getClosestPosition(current_position, enemies));
-  } else {
-    distance_to_target_ = Utils::getDistanceToPosition(current_position, exit_door_position);
-  }
-
-  can_heal_ = false;
+  initializeVars(false);
 }
 
 void State::initializeVars(bool can_heal)
@@ -47,8 +28,10 @@ void State::initializeVars(bool can_heal)
 
   if (getDistanceToClosestEnemy() != MoveIndicator::NONE) {
     distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
-  } else {
+  } else if (getDistanceToExit() != MoveIndicator::NONE) {
     distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getExitDoorPosition());
+  } else {
+    distance_to_target_ = std::make_pair(-1, -1);
   }
 
   can_heal_ = can_heal;
