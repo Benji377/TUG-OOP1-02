@@ -76,6 +76,7 @@ class State
   bool can_attack_range_; // If the robot can attack from a distance
   bool can_attack_melee_; // If the robot can attack in melee
   bool can_heal_; // If the robot can heal itself
+  std::pair<int, int> distance_to_target_; // The distance to the target
   // The following is not saved in the state, but used for calculating the possible actions
   std::vector<std::vector<int>> enemies_; // The position of the enemies
   std::vector<std::vector<int>> players_; // The position of the players
@@ -124,6 +125,7 @@ public:
   void setDistanceToClosestLootable(MoveIndicator distance_to_closest_lootable) { distance_to_closest_lootable_ = distance_to_closest_lootable; };
   void setDistanceToExit(MoveIndicator distance_to_exit) { distance_to_exit_ = distance_to_exit; };
   void setDistanceToEntry(MoveIndicator distance_to_entry) { distance_to_entry_ = distance_to_entry; };
+  void setDistanceToTarget(std::pair<int, int> distance_to_target) { distance_to_target_ = distance_to_target; };
 
   char getCurrentPlayer() const { return current_player_; };
   std::pair<int, int> getCurrentPosition() const { return current_position_; };
@@ -139,6 +141,7 @@ public:
   MoveIndicator getDistanceToClosestLootable() const { return distance_to_closest_lootable_; };
   MoveIndicator getDistanceToExit() const { return distance_to_exit_; };
   MoveIndicator getDistanceToEntry() const { return distance_to_entry_; };
+  std::pair<int, int> getDistanceToTarget() const { return distance_to_target_; };
 
   std::vector<std::vector<int>> getEnemies() const { return enemies_; };
   std::vector<std::vector<int>> getPlayers() const { return players_; };
@@ -151,6 +154,7 @@ public:
   std::string serializeState() const;
   void deserializeState(std::string state_string);
   MoveIndicator getMoveIndicator(std::pair<int, int> position) const;
+  void initializeVars(bool can_heal);
   void updateState(char current_player, std::pair<int, int> current_position, int health,
                    int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
                    std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,

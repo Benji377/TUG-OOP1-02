@@ -151,6 +151,12 @@ std::pair<int, int> Utils::getClosestPosition(const std::pair<int, int> current_
       }
     }
   }
-
   return closest_position;
+}
+
+std::pair<int, int> Utils::getDistanceToPosition(const std::pair<int, int> current_position,
+                                                const std::pair<int, int> target_position)
+{
+  return std::make_pair(std::abs(current_position.first - target_position.first),
+                        std::abs(current_position.second - target_position.second));
 }

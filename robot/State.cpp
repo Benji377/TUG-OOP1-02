@@ -21,7 +21,37 @@ State::State(char current_player, std::pair<int, int> current_position, int heal
     return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
   });
 
+  if (getDistanceToClosestEnemy() != MoveIndicator::NONE) {
+    distance_to_target_ = Utils::getDistanceToPosition(current_position, Utils::getClosestPosition(current_position, enemies));
+  } else {
+    distance_to_target_ = Utils::getDistanceToPosition(current_position, exit_door_position);
+  }
+
   can_heal_ = false;
+}
+
+void State::initializeVars(bool can_heal)
+{
+  can_attack_melee_ = getCanAttackMelee();
+  can_attack_range_ = getCanAttackRange();
+  distance_to_entry_ = getMoveIndicator(getEntryDoorPosition());
+  distance_to_exit_ = getMoveIndicator(getExitDoorPosition());
+  distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
+  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getPlayers()));
+  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getLootables()));
+
+  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
+  remaining_enemies_ = std::count_if(getEnemies().begin(), getEnemies().end(), [](const std::vector<int>& row) {
+    return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
+  });
+
+  if (getDistanceToClosestEnemy() != MoveIndicator::NONE) {
+    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
+  } else {
+    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getExitDoorPosition());
+  }
+
+  can_heal_ = can_heal;
 }
 
 
@@ -93,10 +123,13 @@ std::set<RobotAction> State::getPossibleMoves()
         && getPlayers()[new_y][new_x] == 0
         && getLootables()[new_y][new_x] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
-      if (getRemainingEnemies() == 0 || (std::make_pair(new_y, new_x) != getExitDoorPosition() &&
-          std::make_pair(new_y, new_x) != getEntryDoorPosition()))
+      if (getRemainingEnemies() == 0 || std::make_pair(new_y, new_x) != getExitDoorPosition())
       {
-        possible_moves.insert(move.first);
+        // Prevents the robot from moving onto the entry door and fleeing the room
+        if (std::make_pair(new_y, new_x) != getEntryDoorPosition())
+        {
+          possible_moves.insert(move.first);
+        }
       }
     }
   }
@@ -302,8 +335,8 @@ std::string State::serializeState() const
 {
   std::string serialized_state;
   serialized_state += std::to_string(getCurrentPlayer()) + "|"
-                      + std::to_string(getCurrentPosition().first) + "|"
-                      + std::to_string(getCurrentPosition().second) + "|"
+                      + std::to_string(getDistanceToTarget().first) + "|"
+                      + std::to_string(getDistanceToTarget().second) + "|"
                       + std::to_string(getHealth()) + "|"
                       + std::to_string(getDamageOutput()) + "|"
                       + std::to_string(getDamageInput()) + "|"
@@ -324,7 +357,7 @@ void State::deserializeState(std::string state_string)
   // Each item is separated by a pipe
   std::vector<std::string> state_items = Utils::splitString(state_string, "|");
   setCurrentPlayer(state_items[0][0]); // Take the first character of the string
-  setCurrentPosition(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[2])));
+  setDistanceToTarget(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[2])));
   setHealth(std::stoi(state_items[3]));
   setDamageOutput(std::stoi(state_items[4]));
   setDamageInput(std::stoi(state_items[5]));
@@ -342,7 +375,7 @@ void State::deserializeState(std::string state_string)
 bool State::operator==(const State& other) const
 {
   return current_player_ == other.current_player_ &&
-         current_position_ == other.current_position_ &&
+         distance_to_target_ == other.distance_to_target_ &&
          // Health can vary of about 10% of the total health
          health_ >= other.health_ * 0.9 && health_ <= other.health_ * 1.1 &&
          // Damage output and damage input can vary of about +/- 2 points
@@ -405,18 +438,5 @@ void State::updateState(char current_player, std::pair<int, int> current_positio
   setEntryDoorPosition(entry_door_position);
   setExitDoorPosition(exit_door_position);
 
-  can_attack_melee_ = getCanAttackMelee();
-  can_attack_range_ = getCanAttackRange();
-  distance_to_entry_ = getMoveIndicator(entry_door_position);
-  distance_to_exit_ = getMoveIndicator(exit_door_position);
-  distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(current_position, enemies));
-  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(current_position, players));
-  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(current_position, lootables));
-
-  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
-  remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
-    return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
-  });
-
-  can_heal_ = can_heal;
+  initializeVars(can_heal);
 }

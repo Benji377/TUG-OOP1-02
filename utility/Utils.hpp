@@ -136,6 +136,9 @@ class Utils
     static std::pair<int, int> getClosestPosition(const std::pair<int, int> current_position,
                                                   const std::vector<std::vector<int>> positions);
 
+    static std::pair<int, int> getDistanceToPosition(const std::pair<int, int> current_position,
+                                                      const std::pair<int, int> target_position);
+
 };
 
 #endif // UTILS_HPP
