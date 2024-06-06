@@ -112,6 +112,11 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return Action{USE, {0, 0}, player->getId()};
   };
 
+  auto dummy_action = [](Game* game, std::shared_ptr<Player> player) {
+    std::cout << "Player " << player->getName() << " does nothing" << std::endl;
+    return Action{MOVE, {0, 0}, player->getId()};
+  };
+
   // Create decision tree
   auto root = std::make_shared<DecisionNode>(is_current_room_complete, "Is current room complete?");
   root->true_branch = std::make_shared<DecisionNode>(current_room_has_loot, "Does current room have loot?");
@@ -129,7 +134,10 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->true_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_has_melee_weapon, "Does player have melee weapon?");
   root->false_branch->true_branch->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(player_has_melee_weapon_equipped, "Does player have melee weapon equipped?");
   root->false_branch->true_branch->true_branch->false_branch->true_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_melee, "Attack enemy with melee weapon");
+  root->false_branch->true_branch->true_branch->false_branch->true_branch->true_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement this branch");
   root->false_branch->true_branch->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_melee_weapon, "Equip best melee weapon");
+  root->false_branch->true_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement this branch");
+  root->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement this branch");
   root->false_branch->false_branch = std::make_shared<DecisionNode>(is_enemy_nearby, "Is enemy nearby?");
   root->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_melee, "Attack enemy with melee weapon");
   root->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(is_loot_nearby, "Is loot nearby?");
