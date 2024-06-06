@@ -131,6 +131,10 @@ RobotAction Robot::getBestAction(State state, Player player)
     auto it = std::next(possible_actions.begin(), dis(gen));
     best_action = *it;
   }
+  else
+  {
+    std::cout << "[DEBUG] Exploitation: Choosing best action" << std::endl;
+  }
   std::cout << "[DEBUG] Best action: (" << static_cast<int>(best_action) << ") " << getRobotActionAsString(best_action) << std::endl;
 
   // Decay epsilon

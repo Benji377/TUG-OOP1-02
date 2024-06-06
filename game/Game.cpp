@@ -379,6 +379,7 @@ void Game::plusOneActionCount()
 {
   action_count_++;
   total_actions_++;
+  setAdditionalreward(getAdditionalreward() - 1); // TODO: Experimental
 }
 
 std::ostream &Game::returnScoreOutput(std::ostream &os)
@@ -520,7 +521,7 @@ void Game::setActivePlayerQLearn(char abbreviation)
   {
     char current_player_abbrev = player->getAbbreviation();
 
-    if(current_player_abbrev == abbreviation && player->isDead() == false)
+    if(current_player_abbrev == abbreviation && !player->isDead())
     {
       active_player_q_learn_ = player;
     }
