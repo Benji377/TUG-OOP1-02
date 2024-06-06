@@ -142,7 +142,7 @@ void Command::updateState(shared_ptr<State> state)
   std::pair<int,int> exit_door_position = current_room->getNextDoorPosition();
   --exit_door_position.first;
   --exit_door_position.second;
-  
+
   state->updateState(current_player->getAbbreviation(), new_pos, current_player->getHealth(),
                      damage, armor_value, current_room->getCharacterAsInt<Enemy>(),
                              current_room->getCharacterAsInt<Player>(), current_room->getLootableAsInt(),

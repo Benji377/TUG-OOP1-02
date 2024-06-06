@@ -21,8 +21,6 @@ State::State(char current_player, std::pair<int, int> current_position, int heal
     return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
   });
 
-  std::cout << "Remaining enemies: " << remaining_enemies_ << std::endl;
-
   can_heal_ = false;
 }
 
