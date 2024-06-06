@@ -436,17 +436,8 @@ vector<vector<int>> Room::getMapForPathfinding(pair<int, int> start, pair<int, i
     }
     map.push_back(row_map);
   }
-  // Debugging
-  std::cout << "Start: " << start.first - 1 << ", " << start.second - 1 << std::endl;
-  std::cout << "End: " << end.first - 1 << ", " << end.second - 1 << std::endl;
-  for (const auto &row : map)
-  {
-    for (const auto &field : row)
-    {
-      cout << field << " ";
-    }
-    cout << endl;
-  }
+  map[start.first - 1][start.second - 1] = 0;
+  map[end.first - 1][end.second - 1] = 0;
   return map;
 }
 
@@ -454,7 +445,6 @@ bool Room::getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_po
 {
   pair<int, int> player_position = getFieldOfEntity(player);
   pair<int, int> closest_enemy_position = getClosestEnemyPosition(player);
-  std::cout << "Closest enemy position: " << closest_enemy_position.first << ", " << closest_enemy_position.second << std::endl;
   vector<vector<int>> map = getMapForPathfinding(player_position, closest_enemy_position);
   return Pathfinder::find_path(map, player_position, closest_enemy_position, next_position, distance);
 }

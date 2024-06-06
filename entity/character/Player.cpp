@@ -246,3 +246,80 @@ void Player::simplePrint() const
   std::cout << "Player " << getId() << ": " << getTypeName()
             << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
 }
+
+std::shared_ptr<Weapon> Player::getBestRangeWeapon() const
+{
+  //return inventory_->getBestRangeWeapon();
+  return nullptr;
+}
+
+bool Player::hasRangeWeapon() const
+{
+  if (getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::RANGED)
+  {
+    return true;
+  }
+  else
+  {
+    return getInventory()->containsRangeWeapon();
+  }
+  return false;
+}
+
+bool Player::hasRangeWeaponEquipped() const
+{
+  std::cout << "Test" << std::endl;
+  if (getWeapon() == nullptr)
+  {
+    std::cout << "No weapon equipped." << std::endl;
+  }
+  else
+  {
+    std::string attack_type = getWeapon()->getAttackType() == AttackType::MELEE ? "MELEE" : "RANGED";
+    std::cout << "Weapon equipped: " << getWeapon()->getAbbreviation() << " with attack type " << attack_type << std::endl;
+  }
+  return getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::RANGED;
+}
+
+bool Player::hasRangeWeaponAmmunition() const
+{
+  // if (getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::RANGED)
+  // {
+  //   return getInventory()->getAmmunition(getWeapon()->getAmmunitionType()) != nullptr;
+  // }
+  return false;
+}
+
+bool Player::hasAmmunitionForEquippedWeapon() const
+{
+  if (getWeapon()->getAbbreviation() != "QFIR" && getWeapon()->getAbbreviation() != "QACD")
+  {
+    std::string ammo_type = (getWeapon()->getAbbreviation() == "SBOW" ||
+                            getWeapon()->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
+
+    if (getInventory()->getAmmunition(ammo_type) == nullptr ||
+        getInventory()->getAmmunition(ammo_type)->getAmount() == 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool Player::hasMeleeWeapon() const
+{
+  if (getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::MELEE)
+  {
+    return true;
+  }
+  else
+  {
+    return getInventory()->containsMeleeWeapon();
+  }
+  return false;
+}
+
+bool Player::hasMeleeWeaponEquipped() const
+{
+  return getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::MELEE;
+}

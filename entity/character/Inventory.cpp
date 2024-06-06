@@ -227,3 +227,27 @@ std::map<std::string, int> Inventory::getInventoryMapped() const
   }
   return inventory;
 }
+
+bool Inventory::containsRangeWeapon() const
+{
+  for (auto &weapon: weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::RANGED)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Inventory::containsMeleeWeapon() const
+{
+  for (auto &weapon: weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::MELEE)
+    {
+      return true;
+    }
+  }
+  return false;
+}

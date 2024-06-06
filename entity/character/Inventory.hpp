@@ -190,6 +190,10 @@ class Inventory
     /// @return a map containing the items and their quantities
     //
     std::map<std::string, int> getInventoryMapped() const;
+
+    bool containsRangeWeapon() const;
+
+    bool containsMeleeWeapon() const;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Copy constructor for the Inventory class

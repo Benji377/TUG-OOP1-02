@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include <algorithm>
 
+Node::Node(int x, int y, int g, int h, std::shared_ptr<Node> parent)
+  : x_(x), y_(y), g_(g), h_(h), parent_(parent) {}
+
 int Node::get_f() const {
   return g_ + h_;
 }
@@ -54,8 +57,7 @@ std::vector<std::shared_ptr<Node>> Pathfinder::reconstruct_path(std::shared_ptr<
   return path;
 }
 
-// Chatgpt helped me with this function
-bool Pathfinder::find_path(const std::vector<std::vector<int>> map, const std::pair<int, int> start, const std::pair<int, int> end, std::pair<int, int>& move_position, int& distance) {
+bool Pathfinder::find_path(const std::vector<std::vector<int>>& map, const std::pair<int, int> start, const std::pair<int, int>& end, std::pair<int, int>& move_position, int& distance) {
   auto start_node = std::make_shared<Node>(start.first - 1, start.second - 1, 0, 0);
   auto end_node = std::make_shared<Node>(end.first - 1, end.second - 1, 0, 0);
 
@@ -71,9 +73,9 @@ bool Pathfinder::find_path(const std::vector<std::vector<int>> map, const std::p
 
     if (*current == *end_node) {
       std::vector<std::shared_ptr<Node>> path = reconstruct_path(current);
-      distance = current->g_; // Distanz setzen
+      distance = current->g_;
       if (path.size() > 1) {
-        move_position = { path[1]->x_ + 1, path[1]->y_ + 1};
+        move_position = { path[1]->x_ + 1, path[1]->y_ + 1 };
         return true;
       } else {
         return false;

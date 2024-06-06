@@ -109,6 +109,20 @@ class Player: public Character
     /// @return the active weapon of the player
     //
     std::shared_ptr<Weapon> getWeapon() const override { return weapon_; };
+
+    std::shared_ptr<Weapon> getBestRangeWeapon() const;
+
+    bool hasRangeWeapon() const;
+
+    bool hasRangeWeaponEquipped() const;
+
+    bool hasRangeWeaponAmmunition() const;
+
+    bool hasAmmunitionForEquippedWeapon() const;
+
+    bool hasMeleeWeapon() const;
+
+    bool hasMeleeWeaponEquipped() const;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to get the currently active armor of the player

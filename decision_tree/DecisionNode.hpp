@@ -1,29 +1,60 @@
-#ifndef DECISIONNODE_HPP
-#define DECISIONNODE_HPP
+#ifndef DECISION_NODE_HPP
+#define DECISION_NODE_HPP
 
 #include <functional>
 #include <memory>
-#include <vector>
+#include <iostream>
 #include <string>
-#include "../game/Game.hpp"
-#include "Action.hpp"
 
-class DecisionNode {
-  private:
-    std::function<bool(Game* game, std::shared_ptr<Player> player)> condition;
-    std::function<Action(Game* game, std::shared_ptr<Player> player)> action;
-    bool is_action_node;
-
-  public:
-    DecisionNode(std::function<bool(Game* game, std::shared_ptr<Player> player)> condition);
-    DecisionNode(std::function<Action(Game* game, std::shared_ptr<Player> player)> action);
-
-    bool isConditionNode() const;
-    Action reviewAction(Game* game, std::shared_ptr<Player> player) const;
-    bool evaluateCondition(Game* game, std::shared_ptr<Player> player) const;
-
-    std::shared_ptr<DecisionNode> true_branch;
-    std::shared_ptr<DecisionNode> false_branch;
+enum NodeType {
+  CONDITION,
+  ACTION
 };
 
-#endif // DECISIONNODE_HPP
+class DecisionNode {
+public:
+  std::function<bool(Game*, std::shared_ptr<Player>)> condition_;
+  std::function<Action(Game*, std::shared_ptr<Player>)> action_;
+  NodeType node_type_;
+  std::shared_ptr<DecisionNode> true_branch;
+  std::shared_ptr<DecisionNode> false_branch;
+
+  DecisionNode(std::function<bool(Game*, std::shared_ptr<Player>)> condition)
+    : condition_(condition), node_type_(CONDITION) {}
+
+  DecisionNode(std::function<Action(Game*, std::shared_ptr<Player>)> action)
+    : action_(action), node_type_(ACTION) {}
+
+  bool isConditionNode() const {
+    return node_type_ == CONDITION;
+  }
+
+  bool evaluateCondition(Game* game, std::shared_ptr<Player> player) const {
+    return condition_(game, player);
+  }
+
+  Action reviewAction(Game* game, std::shared_ptr<Player> player) const {
+    return action_(game, player);
+  }
+
+  void toDot(std::ostream& out, int& node_id) const {
+    int current_id = node_id++;
+    out << "  node" << current_id << " [label=\"";
+    if (node_type_ == CONDITION) {
+      out << "Condition " << current_id;
+    } else {
+      out << "Action " << current_id;
+    }
+    out << "\"];\n";
+    if (node_type_ == CONDITION) {
+      int true_id = node_id;
+      true_branch->toDot(out, node_id);
+      out << "  node" << current_id << " -> node" << true_id << " [label=\"true\"];\n";
+      int false_id = node_id;
+      false_branch->toDot(out, node_id);
+      out << "  node" << current_id << " -> node" << false_id << " [label=\"false\"];\n";
+    }
+  }
+};
+
+#endif // DECISION_NODE_HPP
