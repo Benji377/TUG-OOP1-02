@@ -139,9 +139,8 @@ class Utils
     ///
     /// @return The serialized map as a string
     //
-    static std::string serializeMap(std::vector<std::vector<int>> map);
-
-    static std::vector<std::vector<int>> deserializeMap(std::string map);
+    static std::string serializeDistanceMap(std::map<char, int> distance_map);
+    static std::map<char, int> deserializeDistanceMap(std::string distance_map);
 };
 
 #endif // UTILS_HPP

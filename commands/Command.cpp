@@ -123,7 +123,6 @@ void Command::updateState(shared_ptr<State> state)
   state->setCurrentPosition(new_pos);
 
   state->setHealth(current_player->getHealth());
-  state->setRemainingActionCount(game_->getActionCount());
   std::shared_ptr<Weapon> weapon = current_player->getWeapon();
   state->setDamageOutput(weapon->getDamage());
   if(weapon->getAttackType() == AttackType::MELEE)

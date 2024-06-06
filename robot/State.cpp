@@ -1,24 +1,21 @@
 #include "State.hpp"
 
-State::State(int remaining_actions, std::pair<int, int> position, Player player, std::vector<std::vector<int>> enemies,
-             std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
-             std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position)
+State::State(char current_player, std::pair<int, int> current_position, int health, int remaining_enemies,
+              int damage_output, int damage_input, std::map<char, int> distance_to_enemy,
+              std::map<char, int> distance_to_player, std::map<char, int> distance_to_lootable,
+              int distance_to_exit, int distance_to_entry, std::vector<std::vector<int>> enemies,
+              std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
+              std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position)
+  : current_player_(current_player), current_position_(current_position), health_(health),
+    damage_output_(damage_output), damage_input_(damage_input), remaining_enemies_(remaining_enemies),
+    distance_to_enemy_(distance_to_enemy), distance_to_player_(distance_to_player),
+    distance_to_lootable_(distance_to_lootable), distance_to_exit_(distance_to_exit),
+    distance_to_entry_(distance_to_entry), enemies_(enemies), players_(players), lootables_(lootables),
+    entry_door_position_(entry_door_position), exit_door_position_(exit_door_position)
 {
-  // TODO: This constructor may throw an exception if any of the arguments are invalid or null
-  current_player_ = player.getAbbreviation();
-  current_position_ = position;
-  health_ = player.getHealth();
-  remaining_action_count_ = remaining_actions;
-  damage_output_ = player.getWeapon()->getDamage();
-  damage_input_ = (player.getArmor() != nullptr) ? player.getArmor()->getArmorValue() : 0;
-  enemies_ = enemies;
-  players_ = players;
-  lootables_ = lootables;
-  entry_door_position_ = entry_door_position;
-  exit_door_position_ = exit_door_position;
-  can_attack_range_ = canAttackAnywhere(player);
-  can_attack_melee_ = canAttackAdjacent(player);
-  can_heal_ = canRegenerate(player);
+  can_attack_melee_ = getCanAttackMelee();
+  can_attack_range_ = getCanAttackRange();
+  can_heal_ = false;
 }
 
 
@@ -64,15 +61,6 @@ std::set<RobotAction> State::getPossibleActions(Player player)
 
 std::set<RobotAction> State::getPossibleMoves()
 {
-  int enemies_left = 0;
-  for (const auto& row : getEnemies()) {
-    for (const auto& enemy : row) {
-      if (enemy > 0) {
-        enemies_left++;
-      }
-    }
-  }
-
   std::set<RobotAction> possible_moves;
   std::vector<std::pair<RobotAction, std::pair<int, int>>> moves = {
           {RobotAction::MOVE_UP, {-1, 0}}, //up means one less in y
@@ -100,8 +88,8 @@ std::set<RobotAction> State::getPossibleMoves()
         && getPlayers()[new_y][new_x] == 0
         && getLootables()[new_y][new_x] == 0) {
       // Check if the robot is not moving onto the door if there are still enemies left
-      if ((std::make_pair(new_y, new_x) != getExitDoorPosition() &&
-          std::make_pair(new_y, new_x) != getEntryDoorPosition()) || enemies_left == 0) 
+      if (getRemainingEnemies() == 0 || (std::make_pair(new_y, new_x) != getExitDoorPosition() &&
+          std::make_pair(new_y, new_x) != getEntryDoorPosition()))
       {
         possible_moves.insert(move.first);
       }
@@ -112,20 +100,11 @@ std::set<RobotAction> State::getPossibleMoves()
 }
 
 bool State::canLoot() {
-  // Looking at the items map and the player position. If there is an item in the player position
-  // or in the 8 adjacent positions, the player can loot.
-  for (int i = -1; i <= 1; i++) {
-    for (int j = -1; j <= 1; j++) {
-      int new_y = getCurrentPosition().first + i;
-      int new_x = getCurrentPosition().second + j;
-      if (new_y >= 0 && new_y < static_cast<int>(getLootables().size())
-          && new_x >= 0 && new_x < static_cast<int>(getLootables()[0].size()) &&
-          getLootables()[new_y][new_x] == 1) {
-        return true;
-      }
-    }
-  }
-  return false;
+  bool canLoot = std::any_of(distance_to_lootable_.begin(), distance_to_lootable_.end(), []
+              (const std::pair<char, int>& lootable) {
+    return lootable.second == 0;
+  });
+  return canLoot;
 }
 
 bool State::canRegenerate(Player player)
@@ -168,39 +147,25 @@ bool State::canAttack(Player player)
 {
   // To attack, there must be at least one enemy in the room, and depending on the player's weapon,
   // the player must be able to attack adjacent enemies or enemies from a distance
-  if (hasEnemies() && (canAttackAdjacent(player) || canAttackAnywhere(player))) {
+  if (getRemainingEnemies() > 0 && (canAttackAdjacent(player) || canAttackAnywhere(player))) {
     return true;
   }
   return false;
 }
 
-bool State::hasEnemies()
-{
-  // Check if there are any enemies left in the room
-  for (const auto& row : getEnemies()) {
-    if (std::any_of(row.begin(), row.end(), [](int cell) { return cell > 0; })) {
-      return true;
-    }
-  }
-  return false;
-}
+
 
 bool State::canAttackAdjacent(Player player)
 {
   // Check if there is an enemy in any of the 8 adjacent positions, only for melee weapons
   if (player.getWeapon()->getAttackType() == AttackType::MELEE) {
-    for (int i = -1; i <= 1; i++) {
-      for (int j = -1; j <= 1; j++) {
-        int new_y = getCurrentPosition().first + i;
-        int new_x = getCurrentPosition().second + j;
-        if (new_y >= 0 && new_y < static_cast<int>(getEnemies().size())
-            && new_x >= 0 && new_x < static_cast<int>(getEnemies()[0].size()) &&
-            getEnemies()[new_y][new_x] > 0) {
-          setCanAttackMelee(true);
-          return true;
-        }
-      }
-    }
+    // Check if there is any enemy has the distance of 1 from the player
+    bool canAttack = std::any_of(distance_to_enemy_.begin(), distance_to_enemy_.end(), []
+            (const std::pair<char, int>& enemy) {
+      return enemy.second == 0;
+    });
+    setCanAttackMelee(canAttack);
+    return canAttack;
   }
   setCanAttackMelee(false);
   return false;
@@ -266,19 +231,8 @@ bool State::canUseMelee(Player player)
 
 bool State::canSwitchPlayer()
 {
-  // The robot can switch player if there are more than one player in the game (and not all players are dead)
-  for (int i = 0; i < static_cast<int>(getPlayers().size()); i++) {
-    for (int j = 0; j < static_cast<int>(getPlayers()[i].size()); j++) {
-      // Skip the current player's position
-      if (i == getCurrentPosition().first && j == getCurrentPosition().second) {
-        continue;
-      }
-      if (getPlayers()[i][j] > 1) {
-        return true;
-      }
-    }
-  }
-  return false;
+  // Returns true if there is at least another player in the player map
+  return getDistanceToPlayer().size() > 1;
 }
 
 bool State::canUseArmor(Player player)
@@ -304,17 +258,21 @@ bool State::canUseArmor(Player player)
 std::string State::serializeState() const
 {
   std::string serialized_state;
-  serialized_state += std::to_string(getCurrentPlayer()) + "|";
-  serialized_state += std::to_string(getCurrentPosition().first) + "|" + std::to_string(getCurrentPosition().second) + "|";
-  serialized_state += std::to_string(getHealth()) + "|" + std::to_string(getRemainingActionCount()) + "|";
-  serialized_state += std::to_string(getDamageOutput()) + "|" + std::to_string(getDamageInput()) + "|";
-  serialized_state += std::to_string(getCanAttackRange()) + "|" + std::to_string(getCanAttackMelee()) + "|";
-  serialized_state += std::to_string(getCanHeal()) + "|";
-  serialized_state += std::to_string(getExitDoorPosition().first) + "|" + std::to_string(getExitDoorPosition().second) + "|";
-  serialized_state += std::to_string(getEntryDoorPosition().first) + "|" + std::to_string(getEntryDoorPosition().second) + "|";
-  serialized_state += Utils::serializeMap(getEnemies()) + "|";
-  serialized_state += Utils::serializeMap(getPlayers()) + "|";
-  serialized_state += Utils::serializeMap(getLootables());
+  serialized_state += std::to_string(getCurrentPlayer()) + "|"
+          + std::to_string(getCurrentPosition().first) + "|"
+          + std::to_string(getCurrentPosition().second) + "|"
+          + std::to_string(getHealth())+ "|"
+          + std::to_string(getDamageOutput()) + "|"
+          + std::to_string(getDamageInput()) + "|"
+          + std::to_string(getRemainingEnemies()) + "|"
+          + Utils::serializeDistanceMap(getDistanceToEnemy()) + "|"
+          + Utils::serializeDistanceMap(getDistanceToPlayer()) + "|"
+          + Utils::serializeDistanceMap(getDistanceToLootable()) + "|"
+          + std::to_string(getDistanceToExit()) + "|"
+          + std::to_string(getDistanceToEntry()) + "|"
+          + std::to_string(getCanAttackRange()) + "|"
+          + std::to_string(getCanAttackMelee()) + "|"
+          + std::to_string(getCanHeal()) + "|";
   return serialized_state;
 }
 
@@ -322,37 +280,39 @@ void State::deserializeState(std::string state_string)
 {
   // Each item is separated by a pipe
   std::vector<std::string> state_items = Utils::splitString(state_string, "|");
-  setCurrentPlayer(state_items[0][0]);
-  setCurrentPosition(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[1])));
+  setCurrentPlayer(state_items[0][0]); // Take the first character of the string
+  setCurrentPosition(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[2])));
   setHealth(std::stoi(state_items[3]));
-  setRemainingActionCount(std::stoi(state_items[4]));
-  setDamageOutput(std::stoi(state_items[5]));
-  setDamageInput(std::stoi(state_items[6]));
-  setCanAttackRange(std::stoi(state_items[7]));
-  setCanAttackMelee(std::stoi(state_items[8]));
-  setCanHeal(std::stoi(state_items[9]));
-  setExitDoorPosition(std::make_pair(std::stoi(state_items[10]), std::stoi(state_items[11])));
-  setEntryDoorPosition(std::make_pair(std::stoi(state_items[12]), std::stoi(state_items[13])));
-  setEnemies(Utils::deserializeMap(state_items[14]));
-  setPlayers(Utils::deserializeMap(state_items[15]));
-  setLootables(Utils::deserializeMap(state_items[16]));
+  setDamageOutput(std::stoi(state_items[4]));
+  setDamageInput(std::stoi(state_items[5]));
+  setRemainingEnemies(std::stoi(state_items[6]));
+  setDistanceToEnemy(Utils::deserializeDistanceMap(state_items[7]));
+  setDistanceToPlayer(Utils::deserializeDistanceMap(state_items[8]));
+  setDistanceToLootable(Utils::deserializeDistanceMap(state_items[9]));
+  setDistanceToExit(std::stoi(state_items[10]));
+  setDistanceToEntry(std::stoi(state_items[11]));
+  setCanAttackRange(std::stoi(state_items[12]));
+  setCanAttackMelee(std::stoi(state_items[13]));
+  setCanHeal(std::stoi(state_items[14]));
 }
 
 bool State::operator==(const State& other) const
 {
   return current_player_ == other.current_player_ &&
          current_position_ == other.current_position_ &&
-         health_ == other.health_ &&
-         remaining_action_count_ == other.remaining_action_count_ &&
-         damage_output_ == other.damage_output_ &&
-         damage_input_ == other.damage_input_ &&
-         enemies_ == other.enemies_ &&
-         players_ == other.players_ &&
-         lootables_ == other.lootables_ &&
-         entry_door_position_ == other.entry_door_position_ &&
-         exit_door_position_ == other.exit_door_position_ &&
-         can_attack_range_ == other.can_attack_range_ &&
+         // Health can vary of about 10% of the total health
+         health_ >= other.health_ * 0.9 && health_ <= other.health_ * 1.1 &&
+         // Damage output and damage input can vary of about +/- 2 points
+         damage_output_ >= other.damage_output_ - 2 && damage_output_ <= other.damage_output_ + 2 &&
+         damage_input_ >= other.damage_input_ - 2 && damage_input_ <= other.damage_input_ + 2 &&
+         remaining_enemies_ == other.remaining_enemies_ &&
+         distance_to_enemy_ == other.distance_to_enemy_ &&
+         distance_to_player_ == other.distance_to_player_ &&
+         distance_to_lootable_ == other.distance_to_lootable_ &&
+         distance_to_exit_ == other.distance_to_exit_ &&
+         distance_to_entry_ == other.distance_to_entry_ &&
          can_attack_melee_ == other.can_attack_melee_ &&
+         can_attack_range_ == other.can_attack_range_ &&
          can_heal_ == other.can_heal_;
 }
 

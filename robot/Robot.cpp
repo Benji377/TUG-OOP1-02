@@ -143,14 +143,6 @@ RobotAction Robot::getBestAction(State state, Player player)
 double Robot::executeAction(RobotAction action, Player player, std::vector<Player> players)
 {
   PerformAction performAction = PerformAction(game_);
-  int enemies_left = 0;
-  for (const auto& row : current_state_.getEnemies()) {
-    for (const auto& enemy : row) {
-      if (enemy > 0) {
-        enemies_left++;
-      }
-    }
-  }
 
   switch (action) {
     case RobotAction::MOVE_UP:
@@ -162,7 +154,8 @@ double Robot::executeAction(RobotAction action, Player player, std::vector<Playe
     case RobotAction::MOVE_DOWN_LEFT:
     case RobotAction::MOVE_DOWN_RIGHT:
       return performAction.perform_move(player, current_state_.getCurrentPosition(), action,
-                                        current_state_.getEntryDoorPosition(), current_state_.getExitDoorPosition(), enemies_left);
+                                        current_state_.getEntryDoorPosition(), current_state_.getExitDoorPosition(),
+                                        current_state_.getRemainingEnemies());
     case RobotAction::LOOT:
       return performAction.perform_loot(player, current_state_.getCurrentPosition(), current_state_.getLootables());
     case RobotAction::REGENERATE:
