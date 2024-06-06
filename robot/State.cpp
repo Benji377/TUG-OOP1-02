@@ -21,8 +21,8 @@ void State::initializeVars(bool can_heal)
   distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getPlayers()));
   distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getLootables()));
 
-  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
-  remaining_enemies_ = std::count_if(getEnemies().begin(), getEnemies().end(), [](const std::vector<int>& row) {
+  auto enemies = getEnemies();
+  remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
     return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
   });
 
@@ -391,18 +391,31 @@ MoveIndicator State::getMoveIndicator(std::pair<int, int> position) const
   int y_diff = position.first - getCurrentPosition().first;
   int x_diff = position.second - getCurrentPosition().second;
 
-  std::map<std::pair<int, int>, MoveIndicator> move_indicators = {
-          {{-1, 0}, MoveIndicator::UP},
-          {{1, 0}, MoveIndicator::DOWN},
-          {{0, -1}, MoveIndicator::LEFT},
-          {{0, 1}, MoveIndicator::RIGHT},
-          {{-1, -1}, MoveIndicator::UP_LEFT},
-          {{-1, 1}, MoveIndicator::UP_RIGHT},
-          {{1, -1}, MoveIndicator::DOWN_LEFT},
-          {{1, 1}, MoveIndicator::DOWN_RIGHT}
-  };
-  // If no move indicator is found, it returns NONE
-  return move_indicators.count(std::make_pair(y_diff, x_diff)) ? move_indicators[std::make_pair(y_diff, x_diff)] : MoveIndicator::NONE;
+  if (y_diff == 0) {
+    if (x_diff == 0) {
+      return MoveIndicator::NONE;
+    } else if (x_diff > 0) {
+      return MoveIndicator::RIGHT;
+    } else {
+      return MoveIndicator::LEFT;
+    }
+  } else if (y_diff > 0) {
+    if (x_diff == 0) {
+      return MoveIndicator::DOWN;
+    } else if (x_diff > 0) {
+      return MoveIndicator::DOWN_RIGHT;
+    } else {
+      return MoveIndicator::DOWN_LEFT;
+    }
+  } else {
+    if (x_diff == 0) {
+      return MoveIndicator::UP;
+    } else if (x_diff > 0) {
+      return MoveIndicator::UP_RIGHT;
+    } else {
+      return MoveIndicator::UP_LEFT;
+    }
+  }
 }
 
 void State::updateState(char current_player, std::pair<int, int> current_position, int health, int damage_output,
