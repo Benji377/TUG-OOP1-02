@@ -171,6 +171,7 @@ void Game::doCommand()
   {
     string input = InputOutput::promtUserInput();
 
+    //string input = "play";
     vector<string> command_input = InputOutput::commandifyString(input);
 
     try

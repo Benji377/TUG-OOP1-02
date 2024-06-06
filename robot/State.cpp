@@ -218,6 +218,11 @@ bool State::canAttackAnywhere(Player player)
 
 bool State::canUseRanged(Player player)
 {
+  if(player.getWeapon()->getAttackType() == AttackType::RANGED)
+  {
+    return false;
+  }
+
   // Can use ranged weapon if the player has a ranged weapon in his inventory
   if (!player.getInventory()->getAllWeapons().empty())
   {
@@ -234,6 +239,11 @@ bool State::canUseRanged(Player player)
 
 bool State::canUseMelee(Player player)
 {
+  if(player.getWeapon()->getAttackType() == AttackType::MELEE)
+  {
+    return false;
+  }
+
   auto weapons = player.getInventory()->getAllWeapons();
 
   // Can use melee weapon if the player has a melee weapon in his inventory

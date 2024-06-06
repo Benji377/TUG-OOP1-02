@@ -20,7 +20,8 @@ void PlayCommand::execute(std::vector<std::string> params)
   game_->setAdditionalreward(0); //This is the additional reward, in case robot does something very good or very evil inside the game.
   do
   {
-  action = game_->getRobot()->getBestAction(*(game_->getState()), *(game_->getActivePlayerQLearn()));
+  //action = game_->getRobot()->getBestAction(*(game_->getState()), *(game_->getActivePlayerQLearn()));
+  action = RobotAction::LOOT;
   reward = game_->getRobot()->executeAction(action, *(game_->getActivePlayerQLearn()), players);
   setCurrentRobotAction(action);
   setCurrentReward(reward); //This reward is only saved in case it's a switch command.
