@@ -116,46 +116,35 @@ void Command::updateState(shared_ptr<State> state)
 {
   auto current_room = game_->getCurrentRoom();
   std::shared_ptr<Player> current_player = game_->getActivePlayerQLearn();
-  state->setCurrentPlayer(current_player->getAbbreviation());
 
   auto current_pos = current_room->getFieldOfEntity(current_player);
   std::pair<int, int> new_pos = std::make_pair(current_pos.first - 1, current_pos.second - 1);
-  state->setCurrentPosition(new_pos);
 
-  state->setHealth(current_player->getHealth());
-  std::shared_ptr<Weapon> weapon = current_player->getWeapon();
-  state->setDamageOutput(weapon->getDamage());
-  if(weapon->getAttackType() == AttackType::MELEE)
-  {
-    state->setCanAttackRange(false);
-  }
-  else
-  {
-    state->setCanAttackRange(true);
-  }
-  state->setCanAttackMelee(true);
-  auto armor = current_player->getArmor();
-  if(armor) state->setDamageInput(armor->getArmorValue());
+  int damage = current_player->getWeapon()->getDamageAddition() + current_player->getWeapon()->getDice()->getType();
+
+  int armor_value = current_player->getArmor() ? current_player->getArmor()->getArmorValue() : current_player->getBaseArmor();
+
+  bool can_heal = false;
   std::vector<std::shared_ptr<Potion>> potions = current_player->getInventory()->getAllPotions();
   for(auto potion : potions)
   {
     if(potion->getEffect() == Effect::HEALTH)
     {
-      state->setCanHeal(true);
+      can_heal = true;
       break;
     }
   }
-  state->setEnemies(current_room->getCharacterAsInt<Enemy>());
-  state->setPlayers(current_room->getCharacterAsInt<Player>());
-  state->setLootables(current_room->getLootableAsInt());
 
-  std::pair<int,int> door_position = current_room->getEntryDoorPosition();
-  --door_position.first; //Convert it to vector coordinates.
-  --door_position.second;
-  state->setEntryDoorPosition(door_position);
+  std::pair<int,int> entry_door_position = current_room->getEntryDoorPosition();
+  --entry_door_position.first; //Convert it to vector coordinates.
+  --entry_door_position.second;
 
-  door_position = current_room->getNextDoorPosition();
-  --door_position.first;
-  --door_position.second;
-  state->setExitDoorPosition(door_position);
+  std::pair<int,int> exit_door_position = current_room->getNextDoorPosition();
+  --exit_door_position.first;
+  --exit_door_position.second;
+  
+  state->updateState(current_player->getAbbreviation(), new_pos, current_player->getHealth(),
+                     damage, armor_value, current_room->getCharacterAsInt<Enemy>(),
+                             current_room->getCharacterAsInt<Player>(), current_room->getLootableAsInt(),
+                             entry_door_position, exit_door_position, can_heal);
 }

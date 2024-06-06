@@ -21,6 +21,8 @@ State::State(char current_player, std::pair<int, int> current_position, int heal
     return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
   });
 
+  std::cout << "Remaining enemies: " << remaining_enemies_ << std::endl;
+
   can_heal_ = false;
 }
 
@@ -377,4 +379,36 @@ MoveIndicator State::getMoveIndicator(std::pair<int, int> position) const
   };
   // If no move indicator is found, it returns NONE
   return move_indicators.count(std::make_pair(y_diff, x_diff)) ? move_indicators[std::make_pair(y_diff, x_diff)] : MoveIndicator::NONE;
+}
+
+void State::updateState(char current_player, std::pair<int, int> current_position, int health, int damage_output,
+                        int damage_input, std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
+                        std::vector<std::vector<int>> lootables, std::pair<int, int> entry_door_position,
+                        std::pair<int, int> exit_door_position, bool can_heal)
+{
+  setCurrentPlayer(current_player);
+  setCurrentPosition(current_position);
+  setHealth(health);
+  setDamageOutput(damage_output);
+  setDamageInput(damage_input);
+  setEnemies(enemies);
+  setPlayers(players);
+  setLootables(lootables);
+  setEntryDoorPosition(entry_door_position);
+  setExitDoorPosition(exit_door_position);
+
+  can_attack_melee_ = getCanAttackMelee();
+  can_attack_range_ = getCanAttackRange();
+  distance_to_entry_ = getMoveIndicator(entry_door_position);
+  distance_to_exit_ = getMoveIndicator(exit_door_position);
+  distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(current_position, enemies));
+  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(current_position, players));
+  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(current_position, lootables));
+
+  // The amount of enemies remaining in the room can be calculated by counting the amount of non-zero elements in the enemies vector
+  remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
+    return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
+  });
+
+  can_heal_ = can_heal;
 }

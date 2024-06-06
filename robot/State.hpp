@@ -151,6 +151,10 @@ public:
   std::string serializeState() const;
   void deserializeState(std::string state_string);
   MoveIndicator getMoveIndicator(std::pair<int, int> position) const;
+  void updateState(char current_player, std::pair<int, int> current_position, int health,
+                   int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
+                   std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
+                   std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position, bool can_heal);
 
 
   // Overloading some important operators

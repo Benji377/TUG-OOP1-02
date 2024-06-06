@@ -117,7 +117,8 @@ void Game::start()
   active_player_q_learn_ = players_.at(0);
   state_ = std::make_shared<State>(active_player_q_learn_->getAbbreviation(), dungeon_.getCurrentRoom()->getFieldOfEntity(active_player_q_learn_),
                                    active_player_q_learn_->getHealth(), active_player_q_learn_->getAttackDamage(),
-                                   active_player_q_learn_->getArmor()->getArmorValue(), dungeon_.getCurrentRoom()->getCharacterAsInt<Enemy>(),
+                                   active_player_q_learn_->getArmor() ? active_player_q_learn_->getArmor()->getArmorValue() : active_player_q_learn_->getBaseArmor(),
+                                   dungeon_.getCurrentRoom()->getCharacterAsInt<Enemy>(),
                                    dungeon_.getCurrentRoom()->getCharacterAsInt<Player>(), dungeon_.getCurrentRoom()->getLootableAsInt(),
                                    dungeon_.getCurrentRoom()->getEntryDoorPosition(), dungeon_.getCurrentRoom()->getNextDoorPosition());
   robot_ = std::make_shared<Robot>(*state_, this);
