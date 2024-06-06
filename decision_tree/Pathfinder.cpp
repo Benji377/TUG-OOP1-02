@@ -4,9 +4,6 @@
 #include <unordered_map>
 #include <algorithm>
 
-Node::Node(int x, int y, int g, int h, std::shared_ptr<Node> parent)
-  : x_(x), y_(y), g_(g), h_(h), parent_(parent) {}
-
 int Node::get_f() const {
   return g_ + h_;
 }
@@ -58,9 +55,9 @@ std::vector<std::shared_ptr<Node>> Pathfinder::reconstruct_path(std::shared_ptr<
 }
 
 // Chatgpt helped me with this function
-bool Pathfinder::find_path(const std::vector<std::vector<int>>& map, const std::pair<int, int> start, const std::pair<int, int>& end, std::pair<int, int>& move_position, int& distance) {
-  auto start_node = std::make_shared<Node>(start.first, start.second, 0, 0);
-  auto end_node = std::make_shared<Node>(end.first, end.second, 0, 0);
+bool Pathfinder::find_path(const std::vector<std::vector<int>> map, const std::pair<int, int> start, const std::pair<int, int> end, std::pair<int, int>& move_position, int& distance) {
+  auto start_node = std::make_shared<Node>(start.first - 1, start.second - 1, 0, 0);
+  auto end_node = std::make_shared<Node>(end.first - 1, end.second - 1, 0, 0);
 
   std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, CompareNode> open_list;
   std::unordered_map<int, std::shared_ptr<Node>> closed_list;
@@ -76,7 +73,7 @@ bool Pathfinder::find_path(const std::vector<std::vector<int>>& map, const std::
       std::vector<std::shared_ptr<Node>> path = reconstruct_path(current);
       distance = current->g_; // Distanz setzen
       if (path.size() > 1) {
-        move_position = { path[1]->x_, path[1]->y_ };
+        move_position = { path[1]->x_ + 1, path[1]->y_ + 1};
         return true;
       } else {
         return false;

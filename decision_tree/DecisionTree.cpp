@@ -44,14 +44,25 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   // TODO: The find path function gets called two times, which is not efficient
   auto pathToEnemyExists = [](Game* game, std::shared_ptr<Player> player)
   {
+    std::cout << "Debugging: pathToEnemyExists" << std::endl;
     pair<int, int> next_position;
     int distance;
-    return game->getCurrentRoom()->getBestMoveToEnemy(player, next_position, distance);
+    bool pathExists = game->getCurrentRoom()->getBestMoveToEnemy(player, next_position, distance);
+    if (pathExists)
+    {
+      std::cout << "Player " << player->getName() << " can move to enemy with distance " << distance << std::endl;
+    }
+    else
+    {
+      std::cout << "Player " << player->getName() << " cannot move to enemy" << std::endl;
+    }
+    return pathExists;
   };
 
   // Define actions
   auto moveToEnemy = [](Game *game, std::shared_ptr<Player> player)
   {
+    std::cout << "Debugging: moveToEnemy" << std::endl;
     pair<int, int> next_position;
     int distance;
     game->getCurrentRoom()->getBestMoveToEnemy(player, next_position, distance);

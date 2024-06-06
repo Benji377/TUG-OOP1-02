@@ -11,7 +11,7 @@ public:
   int g_, h_;
   std::shared_ptr<Node> parent_;
 
-  Node(int x, int y, int g, int h, std::shared_ptr<Node> parent = nullptr);
+  Node(int x, int y, int g, int h, std::shared_ptr<Node> parent = nullptr) : x_(x), y_(y), g_(g), h_(h), parent_(parent) {}
 
   int get_f() const;
 
@@ -30,8 +30,8 @@ class Pathfinder {
     static std::vector<std::shared_ptr<Node>> get_neighbors(std::shared_ptr<Node> current, const std::vector<std::vector<int>>& map);
     static std::vector<std::shared_ptr<Node>> reconstruct_path(std::shared_ptr<Node> end);
   public:
-    static bool find_path(const std::vector<std::vector<int>>& map, const std::pair<int, int> start,
-      const std::pair<int, int>& end, std::pair<int, int>& move_position, int& distance);
+    static bool find_path(const std::vector<std::vector<int>> map, const std::pair<int, int> start,
+      const std::pair<int, int> end, std::pair<int, int>& move_position, int& distance);
 };
 
 #endif // PATHFINDER_HPP
