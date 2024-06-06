@@ -13,17 +13,18 @@ enum NodeType {
 
 class DecisionNode {
 public:
+  std::string task_name_;
   std::function<bool(Game*, std::shared_ptr<Player>)> condition_;
   std::function<Action(Game*, std::shared_ptr<Player>)> action_;
   NodeType node_type_;
   std::shared_ptr<DecisionNode> true_branch;
   std::shared_ptr<DecisionNode> false_branch;
 
-  DecisionNode(std::function<bool(Game*, std::shared_ptr<Player>)> condition)
-    : condition_(condition), node_type_(CONDITION) {}
+  DecisionNode(std::function<bool(Game*, std::shared_ptr<Player>)> condition, std::string task_name)
+    : task_name_(task_name), condition_(condition), node_type_(CONDITION) {}
 
-  DecisionNode(std::function<Action(Game*, std::shared_ptr<Player>)> action)
-    : action_(action), node_type_(ACTION) {}
+  DecisionNode(std::function<Action(Game*, std::shared_ptr<Player>)> action, std::string task_name)
+    : task_name_(task_name), action_(action), node_type_(ACTION) {}
 
   bool isConditionNode() const {
     return node_type_ == CONDITION;
@@ -40,11 +41,7 @@ public:
   void toDot(std::ostream& out, int& node_id) const {
     int current_id = node_id++;
     out << "  node" << current_id << " [label=\"";
-    if (node_type_ == CONDITION) {
-      out << "Condition " << current_id;
-    } else {
-      out << "Action " << current_id;
-    }
+    out << task_name_;
     out << "\"];\n";
     if (node_type_ == CONDITION) {
       int true_id = node_id;

@@ -6,6 +6,7 @@ void PlayCommand::execute(std::vector<std::string> params)
 {
   checkCommandLenght(params, 1);
   std::shared_ptr<DecisionTree> decision_tree = std::make_shared<DecisionTree>(game_);
+  decision_tree->exportToDot("decision_tree.dot");
   for (auto player : game_->getPlayers())
   {
     Action action = decision_tree->traverse(player);
