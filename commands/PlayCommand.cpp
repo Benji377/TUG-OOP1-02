@@ -27,7 +27,7 @@ void PlayCommand::execute(std::vector<std::string> params)
   game_->doCommand(best_action.getCommand());
 }
 
-Action PlayCommand::getBestAction(std::vector<Action> actions)
+Action PlayCommand::getBestAction(std::vector<Action>& actions)
 {
   Action best_action = actions[0];
   for (auto action : actions)

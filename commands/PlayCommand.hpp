@@ -35,7 +35,7 @@ public:
   void execute(std::vector<std::string> params) override;
 
 
-  Action getBestAction(std::vector<Action> actions);
+  Action getBestAction(std::vector<Action>& actions);
 
 };
 
