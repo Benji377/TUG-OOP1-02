@@ -26,10 +26,10 @@ void State::initializeVars(bool can_heal)
     return std::any_of(row.begin(), row.end(), [](int i) { return i != 0; });
   });
 
-  if (getDistanceToClosestEnemy() != MoveIndicator::NONE) {
-    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
-  } else if (getDistanceToExit() != MoveIndicator::NONE) {
+  if (getDistanceToExit() != MoveIndicator::NONE) {
     distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getExitDoorPosition());
+  } else if (getDistanceToEntry() != MoveIndicator::NONE) {
+    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getEntryDoorPosition());
   } else {
     distance_to_target_ = std::make_pair(-1, -1);
   }
