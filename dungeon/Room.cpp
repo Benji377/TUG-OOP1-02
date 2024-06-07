@@ -431,7 +431,6 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   for (const auto &death_location : death_locations)
   {
     pair<int, int> death_location_position = getFieldOfEntity(death_location);
-    std::cout << death_location_position.first << " " << death_location_position.second << std::endl;
     int distance = getDistance(player_position, death_location_position);
     if (distance < shortest_distance)
     {

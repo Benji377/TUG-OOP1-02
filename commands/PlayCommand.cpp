@@ -3,8 +3,8 @@
 #include "../decision_tree/DecisionTree.hpp"
 
 const int ATTACK_BONUS = 100;
-const int MOVE_BONUS = 30;
-const int LOOT_BONUS = 20;
+const int MOVE_BONUS = 20;
+const int LOOT_BONUS = 30;
 const int USE_BONUS = 50;
 
 const int KILL_ALLY_PENALTY = -50;
@@ -17,7 +17,7 @@ void PlayCommand::execute(std::vector<std::string> params)
   // Install Graphviz and use "dot -Tpng decision_tree.dot -o decision_tree.png" to generate a visual representation of the decision tree
   decision_tree->exportToDot("decision_tree.dot");
   std::vector<Action> actions;
-  for (auto player : game_->getPlayers())
+  for (auto player : game_->getLivingPlayers())
   {
     Action action = decision_tree->traverse(player);
     actions.push_back(action);
@@ -30,7 +30,7 @@ void PlayCommand::execute(std::vector<std::string> params)
 Action PlayCommand::getBestAction(std::vector<Action>& actions)
 {
   Action best_action = actions[0];
-  for (auto action : actions)
+  for (auto& action : actions)
   {
     switch (action.getType())
     {
