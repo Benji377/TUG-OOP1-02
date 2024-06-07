@@ -255,6 +255,8 @@ class Room
 
     std::pair<int, int> getClosestLootposition(shared_ptr<Player> player) const;
 
+    std::pair<int, int> getLowestHealthEnemyPosition() const;
+
 
 
     int getDistance(pair<int, int> field_1, pair<int, int> field_2) const;

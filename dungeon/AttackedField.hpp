@@ -83,6 +83,12 @@ class AttackedField
     /// @param name the name of the character
     //
     void setName(string name) { character_name_ = name; }
+
+    void setDead(bool is_dead) { is_dead_ = is_dead; }
+
+    CharacterType getCharacterType() const { return character_type_; }
+
+    int getLostHealth() const { return lost_health_; }
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Sets the character on the AttackedField with the given parameters

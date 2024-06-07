@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+const int MAX_TASK_NAME_LENGTH = 15;
+
 enum NodeType {
   CONDITION,
   ACTION
@@ -41,7 +43,7 @@ public:
   void toDot(std::ostream& out, int& node_id) const {
     int current_id = node_id++;
     out << "  node" << current_id << " [label=\"";
-    out << task_name_;
+    Utils::wordWrapText(out, task_name_, MAX_TASK_NAME_LENGTH);
     out << "\"];\n";
     if (node_type_ == CONDITION) {
       int true_id = node_id;

@@ -114,6 +114,14 @@ public:
 
   ///------------------------------------------------------------------------------------------------------------------
   ///
+  /// Returns the highest possible damage of the weapon. Does not roll the dice.
+  ///
+  /// @return The highest possible damage of the weapon.
+  //
+  int getHighestDamage() const;
+
+  ///------------------------------------------------------------------------------------------------------------------
+  ///
   /// The copy constructor of the Weapon class. It is deleted to prevent copying of Weapon objects.
   //
   Weapon(const Weapon &weapon) = delete;

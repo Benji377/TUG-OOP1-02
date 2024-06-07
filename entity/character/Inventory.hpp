@@ -153,7 +153,7 @@ class Inventory
     ///
     /// @return a shared pointer to the ammunition
     //
-    std::shared_ptr<Ammunition> getAmmunition(const std::string& abbreviation);
+    std::shared_ptr<Ammunition> getAmmunition(const std::string& abbreviation) const;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to get all weapons from the inventory
@@ -191,9 +191,16 @@ class Inventory
     //
     std::map<std::string, int> getInventoryMapped() const;
 
-    bool containsRangeWeapon() const;
+    bool containsRangeWeaponWithAmmunition() const;
 
     bool containsMeleeWeapon() const;
+
+    bool hasAmmunitionForWeapon(std::shared_ptr<Weapon> weapon) const;
+
+    std::vector<std::shared_ptr<Weapon>> getAllRangeWeaponWithAmmunition() const;
+
+    std::shared_ptr<Weapon> getBestMeleeWeapon() const;
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Copy constructor for the Inventory class

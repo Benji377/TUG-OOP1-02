@@ -170,3 +170,29 @@ std::vector<std::vector<int>> Utils::deserializeMap(std::string map)
   }
   return deserialized_map;
 }
+
+std::ostream& Utils::wordWrapText(std::ostream& out, const std::string& text, size_t max_line_length)
+{
+  std::string currentWord;
+  size_t lineLength = 0; 
+
+  for (char c : text) {
+    if (std::isspace(c)) {
+      if (lineLength + currentWord.length() + 1 > max_line_length) {
+        out << '\n';
+        lineLength = 0;
+      }
+
+      out << currentWord << ' ';
+      lineLength += currentWord.length() + 1;
+      currentWord.clear();
+    } else {
+      currentWord += c;
+    }
+  }
+
+  if (!currentWord.empty()) {
+    out << currentWord;
+  }
+  return out;
+}

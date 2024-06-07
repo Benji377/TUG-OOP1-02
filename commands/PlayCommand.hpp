@@ -10,6 +10,7 @@
 #define PLAYCOMMAND_HPP
 
 #include "Command.hpp"
+#include "../decision_tree/Action.hpp"
 
 class PlayCommand: public Command
 {
@@ -32,6 +33,9 @@ public:
   ///
   //------------------------------------------------------------------------------------------------------------------
   void execute(std::vector<std::string> params) override;
+
+
+  Action getBestAction(std::vector<Action> actions);
 
 };
 

@@ -119,6 +119,17 @@ int Enemy::takeDamage(int damage, DamageType damage_type)
   return lost_health;
 }
 
+int Enemy::simulateDamage(int damage, DamageType damage_type)
+{
+  if (getResistantTo() == damage_type)
+  {
+    damage /= 2;
+  }
+
+  int damage_taken = damage - getBaseArmor();
+  return std::min(getHealth(), std::max(0, damage_taken));
+}
+
 void Enemy::printEnemy(const std::string &id_string, const std::pair<int, int> &position) const
 {
   std::cout << id_string << " [" << getAbbreviation() << getId() << "] on (" << position.first

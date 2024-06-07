@@ -142,6 +142,8 @@ class Utils
     static std::string serializeMap(std::vector<std::vector<int>> map);
 
     static std::vector<std::vector<int>> deserializeMap(std::string map);
+
+    static std::ostream& wordWrapText(std::ostream& out, const std::string& text, size_t max_line_length);
 };
 
 #endif // UTILS_HPP

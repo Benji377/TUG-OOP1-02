@@ -213,6 +213,7 @@ void Game::doCommand()
   }
 }
 
+// TODO: Undo changes
 void Game::doCommand(string input)
 {
   vector<string> command_input = InputOutput::commandifyString(input);
@@ -228,27 +229,27 @@ void Game::doCommand(string input)
     catch (const UnknownCommand &e)
     {
       cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
-      continue;
+      return;
     }
     catch (const WrongNumberOfParametersException &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
-      continue;
+      return;
     }
     catch (const InvalidParamCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM");
-      continue;
+      return;
     }
     catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
-      continue;
+      return;
     }
     catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
-      continue;
+      return;
     }
     catch (const CommandExecutionException &e)
     {
@@ -265,7 +266,7 @@ void Game::doCommand(string input)
         default:
           break;
       }
-      continue;
+      return;
     }
 
     command_finished = true;

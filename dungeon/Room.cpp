@@ -382,8 +382,32 @@ std::pair<int, int> Room::getClosestEnemyPosition(shared_ptr<Player> player) con
       shortest_distance = distance;
       closest_enemy_position = enemy_position;
     }
+    else if (distance == shortest_distance)
+    {
+      if (enemy->getHealth() < dynamic_pointer_cast<Enemy>(getField(closest_enemy_position)->getEntity())->getHealth())
+      {
+        closest_enemy_position = enemy_position;
+      }
+    }
   }
   return closest_enemy_position;
+}
+
+std::pair<int, int> Room::getLowestHealthEnemyPosition() const
+{
+  vector<std::shared_ptr<Enemy>> enemies = getAllEntitiesOfType<Enemy>();
+  int lowest_health = INT_MAX;
+  pair<int, int> lowest_health_enemy_position = make_pair(-1, -1);
+  for (const auto &enemy : enemies)
+  {
+    pair<int, int> enemy_position = getFieldOfEntity(enemy);
+    if (enemy->getHealth() < lowest_health)
+    {
+      lowest_health = enemy->getHealth();
+      lowest_health_enemy_position = enemy_position;
+    }
+  }
+  return lowest_health_enemy_position;
 }
 
 // TODO: Try with to insert both vectors in one
@@ -407,6 +431,7 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   for (const auto &death_location : death_locations)
   {
     pair<int, int> death_location_position = getFieldOfEntity(death_location);
+    std::cout << death_location_position.first << " " << death_location_position.second << std::endl;
     int distance = getDistance(player_position, death_location_position);
     if (distance < shortest_distance)
     {
