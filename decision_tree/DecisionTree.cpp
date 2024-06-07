@@ -50,6 +50,11 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return player->getInventory()->hasAmmunitionForWeapon(player->getWeapon());
   };
 
+  auto player_has_healing_potion = [](Game *game, std::shared_ptr<Player> player)
+  {
+    return player->hasHealingPotion();
+  };
+
   auto is_best_range_weapon_equipped_with_ammunition = [](Game* game, std::shared_ptr<Player> player) {
     std::shared_ptr<Weapon> best_range_weapon = player->getBestRangeWeaponWithAmmunition();
     return player->getWeapon() == best_range_weapon && player->getInventory()->hasAmmunitionForWeapon(best_range_weapon);
@@ -105,8 +110,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   };
 
   auto use_health_potion = [](Game* game, std::shared_ptr<Player> player) {
-    // TODO: Implement use health potion
-    return Action{USE, player->getAbbreviation(), "health_potion"};
+    return Action{USE, player->getAbbreviation(), player->getHealingPotion()->getAbbreviation()};
   };
 
   auto attack_enemy_with_melee = [](Game *game, std::shared_ptr<Player> player)
@@ -149,7 +153,9 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->true_branch->true_branch->true_branch = std::make_shared<DecisionNode>(collect_loot, "Collect loot");
   root->true_branch->true_branch->false_branch = std::make_shared<DecisionNode>(move_to_loot, "Move to loot");
   root->true_branch->false_branch = std::make_shared<DecisionNode>(player_is_low_health, "Is the player low on health?");
-  root->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(use_health_potion, "Use health potion");
+  root->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_has_healing_potion, "Does the player have a healing potion?");
+  root->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(use_health_potion, "Use health potion");
+  root->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
   root->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_better_armor, "Does the player have better armor?");
   root->true_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(equip_best_armor, "Equip best armor");
   root->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(move_to_door, "Move to door");

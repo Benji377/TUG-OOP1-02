@@ -118,6 +118,8 @@ class Player: public Character
 
     std::shared_ptr<Armor> getBestArmor() const;
 
+    std::shared_ptr<Potion> getHealingPotion() const;
+
     bool hasRangeWeaponEquipped() const;
 
     bool hasMeleeWeapon() const;
@@ -127,6 +129,10 @@ class Player: public Character
     bool hasRangeWeaponWithAmmunition() const;
 
     bool hasBetterArmor() const;
+
+    bool hasHealingPotion() const;
+
+
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to get the currently active armor of the player

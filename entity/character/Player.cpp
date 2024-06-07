@@ -174,7 +174,6 @@ int Player::getAttackDamage()
   {
     return -1;
   }
-
   if (getWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
       && getWeapon()->getAbbreviation() != "QFIR" && getWeapon()->getAbbreviation() != "QACD")
   {
@@ -345,4 +344,14 @@ std::shared_ptr<Armor> Player::getBestArmor() const
     }
   }
   return best_armor;
+}
+
+bool Player::hasHealingPotion() const
+{
+  return inventory_->containsHealingPotion();
+}
+
+std::shared_ptr<Potion> Player::getHealingPotion() const
+{
+  return inventory_->getHealingPotion();
 }

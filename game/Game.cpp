@@ -371,6 +371,11 @@ void Game::printStoryAndRoom(bool print_story, bool print_room_completed, bool p
   {
     cout << endl;
   }
+  // Debugging
+  for (auto player : getLivingPlayers())
+  {
+    InputOutput::printPlayerInventory(player);
+  }
 }
 
 

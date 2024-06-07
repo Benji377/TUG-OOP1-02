@@ -322,9 +322,15 @@ vector<vector<int>> Room::getLootableAsInt() const
   return lootable_map;
 }
 
+// int Room::getDistance(pair<int, int> start, pair<int, int> end) const
+// {
+//   return std::abs(start.first - end.first) + std::abs(start.second - end.second);
+// }
+
+// Chebyshev-Distance
 int Room::getDistance(pair<int, int> start, pair<int, int> end) const
 {
-  return std::abs(start.first - end.first) + std::abs(start.second - end.second);
+  return std::max(std::abs(start.first - end.first), std::abs(start.second - end.second));
 }
 
 bool Room::hasLoot() const
@@ -422,6 +428,7 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   {
     pair<int, int> chest_position = getFieldOfEntity(chest);
     int distance = getDistance(player_position, chest_position);
+    std::cout << "Distance: " << distance << " to chest at " << chest_position.first << " " << chest_position.second << std::endl;
     if (distance < shortest_distance)
     {
       shortest_distance = distance;
@@ -432,6 +439,7 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   {
     pair<int, int> death_location_position = getFieldOfEntity(death_location);
     int distance = getDistance(player_position, death_location_position);
+    std::cout << "Distance: " << distance << " to death location at " << death_location_position.first << " " << death_location_position.second << std::endl;
     if (distance < shortest_distance)
     {
       shortest_distance = distance;

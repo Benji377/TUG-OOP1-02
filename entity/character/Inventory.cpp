@@ -297,3 +297,27 @@ bool Inventory::hasAmmunitionForWeapon(std::shared_ptr<Weapon> weapon) const
   }
   return true;
 }
+
+bool Inventory::containsHealingPotion() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() == Effect::HEALTH)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+std::shared_ptr<Potion> Inventory::getHealingPotion() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() == Effect::HEALTH)
+    {
+      return potion;
+    }
+  }
+  return nullptr;
+}

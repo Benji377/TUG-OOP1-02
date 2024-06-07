@@ -195,11 +195,15 @@ class Inventory
 
     bool containsMeleeWeapon() const;
 
+    bool containsHealingPotion() const;
+
     bool hasAmmunitionForWeapon(std::shared_ptr<Weapon> weapon) const;
 
     std::vector<std::shared_ptr<Weapon>> getAllRangeWeaponWithAmmunition() const;
 
     std::shared_ptr<Weapon> getBestMeleeWeapon() const;
+
+    std::shared_ptr<Potion> getHealingPotion() const;
 
     ///----------------------------------------------------------------------------------------------------------------
     ///
