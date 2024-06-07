@@ -1,25 +1,24 @@
 #include "State.hpp"
 
-State::State(char current_player, std::pair<int, int> current_position, int health,
-              int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
-              std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
-              std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position)
-  : current_player_(current_player), current_position_(current_position), health_(health),
-    damage_output_(damage_output), damage_input_(damage_input), enemies_(enemies), players_(players),
-    lootables_(lootables), entry_door_position_(entry_door_position), exit_door_position_(exit_door_position)
+State::State(char current_player, std::pair<int, int> current_position, int health, int max_health,
+              std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
+              std::vector<std::vector<int>> lootables, std::pair<int, int> entry_door_position,
+              std::pair<int, int> exit_door_position)
+  : current_player_(current_player), current_position_(current_position), max_health_(max_health),
+    enemies_(enemies), players_(players), lootables_(lootables), entry_door_position_(entry_door_position),
+    exit_door_position_(exit_door_position)
 {
-  initializeVars(false);
+  initializeVars(health);
 }
 
-void State::initializeVars(bool can_heal)
+void State::initializeVars(int health)
 {
   can_attack_melee_ = getCanAttackMelee();
   can_attack_range_ = getCanAttackRange();
   distance_to_entry_ = getMoveIndicator(getEntryDoorPosition());
   distance_to_exit_ = getMoveIndicator(getExitDoorPosition());
   distance_to_closest_enemy_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
-  distance_to_closest_player_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getPlayers()));
-  distance_to_closest_lootable_ = getMoveIndicator(Utils::getClosestPosition(getCurrentPosition(), getLootables()));
+  health_ = getHealthIndicator(health);
 
   auto enemies = getEnemies();
   remaining_enemies_ = std::count_if(enemies.begin(), enemies.end(), [](const std::vector<int>& row) {
@@ -33,8 +32,6 @@ void State::initializeVars(bool can_heal)
   } else {
     distance_to_target_ = std::make_pair(-1, -1);
   }
-
-  can_heal_ = can_heal;
 }
 
 
@@ -144,12 +141,10 @@ bool State::canRegenerate(Player player)
   if (!player.getInventory()->getAllPotions().empty()) {
     for (const auto& potion : player.getInventory()->getAllPotions()) {
       if (potion->getEffect() == Effect::HEALTH && player.getHealth() < player.getMaximumHealth()) {
-        setCanHeal(true);
         return true;
       }
     }
   }
-  setCanHeal(false);
   return false;
 }
 
@@ -320,18 +315,12 @@ std::string State::serializeState() const
   serialized_state += std::to_string(getCurrentPlayer()) + "|"
                       + std::to_string(getDistanceToTarget().first) + "|"
                       + std::to_string(getDistanceToTarget().second) + "|"
-                      + std::to_string(getHealth()) + "|"
-                      + std::to_string(getDamageOutput()) + "|"
-                      + std::to_string(getDamageInput()) + "|"
+                      + std::to_string(static_cast<int>(getHealth())) + "|"
                       + std::to_string(getRemainingEnemies()) + "|"
                       + std::to_string(static_cast<int>(getDistanceToClosestEnemy())) + "|"
-                      + std::to_string(static_cast<int>(getDistanceToClosestPlayer())) + "|"
-                      + std::to_string(static_cast<int>(getDistanceToClosestLootable())) + "|"
                       + std::to_string(static_cast<int>(getDistanceToExit())) + "|"
-                      + std::to_string(static_cast<int>(getDistanceToEntry())) + "|"
                       + std::to_string(getCanAttackRange()) + "|"
-                      + std::to_string(getCanAttackMelee()) + "|"
-                      + std::to_string(getCanHeal()) + "|";
+                      + std::to_string(getCanAttackMelee());
   return serialized_state;
 }
 
@@ -341,18 +330,12 @@ void State::deserializeState(std::string state_string)
   std::vector<std::string> state_items = Utils::splitString(state_string, "|");
   setCurrentPlayer(state_items[0][0]); // Take the first character of the string
   setDistanceToTarget(std::make_pair(std::stoi(state_items[1]), std::stoi(state_items[2])));
-  setHealth(std::stoi(state_items[3]));
-  setDamageOutput(std::stoi(state_items[4]));
-  setDamageInput(std::stoi(state_items[5]));
-  setRemainingEnemies(std::stoi(state_items[6]));
-  setDistanceToClosestEnemy(static_cast<MoveIndicator>(std::stoi(state_items[7])));
-  setDistanceToClosestPlayer(static_cast<MoveIndicator>(std::stoi(state_items[8])));
-  setDistanceToClosestLootable(static_cast<MoveIndicator>(std::stoi(state_items[9])));
-  setDistanceToExit(static_cast<MoveIndicator>(std::stoi(state_items[10])));
-  setDistanceToEntry(static_cast<MoveIndicator>(std::stoi(state_items[11])));
-  setCanAttackRange(std::stoi(state_items[12]));
-  setCanAttackMelee(std::stoi(state_items[13]));
-  setCanHeal(std::stoi(state_items[14]));
+  setHealth(static_cast<HealthIndicator>(std::stoi(state_items[3])));
+  setRemainingEnemies(std::stoi(state_items[4]));
+  setDistanceToClosestEnemy(static_cast<MoveIndicator>(std::stoi(state_items[5])));
+  setDistanceToExit(static_cast<MoveIndicator>(std::stoi(state_items[6])));
+  setCanAttackRange(std::stoi(state_items[7]));
+  setCanAttackMelee(std::stoi(state_items[8]));
 }
 
 bool State::operator==(const State& other) const
@@ -360,24 +343,31 @@ bool State::operator==(const State& other) const
   return current_player_ == other.current_player_ &&
          distance_to_target_ == other.distance_to_target_ &&
          // Health can vary of about 10% of the total health
-         health_ >= other.health_ * 0.9 && health_ <= other.health_ * 1.1 &&
-         // Damage output and damage input can vary of about +/- 2 points
-         damage_output_ >= other.damage_output_ - 2 && damage_output_ <= other.damage_output_ + 2 &&
-         damage_input_ >= other.damage_input_ - 2 && damage_input_ <= other.damage_input_ + 2 &&
+         health_ == other.health_ &&
          remaining_enemies_ == other.remaining_enemies_ &&
          distance_to_closest_enemy_ == other.distance_to_closest_enemy_ &&
-         distance_to_closest_player_ == other.distance_to_closest_player_ &&
-         distance_to_closest_lootable_ == other.distance_to_closest_lootable_ &&
          distance_to_exit_ == other.distance_to_exit_ &&
-         distance_to_entry_ == other.distance_to_entry_ &&
          can_attack_melee_ == other.can_attack_melee_ &&
-         can_attack_range_ == other.can_attack_range_ &&
-         can_heal_ == other.can_heal_;
+         can_attack_range_ == other.can_attack_range_;
 }
 
 bool State::operator<(const State& other) const
 {
   return serializeState() < other.serializeState();
+}
+
+HealthIndicator State::getHealthIndicator(int health) const
+{
+  // We want to return LOW, MID or FULL depending on how much health the player has
+  if (health <= 0) {
+    return HealthIndicator::NONE;
+  } else if (health <= 0.3 * max_health_) {
+    return HealthIndicator::LOW;
+  } else if (health <= 0.7 * max_health_) {
+    return HealthIndicator::MEDIUM;
+  } else {
+    return HealthIndicator::FULL;
+  }
 }
 
 MoveIndicator State::getMoveIndicator(std::pair<int, int> position) const
@@ -418,21 +408,19 @@ MoveIndicator State::getMoveIndicator(std::pair<int, int> position) const
   }
 }
 
-void State::updateState(char current_player, std::pair<int, int> current_position, int health, int damage_output,
-                        int damage_input, std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
+void State::updateState(char current_player, std::pair<int, int> current_position, int health, int max_health,
+                        std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
                         std::vector<std::vector<int>> lootables, std::pair<int, int> entry_door_position,
-                        std::pair<int, int> exit_door_position, bool can_heal)
+                        std::pair<int, int> exit_door_position)
 {
   setCurrentPlayer(current_player);
+  setMaxHealth(max_health);
   setCurrentPosition(current_position);
-  setHealth(health);
-  setDamageOutput(damage_output);
-  setDamageInput(damage_input);
   setEnemies(enemies);
   setPlayers(players);
   setLootables(lootables);
   setEntryDoorPosition(entry_door_position);
   setExitDoorPosition(exit_door_position);
 
-  initializeVars(can_heal);
+  initializeVars(health);
 }
