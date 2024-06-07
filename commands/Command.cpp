@@ -116,6 +116,19 @@ void Command::updateState(shared_ptr<State> state)
 {
   auto current_room = game_->getCurrentRoom();
   std::shared_ptr<Player> current_player = game_->getActivePlayerQLearn();
+  if(current_player->isDead())
+  {
+    auto players = game_->getPlayers();
+    for(const auto& player : players)
+    {
+      if(player->isDead() == false)
+      {
+        game_->setActivePlayerQLearn(player->getAbbreviation());
+        current_player = game_->getActivePlayerQLearn();
+        break;
+      }
+    }
+  }
 
   auto current_pos = current_room->getFieldOfEntity(current_player);
   std::pair<int, int> new_pos = std::make_pair(current_pos.first - 1, current_pos.second - 1);
