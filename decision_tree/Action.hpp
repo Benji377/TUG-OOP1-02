@@ -26,16 +26,31 @@ class Action {
   public:
     // Loot action
     Action(ActionType type, char player_abbreviation, std::pair<int, int> target_position)
-      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position) {}
+      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position)
+      {
+        distance_ = 0;
+        score_ = 0;
+      }
     // Use action
     Action(ActionType type, char player_abbreviation, std::string item_name)
-      : type_(type), player_abbreviation_(player_abbreviation), item_name_(item_name) {}
+      : type_(type), player_abbreviation_(player_abbreviation), item_name_(item_name)
+      {
+        distance_ = 0;
+        score_ = 0;
+      }
     // Move action
     Action(ActionType type, char player_abbreviation, std::pair<int, int> target_position, int distance)
-      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), distance_(distance) {}
+      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), distance_(distance)
+      {
+        score_ = 0;
+      }
     // Attack action
     Action(ActionType type, char player_abbreviation, std::pair<int, int> target_position, std::vector<AttackedField> attacked_fields)
-      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), attacked_fields_(attacked_fields) {}
+      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), attacked_fields_(attacked_fields)
+      {
+        distance_ = 0;
+        score_ = 0;
+      }
       
     ActionType getType() const { return type_; }
     std::pair<int, int> getTargetPosition() const { return target_position_; }

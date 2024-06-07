@@ -38,23 +38,26 @@ Action PlayCommand::getBestAction(std::vector<Action> actions)
         action.setScore(ATTACK_BONUS);
         for (auto attacked_field : action.getAttackedFields())
         {
-          if (attacked_field.getCharacterType() == CharacterType::PLAYER)
+          if (attacked_field.containsCharacter())
           {
-            if (attacked_field.isDead())
+            if (attacked_field.getCharacterType() == CharacterType::PLAYER)
             {
-              action.addScore(KILL_ALLY_PENALTY);
+              if (attacked_field.isDead())
+              {
+                action.addScore(KILL_ALLY_PENALTY);
+              }
+              else
+              {
+                action.setScore(attacked_field.getLostHealth() * -1);
+              }
             }
             else
             {
-              action.setScore(attacked_field.getLostHealth() * -1);
-            }
-          }
-          else
-          {
-            action.addScore(attacked_field.getLostHealth());
-            if (attacked_field.isDead())
-            {
-              action.addScore(KILL_ENEMY_BONUS);
+              action.addScore(attacked_field.getLostHealth());
+              if (attacked_field.isDead())
+              {
+                action.addScore(KILL_ENEMY_BONUS);
+              }
             }
           }
         }
