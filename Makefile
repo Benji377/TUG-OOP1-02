@@ -3,7 +3,7 @@ CXXFLAGS      := -Wall -Wextra -pedantic -gdwarf-4 -std=c++17 -g -fstandalone-de
 ASSIGNMENT    := a2
 
 BUILDDIR      := build
-SOURCES       := $(wildcard *.cpp)
+SOURCES       := $(filter-out test.cpp, $(wildcard *.cpp))
 SOURCES_SUBD  := $(shell find */ -name "*.cpp")
 DIRS          := $(patsubst %,$(BUILDDIR)/%,${SOURCES_SUBD:.cpp=})
 OBJECTS       := $(patsubst %,$(BUILDDIR)/%,${SOURCES:.cpp=.o})

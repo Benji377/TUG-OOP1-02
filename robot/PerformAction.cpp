@@ -67,13 +67,15 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
   }
 
 //This is just so we have some fail output when it finds no loot. This code can be removed later
-//BEGIN
+/*BEGIN
     std::string command = "loot " + std::string(1, player.getAbbreviation()) + " " 
             + std::to_string(player_position.first +1) + "," + std::to_string(player_position.second+1) + "\n";
     std::cout << command;
     game_->doCommand(command); 
     std::cout << "Robot loot failed\n"; 
-//END
+END*/
+
+    std::cout << "Robot loot failed\n"; 
 
   // If there is no loot, return a big negative number
   return REWARD_EXCEPTION;
