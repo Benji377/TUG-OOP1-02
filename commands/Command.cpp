@@ -124,6 +124,7 @@ void Command::updateState(shared_ptr<State> state)
       if(player->isDead() == false)
       {
         game_->setActivePlayerQLearn(player->getAbbreviation());
+        current_player = game_->getActivePlayerQLearn();
         break;
       }
     }
