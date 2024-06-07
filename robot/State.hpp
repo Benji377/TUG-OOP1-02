@@ -59,6 +59,14 @@ enum class MoveIndicator
   RIGHT,
 };
 
+enum class HealthIndicator
+{
+  NONE, // For when there is no object left
+  LOW,
+  MEDIUM,
+  FULL,
+};
+
 
 class State
 {

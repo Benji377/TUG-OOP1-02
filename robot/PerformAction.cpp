@@ -61,7 +61,6 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
         std::cout << command;
         game_->doCommand(command);
 
-        std::cout << "Robot looted at: (" << new_x << ", " << new_y << ")" << std::endl;
         return REWARD_LOOT;
       }
     }
@@ -102,7 +101,8 @@ double PerformAction::perform_regeneration(Player player)
         std::cout << command << std::endl;
         game_->doCommand(command);
     } 
-    else {
+    else
+    {
         std::cout << "No suitable potion found in inventory." << std::endl;
         return REWARD_EXCEPTION; // Regeneration not possible.
     }
@@ -158,7 +158,6 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
 
 double PerformAction::perform_attack(Player player, std::pair<int, int> player_position, std::vector<std::vector<int>> enemies)
 {
-  // TODO: Add a big reward if the enemy is killed
   if (player.getWeapon()->getAttackType() == AttackType::MELEE)
   {
     // Define the offsets for the surrounding cells
@@ -169,14 +168,11 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
     {
       int new_y = player_position.first + offset.first;
       int new_x = player_position.second + offset.second;
-      std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << new_y + 1 << ", " << new_x + 1 << ")" << std::endl;
 
       // Check if the new position is within the bounds of the enemies vector
       if (new_y >= 0 && new_y < static_cast<int>(enemies.size()) && new_x >= 0 && new_x < static_cast<int>(enemies[0].size()))
       {
-        std::cout << "[DEBUG] Field is not out of bounds" << std::endl;
-        int temp = enemies[new_y][new_x]; //TODO sometimes skips over this
-        std::cout << "[DEBUG] Enemy at: (" << new_y + 1 << ", " << new_x + 1 << ") has health: " << temp << std::endl;
+        int temp = enemies[new_y][new_x];
         if (temp > 0)
         {
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
@@ -186,33 +182,21 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
           return REWARD_ATTACK;
         }
       }
-      else
-      {
-        std::cout << "[DEBUG] Field is out of bounds" << std::endl;
-      }
     }
   } else 
   {
     // If the player has a ranged weapon, check if there is an enemy in range
     for (int i = 0; i < static_cast<int>(enemies.size()); i++)
     {
-      std::cout << "[DEBUG] Checking column: " << i << " of: " << enemies.size() << std::endl;
       for (int j = 0; j < static_cast<int>(enemies[0].size()); j++)
       {
-        std::cout << "[DEBUG] Checking row: " << j << " of: " << enemies[0].size() << std::endl;
         if (enemies[i][j] > 0)
         {
-          std::cout << "[DEBUG] Robot is trying to attack enemy at: (" << j << ", " << i << ")" << std::endl;
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";
           std::cout << command;
           game_->doCommand(command);
-          std::cout << "Robot attacked enemy at: (" << i + 1 << ", " << j + 1 << ") using ranged weapon" << std::endl;
           return REWARD_ATTACK;
-        }
-        else
-        {
-          std::cout << "[DEBUG] No enemy found at: (" << i + 1 << ", " << j + 1 << ")" << std::endl;
         }
       }
     }
@@ -255,7 +239,6 @@ double PerformAction::perform_use_ranged(Player player)
   }
   else
   {
-    std::cout << "Robot failed to equip ranged weapon" << std::endl;
     return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }
@@ -292,7 +275,6 @@ double PerformAction::perform_use_melee(Player player)
   }
   else
   {
-    std::cout << "Robot failed to equip melee weapon" << std::endl;
     return REWARD_EXCEPTION; //tried to equip meele but there wasn't one.
   }
 }

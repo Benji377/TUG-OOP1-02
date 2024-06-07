@@ -29,7 +29,7 @@ void State::initializeVars(bool can_heal)
   if (getDistanceToExit() != MoveIndicator::NONE) {
     distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getExitDoorPosition());
   } else if (getDistanceToEntry() != MoveIndicator::NONE) {
-    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), getEntryDoorPosition());
+    distance_to_target_ = Utils::getDistanceToPosition(getCurrentPosition(), Utils::getClosestPosition(getCurrentPosition(), getEnemies()));
   } else {
     distance_to_target_ = std::make_pair(-1, -1);
   }
