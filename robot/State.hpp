@@ -72,18 +72,14 @@ class State
 {
   char current_player_;
   std::pair<int, int> current_position_;
-  int health_;
-  int damage_output_; // The amount of damage the robot can deal
-  int damage_input_; // The amount of damage the robot can take
+  HealthIndicator health_;
+  int max_health_;
   int remaining_enemies_;
   MoveIndicator distance_to_exit_; // The distance to the exit door
   MoveIndicator distance_to_entry_; // The distance to the entry door
   MoveIndicator distance_to_closest_enemy_;
-  MoveIndicator distance_to_closest_player_;
-  MoveIndicator distance_to_closest_lootable_;
   bool can_attack_range_; // If the robot can attack from a distance
   bool can_attack_melee_; // If the robot can attack in melee
-  bool can_heal_; // If the robot can heal itself
   std::pair<int, int> distance_to_target_; // The distance to the target
   // The following is not saved in the state, but used for calculating the possible actions
   std::vector<std::vector<int>> enemies_; // The position of the enemies
@@ -107,46 +103,36 @@ class State
 
 
 public:
-  State(char current_player, std::pair<int, int> current_position, int health,
-        int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
-        std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
-        std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position);
+  State(char current_player, std::pair<int, int> current_position, int health, int max_health,
+        std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
+        std::vector<std::vector<int>> lootables, std::pair<int, int> entry_door_position,
+        std::pair<int, int> exit_door_position);
   State() = default;
 
   // Getter and Setter methods
   void setCurrentPlayer(char current_player) { current_player_ = current_player; };
   void setCurrentPosition(std::pair<int, int> current_position) { current_position_ = current_position; };
-  void setHealth(int health) { health_ = health; };
   void setRemainingEnemies(int remaining_enemies) { remaining_enemies_ = remaining_enemies; };
-  void setDamageOutput(int damage_output) { damage_output_ = damage_output; };
-  void setDamageInput(int damage_input) { damage_input_ = damage_input; };
   void setCanAttackRange(bool can_attack_range) { can_attack_range_ = can_attack_range; };
   void setCanAttackMelee(bool can_attack_melee) { can_attack_melee_ = can_attack_melee; };
-  void setCanHeal(bool can_heal) { can_heal_ = can_heal; };
   void setEnemies(std::vector<std::vector<int>> enemies) { enemies_ = enemies; };
   void setPlayers(std::vector<std::vector<int>> players) { players_ = players; };
   void setLootables(std::vector<std::vector<int>> lootables) { lootables_ = lootables; };
   void setEntryDoorPosition(std::pair<int, int> entry_door_position) { entry_door_position_ = entry_door_position; };
   void setExitDoorPosition(std::pair<int, int> exit_door_position) { exit_door_position_ = exit_door_position; };
   void setDistanceToClosestEnemy(MoveIndicator distance_to_closest_enemy) { distance_to_closest_enemy_ = distance_to_closest_enemy; };
-  void setDistanceToClosestPlayer(MoveIndicator distance_to_closest_player) { distance_to_closest_player_ = distance_to_closest_player; };
-  void setDistanceToClosestLootable(MoveIndicator distance_to_closest_lootable) { distance_to_closest_lootable_ = distance_to_closest_lootable; };
   void setDistanceToExit(MoveIndicator distance_to_exit) { distance_to_exit_ = distance_to_exit; };
-  void setDistanceToEntry(MoveIndicator distance_to_entry) { distance_to_entry_ = distance_to_entry; };
   void setDistanceToTarget(std::pair<int, int> distance_to_target) { distance_to_target_ = distance_to_target; };
+  void setHealth(HealthIndicator health_indicator) { health_ = health_indicator; };
+  void setMaxHealth(int max_health) { max_health_ = max_health; };
 
   char getCurrentPlayer() const { return current_player_; };
   std::pair<int, int> getCurrentPosition() const { return current_position_; };
-  int getHealth() const { return health_; };
+  HealthIndicator getHealth() const { return health_; };
   int getRemainingEnemies() const { return remaining_enemies_; };
-  int getDamageOutput() const { return damage_output_; };
-  int getDamageInput() const { return damage_input_; };
   bool getCanAttackRange() const { return can_attack_range_; };
   bool getCanAttackMelee() const { return can_attack_melee_; };
-  bool getCanHeal() const { return can_heal_; };
   MoveIndicator getDistanceToClosestEnemy() const { return distance_to_closest_enemy_; };
-  MoveIndicator getDistanceToClosestPlayer() const { return distance_to_closest_player_; };
-  MoveIndicator getDistanceToClosestLootable() const { return distance_to_closest_lootable_; };
   MoveIndicator getDistanceToExit() const { return distance_to_exit_; };
   MoveIndicator getDistanceToEntry() const { return distance_to_entry_; };
   std::pair<int, int> getDistanceToTarget() const { return distance_to_target_; };
@@ -156,17 +142,19 @@ public:
   std::vector<std::vector<int>> getLootables() const { return lootables_; };
   std::pair<int, int> getEntryDoorPosition() const { return entry_door_position_; };
   std::pair<int, int> getExitDoorPosition() const { return exit_door_position_; };
+  int getMaxHealth() const { return max_health_; };
 
   // Methods
   std::set<RobotAction> getPossibleActions(Player player);
   std::string serializeState() const;
   void deserializeState(std::string state_string);
   MoveIndicator getMoveIndicator(std::pair<int, int> position) const;
-  void initializeVars(bool can_heal);
-  void updateState(char current_player, std::pair<int, int> current_position, int health,
-                   int damage_output, int damage_input, std::vector<std::vector<int>> enemies,
-                   std::vector<std::vector<int>> players, std::vector<std::vector<int>> lootables,
-                   std::pair<int, int> entry_door_position, std::pair<int, int> exit_door_position, bool can_heal);
+  HealthIndicator getHealthIndicator(int health) const;
+  void initializeVars(int health);
+  void updateState(char current_player, std::pair<int, int> current_position, int health, int max_health,
+                   std::vector<std::vector<int>> enemies, std::vector<std::vector<int>> players,
+                   std::vector<std::vector<int>> lootables, std::pair<int, int> entry_door_position,
+                   std::pair<int, int> exit_door_position);
 
 
   // Overloading some important operators

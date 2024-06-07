@@ -120,21 +120,6 @@ void Command::updateState(shared_ptr<State> state)
   auto current_pos = current_room->getFieldOfEntity(current_player);
   std::pair<int, int> new_pos = std::make_pair(current_pos.first - 1, current_pos.second - 1);
 
-  int damage = current_player->getWeapon()->getDamageAddition() + current_player->getWeapon()->getDice()->getType();
-
-  int armor_value = current_player->getArmor() ? current_player->getArmor()->getArmorValue() : current_player->getBaseArmor();
-
-  bool can_heal = false;
-  std::vector<std::shared_ptr<Potion>> potions = current_player->getInventory()->getAllPotions();
-  for(auto potion : potions)
-  {
-    if(potion->getEffect() == Effect::HEALTH)
-    {
-      can_heal = true;
-      break;
-    }
-  }
-
   std::pair<int,int> entry_door_position = current_room->getEntryDoorPosition();
   --entry_door_position.first; //Convert it to vector coordinates.
   --entry_door_position.second;
@@ -144,7 +129,7 @@ void Command::updateState(shared_ptr<State> state)
   --exit_door_position.second;
 
   state->updateState(current_player->getAbbreviation(), new_pos, current_player->getHealth(),
-                     damage, armor_value, current_room->getCharacterAsInt<Enemy>(),
+                     current_player->getMaximumHealth(), current_room->getCharacterAsInt<Enemy>(),
                              current_room->getCharacterAsInt<Player>(), current_room->getLootableAsInt(),
-                             entry_door_position, exit_door_position, can_heal);
+                             entry_door_position, exit_door_position);
 }
