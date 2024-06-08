@@ -475,7 +475,6 @@ bool Room::getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_po
 {
   pair<int, int> player_position = getFieldOfEntity(player);
   pair<int, int> closest_enemy_position = getClosestEnemyPosition(player);
-  std::cout << "Closest enemy position: " << closest_enemy_position.first << " " << closest_enemy_position.second << std::endl;
   vector<vector<int>> map = getMapForPathfinding(player_position, closest_enemy_position);
   return Pathfinder::find_path(map, player_position, closest_enemy_position, next_position, distance);
 }

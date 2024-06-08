@@ -75,7 +75,6 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
   }
   for (auto action : actions)
   {
-    std::cout << "Player: " << action.getPlayerAbbreviation() << " Action: " << action.getCommand() << " Score: " << action.getScore() << std::endl;
     if (action.getScore() > best_action.getScore())
     {
       best_action = action;
