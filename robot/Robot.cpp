@@ -39,8 +39,7 @@ void Robot::saveQTable()
 {
   std::ofstream file(q_table_file_path_);
   if (!file.is_open()) {
-    std::cout << "Error opening file for writing: " << q_table_file_path_ << std::endl;
-    return;
+    throw std::runtime_error("Error opening file: " + q_table_file_path_);
   }
 
   for (const auto& entry : q_table_) {
@@ -58,7 +57,7 @@ void Robot::loadQTable()
 {
   std::ifstream file(q_table_file_path_);
   if (!file.is_open()) {
-    std::cout << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
+    //TODO std::cout << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
     // No need to initialize Q-table here as it will be done on-the-fly
     return;
   }
@@ -66,8 +65,7 @@ void Robot::loadQTable()
 
   for (const auto& row : q_table_data) {
     if (row.size() != 3) {
-      std::cout << "Error reading Q-table data: " << q_table_file_path_ << std::endl;
-      return;
+      throw std::runtime_error("Invalid Q-table data: " + q_table_file_path_);
     }
 
     State state = State();
@@ -94,24 +92,24 @@ void Robot::updateQTable(RobotAction action, Player player, double reward)
 
 RobotAction Robot::getBestAction(State state, Player player)
 {
-  std::cout << "[DEBUG] Getting best action for player: " << player.getName() << std::endl;
+  //TODO std::cout << "[DEBUG] Getting best action for player: " << player.getName() << std::endl;
   std::set<RobotAction> possible_actions = state.getPossibleActions(player);
   // Output possible actions
-  std::cout << "[DEBUG] Possible actions: ";
-  for (const RobotAction& action : possible_actions) {
-    std::cout << getRobotActionAsString(action) << ", ";
-  }
-  std::cout << std::endl;
+  //TODO std::cout << "[DEBUG] Possible actions: ";
+  //for (const RobotAction& action : possible_actions) {
+  //  std::cout << getRobotActionAsString(action) << ", ";
+  //}
+  //std::cout << std::endl;
   RobotAction best_action = RobotAction::UNKNOWN;
   double max_q_value = -std::numeric_limits<double>::infinity();
-  std::cout << "[DEBUG] Max Q-value: " << max_q_value << std::endl;
+  //TODO std::cout << "[DEBUG] Max Q-value: " << max_q_value << std::endl;
 
   // Exploitation: Choose the action with the highest Q-value
   for (const RobotAction& action : possible_actions) {
     auto it = q_table_.find(std::make_tuple(state, action));
     if (it != q_table_.end()) {
       double q_value = it->second;
-      std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
+      //TODO std::cout << "[DEBUG] Q-value for action " << getRobotActionAsString(action) << ": " << q_value << std::endl;
       if (q_value > max_q_value) {
         max_q_value = q_value;
         best_action = action;
@@ -124,20 +122,20 @@ RobotAction Robot::getBestAction(State state, Player player)
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> distribution(0, 1);
   if (distribution(gen) < epsilon_ || best_action == RobotAction::UNKNOWN) {
-    std::cout << "[DEBUG] Exploration: Choosing random action" << std::endl;
+    //TODO std::cout << "[DEBUG] Exploration: Choosing random action" << std::endl;
     std::uniform_int_distribution<> dis(0, possible_actions.size() - 1);
     auto it = std::next(possible_actions.begin(), dis(gen));
     best_action = *it;
   }
   else
   {
-    std::cout << "[DEBUG] Exploitation: Choosing best action" << std::endl;
+    //TODO std::cout << "[DEBUG] Exploitation: Choosing best action" << std::endl;
   }
-  std::cout << "[DEBUG] Best action: (" << static_cast<int>(best_action) << ") " << getRobotActionAsString(best_action) << std::endl;
+  //TODO std::cout << "[DEBUG] Best action: (" << static_cast<int>(best_action) << ") " << getRobotActionAsString(best_action) << std::endl;
 
   // Decay epsilon
   epsilon_ = std::max(epsilon_ * epsilon_decay_, epsilon_min_);
-  std::cout << "[DEBUG] Epsilon decayed: " << epsilon_ << std::endl;
+  //TODO std::cout << "[DEBUG] Epsilon decayed: " << epsilon_ << std::endl;
 
   return best_action;
 }
@@ -178,7 +176,7 @@ double Robot::executeAction(RobotAction action, Player player, std::vector<Playe
     case RobotAction::USE_ARMOR:
       return performAction.perform_use_armor(player);
     default:
-      std::cout << "Invalid action: " << getRobotActionAsString(action) << std::endl;
+      //TODO std::cout << "Invalid action: " << getRobotActionAsString(action) << std::endl;
       throw std::invalid_argument("Invalid action");
   }
 }
