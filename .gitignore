@@ -2,6 +2,7 @@
 a2
 valgrind_logs/
 testreport.html
+test.cpp
 build/
 .vscode
 testrunner
