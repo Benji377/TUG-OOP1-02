@@ -2,7 +2,6 @@
 #include "../game/Game.hpp"
 #include "../entity/TreasureChest.hpp"
 #include "../entity/DeathLocation.hpp"
-#include "../robot/PerformAction.hpp"
 
 void AttackCommand::execute(std::vector<std::string> params)
 {
@@ -21,6 +20,8 @@ void AttackCommand::execute(std::vector<std::string> params)
   if(players_weapon == nullptr)
   {
     throw CommandExecutionException(CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED);
+    //TODO InvalidPos Command has higher priority that noweaponequipped. This cannot be checked in that order however
+    //as the type of weapon influences the valid position
   }
   std::pair<int,int> current_position = game_->getCurrentRoom()->getFieldOfEntity(player);
 
@@ -64,34 +65,6 @@ void AttackCommand::execute(std::vector<std::string> params)
   InputOutput::printDiceRoll(player->getWeapon()->getDice()->getPreviousRoll(), player->getWeapon()->getDice());
 
   InputOutput::printAttackedCharacters(attacked_fields_sorted);
-
-  //Soly for a3 qlearning
-  auto players = game_->getPlayers();
-  for(auto field : attacked_fields_sorted)
-  {
-    if(field.getChracterType() == CharacterType::PLAYER)
-    {
-      game_->setAdditionalreward(game_->getAdditionalreward() + REWARD_PLAYER_HIT);
-      if(game_->getActivePlayerQLearn()->isDead())
-      {
-          game_->setAdditionalreward(game_->getAdditionalreward() + REWARD_PLAYER_KILLED);
-          for(auto player : game_->getPlayers())
-          {
-            if(player->isDead() == false)
-            {
-              game_->setActivePlayerQLearn(player->getAbbreviation());
-              break;
-            }
-          }
-      }
-
-    }
-    else if(field.getChracterType() == CharacterType::ENEMY && field.isDead() == true)
-    {
-      game_->setAdditionalreward(game_->getAdditionalreward() + REWARD_ENEMY_KILLED);
-    }
-  }
-  //Soly for a3 qlearning
 
   if(game_->getDungeon().isBossDead())
   {

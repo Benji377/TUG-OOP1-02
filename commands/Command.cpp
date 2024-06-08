@@ -30,7 +30,7 @@ std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> para
   {
     char current_player_abbrev = player->getAbbreviation();
 
-    if(current_player_abbrev == uppercase_input_abbrev && !player->isDead())
+    if(current_player_abbrev == uppercase_input_abbrev && player->isDead() == false)
     {
       return player;
     }
@@ -108,41 +108,4 @@ std::pair<std::shared_ptr<Player>, std::pair<int, int>>
   }
 
   return std::make_pair(player, target_position);
-}
-
-
-
-void Command::updateState(shared_ptr<State> state)
-{
-  auto current_room = game_->getCurrentRoom();
-  std::shared_ptr<Player> current_player = game_->getActivePlayerQLearn();
-  if(current_player->isDead())
-  {
-    auto players = game_->getPlayers();
-    for(const auto& player : players)
-    {
-      if(player->isDead() == false)
-      {
-        game_->setActivePlayerQLearn(player->getAbbreviation());
-        current_player = game_->getActivePlayerQLearn();
-        break;
-      }
-    }
-  }
-
-  auto current_pos = current_room->getFieldOfEntity(current_player);
-  std::pair<int, int> new_pos = std::make_pair(current_pos.first - 1, current_pos.second - 1);
-
-  std::pair<int,int> entry_door_position = current_room->getEntryDoorPosition();
-  --entry_door_position.first; //Convert it to vector coordinates.
-  --entry_door_position.second;
-
-  std::pair<int,int> exit_door_position = current_room->getNextDoorPosition();
-  --exit_door_position.first;
-  --exit_door_position.second;
-
-  state->updateState(current_player->getAbbreviation(), new_pos, current_player->getHealth(),
-                     current_player->getMaximumHealth(), current_room->getCharacterAsInt<Enemy>(),
-                             current_room->getCharacterAsInt<Player>(), current_room->getLootableAsInt(),
-                             entry_door_position, exit_door_position);
 }

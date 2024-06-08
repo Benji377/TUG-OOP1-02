@@ -133,30 +133,66 @@ bool Utils::isValidItemAbbrev(std::string item_abbreviation)
   return true;
 }
 
-std::pair<int, int> Utils::getClosestPosition(const std::pair<int, int> current_position,
-                                              const std::vector<std::vector<int>> positions)
+std::string Utils::serializeMap(std::vector<std::vector<int>> map)
 {
-  int closest_distance = std::numeric_limits<int>::max();
-  std::pair<int, int> closest_position = std::make_pair(-1, -1);
-
-  for (int i = 0; i < static_cast<int>(positions.size()); i++) {
-    for (int j = 0; j < static_cast<int>(positions[i].size()); j++) {
-      // Only consider positions where the value is greater than 0
-      if (positions[i][j] > 0) {
-        int distance = std::abs(current_position.first - i) + std::abs(current_position.second - j);
-        if (distance < closest_distance) {
-          closest_distance = distance;
-          closest_position = std::make_pair(i, j);
-        }
-      }
+  std::string serialized_map;
+  // For each item in a row, we want to separate it with a comma
+  // For each row we want to separate it with a slash
+  for (const auto &row : map)
+  {
+    for (const auto &item : row)
+    {
+      serialized_map += std::to_string(item) + " ";
     }
+    serialized_map.pop_back();
+    serialized_map += "/";
   }
-  return closest_position;
+  return serialized_map;
 }
 
-std::pair<int, int> Utils::getDistanceToPosition(const std::pair<int, int> current_position,
-                                                const std::pair<int, int> target_position)
+std::vector<std::vector<int>> Utils::deserializeMap(std::string map)
 {
-  return std::make_pair(std::abs(current_position.first - target_position.first),
-                        std::abs(current_position.second - target_position.second));
+  // Each item in a row is separated by a comma
+  // Each row is separated by a slash. The amount of rows can vary
+  std::vector<std::vector<int>> deserialized_map;
+  std::vector<int> row;
+  std::string item;
+  std::istringstream map_stream(map);
+  while (std::getline(map_stream, item, '/'))
+  {
+    std::istringstream row_stream(item);
+    while (std::getline(row_stream, item, ' '))
+    {
+      row.push_back(std::stoi(item));
+    }
+    deserialized_map.push_back(row);
+    row.clear();
+  }
+  return deserialized_map;
+}
+
+std::ostream& Utils::wordWrapText(std::ostream& out, const std::string& text, size_t max_line_length)
+{
+  std::string currentWord;
+  size_t lineLength = 0; 
+
+  for (char c : text) {
+    if (std::isspace(c)) {
+      if (lineLength + currentWord.length() + 1 > max_line_length) {
+        out << '\n';
+        lineLength = 0;
+      }
+
+      out << currentWord << ' ';
+      lineLength += currentWord.length() + 1;
+      currentWord.clear();
+    } else {
+      currentWord += c;
+    }
+  }
+
+  if (!currentWord.empty()) {
+    out << currentWord;
+  }
+  return out;
 }

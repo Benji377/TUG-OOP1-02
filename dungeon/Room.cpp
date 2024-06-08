@@ -7,6 +7,7 @@
 #include "../utility/Exceptions.hpp"
 #include "../utility/Utils.hpp"
 #include <algorithm>
+#include <climits>
 
 using std::cout;
 using std::dynamic_pointer_cast;
@@ -321,42 +322,185 @@ vector<vector<int>> Room::getLootableAsInt() const
   return lootable_map;
 }
 
-std::pair<int, int> Room::getNextDoorPosition() 
+// int Room::getDistance(pair<int, int> start, pair<int, int> end) const
+// {
+//   return std::abs(start.first - end.first) + std::abs(start.second - end.second);
+// }
+
+// Chebyshev-Distance
+int Room::getDistance(pair<int, int> start, pair<int, int> end) const
 {
-    std::vector<std::shared_ptr<Door>> doors;
-
-    for (const auto& row : fields_) {
-        for (const auto& field : row) {
-            if (auto door = std::dynamic_pointer_cast<Door>(field->getEntity())) {
-                doors.push_back(door);
-            }
-        }
-    }
-
-    auto maxDoorIt = std::max_element(doors.begin(), doors.end(),
-        [](const std::shared_ptr<Door>& a, const std::shared_ptr<Door>& b) {
-            return a->getLeadsTo() < b->getLeadsTo();
-        });
-
-    return getFieldOfEntity((*maxDoorIt));
+  return std::max(std::abs(start.first - end.first), std::abs(start.second - end.second));
 }
 
-std::pair<int, int> Room::getEntryDoorPosition()
+bool Room::hasLoot() const
 {
-    std::vector<std::shared_ptr<Door>> doors;
-
-    for (const auto& row : fields_) {
-        for (const auto& field : row) {
-            if (auto door = std::dynamic_pointer_cast<Door>(field->getEntity())) {
-                doors.push_back(door);
-            }
-        }
+  for (const auto &row : fields_)
+  {
+    for (const auto &field : row)
+    {
+      shared_ptr<TreasureChest> chest = dynamic_pointer_cast<TreasureChest>(field->getEntity());
+      shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(field->getEntity());
+      if (chest != nullptr || death_location != nullptr) { return true; }
     }
+  }
+  return false;
+}
 
-    auto minDoorIt = std::min_element(doors.begin(), doors.end(),
-        [](const std::shared_ptr<Door>& a, const std::shared_ptr<Door>& b) {
-            return a->getLeadsTo() < b->getLeadsTo();
-        });
+// TODO: Combine following three functions into one
+bool Room::isLootNearby(shared_ptr<Player> player) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  vector<pair<int, int>> surrounding_fields = getSurroundingFieldPositions(player_position);
+  for (const auto &field : surrounding_fields)
+  {
+    shared_ptr<TreasureChest> chest = dynamic_pointer_cast<TreasureChest>(getField(field)->getEntity());
+     shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(getField(field)->getEntity());
+     if (chest != nullptr || death_location != nullptr) { return true; }
+  }
+  return false;
+}
 
-    return getFieldOfEntity((*minDoorIt));
+bool Room::isEnemyNearby(shared_ptr<Player> player) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  vector<pair<int, int>> surrounding_fields = getSurroundingFieldPositions(player_position);
+  for (const auto &field : surrounding_fields)
+  {
+    shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(getField(field)->getEntity());
+    if (enemy != nullptr) { return true; }
+  }
+  return false;
+}
+
+std::pair<int, int> Room::getClosestEnemyPosition(shared_ptr<Player> player) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  vector<std::shared_ptr<Enemy>> enemies = getAllEntitiesOfType<Enemy>();
+  int shortest_distance = INT_MAX;
+  pair<int, int> closest_enemy_position = make_pair(-1, -1);
+  for (const auto &enemy : enemies)
+  {
+    pair<int, int> enemy_position = getFieldOfEntity(enemy);
+    int distance = getDistance(player_position, enemy_position);
+    if (distance < shortest_distance)
+    {
+      shortest_distance = distance;
+      closest_enemy_position = enemy_position;
+    }
+    else if (distance == shortest_distance)
+    {
+      if (enemy->getHealth() < dynamic_pointer_cast<Enemy>(getField(closest_enemy_position)->getEntity())->getHealth())
+      {
+        closest_enemy_position = enemy_position;
+      }
+    }
+  }
+  return closest_enemy_position;
+}
+
+std::pair<int, int> Room::getLowestHealthEnemyPosition() const
+{
+  vector<std::shared_ptr<Enemy>> enemies = getAllEntitiesOfType<Enemy>();
+  int lowest_health = INT_MAX;
+  pair<int, int> lowest_health_enemy_position = make_pair(-1, -1);
+  for (const auto &enemy : enemies)
+  {
+    pair<int, int> enemy_position = getFieldOfEntity(enemy);
+    if (enemy->getHealth() < lowest_health)
+    {
+      lowest_health = enemy->getHealth();
+      lowest_health_enemy_position = enemy_position;
+    }
+  }
+  return lowest_health_enemy_position;
+}
+
+// TODO: Try with to insert both vectors in one
+std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  vector<std::shared_ptr<TreasureChest>> chests = getAllEntitiesOfType<TreasureChest>();
+  vector<std::shared_ptr<DeathLocation>> death_locations = getAllEntitiesOfType<DeathLocation>();
+  int shortest_distance = INT_MAX;
+  pair<int, int> closest_loot_position = make_pair(-1, -1);
+  for (const auto &chest : chests)
+  {
+    pair<int, int> chest_position = getFieldOfEntity(chest);
+    int distance = getDistance(player_position, chest_position);
+    if (distance < shortest_distance)
+    {
+      shortest_distance = distance;
+      closest_loot_position = chest_position;
+    }
+  }
+  for (const auto &death_location : death_locations)
+  {
+    pair<int, int> death_location_position = getFieldOfEntity(death_location);
+    int distance = getDistance(player_position, death_location_position);
+    if (distance < shortest_distance)
+    {
+      shortest_distance = distance;
+      closest_loot_position = death_location_position;
+    }
+  }
+  return closest_loot_position;
+}
+
+vector<vector<int>> Room::getMapForPathfinding(pair<int, int> start, pair<int, int> end) const
+{
+  vector<vector<int>> map;
+  for (const auto &row : fields_)
+  {
+    vector<int> row_map;
+    for (const auto &field : row)
+    {
+      if (field->getEntity() != nullptr)
+      {
+        row_map.push_back(1);
+      }
+      else
+      {
+        row_map.push_back(0);
+      }
+    }
+    map.push_back(row_map);
+  }
+  map[start.first - 1][start.second - 1] = 0;
+  map[end.first - 1][end.second - 1] = 0;
+  return map;
+}
+
+bool Room::getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  pair<int, int> closest_enemy_position = getClosestEnemyPosition(player);
+  std::cout << "Closest enemy position: " << closest_enemy_position.first << " " << closest_enemy_position.second << std::endl;
+  vector<vector<int>> map = getMapForPathfinding(player_position, closest_enemy_position);
+  return Pathfinder::find_path(map, player_position, closest_enemy_position, next_position, distance);
+}
+
+bool Room::getBestMoveToDoor(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  vector<shared_ptr<Door>> surrounding_fields = getAllEntitiesOfType<Door>();
+  shared_ptr<Door> door = nullptr;
+  for (const auto &field : surrounding_fields)
+  {
+    if (door == nullptr || field->getLeadsTo() > door->getLeadsTo()) { door = field; }
+  }
+  if (door == nullptr) { return false; }
+  pair<int, int> door_position = getFieldOfEntity(door);
+  std::cout << "Door position: " << door_position.first << " " << door_position.second << std::endl;
+  vector<vector<int>> map = getMapForPathfinding(player_position, door_position);
+  return Pathfinder::find_path(map, player_position, door_position, next_position, distance);
+}
+
+bool Room::getBestMoveToLoot(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const
+{
+  pair<int, int> player_position = getFieldOfEntity(player);
+  pair<int, int> closest_loot_position = getClosestLootposition(player);
+  std::cout << "Closest loot position: " << closest_loot_position.first << " " << closest_loot_position.second << std::endl;
+  vector<vector<int>> map = getMapForPathfinding(player_position, closest_loot_position);
+  return Pathfinder::find_path(map, player_position, closest_loot_position, next_position, distance);
 }

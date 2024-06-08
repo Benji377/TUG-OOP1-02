@@ -31,13 +31,13 @@ class Utils
     ///
     /// @return The file with the file pointer at the specified line
     //
-    static std::fstream &goToLine(std::fstream &file, int line_number);
+    static std::fstream& goToLine(std::fstream& file, int line_number);
   public:
     ///------------------------------------------------------------------------------------------------------------------
     /// Constructor, Copy-Constructor and Destructor are deleted, as this class should never be instantiated.
     //
     Utils() = delete;
-    Utils(const Utils &) = delete;
+    Utils(const Utils&) = delete;
     ~Utils() = delete;
 
     ///------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class Utils
     ///
     /// @return true, if conversion was successful, false otherwise
     //
-    static bool decimalStringToInt(const std::string &str, int &number);
+    static bool decimalStringToInt(const std::string& str, int& number);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function reads a specific line from a file. The line number is given as a parameter.
@@ -59,7 +59,7 @@ class Utils
     ///
     /// @return The line read from the file
     //
-    static std::string readFileLine(const char *file_path, int line_number);
+    static std::string readFileLine(const char* file_path, int line_number);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function checks if a given configuration file is valid. A configuration file is valid
@@ -68,7 +68,7 @@ class Utils
     /// @param config_path The path to the configuration file
     /// @param magic_number The magic number to be checked
     //
-    static void isValidConfig(const char *config_path, const char *magic_number);
+    static void isValidConfig(const char* config_path, const char* magic_number);
 
     ///------------------------------------------------------------------------------------------------------------------
     ///
@@ -79,7 +79,7 @@ class Utils
     ///
     /// @return A vector of strings
     //
-    static std::vector<std::string> splitString(const std::string &string, const std::string &delimiter);
+    static std::vector<std::string> splitString(const std::string& string, const std::string& delimiter);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function normalizes a string by removing all whitespace and converting it by default
@@ -88,7 +88,7 @@ class Utils
     /// @param string The string to be normalized
     /// @param to_upper True if the string should be converted to uppercase, false otherwise
     //
-    static void normalizeString(std::string &string, bool to_upper = false);
+    static void normalizeString(std::string& string, bool to_upper = false);
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function checks if a given object is an instance of a specific class.
@@ -98,10 +98,7 @@ class Utils
     /// @return True if the object is an instance of the class, false otherwise
     //
     template<typename Base, typename T>
-      static bool instanceof(const T *ptr)
-      {
-        return dynamic_cast<const Base *>(ptr) != nullptr;
-      }
+    static bool instanceof(const T *ptr) { return dynamic_cast<const Base*>(ptr) != nullptr; }
     ///------------------------------------------------------------------------------------------------------------------
     ///
     /// Utils class extension: This function returns the difference between two vectors. The difference is calculated by
@@ -133,12 +130,20 @@ class Utils
     //
     static bool isValidItemAbbrev(std::string item_abbreviation);
 
-    static std::pair<int, int> getClosestPosition(const std::pair<int, int> current_position,
-                                                  const std::vector<std::vector<int>> positions);
+    ///----------------------------------------------------------------------------------------------------------------
+    ///
+    /// Utils class extension: This function serializes a map into a string.
+    /// The map is represented as a 2D vector of integers.
+    ///
+    /// @param map The map to be serialized
+    ///
+    /// @return The serialized map as a string
+    //
+    static std::string serializeMap(std::vector<std::vector<int>> map);
 
-    static std::pair<int, int> getDistanceToPosition(const std::pair<int, int> current_position,
-                                                      const std::pair<int, int> target_position);
+    static std::vector<std::vector<int>> deserializeMap(std::string map);
 
+    static std::ostream& wordWrapText(std::ostream& out, const std::string& text, size_t max_line_length);
 };
 
 #endif // UTILS_HPP

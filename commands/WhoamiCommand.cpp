@@ -5,6 +5,6 @@ void WhoamiCommand::execute(std::vector<std::string> params)
 {
   checkCommandLenght(params, 1);
 
-  std::cout << "Team: We are cool." << std::endl;
+  std::cout << "Insert Team Name" << std::endl;
 
 }
