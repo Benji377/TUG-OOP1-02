@@ -21,7 +21,6 @@ void PlayCommand::execute(std::vector<std::string> params)
   {
     Action action = decision_tree->traverse(player);
     actions.push_back(action);
-    InputOutput::printInventory(player->getInventory(), player);
   }
   Action best_action = getBestAction(actions);
   std::cout << "AI: " << best_action.getCommand() << std::endl;

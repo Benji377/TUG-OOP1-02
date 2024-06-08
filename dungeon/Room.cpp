@@ -428,7 +428,6 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   {
     pair<int, int> chest_position = getFieldOfEntity(chest);
     int distance = getDistance(player_position, chest_position);
-    std::cout << "Distance: " << distance << " to chest at " << chest_position.first << " " << chest_position.second << std::endl;
     if (distance < shortest_distance)
     {
       shortest_distance = distance;
@@ -439,7 +438,6 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   {
     pair<int, int> death_location_position = getFieldOfEntity(death_location);
     int distance = getDistance(player_position, death_location_position);
-    std::cout << "Distance: " << distance << " to death location at " << death_location_position.first << " " << death_location_position.second << std::endl;
     if (distance < shortest_distance)
     {
       shortest_distance = distance;
@@ -477,6 +475,7 @@ bool Room::getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_po
 {
   pair<int, int> player_position = getFieldOfEntity(player);
   pair<int, int> closest_enemy_position = getClosestEnemyPosition(player);
+  std::cout << "Closest enemy position: " << closest_enemy_position.first << " " << closest_enemy_position.second << std::endl;
   vector<vector<int>> map = getMapForPathfinding(player_position, closest_enemy_position);
   return Pathfinder::find_path(map, player_position, closest_enemy_position, next_position, distance);
 }
@@ -492,6 +491,7 @@ bool Room::getBestMoveToDoor(shared_ptr<Player> player, pair<int, int>& next_pos
   }
   if (door == nullptr) { return false; }
   pair<int, int> door_position = getFieldOfEntity(door);
+  std::cout << "Door position: " << door_position.first << " " << door_position.second << std::endl;
   vector<vector<int>> map = getMapForPathfinding(player_position, door_position);
   return Pathfinder::find_path(map, player_position, door_position, next_position, distance);
 }
@@ -500,6 +500,7 @@ bool Room::getBestMoveToLoot(shared_ptr<Player> player, pair<int, int>& next_pos
 {
   pair<int, int> player_position = getFieldOfEntity(player);
   pair<int, int> closest_loot_position = getClosestLootposition(player);
+  std::cout << "Closest loot position: " << closest_loot_position.first << " " << closest_loot_position.second << std::endl;
   vector<vector<int>> map = getMapForPathfinding(player_position, closest_loot_position);
   return Pathfinder::find_path(map, player_position, closest_loot_position, next_position, distance);
 }

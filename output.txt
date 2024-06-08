@@ -51,27 +51,12 @@ Hanno, please choose a player type:
  4 |#D0| R |   |   |   |
    +---+---+---+---+---+
    Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QFRC] Quarterstaff of Force
-  Weapons: [DAGG] Dagger (1), [QACD] Quarterstaff of Acid (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.0 Iteration
-  Weapons: [DAGG] Dagger (1), [QACD] Quarterstaff of Acid (1)
-  Weapons: [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+Closest enemy position: 2 4
+Closest enemy position: 2 4
 Player: W Action: use W QACD Score: 50
 Player: B Action: move B 2,3 Score: 18
 Player: R Action: use R SBOW Score: 50
@@ -90,28 +75,13 @@ AI: use W QACD
  4 |#D0| R |   |   |   |
    +---+---+---+---+---+
    Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.1 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 2,4 Score: 107
+Closest enemy position: 2 4
+Closest enemy position: 2 4
+Player: W Action: attack W 2,4 Score: 105
 Player: B Action: move B 2,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 2,4
@@ -133,35 +103,20 @@ Zombie 1 loses 8 health (9 * 100 % - 1).
  4 |#D0| R |   |   |   |
    +---+---+---+---+---+
    Z1: 7/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.2 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 2,4 Score: 103
+Closest enemy position: 2 4
+Closest enemy position: 2 4
+Player: W Action: attack W 2,4 Score: 100
 Player: B Action: move B 2,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 2,4
 Wizard [W] "Elija" used "Quarterstaff of Acid" on (2,4) affecting (2,4).
-[Dice Roll] 1 d10 resulting in a total value of 7.
+[Dice Roll] 1 d10 resulting in a total value of 1.
 
-Zombie 1 loses 6 health (7 * 100 % - 1).
+Zombie 1 loses 0 health (1 * 100 % - 1).
 
 -- ROOM 1 (0/5 completed) --------------------
 
@@ -175,194 +130,116 @@ Zombie 1 loses 6 health (7 * 100 % - 1).
    +---+---+---+---+---+
  4 |#D0| R |   |   |   |
    +---+---+---+---+---+
-   Z1: 1/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+   Z1: 7/15
 
-Zombie 1 [Z1] moved to (3,5).
+Zombie 1 [Z1] moved to (1,4).
 
 -- ROOM 1 (0/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   |#D2|   |   |
+ 1 |   |   |#D2| Z1|   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
- 3 | W | B |   |   | Z1|
+ 3 | W | B |   |   |   |
    +---+---+---+---+---+
  4 |#D0| R |   |   |   |
    +---+---+---+---+---+
-   Z1: 1/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+   Z1: 7/15
 
 ** What do you want to do?
 > 
 1.3 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 3,5 Score: 101
-Player: B Action: move B 3,3 Score: 17
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 1,4 Score: 107
+Player: B Action: move B 2,3 Score: 18
 Player: R Action: use R SBOW Score: 50
-AI: attack W 3,5
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,5) affecting (3,5).
-[Dice Roll] 1 d10 resulting in a total value of 2.
+AI: attack W 1,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
+[Dice Roll] 1 d10 resulting in a total value of 7.
 
-Zombie 1 loses 1 health (2 * 100 % - 1).
+Zombie 1 loses 6 health (7 * 100 % - 1).
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2| Z1|   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 1/15
+
+** What do you want to do?
+> 
+1.4 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 1,4 Score: 101
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 1,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 1 health (9 * 100 % - 1).
 Zombie 1 was defeated.
 
 -- ROOM 1 (1/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | D2|   |   |
+ 1 |   |   | D2| X |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
- 3 | W | B |   |   | X |
+ 3 | W | B |   |   |   |
    +---+---+---+---+---+
  4 | D0| R |   |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.4 Iteration
-Distance: 4 to death location at 3 5
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to death location at 3 5
-  Weapons: [HAXE] Handaxe (2)
-Distance: 3 to death location at 3 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 2,2 Score: 16
-Player: B Action: move B 3,3 Score: 17
-Player: R Action: move R 3,3 Score: 17
-AI: move B 3,3
-Barbarian [B] "Benjo" moved to (3,3).
-
--- ROOM 1 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | D2|   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | W |   | B |   | X |
-   +---+---+---+---+---+
- 4 | D0| R |   |   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.5 Iteration
-Distance: 4 to death location at 3 5
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Distance: 2 to death location at 3 5
-  Weapons: [HAXE] Handaxe (2)
-Distance: 3 to death location at 3 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: move B 3,4 Score: 18
-Player: R Action: move R 4,3 Score: 17
-AI: move B 3,4
-Barbarian [B] "Benjo" moved to (3,4).
+Closest loot position: 1 4
+Closest loot position: 1 4
+Closest loot position: 1 4
+Player: W Action: move W 2,2 Score: 17
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: move R 3,3 Score: 17
+AI: move B 2,3
+Barbarian [B] "Benjo" moved to (2,3).
 
 -- ROOM 1 (1/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | D2|   |   |
+ 1 |   |   | D2| X |   |
    +---+---+---+---+---+
- 2 |   |   |   |   |   |
+ 2 |   |   | B |   |   |
    +---+---+---+---+---+
- 3 | W |   |   | B | X |
+ 3 | W |   |   |   |   |
    +---+---+---+---+---+
  4 | D0| R |   |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.6 Iteration
-Distance: 4 to death location at 3 5
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Distance: 1 to death location at 3 5
-  Weapons: [HAXE] Handaxe (2)
-Distance: 3 to death location at 3 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: loot B 3,5 Score: 30
+Closest loot position: 1 4
+Closest loot position: 1 4
+Player: W Action: move W 2,2 Score: 16
+Player: B Action: loot B 1,4 Score: 30
 Player: R Action: move R 3,3 Score: 17
-AI: loot B 3,5
+AI: loot B 1,4
 ** Looting successful! You have received the following items ...
   Weapons: [DAGG] Dagger (1)
 
@@ -372,79 +249,28 @@ AI: loot B 3,5
    +---+---+---+---+---+
  1 |   |   | D2|   |   |
    +---+---+---+---+---+
- 2 |   |   |   |   |   |
+ 2 |   |   | B |   |   |
    +---+---+---+---+---+
- 3 | W |   |   | B |   |
+ 3 | W |   |   |   |   |
    +---+---+---+---+---+
  4 | D0| R |   |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.7 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+Door position: 1 3
+Player W moving to door at 2, 2 with distance 2
+Door position: 1 3
+Player B moving to door at 1, 3 with distance 1
+Door position: 1 3
+Player R moving to door at 3, 3 with distance 3
 Player: W Action: move W 2,2 Score: 18
-Player: B Action: move B 2,3 Score: 18
+Player: B Action: move B 1,3 Score: 19
 Player: R Action: move R 3,3 Score: 17
-AI: move W 2,2
-Wizard [W] "Elija" moved to (2,2).
-
--- ROOM 1 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | D2|   |   |
-   +---+---+---+---+---+
- 2 |   | W |   |   |   |
-   +---+---+---+---+---+
- 3 |   |   |   | B |   |
-   +---+---+---+---+---+
- 4 | D0| R |   |   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.8 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 1,3 Score: 19
-Player: B Action: move B 2,3 Score: 18
-Player: R Action: move R 3,3 Score: 17
-AI: move W 1,3
-Wizard [W] "Elija" moved to (1,3).
+AI: move B 1,3
+Barbarian [B] "Benjo" moved to (1,3).
 ** Well done, you made it through the first room!
 ** Let's see if you can master this one as well!
 
@@ -466,35 +292,48 @@ Wizard [W] "Elija" moved to (1,3).
  6 |   |   |#D1| R |   |
    +---+---+---+---+---+
    Z1: 15/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+
+** What do you want to do?
+> 
+1.8 Iteration
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: use W QFRC Score: 50
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: use W QFRC
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   | Z2|   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | Z1|   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z1: 15/15, Z2: 15/15
 
 ** What do you want to do?
 > 
 1.9 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 4,2 Score: 105
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: attack W 4,2 Score: 107
 Player: B Action: move B 4,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 4,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (4,2) affecting (4,2).
-[Dice Roll] 1 d10 resulting in a total value of 2.
+Wizard [W] "Elija" used "Quarterstaff of Force" on (4,2) affecting (4,2).
+[Dice Roll] 1 d10 resulting in a total value of 10.
 
-Zombie 1 loses 1 health (2 * 100 % - 1).
+Zombie 1 loses 9 health (10 * 100 % - 1).
 
 -- ROOM 2 (1/5 completed) --------------------
 
@@ -512,177 +351,30 @@ Zombie 1 loses 1 health (2 * 100 % - 1).
    +---+---+---+---+---+
  6 |   |   |#D1| R |   |
    +---+---+---+---+---+
-   Z1: 14/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+   Z1: 6/15, Z2: 15/15
 
 ** What do you want to do?
 > 
 1.10 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 4,2 Score: 106
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: attack W 4,2 Score: 104
 Player: B Action: move B 4,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 4,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (4,2) affecting (4,2).
-[Dice Roll] 1 d10 resulting in a total value of 6.
+Wizard [W] "Elija" used "Quarterstaff of Force" on (4,2) affecting (4,2).
+[Dice Roll] 1 d10 resulting in a total value of 9.
 
-Zombie 1 loses 5 health (6 * 100 % - 1).
-
--- ROOM 2 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   | Z2|   |   |
-   +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
-   +---+---+---+---+---+
- 4 |   | Z1|   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | W | B |   |
-   +---+---+---+---+---+
- 6 |   |   |#D1| R |   |
-   +---+---+---+---+---+
-   Z1: 9/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.11 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 4,2 Score: 108
-Player: B Action: move B 4,3 Score: 18
-Player: R Action: use R SBOW Score: 50
-AI: attack W 4,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (4,2) affecting (4,2).
-[Dice Roll] 1 d10 resulting in a total value of 6.
-
-Zombie 1 loses 5 health (6 * 100 % - 1).
-
--- ROOM 2 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   | Z2|   |   |
-   +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
-   +---+---+---+---+---+
- 4 |   | Z1|   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | W | B |   |
-   +---+---+---+---+---+
- 6 |   |   |#D1| R |   |
-   +---+---+---+---+---+
-   Z1: 4/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-Zombie 1 [Z1] used "Dagger" on (5,3) affecting (5,3).
-[Dice Roll] 1 d4 resulting in a total value of 2.
-
-Elija loses 2 health (2 * 100 % - 0).
-
-Zombie 2 [Z2] moved to (1,4).
-
--- ROOM 2 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | Z2|   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
-   +---+---+---+---+---+
- 4 |   | Z1|   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | W | B |   |
-   +---+---+---+---+---+
- 6 |   |   |#D1| R |   |
-   +---+---+---+---+---+
-   Z1: 4/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.12 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 4,2 Score: 101
-Player: B Action: move B 4,3 Score: 18
-Player: R Action: use R SBOW Score: 50
-AI: attack W 4,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (4,2) affecting (4,2).
-[Dice Roll] 1 d10 resulting in a total value of 5.
-
-Zombie 1 loses 4 health (5 * 100 % - 1).
+Zombie 1 loses 6 health (9 * 100 % - 1).
 Zombie 1 was defeated.
 
 -- ROOM 2 (1/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   |   | Z2|   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
- 2 |   |   |   |   |   |
+ 2 |   |   | Z2|   |   |
    +---+---+---+---+---+
  3 |#T |   |   |   |#D3|
    +---+---+---+---+---+
@@ -693,45 +385,110 @@ Zombie 1 was defeated.
  6 |   |   |#D1| R |   |
    +---+---+---+---+---+
    Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+
+Zombie 2 [Z2] moved to (3,3).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 15/15
+
+** What do you want to do?
+> 
+1.11 Iteration
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: use W QACD Score: 50
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: use W QACD
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 15/15
+
+** What do you want to do?
+> 
+1.12 Iteration
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: attack W 3,3 Score: 106
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 3,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,3) affecting (3,3).
+[Dice Roll] 1 d10 resulting in a total value of 10.
+
+Zombie 2 loses 9 health (10 * 100 % - 1).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 6/15
 
 ** What do you want to do?
 > 
 1.13 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,4 Score: 101
-Player: B Action: move B 4,4 Score: 16
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: attack W 3,3 Score: 105
+Player: B Action: move B 4,3 Score: 18
 Player: R Action: use R SBOW Score: 50
-AI: attack W 1,4
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
-[Dice Roll] 1 d10 resulting in a total value of 5.
+AI: attack W 3,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,3) affecting (3,3).
+[Dice Roll] 1 d10 resulting in a total value of 6.
 
-Zombie 2 loses 4 health (5 * 100 % - 1).
+Zombie 2 loses 5 health (6 * 100 % - 1).
 
 -- ROOM 2 (1/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   |   | Z2|   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
+ 3 |#T |   | Z2|   |#D3|
    +---+---+---+---+---+
  4 |   | X |   |   |   |
    +---+---+---+---+---+
@@ -739,168 +496,66 @@ Zombie 2 loses 4 health (5 * 100 % - 1).
    +---+---+---+---+---+
  6 |   |   |#D1| R |   |
    +---+---+---+---+---+
-   Z2: 11/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+   Z2: 1/15
+
+Zombie 2 [Z2] moved to (4,4).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   | Z2|   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 1/15
 
 ** What do you want to do?
 > 
 1.14 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,4 Score: 101
-Player: B Action: move B 4,4 Score: 16
+Player: W Action: use W QFRC Score: 50
+Player: B Action: attack B 4,4 Score: 101
 Player: R Action: use R SBOW Score: 50
-AI: attack W 1,4
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
-[Dice Roll] 1 d10 resulting in a total value of 8.
+AI: attack B 4,4
+Barbarian [B] "Benjo" used "Greataxe" on (4,4) affecting (4,3), (4,4), (4,5).
+[Dice Roll] 1 d12 resulting in a total value of 10.
 
-Zombie 2 loses 7 health (8 * 100 % - 1).
-
--- ROOM 2 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | Z2|   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
-   +---+---+---+---+---+
- 4 |   | X |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | W | B |   |
-   +---+---+---+---+---+
- 6 |   |   |#D1| R |   |
-   +---+---+---+---+---+
-   Z2: 4/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-Zombie 2 [Z2] moved to (1,3).
-
--- ROOM 2 (1/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | Z2|   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 |#T |   |   |   |#D3|
-   +---+---+---+---+---+
- 4 |   | X |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | W | B |   |
-   +---+---+---+---+---+
- 6 |   |   |#D1| R |   |
-   +---+---+---+---+---+
-   Z2: 4/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.15 Iteration
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,3 Score: 104
-Player: B Action: move B 4,3 Score: 16
-Player: R Action: use R SBOW Score: 50
-AI: attack W 1,3
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,3) affecting (1,3).
-[Dice Roll] 1 d10 resulting in a total value of 9.
-
-Zombie 2 loses 4 health (9 * 100 % - 1).
+Zombie 2 loses 1 health (14 * 100 % - 1).
 Zombie 2 was defeated.
 
 -- ROOM 2 (2/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | X |   |   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
  3 |#T |   |   |   | D3|
    +---+---+---+---+---+
- 4 |   | X |   |   |   |
+ 4 |   | X |   | X |   |
    +---+---+---+---+---+
  5 |   |   | W | B |   |
    +---+---+---+---+---+
  6 |   |   | D1| R |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.16 Iteration
-Distance: 2 to chest at 3 1
-Distance: 4 to death location at 1 3
-Distance: 1 to death location at 4 2
-  Weapons: [DAGG] Dagger (1), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to chest at 3 1
-Distance: 4 to death location at 1 3
-Distance: 2 to death location at 4 2
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 3 to chest at 3 1
-Distance: 5 to death location at 1 3
-Distance: 2 to death location at 4 2
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.15 Iteration
+Closest loot position: 4 2
 Player: W Action: loot W 4,2 Score: 30
-Player: B Action: move B 4,3 Score: 18
-Player: R Action: move R 5,5 Score: 16
+Player: B Action: loot B 4,4 Score: 30
+Player: R Action: move R 5,5 Score: 15
 AI: loot W 4,2
 ** Looting successful! You have received the following items ...
   Weapons: [DAGG] Dagger (1)
@@ -909,7 +564,36 @@ AI: loot W 4,2
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | X |   |   |
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   |   |   | X |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.16 Iteration
+Closest loot position: 4 4
+Player: W Action: loot W 4,4 Score: 30
+Player: B Action: loot B 4,4 Score: 30
+Player: R Action: move R 5,5 Score: 18
+AI: loot W 4,4
+** Looting successful! You have received the following items ...
+  Weapons: [DAGG] Dagger (1)
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
@@ -922,33 +606,13 @@ AI: loot W 4,2
  6 |   |   | D1| R |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (2), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.17 Iteration
-Distance: 2 to chest at 3 1
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to chest at 3 1
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 3 to chest at 3 1
-Distance: 5 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+Closest loot position: 3 1
+Closest loot position: 3 1
+Closest loot position: 3 1
 Player: W Action: move W 4,2 Score: 18
 Player: B Action: move B 4,3 Score: 17
 Player: R Action: move R 5,5 Score: 15
@@ -959,7 +623,7 @@ Wizard [W] "Elija" moved to (4,2).
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | X |   |   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
@@ -972,39 +636,18 @@ Wizard [W] "Elija" moved to (4,2).
  6 |   |   | D1| R |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (2), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.18 Iteration
-Distance: 1 to chest at 3 1
-Distance: 3 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to chest at 3 1
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 3 to chest at 3 1
-Distance: 5 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+Closest loot position: 3 1
+Closest loot position: 3 1
 Player: W Action: loot W 3,1 Score: 30
 Player: B Action: move B 4,3 Score: 17
 Player: R Action: move R 5,3 Score: 16
 AI: loot W 3,1
 ** To unlock this chest you need to roll at least 1 to reach the 5 needed.
-[Dice Roll] 1 d20 resulting in a total value of 9.
+[Dice Roll] 1 d20 resulting in a total value of 13.
 
 ** Looting successful! You have received the following items ...
   Weapons: [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1)
@@ -1013,7 +656,7 @@ AI: loot W 3,1
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | X |   |   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
@@ -1026,218 +669,54 @@ AI: loot W 3,1
  6 |   |   | D1| R |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.19 Iteration
-Distance: 3 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 5 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+Door position: 3 5
+Player W moving to door at 3, 3 with distance 3
+Door position: 3 5
+Player B moving to door at 4, 5 with distance 2
+Door position: 3 5
+Player R moving to door at 5, 5 with distance 3
 Player: W Action: move W 3,3 Score: 17
-Player: B Action: move B 4,3 Score: 16
-Player: R Action: move R 5,3 Score: 15
-AI: move W 3,3
-Wizard [W] "Elija" moved to (3,3).
+Player: B Action: move B 4,5 Score: 18
+Player: R Action: move R 5,5 Score: 17
+AI: move B 4,5
+Barbarian [B] "Benjo" moved to (4,5).
 
 -- ROOM 2 (2/5 completed) --------------------
 
      1   2   3   4   5  
    +---+---+---+---+---+
- 1 |   |   | X |   |   |
+ 1 |   |   |   |   |   |
    +---+---+---+---+---+
  2 |   |   |   |   |   |
    +---+---+---+---+---+
- 3 |   |   | W |   | D3|
+ 3 |   |   |   |   | D3|
    +---+---+---+---+---+
- 4 |   |   |   |   |   |
+ 4 |   | W |   |   | B |
    +---+---+---+---+---+
- 5 |   |   |   | B |   |
+ 5 |   |   |   |   |   |
    +---+---+---+---+---+
  6 |   |   | D1| R |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
 1.20 Iteration
-Distance: 2 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 5 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 2,3 Score: 18
-Player: B Action: move B 4,3 Score: 16
-Player: R Action: move R 5,3 Score: 15
-AI: move W 2,3
-Wizard [W] "Elija" moved to (2,3).
-
--- ROOM 2 (2/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | X |   |   |
-   +---+---+---+---+---+
- 2 |   |   | W |   |   |
-   +---+---+---+---+---+
- 3 |   |   |   |   | D3|
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   | B |   |
-   +---+---+---+---+---+
- 6 |   |   | D1| R |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.21 Iteration
-Distance: 1 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 4 to death location at 1 3
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 5 to death location at 1 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: loot W 1,3 Score: 30
-Player: B Action: move B 4,3 Score: 16
-Player: R Action: move R 5,3 Score: 15
-AI: loot W 1,3
-** Looting successful! You have received the following items ...
-  Weapons: [DAGG] Dagger (1)
-
--- ROOM 2 (2/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   | W |   |   |
-   +---+---+---+---+---+
- 3 |   |   |   |   | D3|
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   | B |   |
-   +---+---+---+---+---+
- 6 |   |   | D1| R |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.22 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 3,4 Score: 18
-Player: B Action: move B 4,5 Score: 18
+Door position: 3 5
+Player W moving to door at 3, 3 with distance 3
+Door position: 3 5
+Player B moving to door at 3, 5 with distance 1
+Door position: 3 5
+Player R moving to door at 5, 5 with distance 3
+Player: W Action: move W 3,3 Score: 17
+Player: B Action: move B 3,5 Score: 19
 Player: R Action: move R 5,5 Score: 17
-AI: move W 3,4
-Wizard [W] "Elija" moved to (3,4).
-
--- ROOM 2 (2/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 |   |   |   | W | D3|
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   | B |   |
-   +---+---+---+---+---+
- 6 |   |   | D1| R |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.23 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 3,5 Score: 19
-Player: B Action: move B 4,5 Score: 18
-Player: R Action: move R 5,5 Score: 17
-AI: move W 3,5
-Wizard [W] "Elija" moved to (3,5).
+AI: move B 3,5
+Barbarian [B] "Benjo" moved to (3,5).
 ** Can you hear the long lost voices of the fallen warriors? This is just room 3!
 
 ** Oh no, I have spotted a goblin in the room. Stay safe!
@@ -1259,28 +738,13 @@ Wizard [W] "Elija" moved to (3,5).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 10/10, Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.24 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 101
+1.21 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 100
 Player: B Action: move B 1,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
@@ -1306,28 +770,13 @@ Goblin 1 loses 3 health (7 * 100 % - 4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 7/10, Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.25 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 100
+1.22 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 101
 Player: B Action: move B 1,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
@@ -1353,35 +802,20 @@ Goblin 1 loses 4 health (8 * 100 % - 4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 3/10, Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.26 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 103
+1.23 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 100
 Player: B Action: move B 1,3 Score: 18
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
 Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 1.
+[Dice Roll] 1 d10 resulting in a total value of 3.
 
-Goblin 1 loses 0 health (1 * 100 % - 4).
+Goblin 1 loses 0 health (3 * 100 % - 4).
 
 -- ROOM 3 (2/5 completed) --------------------
 
@@ -1400,24 +834,11 @@ Goblin 1 loses 0 health (1 * 100 % - 4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 3/10, Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d6 resulting in a total value of 2.
+[Dice Roll] 1 d6 resulting in a total value of 1.
 
-Hanno loses 2 health (6 * 100 % - 4).
+Hanno loses 1 health (5 * 100 % - 4).
 
 Zombie 1 [Z1] moved to (1,3).
 
@@ -1438,35 +859,18 @@ Zombie 1 [Z1] moved to (1,3).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 3/10, Z1: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.27 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 102
-Player: B Action: attack B 1,3 Score: 108
+1.24 Iteration
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: attack B 1,3 Score: 105
 Player: R Action: use R SBOW Score: 50
 AI: attack B 1,3
 Barbarian [B] "Benjo" used "Greataxe" on (1,3) affecting (1,2), (1,3), (2,3).
-[Dice Roll] 1 d12 resulting in a total value of 11.
+[Dice Roll] 1 d12 resulting in a total value of 2.
 
-Zombie 1 loses 14 health (15 * 100 % - 1).
+Zombie 1 loses 5 health (6 * 100 % - 1).
 
 -- ROOM 3 (2/5 completed) --------------------
 
@@ -1484,36 +888,49 @@ Zombie 1 loses 14 health (15 * 100 % - 1).
    +---+---+---+---+---+
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
-   G1: 3/10, Z1: 1/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+   G1: 3/10, Z1: 10/15
 
 ** What do you want to do?
 > 
-1.28 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,3 Score: 100
-Player: B Action: attack B 1,3 Score: 101
+1.25 Iteration
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: attack B 1,3 Score: 109
 Player: R Action: use R SBOW Score: 50
 AI: attack B 1,3
 Barbarian [B] "Benjo" used "Greataxe" on (1,3) affecting (1,2), (1,3), (2,3).
-[Dice Roll] 1 d12 resulting in a total value of 10.
+[Dice Roll] 1 d12 resulting in a total value of 5.
 
-Zombie 1 loses 1 health (14 * 100 % - 1).
+Zombie 1 loses 8 health (9 * 100 % - 1).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | Z1|   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 2/15
+
+** What do you want to do?
+> 
+1.26 Iteration
+Player: W Action: attack W 1,3 Score: 102
+Player: B Action: attack B 1,3 Score: 102
+Player: R Action: use R SBOW Score: 50
+AI: attack W 1,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,3) affecting (1,3).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 2 health (9 * 100 % - 1).
 Zombie 1 was defeated.
 
 -- ROOM 3 (2/5 completed) --------------------
@@ -1533,71 +950,43 @@ Zombie 1 was defeated.
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 3/10
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+
+Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
+[Dice Roll] 1 d6 resulting in a total value of 6.
+
+Hanno loses 6 health (10 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10
 
 ** What do you want to do?
 > 
-1.29 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.27 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
 Player: W Action: attack W 5,5 Score: 100
 Player: B Action: move B 3,3 Score: 17
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
 Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 4.
+[Dice Roll] 1 d10 resulting in a total value of 3.
 
-Goblin 1 loses 0 health (4 * 100 % - 4).
-
--- ROOM 3 (2/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | X |   |   |
-   +---+---+---+---+---+
- 2 | W | B |   |   |   |
-   +---+---+---+---+---+
- 3 |#D2| R |   |   |#D4|
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 |   |   |#T |   |   |
-   +---+---+---+---+---+
-   G1: 3/10
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d6 resulting in a total value of 4.
-
-Hanno loses 4 health (8 * 100 % - 4).
+Goblin 1 loses 0 health (3 * 100 % - 4).
 
 -- ROOM 3 (2/5 completed) --------------------
 
@@ -1616,28 +1005,13 @@ Hanno loses 4 health (8 * 100 % - 4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 3/10
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.30 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 100
+1.28 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
+Player: W Action: attack W 5,5 Score: 101
 Player: B Action: move B 3,3 Score: 17
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
@@ -1663,35 +1037,20 @@ Goblin 1 loses 2 health (6 * 100 % - 4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
    G1: 1/10
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.31 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.29 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
 Player: W Action: attack W 5,5 Score: 101
 Player: B Action: move B 3,3 Score: 17
 Player: R Action: use R SBOW Score: 50
 AI: attack W 5,5
 Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 7.
+[Dice Roll] 1 d10 resulting in a total value of 8.
 
-Goblin 1 loses 1 health (7 * 100 % - 4).
+Goblin 1 loses 1 health (8 * 100 % - 4).
 Goblin 1 was defeated.
 
 -- ROOM 3 (3/5 completed) --------------------
@@ -1711,36 +1070,12 @@ Goblin 1 was defeated.
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.32 Iteration
-Distance: 4 to chest at 6 3
-Distance: 2 to death location at 1 3
-Distance: 4 to death location at 5 5
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 4 to chest at 6 3
-Distance: 1 to death location at 1 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (1), [HAXE] Handaxe (2)
-Distance: 3 to chest at 6 3
-Distance: 2 to death location at 1 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.30 Iteration
+Closest loot position: 1 3
+Closest loot position: 1 3
 Player: W Action: move W 1,2 Score: 18
 Player: B Action: loot B 1,3 Score: 30
 Player: R Action: move R 2,3 Score: 18
@@ -1765,33 +1100,13 @@ AI: loot B 1,3
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.33 Iteration
-Distance: 4 to chest at 6 3
-Distance: 4 to death location at 5 5
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 4 to chest at 6 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Distance: 3 to chest at 6 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.31 Iteration
+Closest loot position: 6 3
+Closest loot position: 5 5
+Closest loot position: 6 3
 Player: W Action: move W 1,2 Score: 14
 Player: B Action: move B 3,3 Score: 17
 Player: R Action: move R 4,3 Score: 17
@@ -1815,33 +1130,13 @@ Barbarian [B] "Benjo" moved to (3,3).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.34 Iteration
-Distance: 4 to chest at 6 3
-Distance: 4 to death location at 5 5
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to chest at 6 3
-Distance: 2 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Distance: 3 to chest at 6 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.32 Iteration
+Closest loot position: 6 3
+Closest loot position: 5 5
+Closest loot position: 6 3
 Player: W Action: move W 2,2 Score: 14
 Player: B Action: move B 4,4 Score: 18
 Player: R Action: move R 4,3 Score: 17
@@ -1865,33 +1160,12 @@ Barbarian [B] "Benjo" moved to (4,4).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.35 Iteration
-Distance: 4 to chest at 6 3
-Distance: 4 to death location at 5 5
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 2 to chest at 6 3
-Distance: 1 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (2)
-Distance: 3 to chest at 6 3
-Distance: 3 to death location at 5 5
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.33 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
 Player: W Action: move W 2,2 Score: 15
 Player: B Action: loot B 5,5 Score: 30
 Player: R Action: move R 4,3 Score: 17
@@ -1917,32 +1191,13 @@ AI: loot B 5,5
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.36 Iteration
-Distance: 4 to chest at 6 3
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 2 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Distance: 3 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.34 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
+Closest loot position: 6 3
 Player: W Action: move W 2,2 Score: 15
 Player: B Action: move B 5,3 Score: 18
 Player: R Action: move R 4,3 Score: 17
@@ -1966,90 +1221,18 @@ Barbarian [B] "Benjo" moved to (5,3).
  6 |   |   |#T |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.37 Iteration
-Distance: 4 to chest at 6 3
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 1 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Distance: 3 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.35 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
 Player: W Action: move W 2,2 Score: 15
 Player: B Action: loot B 6,3 Score: 30
 Player: R Action: move R 4,3 Score: 17
 AI: loot B 6,3
 ** To unlock this chest you need to roll at least 9 to reach the 10 needed.
-[Dice Roll] 1 d20 resulting in a total value of 2.
-
-** Nice try, but the chest remains locked. Keep trying!
-
--- ROOM 3 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D2| R |   |   | D4|
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   | B |   |   |
-   +---+---+---+---+---+
- 6 |   |   |#T |   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.38 Iteration
-Distance: 4 to chest at 6 3
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 1 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-Distance: 3 to chest at 6 3
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 2,2 Score: 15
-Player: B Action: loot B 6,3 Score: 30
-Player: R Action: move R 4,3 Score: 17
-AI: loot B 6,3
-** To unlock this chest you need to roll at least 9 to reach the 10 needed.
-[Dice Roll] 1 d20 resulting in a total value of 12.
+[Dice Roll] 1 d20 resulting in a total value of 17.
 
 ** Looting successful! You have received the following items ...
   Armor: [PARM] Plate Armor (1)
@@ -2073,34 +1256,15 @@ AI: loot B 6,3
  6 |   |   |   |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [-] None
-  Equipped Weapon: [GAXE] Greataxe
-  Armor: [PARM] Plate Armor (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.39 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Armor: [PARM] Plate Armor (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.36 Iteration
+Door position: 3 5
+Player W moving to door at 2, 2 with distance 4
 Player: W Action: move W 2,2 Score: 16
 Player: B Action: use B PARM Score: 50
-Player: R Action: move R 3,3 Score: 17
+Player: R Action: move R 0,0 Score: 20
 AI: use B PARM
 
 -- ROOM 3 (3/5 completed) --------------------
@@ -2120,1823 +1284,19 @@ AI: use B PARM
  6 |   |   |   |   |   |
    +---+---+---+---+---+
 
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
 
 ** What do you want to do?
 > 
-1.40 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
+1.37 Iteration
+Door position: 3 5
+Player W moving to door at 2, 2 with distance 4
+Door position: 3 5
+Player B moving to door at 4, 4 with distance 2
 Player: W Action: move W 2,2 Score: 16
 Player: B Action: move B 4,4 Score: 18
-Player: R Action: move R 3,3 Score: 17
-AI: move B 4,4
-Barbarian [B] "Benjo" moved to (4,4).
-
--- ROOM 3 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D2| R |   |   | D4|
-   +---+---+---+---+---+
- 4 |   |   |   | B |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   |   |
-   +---+---+---+---+---+
- 6 |   |   |   |   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.41 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: move W 2,2 Score: 16
-Player: B Action: move B 3,5 Score: 19
-Player: R Action: move R 3,3 Score: 17
-AI: move B 3,5
-Barbarian [B] "Benjo" moved to (3,5).
-** You've reached room 4, which none of the adventurers who've tried to
-** save the village before you have been able to get through.
-
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | G2|   |
-   +---+---+---+---+---+
- 2 | W | B | Z1|   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   | Z2|   |   | G1|
-   +---+---+---+---+---+
- 6 |   |   |#D5|   |   |
-   +---+---+---+---+---+
-   G1: 10/10, G2: 10/10, Z1: 15/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.42 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,4 Score: 105
-Player: B Action: attack B 2,3 Score: 105
-Player: R Action: attack R 2,3 Score: 109
-AI: attack R 2,3
-Rogue [R] "Hanno" used "Rapier" on (2,3) affecting (1,4), (2,3).
-[Dice Roll] 1 d8 resulting in a total value of 5.
-
-Goblin 2 loses 4 health (8 * 100 % - 4).
-Zombie 1 loses 7 health (8 * 100 % - 1).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | G2|   |
-   +---+---+---+---+---+
- 2 | W | B | Z1|   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   | Z2|   |   | G1|
-   +---+---+---+---+---+
- 6 |   |   |#D5|   |   |
-   +---+---+---+---+---+
-   G1: 10/10, G2: 6/10, Z1: 8/15, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.43 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,4 Score: 101
-Player: B Action: attack B 2,3 Score: 108
-Player: R Action: attack R 2,3 Score: 113
-AI: attack R 2,3
-Rogue [R] "Hanno" used "Rapier" on (2,3) affecting (1,4), (2,3).
-[Dice Roll] 1 d8 resulting in a total value of 6.
-
-Goblin 2 loses 5 health (9 * 100 % - 4).
-Zombie 1 loses 8 health (9 * 100 % - 1).
-Zombie 1 was defeated.
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | G2|   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   | Z2|   |   | G1|
-   +---+---+---+---+---+
- 6 |   |   |#D5|   |   |
-   +---+---+---+---+---+
-   G1: 10/10, G2: 1/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.44 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 1,4 Score: 100
-Player: B Action: use B LCRS Score: 50
-Player: R Action: use R SBOW Score: 50
-AI: attack W 1,4
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
-[Dice Roll] 1 d10 resulting in a total value of 6.
-
-Goblin 2 loses 1 health (6 * 100 % - 4).
-Goblin 2 was defeated.
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   | Z2|   |   | G1|
-   +---+---+---+---+---+
- 6 |   |   |#D5|   |   |
-   +---+---+---+---+---+
-   G1: 10/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d6 resulting in a total value of 4.
-
-Hanno loses 4 health (8 * 100 % - 4).
-
-Zombie 2 [Z2] moved to (6,2).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 |   | Z2|#D5|   |   |
-   +---+---+---+---+---+
-   G1: 10/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.45 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 100
-Player: B Action: use B LCRS Score: 50
-Player: R Action: use R SBOW Score: 50
-AI: attack W 5,5
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 5.
-
-Goblin 1 loses 1 health (5 * 100 % - 4).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 |   | Z2|#D5|   |   |
-   +---+---+---+---+---+
-   G1: 9/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.46 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 100
-Player: B Action: use B LCRS Score: 50
-Player: R Action: use R SBOW Score: 50
-AI: attack W 5,5
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 7.
-
-Goblin 1 loses 3 health (7 * 100 % - 4).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 |   | Z2|#D5|   |   |
-   +---+---+---+---+---+
-   G1: 6/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-** What do you want to do?
-> 
-1.47 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Player: W Action: attack W 5,5 Score: 104
-Player: B Action: use B LCRS Score: 50
-Player: R Action: use R SBOW Score: 50
-AI: attack W 5,5
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 2.
-
-Goblin 1 loses 0 health (2 * 100 % - 4).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| R |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 |   | Z2|#D5|   |   |
-   +---+---+---+---+---+
-   G1: 6/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Inventory "Hanno"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [RAPI] Rapier
-  Weapons: [DAGG] Dagger (2), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
-Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d6 resulting in a total value of 4.
-
-Hanno loses 1 health (8 * 100 % - 4).
-Hanno was defeated.
-
-Zombie 2 [Z2] moved to (6,1).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| X |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | G1|
-   +---+---+---+---+---+
- 6 | Z2|   |#D5|   |   |
-   +---+---+---+---+---+
-   G1: 6/10, Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.48 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: attack W 5,5 Score: 102
-Player: B Action: use B LCRS Score: 50
-AI: attack W 5,5
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
-[Dice Roll] 1 d10 resulting in a total value of 10.
-
-Goblin 1 loses 6 health (10 * 100 % - 4).
-Goblin 1 was defeated.
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| X |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | Z2|   |#D5|   |   |
-   +---+---+---+---+---+
-   Z2: 15/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.49 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: attack W 6,1 Score: 104
-Player: B Action: use B LCRS Score: 50
-AI: attack W 6,1
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (6,1) affecting (6,1).
-[Dice Roll] 1 d10 resulting in a total value of 7.
-
-Zombie 2 loses 6 health (7 * 100 % - 1).
-
--- ROOM 4 (3/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 |#D3| X |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | Z2|   |#D5|   |   |
-   +---+---+---+---+---+
-   Z2: 9/15
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.50 Iteration
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: attack W 6,1 Score: 103
-Player: B Action: use B LCRS Score: 50
-AI: attack W 6,1
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (6,1) affecting (6,1).
-[Dice Roll] 1 d10 resulting in a total value of 10.
-
-Zombie 2 loses 9 health (10 * 100 % - 1).
-Zombie 2 was defeated.
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 | D3| X |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.51 Iteration
-Distance: 4 to chest at 3 5
-Distance: 3 to death location at 1 4
-Distance: 2 to death location at 2 3
-Distance: 1 to death location at 3 2
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1)
-Distance: 3 to chest at 3 5
-Distance: 2 to death location at 1 4
-Distance: 1 to death location at 2 3
-Distance: 1 to death location at 3 2
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: loot W 3,2 Score: 30
-Player: B Action: loot B 2,3 Score: 30
-AI: loot W 3,2
-** Looting successful! You have received the following items ...
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (2), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B | X |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.52 Iteration
-Distance: 4 to chest at 3 5
-Distance: 3 to death location at 1 4
-Distance: 2 to death location at 2 3
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 3 to chest at 3 5
-Distance: 2 to death location at 1 4
-Distance: 1 to death location at 2 3
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (2), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 1,2 Score: 18
-Player: B Action: loot B 2,3 Score: 30
-AI: loot B 2,3
-** Looting successful! You have received the following items ...
-  Weapons: [DAGG] Dagger (1)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   | X |   |
-   +---+---+---+---+---+
- 2 | W | B |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.53 Iteration
-Distance: 4 to chest at 3 5
-Distance: 3 to death location at 1 4
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 3 to chest at 3 5
-Distance: 2 to death location at 1 4
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 1,2 Score: 17
-Player: B Action: move B 1,3 Score: 18
-AI: move B 1,3
-Barbarian [B] "Benjo" moved to (1,3).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | B | X |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.54 Iteration
-Distance: 4 to chest at 3 5
-Distance: 3 to death location at 1 4
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 2 to chest at 3 5
-Distance: 1 to death location at 1 4
-Distance: 4 to death location at 5 5
-Distance: 5 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (3), [LCRS] Light Crossbow (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 1,2 Score: 17
-Player: B Action: loot B 1,4 Score: 30
-AI: loot B 1,4
-** Looting successful! You have received the following items ...
-  Weapons: [HAXE] Handaxe (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   | B |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.55 Iteration
-Distance: 4 to chest at 3 5
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 2 to chest at 3 5
-Distance: 4 to death location at 5 5
-Distance: 5 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: move B 2,4 Score: 18
-AI: move B 2,4
-Barbarian [B] "Benjo" moved to (2,4).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   | B |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.56 Iteration
-Distance: 4 to chest at 3 5
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 1 to chest at 3 5
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: loot B 3,5 Score: 30
-AI: loot B 3,5
-** To unlock this chest you need to roll at least 14 to reach the 15 needed.
-[Dice Roll] 1 d20 resulting in a total value of 10.
-
-** Nice try, but the chest remains locked. Keep trying!
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   | B |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |#T |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-
-** What do you want to do?
-> 
-1.57 Iteration
-Distance: 4 to chest at 3 5
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 1 to chest at 3 5
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: loot B 3,5 Score: 30
-AI: loot B 3,5
-** To unlock this chest you need to roll at least 14 to reach the 15 needed.
-[Dice Roll] 1 d20 resulting in a total value of 18.
-
-** Looting successful! You have received the following items ...
-  Weapons: [QFIR] Quarterstaff of Fire (1)
-  Consumables: [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [SHEP] Superior Health Potion (1)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   | B |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.58 Iteration
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 3 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: move B 3,5 Score: 17
-AI: move B 3,5
-Barbarian [B] "Benjo" moved to (3,5).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   | B |
-   +---+---+---+---+---+
- 4 |   |   |   |   |   |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.59 Iteration
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 2 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: move B 4,5 Score: 18
-AI: move B 4,5
-Barbarian [B] "Benjo" moved to (4,5).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 |   |   |   |   | X |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.60 Iteration
-Distance: 4 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 1 to death location at 5 5
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (4), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (2)
-  Consumables: [ARRW] Arrow (6), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: loot B 5,5 Score: 30
-AI: loot B 5,5
-** Looting successful! You have received the following items ...
-  Weapons: [HAXE] Handaxe (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (3)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 | W |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 |   |   |   |   |   |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.61 Iteration
-Distance: 4 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 3,2 Score: 16
-Player: B Action: move B 5,4 Score: 16
-AI: move W 3,2
-Wizard [W] "Elija" moved to (3,2).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3| W |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 |   |   |   |   |   |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.62 Iteration
-Distance: 3 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 4,1 Score: 17
-Player: B Action: move B 5,4 Score: 16
-AI: move W 4,1
-Wizard [W] "Elija" moved to (4,1).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 | W |   |   |   | B |
-   +---+---+---+---+---+
- 5 |   |   |   |   |   |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.63 Iteration
-Distance: 2 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 5,1 Score: 18
-Player: B Action: move B 5,4 Score: 16
-AI: move W 5,1
-Wizard [W] "Elija" moved to (5,1).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 | W |   |   |   |   |
-   +---+---+---+---+---+
- 6 | X |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.64 Iteration
-Distance: 1 to death location at 6 1
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (5), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Distance: 4 to death location at 6 1
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: loot W 6,1 Score: 30
-Player: B Action: move B 5,4 Score: 16
-AI: loot W 6,1
-** Looting successful! You have received the following items ...
-  Weapons: [DAGG] Dagger (1)
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 | W |   |   |   |   |
-   +---+---+---+---+---+
- 6 |   |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [-] None
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.65 Iteration
-  Armor: [LARM] Leather Armor (1)
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: use W LARM Score: 50
-Player: B Action: move B 5,4 Score: 18
-AI: use W LARM
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 | W |   |   |   |   |
-   +---+---+---+---+---+
- 6 |   |   | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.66 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 6,2 Score: 18
-Player: B Action: move B 5,4 Score: 18
-AI: move W 6,2
-Wizard [W] "Elija" moved to (6,2).
-
--- ROOM 4 (4/5 completed) --------------------
-
-     1   2   3   4   5  
-   +---+---+---+---+---+
- 1 |   |   |   |   |   |
-   +---+---+---+---+---+
- 2 |   |   |   |   |   |
-   +---+---+---+---+---+
- 3 | D3|   |   |   |   |
-   +---+---+---+---+---+
- 4 |   |   |   |   | B |
-   +---+---+---+---+---+
- 5 |   |   |   |   |   |
-   +---+---+---+---+---+
- 6 |   | W | D5|   |   |
-   +---+---+---+---+---+
-
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.67 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: move W 6,3 Score: 19
-Player: B Action: move B 5,4 Score: 18
-AI: move W 6,3
-Wizard [W] "Elija" moved to (6,3).
-** Brave souls, room 5 contains some dangerous creatures. Prepare yourselves!
-
-** We have reached the end of the dungeon!
-** Kill the Lich and you should all be celebrated as heroes of the dungeon.
-
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 50/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.68 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 103
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 4.
-
-Lich 1 loses 0 health (4 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 50/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.69 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 102
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 10.
-
-Lich 1 loses 4 health (10 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.70 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 100
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 5.
-
-Lich 1 loses 0 health (5 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-Lich 1 [L1] used "Quarterstaff of Acid" on (2,9) affecting (2,9).
-[Dice Roll] 1 d10 resulting in a total value of 4.
-
-Benjo loses 0 health (4 * 100 % - 8).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.71 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 104
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 3.
-
-Lich 1 loses 0 health (3 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.72 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 100
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 2.
-
-Lich 1 loses 0 health (2 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.73 Iteration
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: W Action: attack W 3,2 Score: 100
-Player: B Action: use B LCRS Score: 50
-AI: attack W 3,2
-Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,2) affecting (3,2).
-[Dice Roll] 1 d10 resulting in a total value of 3.
-
-Lich 1 loses 0 health (3 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| W |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Elija"
-  Equipped Armor: [LARM] Leather Armor
-  Equipped Weapon: [QACD] Quarterstaff of Acid
-  Weapons: [DAGG] Dagger (6), [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1), [QFRC] Quarterstaff of Force (1), [RAPI] Rapier (1), [SBOW] Shortbow (1)
-  Consumables: [ARRW] Arrow (20)
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-Lich 1 [L1] used "Quarterstaff of Fire" on (2,9) affecting (1,9), (2,8), (2,9), (3,9).
-[Dice Roll] 3 d6 resulting in a total value of 17.
-
-Elija loses 8 health (17 * 100 % - 5).
-Elija was defeated.
-Benjo loses 9 health (17 * 100 % - 8).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| X |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [GAXE] Greataxe
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.74 Iteration
-  Weapons: [DAGG] Dagger (3), [HAXE] Handaxe (5), [LCRS] Light Crossbow (1), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: B Action: use B LCRS Score: 50
-AI: use B LCRS
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| X |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 46/50
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [LCRS] Light Crossbow
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (5), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.75 Iteration
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (4), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: B Action: attack B 3,2 Score: 101
-AI: attack B 3,2
-Barbarian [B] "Benjo" used "Light Crossbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d8 resulting in a total value of 6.
-
-Lich 1 loses 1 health (7 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| X |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 45/50
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [LCRS] Light Crossbow
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (3), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.76 Iteration
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (2), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: B Action: attack B 3,2 Score: 101
-AI: attack B 3,2
-Barbarian [B] "Benjo" used "Light Crossbow" on (3,2) affecting (3,2).
-[Dice Roll] 1 d8 resulting in a total value of 8.
-
-Lich 1 loses 3 health (9 * 100 % - 6).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| X |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 42/50
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [LCRS] Light Crossbow
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (1), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-Lich 1 [L1] used "Quarterstaff of Acid" on (2,9) affecting (2,9).
-[Dice Roll] 1 d10 resulting in a total value of 8.
-
-Benjo loses 0 health (8 * 100 % - 8).
-
--- ROOM 5 (4/5 completed) --------------------
-
-     1   2   3   4   5   6   7   8   9  
-   +---+---+---+---+---+---+---+---+---+
- 1 |   |   |   |   |   |   |   |#D4| X |
-   +---+---+---+---+---+---+---+---+---+
- 2 |   |   |   |   |   |   |   |   | B |
-   +---+---+---+---+---+---+---+---+---+
- 3 |   | L1|   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
- 4 |   |   |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+---+---+
-   L1: 42/50
-Inventory "Benjo"
-  Equipped Armor: [PARM] Plate Armor
-  Equipped Weapon: [LCRS] Light Crossbow
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [BOLT] Bolt (1), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-
-** What do you want to do?
-> 
-1.77 Iteration
-  Weapons: [DAGG] Dagger (3), [GAXE] Greataxe (1), [HAXE] Handaxe (5), [QFIR] Quarterstaff of Fire (1), [SBOW] Shortbow (3)
-  Consumables: [ARRW] Arrow (9), [FIRS] Potion of Fire Resistance (1), [GHEP] Greater Health Potion (2), [NHEP] Normal Health Potion (2), [SHEP] Superior Health Potion (1)
-Player: B Action: attack B 3,2 Score: 101
-AI: attack B 3,2
-!! You don't have the ammunition to attack with this weapon.
+Player: R Action: move R 0,0 Score: 20
+AI: move R 0,0
+!! Position is outside the room, out of reach or does not point to an expected entity.
 
 ** What do you want to do?
 > 
