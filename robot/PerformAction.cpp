@@ -22,6 +22,7 @@ double PerformAction::perform_move(Player player, std::pair<int, int> player_pos
     int new_y = player_position.first + actionToMove[action].first;
     int new_x = player_position.second + actionToMove[action].second; 
 
+    std::cout << "AI: ";
     //But player input is in new_y-Axis and new_x-Axis
     std::string command = "move " + std::string(1, player.getAbbreviation()) + " " 
             + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
@@ -56,6 +57,7 @@ double PerformAction::perform_loot(Player player, std::pair<int, int> player_pos
     if (new_x >= 0 && new_x < static_cast<int>(lootables.size()) && new_y >= 0 && new_y < static_cast<int>(lootables[0].size())) {
       if (lootables[new_y][new_x] == 1) {
 
+        std::cout << "AI: ";
         std::string command = "loot " + std::string(1, player.getAbbreviation()) + " " 
                 + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
         std::cout << command;
@@ -83,6 +85,7 @@ END*/
 
 double PerformAction::perform_regeneration(Player player)
 {
+    std::cout << "AI: ";
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " ";
 
     std::shared_ptr<Potion> potion1 = player.getInventory()->getPotion("NHEP");
@@ -142,7 +145,7 @@ double PerformAction::perform_resistance(Player player, RobotAction action)
     std::string abbreviation = resistanceType.substr(0, 2); //only first two characters
     std::transform(abbreviation.begin(), abbreviation.end(), abbreviation.begin(), ::toupper);
     abbreviation = abbreviation + "RS";
-
+    std::cout << "AI: ";
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " " + abbreviation;
     std::cout << command << std::endl;
     game_->doCommand(command);
@@ -177,6 +180,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
         int temp = enemies[new_y][new_x];
         if (temp > 0)
         {
+          std::cout << "AI: ";
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(new_y + 1) + "," + std::to_string(new_x + 1) + "\n";
           std::cout << command;
@@ -194,6 +198,7 @@ double PerformAction::perform_attack(Player player, std::pair<int, int> player_p
       {
         if (enemies[i][j] > 0)
         {
+          std::cout << "AI: ";
           std::string command = "attack " + std::string(1, player.getAbbreviation()) + " " 
                   + std::to_string(i + 1) + "," + std::to_string(j + 1) + "\n";
           std::cout << command;
@@ -233,6 +238,7 @@ double PerformAction::perform_use_ranged(Player player)
 //ChatGPT End
   if(maxWeaponIt != rangedWeapons.end())
   {
+    std::cout << "AI: ";
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
                   + (*maxWeaponIt)->getAbbreviation() + "\n";
     std::cout << command;
@@ -269,6 +275,7 @@ double PerformAction::perform_use_melee(Player player)
 
   if(maxWeaponIt != meleeWeapons.end())
   {
+    std::cout << "AI: ";
     std::string command = "use " + std::string(1, player.getAbbreviation()) + " " 
                   + (*maxWeaponIt)->getAbbreviation() + "\n";
     std::cout << command;
@@ -337,6 +344,7 @@ double PerformAction::perform_use_armor(Player player)
       {
         if (armor->getArmorValue() > player_armor->getArmorValue()) 
         {
+        std::cout << "AI: ";
         std::string command = "use " + std::string(1, player.getAbbreviation()) + " " +
                   armor->getAbbreviation() + "\n";
         std::cout << command;
@@ -346,6 +354,7 @@ double PerformAction::perform_use_armor(Player player)
       }
       else
       {
+        std::cout << "AI: ";
         std::string command = "use " + std::string(1, player.getAbbreviation()) + " " +
           armor->getAbbreviation() + "\n";
         std::cout << command;
