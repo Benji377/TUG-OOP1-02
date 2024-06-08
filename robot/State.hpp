@@ -17,7 +17,6 @@
 #include <iostream>
 #include <vector>
 #include <set>
-#include <cstring>
 #include "../entity/character/Player.hpp"
 
 // PS: Not all actions are possible at all times, so we will have to filter them and only allow the ones
