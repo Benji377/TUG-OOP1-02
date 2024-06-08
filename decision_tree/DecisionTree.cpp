@@ -155,7 +155,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->true_branch->false_branch = std::make_shared<DecisionNode>(player_is_low_health, "Is the player low on health?");
   root->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_has_healing_potion, "Does the player have a healing potion?");
   root->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(use_health_potion, "Use health potion");
-  root->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(move_to_door, "Move to door");
   root->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_better_armor, "Does the player have better armor?");
   root->true_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(equip_best_armor, "Equip best armor");
   root->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(move_to_door, "Move to door");
