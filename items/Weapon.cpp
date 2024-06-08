@@ -48,3 +48,9 @@ int Weapon::getDamage() const
 {
   return getDice()->roll() + getDamageAddition();
 }
+
+int Weapon::getHighestDamage() const
+{
+  int highest_dice = getDice()->getAmount() * getDice()->getType();
+  return highest_dice + getDamageAddition();
+}

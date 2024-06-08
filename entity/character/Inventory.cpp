@@ -158,7 +158,7 @@ std::shared_ptr<Armor> Inventory::getArmor(const std::string &abbreviation)
   return nullptr;
 }
 
-std::shared_ptr<Ammunition> Inventory::getAmmunition(const std::string &abbreviation)
+std::shared_ptr<Ammunition> Inventory::getAmmunition(const std::string &abbreviation) const
 {
   for (auto &ammunition: ammunition_)
   {
@@ -209,21 +209,115 @@ int Inventory::parseInventory(std::map<std::string, int> &inventory, char player
 std::map<std::string, int> Inventory::getInventoryMapped() const
 {
   std::map<std::string, int> inventory;
-  for (auto &potion: potions_)
+  for (auto &potion : potions_)
   {
     inventory[potion->getAbbreviation()]++;
   }
-  for (auto &weapon: weapons_)
+  for (auto &weapon : weapons_)
   {
     inventory[weapon->getAbbreviation()]++;
   }
-  for (auto &armor: armor_)
+  for (auto &armor : armor_)
   {
     inventory[armor->getAbbreviation()]++;
   }
-  for (auto &ammunition: ammunition_)
+  for (auto &ammunition : ammunition_)
   {
     inventory[ammunition->getAbbreviation()] += ammunition->getAmount();
   }
   return inventory;
+}
+
+bool Inventory::containsRangeWeaponWithAmmunition() const
+{
+  for (auto &weapon : weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::RANGED && hasAmmunitionForWeapon(weapon))
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Inventory::containsMeleeWeapon() const
+{
+  for (auto &weapon : weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::MELEE)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+std::vector<std::shared_ptr<Weapon>> Inventory::getAllRangeWeaponWithAmmunition() const
+{
+  std::vector<std::shared_ptr<Weapon>> weapons;
+  for (auto &weapon : weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::RANGED && hasAmmunitionForWeapon(weapon))
+    {
+      weapons.push_back(weapon);
+    }
+  }
+  return weapons;
+}
+
+std::shared_ptr<Weapon> Inventory::getBestMeleeWeapon() const
+{
+  std::shared_ptr<Weapon> best_weapon = nullptr;
+  for (auto &weapon : weapons_)
+  {
+    if (weapon->getAttackType() == AttackType::MELEE)
+    {
+      if (best_weapon == nullptr || weapon->getHighestDamage() > best_weapon->getHighestDamage())
+      {
+        best_weapon = weapon;
+      }
+    }
+  }
+  return best_weapon;
+}
+
+bool Inventory::hasAmmunitionForWeapon(std::shared_ptr<Weapon> weapon) const
+{
+  if (weapon->getAttackType() != AttackType::MELEE
+      && weapon->getAbbreviation() != "QFIR" && weapon->getAbbreviation() != "QACD")
+  {
+    std::string ammo_type = (weapon->getAbbreviation() == "SBOW" ||
+                            weapon->getAbbreviation() == "LBOW") ? "ARRW" : "BOLT";
+
+    if (getAmmunition(ammo_type) == nullptr ||
+        getAmmunition(ammo_type)->getAmount() == 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool Inventory::containsHealingPotion() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() == Effect::HEALTH)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+std::shared_ptr<Potion> Inventory::getHealingPotion() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() == Effect::HEALTH)
+    {
+      return potion;
+    }
+  }
+  return nullptr;
 }

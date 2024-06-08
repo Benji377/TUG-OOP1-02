@@ -1,6 +1,5 @@
 #include "Game.hpp"
 #include <algorithm>
-#include "../robot/PerformAction.hpp"
 
 using std::cout;
 using std::endl;
@@ -13,7 +12,6 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_ = make_unique<CommandParser>();
   story_.parseStory(config_path);
   current_phase_ = Phase::ACTION;
-  //display commands
   parser_->registerCommand("help", make_unique<HelpCommand>());
   parser_->registerCommand("map", make_unique<MapCommand>(this));
   parser_->registerCommand("story", make_unique<StoryCommand>(this));
@@ -21,15 +19,14 @@ Game::Game(char *dungeon_path, char *config_path) : dungeon_(Dungeon(dungeon_pat
   parser_->registerCommand("positions", make_unique<PositionsCommand>(this));
   parser_->registerCommand("player", make_unique<PlayerCommand>(this));
   parser_->registerCommand("inventory", make_unique<InventoryCommand>(this));
-  //action commands
+
   parser_->registerCommand("move", make_unique<MoveCommand>(this));
   parser_->registerCommand("loot", make_unique<LootCommand>(this));
   parser_->registerCommand("use", make_unique<UseCommand>(this));
   parser_->registerCommand("attack", make_unique<AttackCommand>(this));
-  //a3 commands
+
   parser_->registerCommand("play", make_unique<PlayCommand>(this));
   parser_->registerCommand("whoami", make_unique<WhoamiCommand>());
-  parser_->registerCommand("switch", make_unique<SwitchCommand>(this));
 }
 
 void Game::start()
@@ -114,14 +111,7 @@ void Game::start()
   dungeon_.enterCurrentRoom(0, players_);
   printStoryAndRoom();
 
-  active_player_q_learn_ = players_.at(0);
-  state_ = std::make_shared<State>(active_player_q_learn_->getAbbreviation(), dungeon_.getCurrentRoom()->getFieldOfEntity(active_player_q_learn_),
-                                   active_player_q_learn_->getHealth(), active_player_q_learn_->getMaximumHealth(),
-                                   dungeon_.getCurrentRoom()->getCharacterAsInt<Enemy>(),
-                                   dungeon_.getCurrentRoom()->getCharacterAsInt<Player>(), dungeon_.getCurrentRoom()->getLootableAsInt(),
-                                   dungeon_.getCurrentRoom()->getEntryDoorPosition(), dungeon_.getCurrentRoom()->getNextDoorPosition());
-  robot_ = std::make_shared<Robot>(*state_, this);
-  additional_reward_ = 0;
+  //TODO make better, this is just for testing
 }
 
 void Game::step()
@@ -170,7 +160,6 @@ void Game::doCommand()
   {
     string input = InputOutput::promtUserInput();
 
-    //string input = "play";
     vector<string> command_input = InputOutput::commandifyString(input);
 
     try
@@ -224,9 +213,15 @@ void Game::doCommand()
   }
 }
 
+// TODO: Undo changes
 void Game::doCommand(string input)
 {
   vector<string> command_input = InputOutput::commandifyString(input);
+
+  bool command_finished = false;
+
+  while (!command_finished)
+  {
     try
     {
       parser_->execute(command_input);
@@ -234,24 +229,27 @@ void Game::doCommand(string input)
     catch (const UnknownCommand &e)
     {
       cout << Game::story_.getStorySegment("E_UNKNOWN_COMMAND");
+      return;
     }
     catch (const WrongNumberOfParametersException &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM_COUNT");
+      return;
     }
     catch (const InvalidParamCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_PARAM");
+      return;
     }
     catch (const UnavailableItemOrEntityCommand &e)
     {
       cout << Game::story_.getStorySegment("E_ENTITY_OR_ITEM_UNAVAILABLE");
-      additional_reward_ = REWARD_EXCEPTION;
+      return;
     }
     catch (const InvalidPositionCommand &e)
     {
       cout << Game::story_.getStorySegment("E_INVALID_POSITION");
-      additional_reward_ = REWARD_EXCEPTION;
+      return;
     }
     catch (const CommandExecutionException &e)
     {
@@ -259,20 +257,20 @@ void Game::doCommand(string input)
       {
         case CommandExecutionException::ExceptionType::LOCKED_DOOR:
           cout << Game::story_.getStorySegment("E_MOVE_LOCKED_DOOR");
-                additional_reward_ = REWARD_EXCEPTION;
           break;
         case CommandExecutionException::ExceptionType::NO_WEAPON_EQUIPPED:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_WEAPON_EQUIPPED");
-                additional_reward_ = REWARD_EXCEPTION;
           break;
         case CommandExecutionException::ExceptionType::NO_AMMUNITION:
           cout << Game::story_.getStorySegment("E_ATTACK_NO_AMMUNITION");
-                additional_reward_ = REWARD_EXCEPTION;
         default:
           break;
       }
-
+      return;
     }
+
+    command_finished = true;
+  }
 }
 
 bool Game::isRunning() const
@@ -287,6 +285,16 @@ bool Game::playerExists(string name) const
     if (player->getName() == name) { return true; }
   }
   return false;
+}
+
+vector<shared_ptr<Player>> Game::getLivingPlayers() const
+{
+  vector<shared_ptr<Player>> living_players;
+  for (auto player : players_)
+  {
+    if (!player->isDead()) { living_players.push_back(player); }
+  }
+  return living_players;
 }
 
 int Game::getPlayerTypeAmount(char type) const
@@ -379,7 +387,6 @@ void Game::plusOneActionCount()
 {
   action_count_++;
   total_actions_++;
-  setAdditionalreward(getAdditionalreward() - 1); // TODO: Experimental
 }
 
 std::ostream &Game::returnScoreOutput(std::ostream &os)
@@ -476,17 +483,6 @@ void Game::enemyPhase()
         InputOutput::printDiceRoll(enemy->getWeapon()->getDice()->getPreviousRoll(), enemy->getWeapon()->getDice());
         InputOutput::printAttackedCharacters(attacked_fields);
         if (allPlayersAreDead()) { return; }
-        else if(player->isDead() == true)          //Soly for A3 so it switches players if one is dead
-        {
-          for(auto player : players_)
-          {
-            if(player->isDead() == false)
-            {
-              active_player_q_learn_ = player;
-              break;
-            }
-          }
-        }          //Soly for A3
         break;
       }
       else
@@ -512,18 +508,4 @@ void Game::enemyPhase()
     }
   }
   printStoryAndRoom(false);
-}
-
-
-void Game::setActivePlayerQLearn(char abbreviation)
-{
-  for(auto& player : players_)
-  {
-    char current_player_abbrev = player->getAbbreviation();
-
-    if(current_player_abbrev == abbreviation && !player->isDead())
-    {
-      active_player_q_learn_ = player;
-    }
-  }
 }

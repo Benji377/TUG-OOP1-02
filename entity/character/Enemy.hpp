@@ -64,6 +64,8 @@ class Enemy: public Character
     /// @return the remaining health
     //
     int takeDamage(int damage, DamageType damage_type) override;
+
+    int simulateDamage(int damage, DamageType damage_type) override;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Returns the remaining health after taking damage. The damage taken is influenced by Armor and Resistance

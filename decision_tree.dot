@@ -1,0 +1,126 @@
+digraph DecisionTree {
+  node0 [label="Is current 
+room complete?"];
+  node1 [label="Does the 
+current room 
+contain loot?"];
+  node2 [label="Is loot nearby?"];
+  node3 [label="Collect loot"];
+  node2 -> node3 [label="true"];
+  node4 [label="Move to loot"];
+  node2 -> node4 [label="false"];
+  node1 -> node2 [label="true"];
+  node5 [label="Is the player 
+low on health?"];
+  node6 [label="Does the 
+player have a 
+healing potion?"];
+  node7 [label="Use health potion"];
+  node6 -> node7 [label="true"];
+  node8 [label="TODO: 
+Implement action"];
+  node6 -> node8 [label="false"];
+  node5 -> node6 [label="true"];
+  node9 [label="Does the 
+player have 
+better armor?"];
+  node10 [label="Equip best armor"];
+  node9 -> node10 [label="true"];
+  node11 [label="Move to door"];
+  node9 -> node11 [label="false"];
+  node5 -> node9 [label="false"];
+  node1 -> node5 [label="false"];
+  node0 -> node1 [label="true"];
+  node12 [label="Has the player 
+a weapon equipped?"];
+  node13 [label="Is enemy nearby?"];
+  node14 [label="Has the player 
+a melee weapon equipped?"];
+  node15 [label="Attack enemy"];
+  node14 -> node15 [label="true"];
+  node16 [label="Equip best 
+melee weapon"];
+  node14 -> node16 [label="false"];
+  node13 -> node14 [label="true"];
+  node17 [label="Has the player 
+a range weapon 
+with ammunition?"];
+  node18 [label="Is the best 
+range weapon 
+with 
+ammunition equipped?"];
+  node19 [label="Attack enemy 
+with range weapon"];
+  node18 -> node19 [label="true"];
+  node20 [label="Equip best 
+range weapon 
+with ammunition"];
+  node18 -> node20 [label="false"];
+  node17 -> node18 [label="true"];
+  node21 [label="Does a path to 
+the enemy exist?"];
+  node22 [label="Move to enemy"];
+  node21 -> node22 [label="true"];
+  node23 [label="Is loot nearby?"];
+  node24 [label="Collect loot"];
+  node23 -> node24 [label="true"];
+  node25 [label="Move to loot"];
+  node23 -> node25 [label="false"];
+  node21 -> node23 [label="false"];
+  node17 -> node21 [label="false"];
+  node13 -> node17 [label="false"];
+  node12 -> node13 [label="true"];
+  node26 [label="Is enemy nearby?"];
+  node27 [label="Has the player 
+a melee weapon?"];
+  node28 [label="Equip best 
+melee weapon"];
+  node27 -> node28 [label="true"];
+  node29 [label="Has the player 
+a range weapon 
+with ammunition?"];
+  node30 [label="Is the best 
+range weapon 
+with 
+ammunition equipped?"];
+  node31 [label="Attack enemy 
+with range weapon"];
+  node30 -> node31 [label="true"];
+  node32 [label="Equip best 
+range weapon 
+with ammunition"];
+  node30 -> node32 [label="false"];
+  node29 -> node30 [label="true"];
+  node33 [label="TODO: 
+Implement action"];
+  node29 -> node33 [label="false"];
+  node27 -> node29 [label="false"];
+  node26 -> node27 [label="true"];
+  node34 [label="Has the player 
+a range weapon 
+with ammunition?"];
+  node35 [label="Is the best 
+range weapon 
+with 
+ammunition equipped?"];
+  node36 [label="Attack enemy 
+with range weapon"];
+  node35 -> node36 [label="true"];
+  node37 [label="Equip best 
+range weapon 
+with ammunition"];
+  node35 -> node37 [label="false"];
+  node34 -> node35 [label="true"];
+  node38 [label="Has the player 
+a melee weapon?"];
+  node39 [label="Equip best 
+melee weapon"];
+  node38 -> node39 [label="true"];
+  node40 [label="TODO: 
+Implement action"];
+  node38 -> node40 [label="false"];
+  node34 -> node38 [label="false"];
+  node26 -> node34 [label="false"];
+  node12 -> node26 [label="false"];
+  node0 -> node12 [label="false"];
+}

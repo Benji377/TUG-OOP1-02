@@ -14,8 +14,12 @@
 #include <vector>
 #include <memory>
 #include <cmath>
+#include <algorithm>
 #include "Field.hpp"
 #include "../entity/character/Character.hpp"
+#include "../entity/character/Player.hpp"
+#include "../entity/Door.hpp"
+#include "../decision_tree/Pathfinder.hpp"
 
 using std::vector;
 using std::shared_ptr;
@@ -209,6 +213,61 @@ class Room
     /// @return A 2D vector containing the lootables in the room
     //
     vector<vector<int>> getLootableAsInt() const;
+    //------------------------------------------------------------------------------------------------------------------
+    ///
+    /// Returns the best move for a player in the room
+    ///
+    /// @tparam T The type of the player to get the best move for
+    ///
+    /// @param player the player to get the best move for
+    ///
+    /// @return A pair containing the row and column indices of the best move
+    //
+    /*
+    template <typename T>
+    pair<int,int> getBestMove(shared_ptr<Player> player) const
+    {
+      vector<pair<int, int>> surrounding_fields = getSurroundingFieldPositions(getFieldOfEntity(player));
+      vector<shared_ptr<T>> available_entities = getAllEntitiesOfType<T>();
+      map<int, pair<int, int>> distances;
+      for (auto& field : surrounding_fields)
+      {
+        if (getField(field)->getEntity() == nullptr)
+        {
+          for (auto& entity : available_entities)
+          {
+            distances[getDistance(field, getFieldOfEntity(dynamic_pointer_cast<Entity>(entity)))] = field;
+          }
+        }
+      }
+      pair<int, int> best_move = distances.begin()->second;
+      return best_move;
+    }
+    */
+
+    bool hasLoot() const;
+
+    bool isLootNearby(shared_ptr<Player> player) const;
+
+    bool isEnemyNearby(shared_ptr<Player> player) const;
+
+    vector<vector<int>> getMapForPathfinding(pair<int, int> player_position, pair<int, int> target_position) const;
+
+    bool getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    bool getBestMoveToDoor(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    bool getBestMoveToLoot(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
+
+    std::pair<int, int> getClosestEnemyPosition(shared_ptr<Player> player) const;
+
+    std::pair<int, int> getClosestLootposition(shared_ptr<Player> player) const;
+
+    std::pair<int, int> getLowestHealthEnemyPosition() const;
+
+
+
+    int getDistance(pair<int, int> field_1, pair<int, int> field_2) const;
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns whether two fields are adjacent to each other

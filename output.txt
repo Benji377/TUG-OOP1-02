@@ -1,0 +1,1303 @@
+
+** Welcome to the exciting world of Dungeons & Classes!
+
+How many players want to join the adventure? (1 to 3)
+> 
+Player 1 what do you wish to be called? (max length 10 characters)
+> 
+Elija, please choose a player type:
+  [W] Wizard     0/1
+  [B] Barbarian  0/1
+  [R] Rogue      0/1
+> 
+
+Player 2 what do you wish to be called? (max length 10 characters)
+> 
+Benjo, please choose a player type:
+  [W] Wizard     1/1
+  [B] Barbarian  0/1
+  [R] Rogue      0/1
+> 
+
+Player 3 what do you wish to be called? (max length 10 characters)
+> 
+Hanno, please choose a player type:
+  [W] Wizard     1/1
+  [B] Barbarian  1/1
+  [R] Rogue      0/1
+> 
+
+-- Players --------------------------------------
+  Player 1: Wizard [W] "Elija"
+  Player 2: Barbarian [B] "Benjo"
+  Player 3: Rogue [R] "Hanno"
+
+** You have entered the dungeon of the evil Lich!
+** Help the anxious souls of the nearby village by freeing
+** them from the monsters that haunt it!
+
+** Beware, there are zombies in this room!
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2|   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 15/15
+
+** What do you want to do?
+> 
+1.0 Iteration
+Closest enemy position: 2 4
+Closest enemy position: 2 4
+Player: W Action: use W QACD Score: 50
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: use W QACD
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2|   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 15/15
+
+** What do you want to do?
+> 
+1.1 Iteration
+Closest enemy position: 2 4
+Closest enemy position: 2 4
+Player: W Action: attack W 2,4 Score: 105
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 2,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (2,4) affecting (2,4).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 8 health (9 * 100 % - 1).
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2|   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 7/15
+
+** What do you want to do?
+> 
+1.2 Iteration
+Closest enemy position: 2 4
+Closest enemy position: 2 4
+Player: W Action: attack W 2,4 Score: 100
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 2,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (2,4) affecting (2,4).
+[Dice Roll] 1 d10 resulting in a total value of 1.
+
+Zombie 1 loses 0 health (1 * 100 % - 1).
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2|   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 7/15
+
+Zombie 1 [Z1] moved to (1,4).
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2| Z1|   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 7/15
+
+** What do you want to do?
+> 
+1.3 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 1,4 Score: 107
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 1,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
+[Dice Roll] 1 d10 resulting in a total value of 7.
+
+Zombie 1 loses 6 health (7 * 100 % - 1).
+
+-- ROOM 1 (0/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |#D2| Z1|   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 |#D0| R |   |   |   |
+   +---+---+---+---+---+
+   Z1: 1/15
+
+** What do you want to do?
+> 
+1.4 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 1,4 Score: 101
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 1,4
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,4) affecting (1,4).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 1 health (9 * 100 % - 1).
+Zombie 1 was defeated.
+
+-- ROOM 1 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | D2| X |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 4 | D0| R |   |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.5 Iteration
+Closest loot position: 1 4
+Closest loot position: 1 4
+Closest loot position: 1 4
+Player: W Action: move W 2,2 Score: 17
+Player: B Action: move B 2,3 Score: 18
+Player: R Action: move R 3,3 Score: 17
+AI: move B 2,3
+Barbarian [B] "Benjo" moved to (2,3).
+
+-- ROOM 1 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | D2| X |   |
+   +---+---+---+---+---+
+ 2 |   |   | B |   |   |
+   +---+---+---+---+---+
+ 3 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 4 | D0| R |   |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.6 Iteration
+Closest loot position: 1 4
+Closest loot position: 1 4
+Player: W Action: move W 2,2 Score: 16
+Player: B Action: loot B 1,4 Score: 30
+Player: R Action: move R 3,3 Score: 17
+AI: loot B 1,4
+** Looting successful! You have received the following items ...
+  Weapons: [DAGG] Dagger (1)
+
+-- ROOM 1 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | D2|   |   |
+   +---+---+---+---+---+
+ 2 |   |   | B |   |   |
+   +---+---+---+---+---+
+ 3 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 4 | D0| R |   |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.7 Iteration
+Door position: 1 3
+Player W moving to door at 2, 2 with distance 2
+Door position: 1 3
+Player B moving to door at 1, 3 with distance 1
+Door position: 1 3
+Player R moving to door at 3, 3 with distance 3
+Player: W Action: move W 2,2 Score: 18
+Player: B Action: move B 1,3 Score: 19
+Player: R Action: move R 3,3 Score: 17
+AI: move B 1,3
+Barbarian [B] "Benjo" moved to (1,3).
+** Well done, you made it through the first room!
+** Let's see if you can master this one as well!
+
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   | Z2|   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | Z1|   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z1: 15/15, Z2: 15/15
+
+** What do you want to do?
+> 
+1.8 Iteration
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: use W QFRC Score: 50
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: use W QFRC
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   | Z2|   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | Z1|   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z1: 15/15, Z2: 15/15
+
+** What do you want to do?
+> 
+1.9 Iteration
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: attack W 4,2 Score: 107
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 4,2
+Wizard [W] "Elija" used "Quarterstaff of Force" on (4,2) affecting (4,2).
+[Dice Roll] 1 d10 resulting in a total value of 10.
+
+Zombie 1 loses 9 health (10 * 100 % - 1).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   | Z2|   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | Z1|   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z1: 6/15, Z2: 15/15
+
+** What do you want to do?
+> 
+1.10 Iteration
+Closest enemy position: 4 2
+Closest enemy position: 4 2
+Player: W Action: attack W 4,2 Score: 104
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 4,2
+Wizard [W] "Elija" used "Quarterstaff of Force" on (4,2) affecting (4,2).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 6 health (9 * 100 % - 1).
+Zombie 1 was defeated.
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   | Z2|   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 15/15
+
+Zombie 2 [Z2] moved to (3,3).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 15/15
+
+** What do you want to do?
+> 
+1.11 Iteration
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: use W QACD Score: 50
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: use W QACD
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 15/15
+
+** What do you want to do?
+> 
+1.12 Iteration
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: attack W 3,3 Score: 106
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 3,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,3) affecting (3,3).
+[Dice Roll] 1 d10 resulting in a total value of 10.
+
+Zombie 2 loses 9 health (10 * 100 % - 1).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 6/15
+
+** What do you want to do?
+> 
+1.13 Iteration
+Closest enemy position: 3 3
+Closest enemy position: 3 3
+Player: W Action: attack W 3,3 Score: 105
+Player: B Action: move B 4,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 3,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (3,3) affecting (3,3).
+[Dice Roll] 1 d10 resulting in a total value of 6.
+
+Zombie 2 loses 5 health (6 * 100 % - 1).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   | Z2|   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 1/15
+
+Zombie 2 [Z2] moved to (4,4).
+
+-- ROOM 2 (1/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   |#D3|
+   +---+---+---+---+---+
+ 4 |   | X |   | Z2|   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   |#D1| R |   |
+   +---+---+---+---+---+
+   Z2: 1/15
+
+** What do you want to do?
+> 
+1.14 Iteration
+Player: W Action: use W QFRC Score: 50
+Player: B Action: attack B 4,4 Score: 101
+Player: R Action: use R SBOW Score: 50
+AI: attack B 4,4
+Barbarian [B] "Benjo" used "Greataxe" on (4,4) affecting (4,3), (4,4), (4,5).
+[Dice Roll] 1 d12 resulting in a total value of 10.
+
+Zombie 2 loses 1 health (14 * 100 % - 1).
+Zombie 2 was defeated.
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   | X |   | X |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.15 Iteration
+Closest loot position: 4 2
+Player: W Action: loot W 4,2 Score: 30
+Player: B Action: loot B 4,4 Score: 30
+Player: R Action: move R 5,5 Score: 15
+AI: loot W 4,2
+** Looting successful! You have received the following items ...
+  Weapons: [DAGG] Dagger (1)
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   |   |   | X |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.16 Iteration
+Closest loot position: 4 4
+Player: W Action: loot W 4,4 Score: 30
+Player: B Action: loot B 4,4 Score: 30
+Player: R Action: move R 5,5 Score: 18
+AI: loot W 4,4
+** Looting successful! You have received the following items ...
+  Weapons: [DAGG] Dagger (1)
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | W | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.17 Iteration
+Closest loot position: 3 1
+Closest loot position: 3 1
+Closest loot position: 3 1
+Player: W Action: move W 4,2 Score: 18
+Player: B Action: move B 4,3 Score: 17
+Player: R Action: move R 5,5 Score: 15
+AI: move W 4,2
+Wizard [W] "Elija" moved to (4,2).
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |#T |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   | W |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.18 Iteration
+Closest loot position: 3 1
+Closest loot position: 3 1
+Player: W Action: loot W 3,1 Score: 30
+Player: B Action: move B 4,3 Score: 17
+Player: R Action: move R 5,3 Score: 16
+AI: loot W 3,1
+** To unlock this chest you need to roll at least 1 to reach the 5 needed.
+[Dice Roll] 1 d20 resulting in a total value of 13.
+
+** Looting successful! You have received the following items ...
+  Weapons: [GSWD] Greatsword (1), [QCLD] Quarterstaff of Cold (1)
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |   |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   | W |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   | B |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.19 Iteration
+Door position: 3 5
+Player W moving to door at 3, 3 with distance 3
+Door position: 3 5
+Player B moving to door at 4, 5 with distance 2
+Door position: 3 5
+Player R moving to door at 5, 5 with distance 3
+Player: W Action: move W 3,3 Score: 17
+Player: B Action: move B 4,5 Score: 18
+Player: R Action: move R 5,5 Score: 17
+AI: move B 4,5
+Barbarian [B] "Benjo" moved to (4,5).
+
+-- ROOM 2 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 3 |   |   |   |   | D3|
+   +---+---+---+---+---+
+ 4 |   | W |   |   | B |
+   +---+---+---+---+---+
+ 5 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 6 |   |   | D1| R |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.20 Iteration
+Door position: 3 5
+Player W moving to door at 3, 3 with distance 3
+Door position: 3 5
+Player B moving to door at 3, 5 with distance 1
+Door position: 3 5
+Player R moving to door at 5, 5 with distance 3
+Player: W Action: move W 3,3 Score: 17
+Player: B Action: move B 3,5 Score: 19
+Player: R Action: move R 5,5 Score: 17
+AI: move B 3,5
+Barbarian [B] "Benjo" moved to (3,5).
+** Can you hear the long lost voices of the fallen warriors? This is just room 3!
+
+** Oh no, I have spotted a goblin in the room. Stay safe!
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 10/10, Z1: 15/15
+
+** What do you want to do?
+> 
+1.21 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: move B 1,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 7.
+
+Goblin 1 loses 3 health (7 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 7/10, Z1: 15/15
+
+** What do you want to do?
+> 
+1.22 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 101
+Player: B Action: move B 1,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 8.
+
+Goblin 1 loses 4 health (8 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 15/15
+
+** What do you want to do?
+> 
+1.23 Iteration
+Closest enemy position: 1 4
+Closest enemy position: 1 4
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: move B 1,3 Score: 18
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 3.
+
+Goblin 1 loses 0 health (3 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   | Z1|   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 15/15
+
+Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
+[Dice Roll] 1 d6 resulting in a total value of 1.
+
+Hanno loses 1 health (5 * 100 % - 4).
+
+Zombie 1 [Z1] moved to (1,3).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | Z1|   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 15/15
+
+** What do you want to do?
+> 
+1.24 Iteration
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: attack B 1,3 Score: 105
+Player: R Action: use R SBOW Score: 50
+AI: attack B 1,3
+Barbarian [B] "Benjo" used "Greataxe" on (1,3) affecting (1,2), (1,3), (2,3).
+[Dice Roll] 1 d12 resulting in a total value of 2.
+
+Zombie 1 loses 5 health (6 * 100 % - 1).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | Z1|   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 10/15
+
+** What do you want to do?
+> 
+1.25 Iteration
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: attack B 1,3 Score: 109
+Player: R Action: use R SBOW Score: 50
+AI: attack B 1,3
+Barbarian [B] "Benjo" used "Greataxe" on (1,3) affecting (1,2), (1,3), (2,3).
+[Dice Roll] 1 d12 resulting in a total value of 5.
+
+Zombie 1 loses 8 health (9 * 100 % - 1).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | Z1|   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10, Z1: 2/15
+
+** What do you want to do?
+> 
+1.26 Iteration
+Player: W Action: attack W 1,3 Score: 102
+Player: B Action: attack B 1,3 Score: 102
+Player: R Action: use R SBOW Score: 50
+AI: attack W 1,3
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (1,3) affecting (1,3).
+[Dice Roll] 1 d10 resulting in a total value of 9.
+
+Zombie 1 loses 2 health (9 * 100 % - 1).
+Zombie 1 was defeated.
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10
+
+Goblin 1 [G1] used "Shortbow" on (3,2) affecting (3,2).
+[Dice Roll] 1 d6 resulting in a total value of 6.
+
+Hanno loses 6 health (10 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10
+
+** What do you want to do?
+> 
+1.27 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
+Player: W Action: attack W 5,5 Score: 100
+Player: B Action: move B 3,3 Score: 17
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 3.
+
+Goblin 1 loses 0 health (3 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 3/10
+
+** What do you want to do?
+> 
+1.28 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
+Player: W Action: attack W 5,5 Score: 101
+Player: B Action: move B 3,3 Score: 17
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 6.
+
+Goblin 1 loses 2 health (6 * 100 % - 4).
+
+-- ROOM 3 (2/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 |#D2| R |   |   |#D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | G1|
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+   G1: 1/10
+
+** What do you want to do?
+> 
+1.29 Iteration
+Closest enemy position: 5 5
+Closest enemy position: 5 5
+Player: W Action: attack W 5,5 Score: 101
+Player: B Action: move B 3,3 Score: 17
+Player: R Action: use R SBOW Score: 50
+AI: attack W 5,5
+Wizard [W] "Elija" used "Quarterstaff of Acid" on (5,5) affecting (5,5).
+[Dice Roll] 1 d10 resulting in a total value of 8.
+
+Goblin 1 loses 1 health (8 * 100 % - 4).
+Goblin 1 was defeated.
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   | X |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | X |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.30 Iteration
+Closest loot position: 1 3
+Closest loot position: 1 3
+Player: W Action: move W 1,2 Score: 18
+Player: B Action: loot B 1,3 Score: 30
+Player: R Action: move R 2,3 Score: 18
+AI: loot B 1,3
+** Looting successful! You have received the following items ...
+  Weapons: [DAGG] Dagger (1)
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W | B |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | X |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.31 Iteration
+Closest loot position: 6 3
+Closest loot position: 5 5
+Closest loot position: 6 3
+Player: W Action: move W 1,2 Score: 14
+Player: B Action: move B 3,3 Score: 17
+Player: R Action: move R 4,3 Score: 17
+AI: move B 3,3
+Barbarian [B] "Benjo" moved to (3,3).
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R | B |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | X |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.32 Iteration
+Closest loot position: 6 3
+Closest loot position: 5 5
+Closest loot position: 6 3
+Player: W Action: move W 2,2 Score: 14
+Player: B Action: move B 4,4 Score: 18
+Player: R Action: move R 4,3 Score: 17
+AI: move B 4,4
+Barbarian [B] "Benjo" moved to (4,4).
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   | B |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   | X |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.33 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
+Player: W Action: move W 2,2 Score: 15
+Player: B Action: loot B 5,5 Score: 30
+Player: R Action: move R 4,3 Score: 17
+AI: loot B 5,5
+** Looting successful! You have received the following items ...
+  Weapons: [HAXE] Handaxe (1), [SBOW] Shortbow (1)
+  Consumables: [ARRW] Arrow (3)
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   | B |   |
+   +---+---+---+---+---+
+ 5 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.34 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
+Closest loot position: 6 3
+Player: W Action: move W 2,2 Score: 15
+Player: B Action: move B 5,3 Score: 18
+Player: R Action: move R 4,3 Score: 17
+AI: move B 5,3
+Barbarian [B] "Benjo" moved to (5,3).
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | B |   |   |
+   +---+---+---+---+---+
+ 6 |   |   |#T |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.35 Iteration
+Closest loot position: 6 3
+Closest loot position: 6 3
+Player: W Action: move W 2,2 Score: 15
+Player: B Action: loot B 6,3 Score: 30
+Player: R Action: move R 4,3 Score: 17
+AI: loot B 6,3
+** To unlock this chest you need to roll at least 9 to reach the 10 needed.
+[Dice Roll] 1 d20 resulting in a total value of 17.
+
+** Looting successful! You have received the following items ...
+  Armor: [PARM] Plate Armor (1)
+  Weapons: [LCRS] Light Crossbow (1)
+  Consumables: [BOLT] Bolt (5), [NHEP] Normal Health Potion (2)
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | B |   |   |
+   +---+---+---+---+---+
+ 6 |   |   |   |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.36 Iteration
+Door position: 3 5
+Player W moving to door at 2, 2 with distance 4
+Player: W Action: move W 2,2 Score: 16
+Player: B Action: use B PARM Score: 50
+Player: R Action: move R 0,0 Score: 20
+AI: use B PARM
+
+-- ROOM 3 (3/5 completed) --------------------
+
+     1   2   3   4   5  
+   +---+---+---+---+---+
+ 1 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 2 | W |   |   |   |   |
+   +---+---+---+---+---+
+ 3 | D2| R |   |   | D4|
+   +---+---+---+---+---+
+ 4 |   |   |   |   |   |
+   +---+---+---+---+---+
+ 5 |   |   | B |   |   |
+   +---+---+---+---+---+
+ 6 |   |   |   |   |   |
+   +---+---+---+---+---+
+
+
+** What do you want to do?
+> 
+1.37 Iteration
+Door position: 3 5
+Player W moving to door at 2, 2 with distance 4
+Door position: 3 5
+Player B moving to door at 4, 4 with distance 2
+Player: W Action: move W 2,2 Score: 16
+Player: B Action: move B 4,4 Score: 18
+Player: R Action: move R 0,0 Score: 20
+AI: move R 0,0
+!! Position is outside the room, out of reach or does not point to an expected entity.
+
+** What do you want to do?
+> 
+CYCLE 1 COMPLETED
