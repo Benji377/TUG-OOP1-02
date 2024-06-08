@@ -193,8 +193,6 @@ class Character: public Entity
     /// @return The remaining health of the character.
     //
     virtual int takeDamage(int damage, DamageType damageType) = 0;
-
-    virtual int simulateDamage(int damage, DamageType damageType) = 0;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Returns the currently equipped weapon of the character. This is a pure virtual function and has to be

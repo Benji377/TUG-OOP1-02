@@ -1,7 +1,6 @@
 #include "Player.hpp"
 #include <iomanip>
 #include <utility>
-#include <algorithm>
 #include "../../utility/Props.hpp"
 #include "../../utility/InputOutput.hpp"
 
@@ -174,6 +173,7 @@ int Player::getAttackDamage()
   {
     return -1;
   }
+
   if (getWeapon()->getAttackType() != AttackType::MELEE //Ranged Quarterstaffs don't need ammo
       && getWeapon()->getAbbreviation() != "QFIR" && getWeapon()->getAbbreviation() != "QACD")
   {
@@ -216,25 +216,6 @@ int Player::takeDamage(int damage, DamageType damage_type)
   return lost_health;
 }
 
-int Player::simulateDamage(int damage, DamageType damage_type)
-{
-  if (getResistantTo() == damage_type)
-  {
-    damage /= 2;
-  }
-
-  int additional_armor = 0;
-  if (getArmor() != nullptr)
-  {
-    additional_armor = getArmor()->getArmorValue();
-  }
-
-  int defense_points = std::max(getBaseArmor(), additional_armor);
-  int damage_taken = damage - defense_points;
-  int lost_health = std::min(getHealth(), std::max(0, damage_taken));
-  return lost_health;
-}
-
 void Player::printPlayer(const std::pair<int, int> &position, bool single_line) const
 {
   simplePrintNoId();
@@ -264,94 +245,4 @@ void Player::simplePrint() const
 {
   std::cout << "Player " << getId() << ": " << getTypeName()
             << " [" << getAbbreviation() << "] \"" << getName() << "\"" << std::endl;
-}
-
-std::shared_ptr<Weapon> Player::getBestRangeWeaponWithAmmunition() const
-{
-  std::shared_ptr<Weapon> best_range_weapon_with_ammo;
-  std::vector<std::shared_ptr<Weapon>> ranged_weapons_with_ammo = inventory_->getAllRangeWeaponWithAmmunition();
-  if (getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::RANGED && getInventory()->hasAmmunitionForWeapon(getWeapon()))
-  {
-    best_range_weapon_with_ammo = getWeapon();
-  }
-  for (auto &weapon : ranged_weapons_with_ammo)
-  {
-    if (best_range_weapon_with_ammo == nullptr || weapon->getHighestDamage() > best_range_weapon_with_ammo->getHighestDamage())
-    {
-      best_range_weapon_with_ammo = weapon;
-    }
-  }
-  return best_range_weapon_with_ammo;
-}
-
-std::shared_ptr<Weapon> Player::getBestMeleeWeapon() const
-{
-  return inventory_->getBestMeleeWeapon();
-  return nullptr;
-}
-
-bool Player::hasRangeWeaponWithAmmunition() const
-{
-  std::shared_ptr<Weapon> equipped_weapon = getWeapon();
-  if (equipped_weapon != nullptr && equipped_weapon->getAttackType() == AttackType::RANGED && getInventory()->hasAmmunitionForWeapon(equipped_weapon))
-  {
-    return true;
-  }
-  else
-  {
-    return getInventory()->containsRangeWeaponWithAmmunition();
-  }
-  return false;
-}
-
-bool Player::hasRangeWeaponEquipped() const
-{
-  return getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::RANGED;
-}
-
-bool Player::hasMeleeWeapon() const
-{
-  if (getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::MELEE)
-  {
-    return true;
-  }
-  else
-  {
-    return getInventory()->containsMeleeWeapon();
-  }
-  return false;
-}
-
-bool Player::hasMeleeWeaponEquipped() const
-{
-  return getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::MELEE;
-}
-
-bool Player::hasBetterArmor() const
-{
-  return getArmor() != getBestArmor();
-}
-
-std::shared_ptr<Armor> Player::getBestArmor() const
-{
-  std::shared_ptr<Armor> best_armor = getArmor();
-  std::vector<std::shared_ptr<Armor>> armors = inventory_->getAllArmor();
-  for (auto &armor : armors)
-  {
-    if (best_armor == nullptr || armor->getArmorValue() > best_armor->getArmorValue())
-    {
-      best_armor = armor;
-    }
-  }
-  return best_armor;
-}
-
-bool Player::hasHealingPotion() const
-{
-  return inventory_->containsHealingPotion();
-}
-
-std::shared_ptr<Potion> Player::getHealingPotion() const
-{
-  return inventory_->getHealingPotion();
 }

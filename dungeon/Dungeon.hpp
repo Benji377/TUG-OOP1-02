@@ -143,8 +143,6 @@ class Dungeon
     /// @return a vector of AttackedFields containing the information of the attack
     //
     vector<AttackedField> characterAttack(shared_ptr<Character> attacker, int damage, pair<int, int> target_field);
-
-    vector<AttackedField> simulateAttack(shared_ptr<Character> attacker, int damage, pair<int, int> target_field);
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// This function handles the loot of an entity

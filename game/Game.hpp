@@ -19,6 +19,9 @@
 #include "../entity/character/Player.hpp"
 #include "../entity/character/Enemy.hpp"
 
+#include "../robot/State.hpp"
+#include "../robot/Robot.hpp"
+
 using std::vector;
 using std::shared_ptr;
 
@@ -47,6 +50,12 @@ class Game
     bool is_running_ = true;
     bool map_output_active_ = true;
     bool story_output_active_ = true;
+    std::shared_ptr<State> state_;
+    std::shared_ptr<Robot> robot_;
+    std::shared_ptr<Player> active_player_q_learn_;
+
+    double additional_reward_;
+
 
   public:
     //------------------------------------------------------------------------------------------------------------------
@@ -86,13 +95,6 @@ class Game
     /// @return the players
     //
     vector<shared_ptr<Player>> getPlayers() const { return players_; }
-    //------------------------------------------------------------------------------------------------------------------
-    ///
-    /// Returns the living players
-    ///
-    /// @return the living players
-    //
-    vector<shared_ptr<Player>> getLivingPlayers() const;
     //------------------------------------------------------------------------------------------------------------------
     ///
     /// Returns a player by the type
@@ -242,6 +244,13 @@ class Game
 
 
 
+
+    shared_ptr<State> getState() { return state_;};
+    shared_ptr<Robot> getRobot() { return robot_;};
+    shared_ptr<Player> getActivePlayerQLearn() {return active_player_q_learn_;};
+    void setActivePlayerQLearn(char abbreviation);
+    double getAdditionalreward() {return additional_reward_;};
+    void setAdditionalreward(double number) {additional_reward_ = number;};
 };
 
 #endif //GAME_HPP

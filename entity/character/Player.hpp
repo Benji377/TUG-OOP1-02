@@ -47,8 +47,6 @@ class Player: public Character
     /// @return the remaining health points of the player
     //
     int takeDamage(int damage, DamageType damage_type) override;
-
-    int simulateDamage(int damage, DamageType damage_type) override;
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to set the resistance of the player. The resistance reduces the damage to 50%
@@ -111,28 +109,6 @@ class Player: public Character
     /// @return the active weapon of the player
     //
     std::shared_ptr<Weapon> getWeapon() const override { return weapon_; };
-
-    std::shared_ptr<Weapon> getBestMeleeWeapon() const;
-
-    std::shared_ptr<Weapon> getBestRangeWeaponWithAmmunition() const;
-
-    std::shared_ptr<Armor> getBestArmor() const;
-
-    std::shared_ptr<Potion> getHealingPotion() const;
-
-    bool hasRangeWeaponEquipped() const;
-
-    bool hasMeleeWeapon() const;
-
-    bool hasMeleeWeaponEquipped() const;
-
-    bool hasRangeWeaponWithAmmunition() const;
-
-    bool hasBetterArmor() const;
-
-    bool hasHealingPotion() const;
-
-
     ///----------------------------------------------------------------------------------------------------------------
     ///
     /// Function to get the currently active armor of the player

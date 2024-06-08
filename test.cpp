@@ -7,15 +7,29 @@
 #include <stdexcept>
 #include <map>
 #include <chrono>
+#include <random>
 
 const std::vector<std::string> INITIAL_INPUTS = {"3", "Elija", "w", "Benjo", "b", "Hanno", "r"};
-const int MAX_ITERATIONS = 200;
-const int MAX_CYCLES = 1;
+const int MAX_ITERATIONS = 300;
+const int MAX_CYCLES = 100;
+const int CHANGE_CONFIG_CYCLE = 10;
 const std::string FILE_NAME = "output.txt";
-const char *const CONFIG_FILE = "configs/dungeon_config_01.txt";
-const char *const STORY_FILE = "configs/story_config.txt";
 
-// 17512
+
+// List of possible configuration file numbers
+const std::vector<std::string> CONFIG_FILES = {"01", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"};
+// Create a random device
+std::random_device rd;
+// Initialize a random number generator engine
+std::mt19937 engine(rd());
+// Create a distribution in the range [0, CONFIG_FILES.size() - 1]
+std::uniform_int_distribution<int> dist(0, CONFIG_FILES.size() - 1);
+// Use the distribution and engine to generate a random index
+int random_index = dist(engine);
+// Use the random index to select a config file
+std::string CONFIG_FILE = "configs/dungeon_config_" + CONFIG_FILES[random_index] + ".txt";
+
+const char *const STORY_FILE = "configs/story_config.txt";
 
 void send_input(int write_fd, const std::string& input) {
   write(write_fd, input.c_str(), input.size());
@@ -39,12 +53,15 @@ std::string read_output(int read_fd) {
 
 int main() {
   const char* program = "./a2";
-  const char* args[] = {program, CONFIG_FILE, STORY_FILE, nullptr};
+  const char* args[] = {program, CONFIG_FILE.c_str(), STORY_FILE, nullptr};
 
   int total_failed_cycles = 0;
   int total_completed_cycles = 0;
   int total_qtable_actions = 0;
   int total_random_actions = 0;
+  int total_players_died = 0;
+  int total_boss_kills = 0;
+  int highest_room = 0;
 
   std::ofstream file(FILE_NAME);
 
@@ -54,6 +71,15 @@ int main() {
     int to_child_pipe[2];
     int from_child_pipe[2];
     int current_room = 1;
+
+    // Each CHANGE_CONFIG_CYCLE cycles, change the config file to a random one
+    // If CHANGE_CONFIG_CYCLE is 0, the config file will never change
+    if (CHANGE_CONFIG_CYCLE != 0 && cycle % CHANGE_CONFIG_CYCLE == 0) {
+      random_index = dist(engine);
+      CONFIG_FILE = "configs/dungeon_config_" + CONFIG_FILES[random_index] + ".txt";
+      std::cout << "Using config file: " << CONFIG_FILE << std::endl;
+      args[1] = CONFIG_FILE.c_str();
+    }
 
     std::map<std::string, int> commands_dict = {
             {"attack", 0},
@@ -65,17 +91,15 @@ int main() {
     };
 
     if (pipe(to_child_pipe) == -1 || pipe(from_child_pipe) == -1) {
-      std::cout << "Error creating pipes." << std::endl;
+      std::cerr << "Error creating pipes." << std::endl;
       return 1;
     }
 
     pid_t pid = fork();
     if (pid == -1) {
-      std::cout << "Error forking." << std::endl;
+      std::cerr << "Error forking." << std::endl;
       return 1;
     }
-
-    auto cycle_start_time = std::chrono::high_resolution_clock::now();
 
     if (pid == 0) { // Child process
       close(to_child_pipe[1]);
@@ -90,7 +114,7 @@ int main() {
 
       execvp(program, const_cast<char* const*>(args));
       std::cout << "Error executing program." << std::endl;
-      return 1;
+      return -1;
     }
     else
     { // Parent process
@@ -107,10 +131,6 @@ int main() {
         // Write the cycle.iteration to the file
         file << cycle + 1 << "." << i << " Iteration" << std::endl;
 
-        send_input(to_child_pipe[1], "play");
-        std::string output = read_output(from_child_pipe[0]);
-        file << output << std::endl;
-
         // Check if child process is still running
         int status;
         pid_t result = waitpid(pid, &status, WNOHANG);
@@ -119,13 +139,32 @@ int main() {
           break;
         }
 
+        send_input(to_child_pipe[1], "play");
+        std::string output = read_output(from_child_pipe[0]);
+        file << output << std::endl;
+
         size_t pos = output.find("-- ROOM");
         if (pos != std::string::npos) {
           int room = std::stoi(output.substr(pos + 8, 1));
+          if (room > highest_room) {
+            highest_room = room;
+          }
           if (room != current_room) {
             current_room = room;
             std::cout << "Room " << current_room - 1 << " completed in " << i << " iterations" << std::endl;
           }
+        }
+
+        if (output.find("** Unfortunately this adventure has come to a tragic end!") != std::string::npos) {
+          std::cout << "Game over at " << i << ". iteration. All players died" << std::endl;
+          total_players_died++;
+          break;
+        }
+
+        if (output.find("Wow, you are all heroes!! You defeated the Lich!") != std::string::npos) {
+          std::cout << "Game over at " << i << ". iteration. Lich defeated" << std::endl;
+          total_boss_kills++;
+          break;
         }
 
         if (output.find("Exploration") != std::string::npos) {
@@ -154,19 +193,10 @@ int main() {
 
       waitpid(pid, nullptr, 0);
     }
-    auto cycle_end_time = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = cycle_end_time - cycle_start_time;
-    int cycle_seconds = static_cast<int>(elapsed.count());
-    int cycle_hours = cycle_seconds / 3600;
-    cycle_seconds %= 3600;
-    int cycle_minutes = cycle_seconds / 60;
-    cycle_seconds %= 60;
-    int cycle_seconds_final = cycle_seconds;
 
     std::cout << "Max room completed: " << --current_room << std::endl;
     std::cout << "---" << std::endl;
     std::cout << "CYCLE " << cycle + 1 << " COMPLETED" << std::endl;
-    std::cout << "Time elapsed: " << cycle_hours << "h " << cycle_minutes << "m " << cycle_seconds_final << "s" << std::endl;
     // Write the cycle number to the file
     file << "CYCLE " << cycle + 1 << " COMPLETED" << std::endl;
 
@@ -190,11 +220,13 @@ int main() {
 
   std::cout << "Overall statistics:" << std::endl;
   std::cout << "Total time elapsed: " << hours << "h " << minutes << "m " << seconds << "s" << std::endl;
+  std::cout << "Highest room completed: " << highest_room << std::endl;
   std::cout << "Total completed cycles: " << total_completed_cycles << std::endl;
+  std::cout << "Total all-dead cycles: " << total_players_died << std::endl;
+  std::cout << "Total boss-kill cycles: " << total_boss_kills << std::endl;
   std::cout << "Total failed cycles: " << total_failed_cycles << std::endl;
   std::cout << "Total Q-table actions: " << total_qtable_actions << std::endl;
   std::cout << "Total random actions: " << total_random_actions << std::endl;
-
 
   return 0;
 }
