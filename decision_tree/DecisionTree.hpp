@@ -10,8 +10,8 @@
 
 class DecisionTree {
 private:
-  std::shared_ptr<DecisionNode> root_;
   Game* game_;
+  std::shared_ptr<DecisionNode> root_;
 
 public:
   DecisionTree(Game* game)

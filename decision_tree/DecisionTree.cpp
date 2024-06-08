@@ -18,11 +18,11 @@ Action DecisionTree::traverse(std::shared_ptr<Player> player) const {
 
 std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   // Define conditions
-  auto is_current_room_complete = [](Game* game, std::shared_ptr<Player> player) {
+  auto is_current_room_complete = [](Game* game, std::shared_ptr<Player>) {
     return game->getCurrentRoom()->isComplete();
   };
 
-  auto current_room_has_loot = [](Game* game, std::shared_ptr<Player> player) {
+  auto current_room_has_loot = [](Game* game, std::shared_ptr<Player>) {
     return game->getCurrentRoom()->hasLoot();
   };
 
@@ -34,41 +34,33 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return game->getCurrentRoom()->isEnemyNearby(player);
   };
 
-  auto player_is_low_health = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_is_low_health = [](Game*, std::shared_ptr<Player> player) {
     return player->getHealth() < player->getMaximumHealth() / 2;
   };
 
-  auto player_has_weapon_equipped = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_has_weapon_equipped = [](Game*, std::shared_ptr<Player> player) {
     return player->getWeapon() != nullptr;
   };
 
-  auto player_has_range_weapon_equipped = [](Game* game, std::shared_ptr<Player> player) {
-    return player->hasRangeWeaponEquipped();
-  };
-
-  auto player_has_ammunition_for_equipped_weapon = [](Game* game, std::shared_ptr<Player> player) {
-    return player->getInventory()->hasAmmunitionForWeapon(player->getWeapon());
-  };
-
-  auto player_has_healing_potion = [](Game *game, std::shared_ptr<Player> player)
+  auto player_has_healing_potion = [](Game*, std::shared_ptr<Player> player)
   {
     return player->hasHealingPotion();
   };
 
-  auto is_best_range_weapon_equipped_with_ammunition = [](Game* game, std::shared_ptr<Player> player) {
+  auto is_best_range_weapon_equipped_with_ammunition = [](Game*, std::shared_ptr<Player> player) {
     std::shared_ptr<Weapon> best_range_weapon = player->getBestRangeWeaponWithAmmunition();
     return player->getWeapon() == best_range_weapon && player->getInventory()->hasAmmunitionForWeapon(best_range_weapon);
   };
 
-  auto player_has_range_weapon_with_ammunition = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_has_range_weapon_with_ammunition = [](Game*, std::shared_ptr<Player> player) {
     return player->hasRangeWeaponWithAmmunition();
   };
 
-  auto player_has_melee_weapon = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_has_melee_weapon = [](Game*, std::shared_ptr<Player> player) {
     return player->hasMeleeWeapon();
   };
 
-  auto player_has_melee_weapon_equipped = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_has_melee_weapon_equipped = [](Game*, std::shared_ptr<Player> player) {
     return player->hasMeleeWeaponEquipped();
   };
 
@@ -78,7 +70,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return game->getCurrentRoom()->getBestMoveToEnemy(player, next_position, distance);
   };
 
-  auto player_has_better_armor = [](Game* game, std::shared_ptr<Player> player) {
+  auto player_has_better_armor = [](Game*, std::shared_ptr<Player> player) {
     return player->hasBetterArmor();
   };
 
@@ -109,7 +101,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return Action{LOOT, player->getAbbreviation(), loot_position};
   };
 
-  auto use_health_potion = [](Game* game, std::shared_ptr<Player> player) {
+  auto use_health_potion = [](Game*, std::shared_ptr<Player> player) {
     return Action{USE, player->getAbbreviation(), player->getHealingPotion()->getAbbreviation()};
   };
 
@@ -129,20 +121,20 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return Action{ATTACK, player->getAbbreviation(), lowest_hp_enemy_position, attacked_fields};
   };
 
-  auto equip_best_melee_weapon = [](Game* game, std::shared_ptr<Player> player) {
+  auto equip_best_melee_weapon = [](Game*, std::shared_ptr<Player> player) {
     std::shared_ptr<Weapon> best_melee_weapon = player->getBestMeleeWeapon();
     return Action{USE, player->getAbbreviation(), best_melee_weapon->getAbbreviation()};
   };
 
-  auto equip_best_range_weapon_with_ammunition = [](Game* game, std::shared_ptr<Player> player) {
+  auto equip_best_range_weapon_with_ammunition = [](Game*, std::shared_ptr<Player> player) {
     return Action{USE, player->getAbbreviation(), player->getBestRangeWeaponWithAmmunition()->getAbbreviation()};
   };
 
-  auto equip_best_armor = [](Game* game, std::shared_ptr<Player> player) {
+  auto equip_best_armor = [](Game*, std::shared_ptr<Player> player) {
     return Action{USE, player->getAbbreviation(), player->getBestArmor()->getAbbreviation()};
   };
 
-  auto dummy_action = [](Game* game, std::shared_ptr<Player> player) {
+  auto dummy_action = [](Game*, std::shared_ptr<Player> player) {
     return Action{MOVE, player->getAbbreviation(), std::make_pair(0, 0)};
   };
 

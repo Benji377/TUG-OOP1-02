@@ -24,7 +24,7 @@ int Pathfinder::heuristic(int x1, int y1, int x2, int y2) {
 }
 
 bool Pathfinder::is_valid(int x, int y, const std::vector<std::vector<int>>& map) {
-  return x >= 0 && y >= 0 && x < map.size() && y < map[0].size() && map[x][y] == 0;
+  return x >= 0 && y >= 0 && static_cast<size_t>(x) < map.size() && static_cast<size_t>(y) < map[0].size() && map[x][y] == 0;
 }
 
 std::vector<std::shared_ptr<Node>> Pathfinder::get_neighbors(std::shared_ptr<Node> current, const std::vector<std::vector<int>>& map) {
