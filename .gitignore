@@ -8,3 +8,5 @@ build/
 testrunner
 /saves/*.txt
 /data/q_table.csv
+play
+test
