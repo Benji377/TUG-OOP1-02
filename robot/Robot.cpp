@@ -2,7 +2,7 @@
 #include "../utility/CSVParser.hpp"
 #include "PerformAction.hpp"
 
-const std::string Robot::q_table_file_path_ = "data/q_table.csv";
+const std::string Robot::q_table_file_path_ = "data/q_table.dat";
 
 // DEBUG ONLY
 std::string getRobotActionAsString(RobotAction action) {
@@ -35,51 +35,73 @@ Robot::Robot(State state, Game* game) : current_state_(state), game_(game)
   loadQTable();
 }
 
-void Robot::saveQTable()
-{
-  std::ofstream file(q_table_file_path_);
-  if (!file.is_open()) {
-    std::cout << "Error opening file for writing: " << q_table_file_path_ << std::endl;
-    return;
-  }
-
-  for (const auto& entry : q_table_) {
-    const auto& state_action = entry.first;
-    const State& state = std::get<0>(state_action);
-    RobotAction action = std::get<1>(state_action);
-    double q_value = entry.second;
-    file << state.serializeState() << ";" << static_cast<int>(action) << ";" << q_value << "\n";
-  }
-
-  file.close();
-}
-
-void Robot::loadQTable()
-{
-  std::ifstream file(q_table_file_path_);
-  if (!file.is_open()) {
-    std::cout << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
-    // No need to initialize Q-table here as it will be done on-the-fly
-    return;
-  }
-  std::vector<std::vector<std::string>> q_table_data = CSVParser::readCSV(q_table_file_path_);
-
-  for (const auto& row : q_table_data) {
-    if (row.size() != 3) {
-      std::cout << "Error reading Q-table data: " << q_table_file_path_ << std::endl;
+void Robot::saveQTable() {
+  try {
+    std::ofstream file(q_table_file_path_, std::ios::binary);
+    if (!file.is_open()) {
+      std::cerr << "Error opening file for writing: " << q_table_file_path_ << std::endl;
       return;
     }
 
-    State state = State();
-    state.deserializeState(row[0]);
-    auto action = static_cast<RobotAction>(std::stoi(row[1]));
-    double q_value = std::stod(row[2]);
+    size_t q_table_size = q_table_.size();
+    file.write(reinterpret_cast<const char*>(&q_table_size), sizeof(q_table_size));
 
-    q_table_[std::make_tuple(state, static_cast<RobotAction>(action))] = q_value;
+    for (const auto& entry : q_table_) {
+      const auto& state_action = entry.first;
+      const State& state = std::get<0>(state_action);
+      std::string state_data = state.serializeState();
+      RobotAction action = std::get<1>(state_action);
+      double q_value = entry.second;
+
+      size_t state_size = state_data.size();
+      file.write(reinterpret_cast<const char*>(&state_size), sizeof(state_size));
+      file.write(state_data.c_str(), state_size);
+      file.write(reinterpret_cast<const char*>(&action), sizeof(action));
+      file.write(reinterpret_cast<const char*>(&q_value), sizeof(q_value));
+    }
+
+    file.close();
+  } catch (const std::bad_alloc& e) {
+    std::cerr << "Memory allocation failed: " << e.what() << std::endl;
   }
-  // Print size of Q-table
-  std::cout << "Q-table loaded with " << q_table_.size() << " entries" << std::endl;
 }
+
+void Robot::loadQTable() {
+  try {
+    std::ifstream file(q_table_file_path_, std::ios::binary);
+    if (!file.is_open()) {
+      std::cerr << "File not found, initializing Q-table with zeros: " << q_table_file_path_ << std::endl;
+      return;
+    }
+
+    size_t q_table_size;
+    file.read(reinterpret_cast<char*>(&q_table_size), sizeof(q_table_size));
+
+    for (size_t i = 0; i < q_table_size; ++i) {
+      size_t state_size;
+      file.read(reinterpret_cast<char*>(&state_size), sizeof(state_size));
+
+      std::string state_data(state_size, '\0');
+      file.read(&state_data[0], state_size);
+
+      State state;
+      state.deserializeState(state_data);
+
+      RobotAction action;
+      file.read(reinterpret_cast<char*>(&action), sizeof(action));
+
+      double q_value;
+      file.read(reinterpret_cast<char*>(&q_value), sizeof(q_value));
+
+      q_table_[std::make_tuple(state, action)] = q_value;
+    }
+
+    file.close();
+  } catch (const std::bad_alloc& e) {
+    std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+  }
+}
+
 
 void Robot::updateQTable(RobotAction action, Player player, double reward)
 {

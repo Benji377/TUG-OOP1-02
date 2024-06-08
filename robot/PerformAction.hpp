@@ -7,22 +7,22 @@
 
 class Game;
 static const double REWARD_EXCEPTION = -100.0;
-static const double REWARD_MOVE = -1.0;
+static const double REWARD_MOVE = -10.0;
 static const double REWARD_MOVE_DOOR_ENTRY = -500.0;
-static const double REWARD_MOVE_DOOR_EXIT = 100.0;
+static const double REWARD_MOVE_DOOR_EXIT = 500.0;
 static const double REWARD_LOOT = 10.0;
-static const double REWARD_HEAL_FULL = -100.0;
-static const double REWARD_HEAL_HALF = 10.0;
-static const double REWARD_HEAL_SOME = 5.0;
-static const double REWARD_USE_RESISTANCE_FULL = 1.0;
-static const double REWARD_USE_RESISTANCE_SOME = 10.0;
-static const double REWARD_ATTACK = 100.0;
-static const double REWARD_ENEMY_KILLED = 100.0;
+static const double REWARD_HEAL_FULL = -10.0;
+static const double REWARD_HEAL_HALF = 100.0;
+static const double REWARD_HEAL_SOME = 50.0;
+static const double REWARD_USE_RESISTANCE_FULL = 10.0;
+static const double REWARD_USE_RESISTANCE_SOME = 50.0;
+static const double REWARD_ATTACK = 200.0;
+static const double REWARD_ENEMY_KILLED = 500.0;
 static const double REWARD_PLAYER_HIT = -100.0;
 static const double REWARD_PLAYER_KILLED = -100.0;
-static const double REWARD_EQUIP_WEAPON = -1.0;
+static const double REWARD_EQUIP_WEAPON = -10.0;
 static const double REWARD_EQUIP_ARMOR = 1.0;
-static const double REWARD_SWITCH_PLAYER = -1.0;
+static const double REWARD_SWITCH_PLAYER = -5.0;
 
 class PerformAction
 {

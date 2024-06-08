@@ -20,6 +20,17 @@
 #include <tuple>
 #include <fstream>
 #include <sstream>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <cstring>
+#include <unordered_map>
+#include <string>
+#include <vector>
+#include <set>
+#include <random>
+#include <algorithm>
+#include <limits>
 #include "State.hpp"
 
 class Game;
@@ -31,8 +42,8 @@ class Robot
   std::map<std::tuple<State, RobotAction>, double> q_table_;
   static const std::string q_table_file_path_;
   // TODO: The following numbers will have to be adjusted and tested to find the best values
-  double alpha_ = 0.1;
-  double gamma_ = 0.95;
+  double alpha_ = 0.4; // Learning rate: A factor of 0 will make the agent not learn anything, while a factor of 1 would make the agent consider only the most recent information.
+  double gamma_ = 0.85; // Discount factor: A factor of 0 will make the agent consider only immediate rewards, while a factor of 1 would make it strive for a long-term high reward.
   double epsilon_ = 0.9;
   double epsilon_decay_ = 0.995;
   double epsilon_min_ = 0.01;
