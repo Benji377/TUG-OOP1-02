@@ -51,7 +51,7 @@ class Action {
         distance_ = 0;
         score_ = 0;
       }
-      
+
     ActionType getType() const { return type_; }
     std::pair<int, int> getTargetPosition() const { return target_position_; }
     char getPlayerAbbreviation() const { return player_abbreviation_; }
