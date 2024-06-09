@@ -17,7 +17,7 @@ const std::string FILE_NAME = "output.txt";
 
 
 // List of possible configuration file numbers
-const std::vector<std::string> CONFIG_FILES = {"01", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"};
+const std::vector<std::string> CONFIG_FILES = {"", "_01", "_04", "_05", "_06", "_07", "_08", "_09", "_10", "_11", "_12", "_13", "_14", "_15"};
 // Create a random device
 std::random_device rd;
 // Initialize a random number generator engine
@@ -27,7 +27,7 @@ std::uniform_int_distribution<int> dist(0, CONFIG_FILES.size() - 1);
 // Use the distribution and engine to generate a random index
 int random_index = dist(engine);
 // Use the random index to select a config file
-std::string CONFIG_FILE = "configs/dungeon_config_" + CONFIG_FILES[random_index] + ".txt";
+std::string CONFIG_FILE = "configs/dungeon_config" + CONFIG_FILES[random_index] + ".txt";
 
 const char *const STORY_FILE = "configs/story_config.txt";
 
@@ -76,7 +76,7 @@ int main() {
     // If CHANGE_CONFIG_CYCLE is 0, the config file will never change
     if (CHANGE_CONFIG_CYCLE != 0 && cycle % CHANGE_CONFIG_CYCLE == 0) {
       random_index = dist(engine);
-      CONFIG_FILE = "configs/dungeon_config_" + CONFIG_FILES[random_index] + ".txt";
+      CONFIG_FILE = "configs/dungeon_config" + CONFIG_FILES[random_index] + ".txt";
       std::cout << "Using config file: " << CONFIG_FILE << std::endl;
       args[1] = CONFIG_FILE.c_str();
     }
