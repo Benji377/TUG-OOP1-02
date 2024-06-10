@@ -22,6 +22,7 @@ class Action {
     std::string item_name_;
     std::vector<AttackedField> attacked_fields_;
     int score_;
+    bool is_target_a_door_;
 
   public:
     // Loot action
@@ -44,6 +45,12 @@ class Action {
       {
         score_ = 0;
       }
+    //Move action overloaded.
+    Action(ActionType type, char player_abbreviation, std::pair<int, int> target_position, int distance, bool is_target_a_door)
+      : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), distance_(distance), is_target_a_door_(is_target_a_door)
+      {
+        score_ = 0;
+      }
     // Attack action
     Action(ActionType type, char player_abbreviation, std::pair<int, int> target_position, std::vector<AttackedField> attacked_fields)
       : type_(type), player_abbreviation_(player_abbreviation), target_position_(target_position), attacked_fields_(attacked_fields)
@@ -60,6 +67,7 @@ class Action {
     void setScore(int score) { score_ = score; }
     void addScore(int score) { score_ += score; }
     std::vector<AttackedField> getAttackedFields() const { return attacked_fields_; }
+    bool isTargetADoor() const { return is_target_a_door_;};
 
     std::string getCommand() const {
       std::string command;

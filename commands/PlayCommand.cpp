@@ -1,6 +1,7 @@
 #include "PlayCommand.hpp"
 #include "../game/Game.hpp"
 #include "../decision_tree/DecisionTree.hpp"
+#include "../entity/TreasureChest.hpp"
 
 const int ATTACK_BONUS = 100;
 const int MOVE_BONUS = 20;
@@ -63,6 +64,22 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
         }
         break;
       case ActionType::MOVE:
+        if(action.getDistance() == 999999999)
+        {
+          action.setScore(-1);
+          break; //It's a dummy action and shouldn't be executed.
+        }
+        else if(game_->getCurrentRoom()->isComplete() && game_->isLowestPlayer(getPlayerOfAbbrev(action.getPlayerAbbreviation())))
+        {
+          if(action.isTargetADoor() == false)
+          {
+            auto player = getPlayerOfAbbrev(action.getPlayerAbbreviation());
+            int multiplier = player->getMaximumHealth() - player->getHealth() + 2; //It could be that several players at once have the same hp. It then takes the one with the higest diff from max health. If all are full it just keeps it to 2
+            action.setScore(MOVE_BONUS * multiplier - action.getDistance()); //so it overrides other possible loots and moves.
+            break;
+          }
+
+        }
         action.setScore(MOVE_BONUS - action.getDistance());
         break;
       case ActionType::LOOT:

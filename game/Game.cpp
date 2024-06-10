@@ -509,3 +509,22 @@ void Game::enemyPhase()
   }
   printStoryAndRoom(false);
 }
+
+
+bool Game::isLowestPlayer(shared_ptr<Player> player) const
+{
+  auto lowest_player = player;
+  auto players = getPlayers();
+  for(const auto& player_ref : players)
+  {
+    if(player_ref->isDead())
+    {
+      continue;
+    }
+    if(player_ref->getHealth() < player->getHealth())
+    {
+      return false;
+    }
+  }
+  return true;
+}

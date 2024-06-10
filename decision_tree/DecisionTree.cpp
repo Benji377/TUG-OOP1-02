@@ -30,6 +30,10 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return game->getCurrentRoom()->isLootNearby(player);
   };
 
+  auto is_lowest_player = [](Game* game, std::shared_ptr<Player> player) {
+    return game->isLowestPlayer(player);
+  };
+
   auto is_enemy_nearby = [](Game* game, std::shared_ptr<Player> player) {
     return game->getCurrentRoom()->isEnemyNearby(player);
   };
@@ -86,14 +90,14 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     std::pair<int, int> next_position;
     int distance;
     game->getCurrentRoom()->getBestMoveToDoor(player, next_position, distance);
-    return Action{MOVE, player->getAbbreviation(), next_position, distance};
+    return Action{MOVE, player->getAbbreviation(), next_position, distance, true};
   };
 
   auto move_to_loot = [](Game* game, std::shared_ptr<Player> player) {
     std::pair<int, int> next_position;
     int distance;
     game->getCurrentRoom()->getBestMoveToLoot(player, next_position, distance);
-    return Action{MOVE, player->getAbbreviation(), next_position, distance};
+    return Action{MOVE, player->getAbbreviation(), next_position, distance, false};
   };
 
   auto collect_loot = [](Game* game, std::shared_ptr<Player> player) {
@@ -135,15 +139,17 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   };
 
   auto dummy_action = [](Game*, std::shared_ptr<Player> player) {
-    return Action{MOVE, player->getAbbreviation(), std::make_pair(0, 0)};
+    return Action{MOVE, player->getAbbreviation(), std::make_pair(0, 0), 999999999}; //very high distance so it doesn't acidentally get chosen
   };
 
   // Create decision tree
   auto root = std::make_shared<DecisionNode>(is_current_room_complete, "Is current room complete?");
   root->true_branch = std::make_shared<DecisionNode>(current_room_has_loot, "Does the current room contain loot?");
-  root->true_branch->true_branch = std::make_shared<DecisionNode>(is_loot_nearby, "Is loot nearby?");
-  root->true_branch->true_branch->true_branch = std::make_shared<DecisionNode>(collect_loot, "Collect loot");
-  root->true_branch->true_branch->false_branch = std::make_shared<DecisionNode>(move_to_loot, "Move to loot");
+  root->true_branch->true_branch = std::make_shared<DecisionNode>(is_lowest_player, "Is he the player with <= health?"); //changed this
+  root->true_branch->true_branch->true_branch = std::make_shared<DecisionNode>(is_loot_nearby, "Is loot nearby?"); //changed this
+  root->true_branch->true_branch->false_branch = std::make_shared<DecisionNode>(move_to_door, "move to door"); //changed this
+  root->true_branch->true_branch->true_branch->true_branch = std::make_shared<DecisionNode>(collect_loot, "Collect loot"); //changed this 
+  root->true_branch->true_branch->true_branch->false_branch = std::make_shared<DecisionNode>(move_to_loot, "Move to Loot"); //changed this
   root->true_branch->false_branch = std::make_shared<DecisionNode>(player_is_low_health, "Is the player low on health?");
   root->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_has_healing_potion, "Does the player have a healing potion?");
   root->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(use_health_potion, "Use health potion");
@@ -162,9 +168,10 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
   root->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(path_to_enemy_exists, "Does a path to the enemy exist?");
   root->false_branch->true_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(move_to_enemy, "Move to enemy");
-  root->false_branch->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(is_loot_nearby, "Is loot nearby?");
-  root->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(collect_loot, "Collect loot");
-  root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(move_to_loot, "Move to loot");
+  //root->false_branch->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(is_loot_nearby, "Is loot nearby?");
+  //root->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(collect_loot, "Collect loot");
+  //root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(move_to_loot, "Move to loot");
+  root->false_branch->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(move_to_door, "Move to door");
   root->false_branch->false_branch = std::make_shared<DecisionNode>(is_enemy_nearby, "Is enemy nearby?");
   root->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_has_melee_weapon, "Has the player a melee weapon?");
   root->false_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(equip_best_melee_weapon, "Equip best melee weapon");

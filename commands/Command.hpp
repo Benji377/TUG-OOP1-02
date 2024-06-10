@@ -65,6 +65,8 @@ protected:
   /// @throws InvalidParamCommand if no player with the specified abbreviation is found.
   //
   std::shared_ptr<Player> getPlayerOfAbbrev(std::vector<std::string> params, size_t position_of_abbrev_in_params) const;
+  std::shared_ptr<Player> getPlayerOfAbbrev(char input_abbreviation) const;
+
 
   //---------------------------------------------------------------------------------------------------------------------
   ///

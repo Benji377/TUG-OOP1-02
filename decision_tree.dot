@@ -4,71 +4,72 @@ room complete?"];
   node1 [label="Does the 
 current room 
 contain loot?"];
-  node2 [label="Is loot nearby?"];
-  node3 [label="Collect loot"];
+  node2 [label="Is he the 
+player with <= health?"];
+  node3 [label="Is loot nearby?"];
+  node4 [label="Collect loot"];
+  node3 -> node4 [label="true"];
+  node5 [label="Move to Loot"];
+  node3 -> node5 [label="false"];
   node2 -> node3 [label="true"];
-  node4 [label="Move to loot"];
-  node2 -> node4 [label="false"];
+  node6 [label="move to door"];
+  node2 -> node6 [label="false"];
   node1 -> node2 [label="true"];
-  node5 [label="Is the player 
+  node7 [label="Is the player 
 low on health?"];
-  node6 [label="Does the 
+  node8 [label="Does the 
 player have a 
 healing potion?"];
-  node7 [label="Use health potion"];
-  node6 -> node7 [label="true"];
-  node8 [label="Move to door"];
-  node6 -> node8 [label="false"];
-  node5 -> node6 [label="true"];
-  node9 [label="Does the 
+  node9 [label="Use health potion"];
+  node8 -> node9 [label="true"];
+  node10 [label="Move to door"];
+  node8 -> node10 [label="false"];
+  node7 -> node8 [label="true"];
+  node11 [label="Does the 
 player have 
 better armor?"];
-  node10 [label="Equip best armor"];
-  node9 -> node10 [label="true"];
-  node11 [label="Move to door"];
-  node9 -> node11 [label="false"];
-  node5 -> node9 [label="false"];
-  node1 -> node5 [label="false"];
+  node12 [label="Equip best armor"];
+  node11 -> node12 [label="true"];
+  node13 [label="Move to door"];
+  node11 -> node13 [label="false"];
+  node7 -> node11 [label="false"];
+  node1 -> node7 [label="false"];
   node0 -> node1 [label="true"];
-  node12 [label="Has the player 
-a weapon equipped?"];
-  node13 [label="Is enemy nearby?"];
   node14 [label="Has the player 
+a weapon equipped?"];
+  node15 [label="Is enemy nearby?"];
+  node16 [label="Has the player 
 a melee weapon equipped?"];
-  node15 [label="Attack enemy"];
-  node14 -> node15 [label="true"];
-  node16 [label="Equip best 
+  node17 [label="Attack enemy"];
+  node16 -> node17 [label="true"];
+  node18 [label="Equip best 
 melee weapon"];
-  node14 -> node16 [label="false"];
-  node13 -> node14 [label="true"];
-  node17 [label="Has the player 
+  node16 -> node18 [label="false"];
+  node15 -> node16 [label="true"];
+  node19 [label="Has the player 
 a range weapon 
 with ammunition?"];
-  node18 [label="Is the best 
+  node20 [label="Is the best 
 range weapon 
 with 
 ammunition equipped?"];
-  node19 [label="Attack enemy 
+  node21 [label="Attack enemy 
 with range weapon"];
-  node18 -> node19 [label="true"];
-  node20 [label="Equip best 
+  node20 -> node21 [label="true"];
+  node22 [label="Equip best 
 range weapon 
 with ammunition"];
-  node18 -> node20 [label="false"];
-  node17 -> node18 [label="true"];
-  node21 [label="Does a path to 
+  node20 -> node22 [label="false"];
+  node19 -> node20 [label="true"];
+  node23 [label="Does a path to 
 the enemy exist?"];
-  node22 [label="Move to enemy"];
-  node21 -> node22 [label="true"];
-  node23 [label="Is loot nearby?"];
-  node24 [label="Collect loot"];
+  node24 [label="Move to enemy"];
   node23 -> node24 [label="true"];
-  node25 [label="Move to loot"];
+  node25 [label="Move to door"];
   node23 -> node25 [label="false"];
-  node21 -> node23 [label="false"];
-  node17 -> node21 [label="false"];
-  node13 -> node17 [label="false"];
-  node12 -> node13 [label="true"];
+  node19 -> node23 [label="false"];
+  node15 -> node19 [label="false"];
+  node14 -> node15 [label="true"];
   node26 [label="Is enemy nearby?"];
   node27 [label="Has the player 
 a melee weapon?"];
@@ -120,6 +121,6 @@ Implement action"];
   node38 -> node40 [label="false"];
   node34 -> node38 [label="false"];
   node26 -> node34 [label="false"];
-  node12 -> node26 [label="false"];
-  node0 -> node12 [label="false"];
+  node14 -> node26 [label="false"];
+  node0 -> node14 [label="false"];
 }

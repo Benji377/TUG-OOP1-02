@@ -240,6 +240,9 @@ class Game
     //
     void enemyPhase();
 
+  bool isLowestPlayer(shared_ptr<Player> player) const;
+
+
 
 
 };

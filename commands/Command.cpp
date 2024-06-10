@@ -9,6 +9,24 @@ void Command::checkCommandLenght(std::vector<std::string> params, size_t require
   }
 }
 
+std::shared_ptr<Player> Command::getPlayerOfAbbrev(char input_abbreviation) const
+{
+  std::vector<std::shared_ptr<Player>> players = game_->getPlayers();
+  char uppercase_input_abbrev = static_cast<char>(toupper(input_abbreviation));
+
+  for(auto& player : players)
+  {
+    char current_player_abbrev = player->getAbbreviation();
+
+    if(current_player_abbrev == uppercase_input_abbrev && player->isDead() == false)
+    {
+      return player;
+    }
+  }
+
+  return nullptr;
+}
+
 std::shared_ptr<Player> Command::getPlayerOfAbbrev(std::vector<std::string> params,
                 size_t position_of_abbrev_in_params) const
 {

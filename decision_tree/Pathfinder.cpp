@@ -95,6 +95,6 @@ bool Pathfinder::find_path(const std::vector<std::vector<int>>& map, const std::
     }
   }
 
-  distance = -1;
+  distance = 999999999;
   return false;
 }
