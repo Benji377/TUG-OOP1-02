@@ -243,6 +243,8 @@ class Room
 
     bool isEnemyNearby(shared_ptr<Player> player) const;
 
+    bool linchCanAttackMultiplePlayers() const;
+
     vector<vector<int>> getMapForPathfinding(pair<int, int> player_position, pair<int, int> target_position) const;
 
     bool getBestMoveToEnemy(shared_ptr<Player> player, pair<int, int>& next_position, int& distance) const;
