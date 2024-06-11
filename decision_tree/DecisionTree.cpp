@@ -123,7 +123,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
 
   auto attack_enemy_with_melee = [](Game *game, std::shared_ptr<Player> player)
   {
-    int damage = player->getWeapon()->getDamageAddition() + player->getWeapon()->getDice()->getType();
+    int damage = player->getWeapon()->getDamageAddition() + (player->getWeapon()->getDice()->getType() / 2) * player->getWeapon()->getDice()->getAmount();
     std::pair<int, int> closest_enemy_position = game->getCurrentRoom()->getClosestEnemyPosition(player);
     std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, closest_enemy_position);
 
@@ -134,7 +134,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
 
   auto attack_enemy_with_range = [](Game *game, std::shared_ptr<Player> player)
   {
-    int damage = player->getWeapon()->getDamageAddition() + player->getWeapon()->getDice()->getType();
+    int damage = player->getWeapon()->getDamageAddition() + + (player->getWeapon()->getDice()->getType() / 2) * player->getWeapon()->getDice()->getAmount();;
     std::pair<int, int> lowest_hp_enemy_position = game->getCurrentRoom()->getLowestHealthEnemyPosition();
     std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, lowest_hp_enemy_position);
 
