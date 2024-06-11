@@ -86,6 +86,10 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return player->getInventory()->containsNonHealingPotions();
   };
 
+  auto linch_can_attack_multiple_players = [](Game* game, std::shared_ptr<Player> player) {
+    return game->getCurrentRoom()->linchCanAttackMultiplePlayers();
+  };
+
   // Define actions
   auto move_to_enemy = [](Game* game, std::shared_ptr<Player> player) {
     std::pair<int, int> next_position;

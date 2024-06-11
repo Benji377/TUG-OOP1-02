@@ -516,3 +516,18 @@ bool Room::isLastRoom() const
   }
   return false;
 }
+
+bool Room::linchCanAttackMultiplePlayers() const
+{
+  std::pair<int, int> linch_position;
+  for(const auto& enemy : getEnemies())
+  {
+    if(enemy->getAbbreviation() == 'L')
+    {
+      linch_position = getFieldOfEntity(enemy);
+      break;
+    }
+  }
+  vector<std::shared_ptr<Player>> players = getAllEntitiesOfType<Player>();
+
+}
