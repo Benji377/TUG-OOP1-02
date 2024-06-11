@@ -310,11 +310,35 @@ bool Inventory::containsHealingPotion() const
   return false;
 }
 
+bool Inventory::containsNonHealingPotions() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() != Effect::HEALTH)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 std::shared_ptr<Potion> Inventory::getHealingPotion() const
 {
   for (auto &potion : potions_)
   {
     if (potion->getEffect() == Effect::HEALTH)
+    {
+      return potion;
+    }
+  }
+  return nullptr;
+}
+
+std::shared_ptr<Potion> Inventory::getNonHealingPotion() const
+{
+  for (auto &potion : potions_)
+  {
+    if (potion->getEffect() != Effect::HEALTH)
     {
       return potion;
     }

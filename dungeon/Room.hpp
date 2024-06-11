@@ -257,6 +257,7 @@ class Room
 
     std::pair<int, int> getLowestHealthEnemyPosition() const;
 
+    bool isLastRoom() const;
 
 
     int getDistance(pair<int, int> field_1, pair<int, int> field_2) const;

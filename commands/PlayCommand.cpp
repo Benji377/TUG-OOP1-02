@@ -7,6 +7,7 @@ const int ATTACK_BONUS = 100;
 const int MOVE_BONUS = 20;
 const int LOOT_BONUS = 30;
 const int USE_BONUS = 50;
+const int HEAL_BONUS = 1000000;
 
 const int KILL_ALLY_PENALTY = -50;
 const int KILL_ENEMY_BONUS = 50;
@@ -35,6 +36,9 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
   {
     switch (action.getType())
     {
+      case ActionType::HEAL:
+        action.setScore(HEAL_BONUS);
+        break;
       case ActionType::ATTACK:
         action.setScore(ATTACK_BONUS);
         for (auto attacked_field : action.getAttackedFields())

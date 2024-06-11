@@ -503,3 +503,16 @@ bool Room::getBestMoveToLoot(shared_ptr<Player> player, pair<int, int>& next_pos
   vector<vector<int>> map = getMapForPathfinding(player_position, closest_loot_position);
   return Pathfinder::find_path(map, player_position, closest_loot_position, next_position, distance);
 }
+
+
+bool Room::isLastRoom() const
+{
+  for(const auto& enemy : getEnemies())
+  {
+    if(enemy->getAbbreviation() == 'L')
+    {
+      return true;
+    }
+  }
+  return false;
+}

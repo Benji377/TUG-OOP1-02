@@ -40,7 +40,7 @@ public:
     return action_(game, player);
   }
 
-  void toDot(std::ostream& out, int& node_id) const {
+  /*void toDot(std::ostream& out, int& node_id) const {
     int current_id = node_id++;
     out << "  node" << current_id << " [label=\"";
     Utils::wordWrapText(out, task_name_, MAX_TASK_NAME_LENGTH);
@@ -53,7 +53,29 @@ public:
       false_branch->toDot(out, node_id);
       out << "  node" << current_id << " -> node" << false_id << " [label=\"false\"];\n";
     }
-  }
+  }*/
+    void toDot(std::ostream& out, int& node_id) const {
+      int current_id = node_id++;
+      out << "  node" << current_id << " [label=\"";
+      Utils::wordWrapText(out, task_name_, MAX_TASK_NAME_LENGTH);
+      out << "\"];\n";
+      if (node_type_ == CONDITION) {
+          if (true_branch) {
+              int true_id = node_id;
+              true_branch->toDot(out, node_id);
+              out << "  node" << current_id << " -> node" << true_id << " [label=\"true\"];\n";
+          } else {
+              std::cerr << "True branch is null for node " << current_id << std::endl;
+          }
+          if (false_branch) {
+              int false_id = node_id;
+              false_branch->toDot(out, node_id);
+              out << "  node" << current_id << " -> node" << false_id << " [label=\"false\"];\n";
+          } else {
+              std::cerr << "False branch is null for node " << current_id << std::endl; //TODO false branch has a NULL somwehere
+          }
+      }
+    }
 };
 
 #endif // DECISION_NODE_HPP

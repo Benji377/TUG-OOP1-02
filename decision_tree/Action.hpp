@@ -10,6 +10,7 @@ enum ActionType {
   MOVE,
   ATTACK,
   USE,
+  HEAL,
   LOOT
 };
 
@@ -79,6 +80,9 @@ class Action {
           command = "attack " + std::string(1, player_abbreviation_) + " " + std::to_string(target_position_.first) + "," + std::to_string(target_position_.second);
           break;
         case USE:
+          command = "use " + std::string(1, player_abbreviation_) + " " + item_name_;
+          break;
+        case HEAL:
           command = "use " + std::string(1, player_abbreviation_) + " " + item_name_;
           break;
         case LOOT:
