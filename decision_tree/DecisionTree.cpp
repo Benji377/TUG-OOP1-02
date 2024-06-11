@@ -126,6 +126,9 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     int damage = player->getWeapon()->getDamageAddition() + player->getWeapon()->getDice()->getType();
     std::pair<int, int> closest_enemy_position = game->getCurrentRoom()->getClosestEnemyPosition(player);
     std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, closest_enemy_position);
+
+    game->getDungeon().getBestAttack(player, damage, closest_enemy_position, attacked_fields); //evalutes (and possible overwrites) attack. Only if the target is still part of it.
+
     return Action{ATTACK, player->getAbbreviation(), closest_enemy_position, attacked_fields};
   };
 
@@ -134,6 +137,9 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     int damage = player->getWeapon()->getDamageAddition() + player->getWeapon()->getDice()->getType();
     std::pair<int, int> lowest_hp_enemy_position = game->getCurrentRoom()->getLowestHealthEnemyPosition();
     std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, lowest_hp_enemy_position);
+
+    game->getDungeon().getBestAttack(player, damage, lowest_hp_enemy_position, attacked_fields);
+
     return Action{ATTACK, player->getAbbreviation(), lowest_hp_enemy_position, attacked_fields};
   };
 

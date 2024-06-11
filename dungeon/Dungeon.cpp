@@ -393,3 +393,84 @@ void Dungeon::killCharacter(shared_ptr<Character> character)
   shared_ptr<Player> player = dynamic_pointer_cast<Player>(character);
   if (player != nullptr) { player->kill(); }
 }
+
+void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pair<int, int>& lowest_hp_enemy_position,
+                            std::vector<AttackedField>& attacked_fields)
+{
+    std::vector<std::tuple<std::vector<AttackedField>, int, std::pair<int, int>>> possible_attacks;
+
+    std::vector<std::pair<int, int>> offsets = {{0,  0},
+                                                {-1, 0},
+                                                {1,  0},
+                                                {0,  -1},
+                                                {0,  1},
+                                                {-1, -1},
+                                                {-1, 1},
+                                                {1,  -1},
+                                                {1,  1}};
+
+    for (const auto &offset: offsets)
+    {
+        int new_x = lowest_hp_enemy_position.first + offset.first;
+        int new_y = lowest_hp_enemy_position.second + offset.second;
+        std::pair<int,int> new_target_position = std::make_pair(new_x, new_y);
+        int score = 0;
+        std::vector<AttackedField> attack;
+
+        if (new_target_position.first < 1 ||
+            new_target_position.second < 1 ||
+            static_cast<std::vector<int>::size_type>(new_target_position.first) > getCurrentRoom()->getFields().size() ||
+            static_cast<std::vector<int>::size_type>(new_target_position.second) > getCurrentRoom()->getFields()[0].size())
+        {
+          continue;
+        }
+
+        try
+        {
+          attack = simulateAttack(player, damage, new_target_position);
+        }
+        catch(const std::out_of_range& e)
+        {
+          continue;
+        }
+        catch(const std::exception& e)
+        {
+          continue;
+        }
+
+        bool add_to_attacks = false;
+        for(const auto& field : attack)
+        {
+            if(field.getCharacterType() == CharacterType::PLAYER)
+            {
+                score -= field.getLostHealth() * 10; // Prioritize player health over enemy damage.
+            }
+            else if(field.getCharacterType() == CharacterType::ENEMY)
+            {
+                score += field.getLostHealth();
+            }
+
+            if(field.getPosition() == lowest_hp_enemy_position) //if one field contains the initial target. We still want to focus on enemy with lowest HP
+            {
+              add_to_attacks = true;
+            }
+        }
+        if(add_to_attacks)
+        {
+          possible_attacks.push_back(std::make_tuple(attack, score, offset));
+        }
+    }
+
+    auto best_attack_it = std::max_element(possible_attacks.begin(), possible_attacks.end(),
+                                           [](const auto& a, const auto& b) {
+                                               return std::get<1>(a) < std::get<1>(b);
+                                           });
+
+    if (best_attack_it != possible_attacks.end())
+    {
+      attacked_fields = std::get<0>(*best_attack_it);
+      std::pair<int, int> best_offset = std::get<2>(*best_attack_it);
+      lowest_hp_enemy_position.first += best_offset.first;
+      lowest_hp_enemy_position.second += best_offset.second;
+    }
+}

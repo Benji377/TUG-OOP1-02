@@ -160,6 +160,10 @@ class Dungeon
     /// @param character the character to kill
     //
     void killCharacter(shared_ptr<Character> character);
+
+
+    void getBestAttack(std::shared_ptr<Player> player, int damage, std::pair<int, int>& lowest_hp_enemy_position,
+                            std::vector<AttackedField>& attacked_fields);
 };
 
 #endif // DUNGEON_HPP
