@@ -395,7 +395,7 @@ void Dungeon::killCharacter(shared_ptr<Character> character)
 }
 
 void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pair<int, int>& lowest_hp_enemy_position,
-                            std::vector<AttackedField>& attacked_fields)
+                            std::vector<AttackedField>& attacked_fields, bool is_distant_line_or_burst)
 {
     std::vector<std::tuple<std::vector<AttackedField>, int, std::pair<int, int>>> possible_attacks;
 
@@ -459,6 +459,17 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
         {
           possible_attacks.push_back(std::make_tuple(attack, score, offset));
         }
+
+        if(is_distant_line_or_burst)
+        {
+          for(const auto& field : attack)
+          {
+            if(field.containsCharacter() && field.getCharacterType() == CharacterType::ENEMY)
+            {
+              possible_attacks.push_back(std::make_tuple(attack, score, offset));
+            }
+          }
+        }
     }
 
     auto best_attack_it = std::max_element(possible_attacks.begin(), possible_attacks.end(),
@@ -474,3 +485,24 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
       lowest_hp_enemy_position.second += best_offset.second;
     }
 }
+
+bool Dungeon::isEnemyNearby(std::shared_ptr<Player> player)
+{
+  if(!getCurrentRoom()->isEnemyNearby(player))
+  {
+    if(player->getWeapon()->getDamagePattern()->getPattern() == Pattern::THRUST
+              || player->getWeapon()->getDamagePattern()->getPattern() == Pattern::LINE)
+    {
+      int damage = player->getWeapon()->getDamageAddition() + (player->getWeapon()->getDice()->getType() / 2) * player->getWeapon()->getDice()->getAmount();
+      std::vector<AttackedField> attacked_fields;
+      std::pair<int,int> player_pos = getCurrentRoom()->getFieldOfEntity(player);
+      getBestAttack(player, damage, player_pos, attacked_fields, true);
+      if(!attacked_fields.empty())
+      {
+        return true;
+      }
+    }
+  }
+  return getCurrentRoom()->isEnemyNearby(player);
+}
+

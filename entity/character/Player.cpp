@@ -324,6 +324,9 @@ bool Player::hasMeleeWeapon() const
 
 bool Player::hasMeleeWeaponEquipped() const
 {
+  if(getWeapon() != nullptr && getWeapon()->getDamagePattern())
+
+
   return getWeapon() != nullptr && getWeapon()->getAttackType() == AttackType::MELEE;
 }
 

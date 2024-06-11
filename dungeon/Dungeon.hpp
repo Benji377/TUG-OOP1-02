@@ -163,7 +163,10 @@ class Dungeon
 
 
     void getBestAttack(std::shared_ptr<Player> player, int damage, std::pair<int, int>& lowest_hp_enemy_position,
-                            std::vector<AttackedField>& attacked_fields);
+                            std::vector<AttackedField>& attacked_fields, bool is_distant_line_or_burst);
+
+    bool isEnemyNearby(std::shared_ptr<Player> player);
+
 };
 
 #endif // DUNGEON_HPP

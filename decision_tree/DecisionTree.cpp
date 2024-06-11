@@ -35,7 +35,8 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   };
 
   auto is_enemy_nearby = [](Game* game, std::shared_ptr<Player> player) {
-    return game->getCurrentRoom()->isEnemyNearby(player);
+    //return game->getCurrentRoom()->isEnemyNearby(player);
+    return game->getDungeon().isEnemyNearby(player);
   };
 
   auto player_is_low_health = [](Game*, std::shared_ptr<Player> player) {
@@ -133,9 +134,18 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   {
     int damage = player->getWeapon()->getDamageAddition() + (player->getWeapon()->getDice()->getType() / 2) * player->getWeapon()->getDice()->getAmount();
     std::pair<int, int> closest_enemy_position = game->getCurrentRoom()->getClosestEnemyPosition(player);
-    std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, closest_enemy_position);
 
-    game->getDungeon().getBestAttack(player, damage, closest_enemy_position, attacked_fields); //evalutes (and possible overwrites) attack. Only if the target is still part of it.
+    std::vector<AttackedField> attacked_fields;
+    if(!game->getCurrentRoom()->isEnemyNearby(player))
+    {
+      closest_enemy_position = game->getCurrentRoom()->getFieldOfEntity(player);
+      game->getDungeon().getBestAttack(player, damage, closest_enemy_position, attacked_fields, true);
+    }
+    else
+    {
+      attacked_fields = game->getDungeon().simulateAttack(player, damage, closest_enemy_position);
+      game->getDungeon().getBestAttack(player, damage, closest_enemy_position, attacked_fields, false); //evalutes (and possible overwrites) attack. Only if the target is still part of it.
+    }
 
     return Action{ATTACK, player->getAbbreviation(), closest_enemy_position, attacked_fields};
   };
@@ -146,7 +156,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     std::pair<int, int> lowest_hp_enemy_position = game->getCurrentRoom()->getLowestHealthEnemyPosition();
     std::vector<AttackedField> attacked_fields = game->getDungeon().simulateAttack(player, damage, lowest_hp_enemy_position);
 
-    game->getDungeon().getBestAttack(player, damage, lowest_hp_enemy_position, attacked_fields);
+    game->getDungeon().getBestAttack(player, damage, lowest_hp_enemy_position, attacked_fields, false);
 
     return Action{ATTACK, player->getAbbreviation(), lowest_hp_enemy_position, attacked_fields};
   };
