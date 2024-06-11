@@ -341,7 +341,11 @@ bool Room::hasLoot() const
     {
       shared_ptr<TreasureChest> chest = dynamic_pointer_cast<TreasureChest>(field->getEntity());
       shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(field->getEntity());
-      if (chest != nullptr || death_location != nullptr) { return true; }
+      if (death_location != nullptr) { return true; }
+      if(chest != nullptr)
+      {
+        return !chest->isUnlockValueTooHigh();
+      }
     }
   }
   return false;
@@ -355,8 +359,12 @@ bool Room::isLootNearby(shared_ptr<Player> player) const
   for (const auto &field : surrounding_fields)
   {
     shared_ptr<TreasureChest> chest = dynamic_pointer_cast<TreasureChest>(getField(field)->getEntity());
-     shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(getField(field)->getEntity());
-     if (chest != nullptr || death_location != nullptr) { return true; }
+    shared_ptr<DeathLocation> death_location = dynamic_pointer_cast<DeathLocation>(getField(field)->getEntity());
+    if (death_location != nullptr) { return true; }
+    if(chest != nullptr)
+    {
+      return !chest->isUnlockValueTooHigh();
+    }
   }
   return false;
 }

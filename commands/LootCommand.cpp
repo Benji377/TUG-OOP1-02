@@ -32,6 +32,12 @@ void LootCommand::execute(std::vector<std::string> params)
       std::cout << game_->getStory().getStorySegment("N_LOOT_CHEST_LOCKED");
       game_->plusOneActionCount();
       game_->printStoryAndRoom(false, true, true);
+      //A3, so he only uses info he can know.
+      if(chest->getMinValue() > 21)
+      {
+        chest->setUnlockValueTooHigh(true);
+      }
+      //A3 end.
       return;
     }
   }
