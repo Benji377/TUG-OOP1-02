@@ -87,7 +87,11 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   };
 
   auto linch_can_attack_multiple_players = [](Game* game, std::shared_ptr<Player> player) {
-    return game->getCurrentRoom()->linchCanAttackMultiplePlayers();
+    return game->getCurrentRoom()->linchCanAttackMultiplePlayers(player);
+  };
+
+  auto can_dodge_linch = [](Game* game, std::shared_ptr<Player> player) {
+    return game->getCurrentRoom()->canDodgeLinch(player);
   };
 
   // Define actions
@@ -213,8 +217,8 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->false_branch = std::make_shared<DecisionNode>(is_last_room, "Is it the last room?");
   root->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_can_use_potion, "Can he drink a potion?");
   root->false_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(use_potion, "Use potion");
-  //root->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(is_in_line_with_lich, "Could lich do double damage?"); //TODO could be implemented
-  //root->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(move_out_of_danger_towards_lich, "Could lich do double damage?");
+  root->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(linch_can_attack_multiple_players, "Could lich do double damage?"); //TODO could be implemented
+  root->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(can_dodge_linch, "Could lich do double damage?");
   root->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(player_has_weapon_equipped, "Has the player a weapon equipped?");
   root->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_enemy_nearby, "Is enemy nearby?");
   root->false_branch->false_branch->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(player_has_melee_weapon_equipped, "Has the player a melee weapon equipped?");

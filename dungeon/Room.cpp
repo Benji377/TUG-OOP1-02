@@ -517,8 +517,7 @@ bool Room::isLastRoom() const
   return false;
 }
 
-bool Room::linchCanAttackMultiplePlayers() const
-{
+std::vector<std::vector<int>> Room::getLinchAttackMap(const shared_ptr<Player>& target_player) const {
   std::pair<int, int> linch_position;
   for(const auto& enemy : getEnemies())
   {
@@ -528,6 +527,75 @@ bool Room::linchCanAttackMultiplePlayers() const
       break;
     }
   }
-  vector<std::shared_ptr<Player>> players = getAllEntitiesOfType<Player>();
+  // First we gather the coverage of the linch weapons for each player and for each weapon. Then we combine it into a single coverage map
+  // Then we check if the linch can attack multiple players
+  std::vector<std::vector<int>> coverage_map;
+  std::pair<int, int> target_position = getFieldOfEntity(target_player);
+  for (const shared_ptr<Weapon>& weapon : getEnemies().at(0)->getInventory()->getAllWeapons())
+  {
+    std::vector<std::vector<int>> weapon_coverage_map = weapon->getDamagePattern()->getAffectedFields(linch_position, target_position, getWidth(), getHeight());
+    // This gives us a map of integers where 0 means the field is not affected and 1 means the field is affected
+    // We need to combine this map with the coverage map
+    if (coverage_map.empty())
+    {
+      coverage_map = weapon_coverage_map;
+    }
+    else
+    {
+      for (int i = 0; i < getHeight(); i++)
+      {
+        for (int j = 0; j < getWidth(); j++)
+        {
+          if (weapon_coverage_map[i][j] == 1)
+          {
+            coverage_map[i][j] = 1;
+          }
+        }
+      }
+    }
+  }
+  // As a debug step, we want to print the coverage map
+  // TODO: DEBUG ONLY! Remove once verified
+  for (int i = 0; i < getHeight(); i++)
+  {
+    for (int j = 0; j < getWidth(); j++)
+    {
+      std::cout << coverage_map[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  return coverage_map;
+}
 
+bool Room::linchCanAttackMultiplePlayers(shared_ptr<Player> target_player) const
+{
+  if (!isLastRoom())
+  {
+    return false;
+  }
+  std::vector<std::vector<int>> coverage_map = getLinchAttackMap(target_player);
+
+  // Now we iterate trough each player again and check if more than one players position are = 1 on the coverage map
+  int affected_players = 0;
+  for (const shared_ptr<Player>& player : getAllEntitiesOfType<Player>())
+  {
+    std::pair<int, int> player_position = getFieldOfEntity(player);
+    if (coverage_map[player_position.first - 1][player_position.second - 1] == 1)
+    {
+      affected_players++;
+    }
+  }
+  return affected_players > 1;
+}
+
+bool Room::canDodgeLinch(shared_ptr<Player> player) const
+{
+  if (!isLastRoom())
+  {
+    return false;
+  }
+  std::vector<std::vector<int>> coverage_map = getLinchAttackMap(player);
+  std::pair<int, int> player_position = getFieldOfEntity(player);
+  return coverage_map[player_position.first - 1][player_position.second - 1] == 0;
+  // TODO: This function would become very complex.
 }

@@ -243,7 +243,11 @@ class Room
 
     bool isEnemyNearby(shared_ptr<Player> player) const;
 
-    bool linchCanAttackMultiplePlayers() const;
+    std::vector<std::vector<int>> getLinchAttackMap(const shared_ptr<Player>& target_player) const;
+
+    bool linchCanAttackMultiplePlayers(shared_ptr<Player> target_player) const;
+
+    bool canDodgeLinch(shared_ptr<Player> player) const;
 
     vector<vector<int>> getMapForPathfinding(pair<int, int> player_position, pair<int, int> target_position) const;
 
