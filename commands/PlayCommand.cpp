@@ -3,7 +3,7 @@
 #include "../decision_tree/DecisionTree.hpp"
 #include "../entity/TreasureChest.hpp"
 
-const int PRIORITISE_NEARBY_ENEMIES_BONUS = 300;
+const int PRIORITISE_NEARBY_ENEMIES_BONUS = 100;
 const int ATTACK_BONUS = 100;
 const int MOVE_BONUS = 20;
 const int LOOT_BONUS = 30;
