@@ -3,7 +3,7 @@
 #include "../decision_tree/DecisionTree.hpp"
 #include "../entity/TreasureChest.hpp"
 
-const int PRIORITISE_NEARBY_ENEMIES_BONUS = 3;
+const int PRIORITISE_NEARBY_ENEMIES_BONUS = 300;
 const int ATTACK_BONUS = 100;
 const int MOVE_BONUS = 20;
 const int LOOT_BONUS = 30;
@@ -58,7 +58,7 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
               }
               else
               {
-                action.addScore(attacked_field.getLostHealth() * -2);
+                action.addScore(attacked_field.getLostHealth() * -3);
               }
             }
             else
