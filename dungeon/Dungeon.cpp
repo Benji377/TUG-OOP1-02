@@ -447,9 +447,9 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
             }
             else if(field.getCharacterType() == CharacterType::ENEMY)
             {
-              if (field.getName().find("Goblin") != std::string::npos) 
+              if (field.getName().find("Goblin") != std::string::npos)
               {
-                    score += field.getLostHealth() * 1.3; // All my homies hate goblins
+                    score += field.getLostHealth() * 2; // All my homies really hate goblins
                 }
               else
               {
