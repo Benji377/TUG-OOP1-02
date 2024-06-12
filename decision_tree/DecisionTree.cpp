@@ -40,7 +40,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   };
 
   auto player_is_low_health = [](Game*, std::shared_ptr<Player> player) {
-    return player->getHealth() < player->getMaximumHealth() / 2;
+    return player->getHealth() < player->getMaximumHealth() * 0.5;
   };
 
   auto player_has_weapon_equipped = [](Game*, std::shared_ptr<Player> player) {

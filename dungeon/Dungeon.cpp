@@ -447,7 +447,14 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
             }
             else if(field.getCharacterType() == CharacterType::ENEMY)
             {
+              if (field.getName().find("Goblin") != std::string::npos) 
+              {
+                    score += field.getLostHealth() * 1.3; // All my homies hate goblins
+                }
+              else
+              {
                 score += field.getLostHealth();
+              }
             }
 
             if(field.getPosition() == lowest_hp_enemy_position) //if one field contains the initial target. We still want to focus on enemy with lowest HP
