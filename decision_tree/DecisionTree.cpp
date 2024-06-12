@@ -174,8 +174,11 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
     return Action{USE, player->getAbbreviation(), player->getBestArmor()->getAbbreviation()};
   };
 
-  auto dummy_action = [](Game*, std::shared_ptr<Player> player) {
-    return Action{MOVE, player->getAbbreviation(), std::make_pair(0, 0), 999999999}; //very high distance so it doesn't acidentally get chosen
+  auto dummy_action = [](Game* game, std::shared_ptr<Player> player) {
+    std::pair<int, int> next_position;
+    int distance;
+    game->getCurrentRoom()->getBestMoveToDoor(player, next_position, distance);
+    return Action{MOVE, player->getAbbreviation(), next_position, 999999999}; //very high distance so it doesn't acidentally get chosen
   };
 
   // Create decision tree
@@ -215,14 +218,14 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
-  root->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
   root->false_branch->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_range_weapon_with_ammunition, "Has the player a range weapon with ammunition?");
   root->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
   root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_melee_weapon, "Has the player a melee weapon?");
   root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(equip_best_melee_weapon, "Equip best melee weapon");
-  root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
 
   root->false_branch->false_branch = std::make_shared<DecisionNode>(is_last_room, "Is it the last room?");
   root->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(player_can_use_potion, "Can he drink a potion?");
@@ -248,14 +251,14 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
-  root->false_branch->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->false_branch->true_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_range_weapon_with_ammunition, "Has the player a range weapon with ammunition?");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_melee_weapon, "Has the player a melee weapon?");
   root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(equip_best_melee_weapon, "Equip best melee weapon");
-  root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->false_branch->true_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
 
   root->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_weapon_equipped, "Has the player a weapon equipped?");
   root->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_enemy_nearby, "Is enemy nearby?");
@@ -279,14 +282,14 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
   root->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
-  root->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
   root->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_range_weapon_with_ammunition, "Has the player a range weapon with ammunition?");
   root->false_branch->false_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(is_best_range_weapon_equipped_with_ammunition, "Is the best range weapon with ammunition equipped?");
   root->false_branch->false_branch->false_branch->false_branch->false_branch->true_branch->true_branch = std::make_shared<DecisionNode>(attack_enemy_with_range, "Attack enemy with range weapon");
   root->false_branch->false_branch->false_branch->false_branch->false_branch->true_branch->false_branch = std::make_shared<DecisionNode>(equip_best_range_weapon_with_ammunition, "Equip best range weapon with ammunition");
   root->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(player_has_melee_weapon, "Has the player a melee weapon?");
   root->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch->true_branch = std::make_shared<DecisionNode>(equip_best_melee_weapon, "Equip best melee weapon");
-  root->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "TODO: Implement action");
+  root->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch->false_branch = std::make_shared<DecisionNode>(dummy_action, "Dummy action");
 
 
 return root;
