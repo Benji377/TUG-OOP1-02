@@ -36,7 +36,7 @@ std::shared_ptr<DecisionNode> DecisionTree::createDecisionTree() {
 
   auto is_enemy_nearby = [](Game* game, std::shared_ptr<Player> player) {
     //return game->getCurrentRoom()->isEnemyNearby(player);
-    return game->getDungeon().isEnemyNearby(player);
+    return game->getDungeon().canAttackMelee(player);
   };
 
   auto player_is_low_health = [](Game*, std::shared_ptr<Player> player) {

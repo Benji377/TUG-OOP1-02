@@ -434,6 +434,10 @@ std::pair<int, int> Room::getClosestLootposition(shared_ptr<Player> player) cons
   pair<int, int> closest_loot_position = make_pair(-1, -1);
   for (const auto &chest : chests)
   {
+    if(chest->isUnlockValueTooHigh())
+    {
+      continue;
+    }
     pair<int, int> chest_position = getFieldOfEntity(chest);
     int distance = getDistance(player_position, chest_position);
     if (distance < shortest_distance)

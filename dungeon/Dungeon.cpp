@@ -455,7 +455,7 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
               add_to_attacks = true;
             }
         }
-        if(add_to_attacks)
+        if(add_to_attacks && score > 0)
         {
           possible_attacks.push_back(std::make_tuple(attack, score, offset));
         }
@@ -464,7 +464,7 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
         {
           for(const auto& field : attack)
           {
-            if(field.containsCharacter() && field.getCharacterType() == CharacterType::ENEMY)
+            if(field.containsCharacter() && field.getCharacterType() == CharacterType::ENEMY && score > 0)
             {
               possible_attacks.push_back(std::make_tuple(attack, score, offset));
             }
@@ -486,7 +486,7 @@ void Dungeon::getBestAttack(std::shared_ptr<Player> player, int damage, std::pai
     }
 }
 
-bool Dungeon::isEnemyNearby(std::shared_ptr<Player> player)
+bool Dungeon::canAttackMelee(std::shared_ptr<Player> player)
 {
   if(!getCurrentRoom()->isEnemyNearby(player))
   {

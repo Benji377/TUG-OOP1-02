@@ -3,6 +3,7 @@
 #include "../decision_tree/DecisionTree.hpp"
 #include "../entity/TreasureChest.hpp"
 
+const int PRIORITISE_NEARBY_ENEMIES_BONUS = 3;
 const int ATTACK_BONUS = 100;
 const int MOVE_BONUS = 20;
 const int LOOT_BONUS = 30;
@@ -41,6 +42,10 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
         break;
       case ActionType::ATTACK:
         action.setScore(ATTACK_BONUS);
+        if(game_->getCurrentRoom()->isEnemyNearby(getPlayerOfAbbrev(action.getPlayerAbbreviation())))
+        {
+          action.addScore(PRIORITISE_NEARBY_ENEMIES_BONUS);
+        }
         for (auto attacked_field : action.getAttackedFields())
         {
           if (attacked_field.containsCharacter())
@@ -53,7 +58,7 @@ Action PlayCommand::getBestAction(std::vector<Action>& actions)
               }
               else
               {
-                action.setScore(attacked_field.getLostHealth() * -1);
+                action.addScore(attacked_field.getLostHealth() * -2);
               }
             }
             else
